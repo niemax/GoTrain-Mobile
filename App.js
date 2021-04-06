@@ -1,14 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import MainStackNavigator from './navigation/AuthStackNavigator'
+import * as firebase from 'firebase';
+import configKeys from './config/Firebase'
+
 
 export default function App() {
+
+    if (!firebase.apps.length) {
+    console.log('Connected with Firebase')
+    firebase.initializeApp(configKeys);
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+      <MainStackNavigator />
+  )
+
 }
 
 const styles = StyleSheet.create({
