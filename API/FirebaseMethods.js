@@ -4,7 +4,7 @@ import { Alert } from "react-native";
 
 export async function registration(name, email, password) {
   try {
-    await firebase.auth().createUserWithEmailAndPassword( email, password);
+    await firebase.auth().createUserWithEmailAndPassword(email, password);
     const currentUser = firebase.auth().currentUser;
 
     const db = firebase.firestore();
@@ -15,7 +15,7 @@ export async function registration(name, email, password) {
         name: name
       });
   } catch (err) {
-    Alert.alert("There is something wrong!!!!", err.message);
+    Alert.alert("There is something wrong!", err.message);
   }
   
 }

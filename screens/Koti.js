@@ -1,96 +1,121 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import { AntDesign} from '@expo/vector-icons';
 import * as firebase from 'firebase';
 import { loggingOut } from '../API/FirebaseMethods'
-import { Alert } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import styled from 'styled-components/native'; 
+import Text from '../components/Text';
+import HeaderComponent from '../components/HeaderComponent';
 
 
 
-const Koti = ({ navigation }) => {
-    let currentUserUID = firebase.auth().currentUser.uid;
-    const [text, setText] = useState('');
-    
+const Koti = ({
+        navigation
+    }) => {
+        const icon = <Ionicons name="log-out-outline" size={32} color="white" />
+       
+        let currentUserUID = firebase.auth().currentUser.uid;
+        const [text, setText] = useState('');
 
-    useEffect(() => {
-        async function getUserInfo() {
-            try {
-                let doc = await firebase
-                    .firestore()
-                    .collection('users')
-                    .doc(currentUserUID)
-                    .get();
 
-                if (!doc.exists) {
-                    Alert.alert('No user data found!')
-                } else {
-                    let dataObj = doc.data();
-                    setText(dataObj.name)
+        useEffect(() => {
+            async function getUserInfo() {
+                try {
+                    let doc = await firebase
+                        .firestore()
+                        .collection('users')
+                        .doc(currentUserUID)
+                        .get();
+
+                    if (!doc.exists) {
+                        Alert.alert('No user data found!');
+                    } else {
+                        let dataObj = doc.data();
+                        setText(dataObj.name);
+                    }
+                } catch (err) {
+                    Alert.alert('There is an error.', err.message)
                 }
-            } catch(err) {
-                Alert.alert('There is an error.', err.message)
             }
-        }
-        getUserInfo();
-    });
+            getUserInfo();
+        }, []);  
 
     
     const handleLogOut = () => {
         loggingOut();
-        navigation.replace('Login');
+        navigation.navigate('Signup');
+        console.log('Logged out!');
     }
 
-    
     return (
-        <View style={styles.container}>
-        <Text style={styles.greeting}>Hello, {text}
-        <AntDesign name="hearto" size={24} color="orange"/>
-        </Text>
+        <Container>
+            <LeftCircle />
+            <RightCircle/>
+        <HeaderContainer>
+        <HeaderComponent 
+            rightComponent={
+            <ProfileIcon onPress={handleLogOut}>{icon}</ProfileIcon>
+            }
+            containerStyle={{
+            backgroundColor: 'rgba(228, 43, 10, 0.87)',
+            justifyContent: 'space-around'
+        }}
+        />
+        </HeaderContainer>
+
+        <TextContainer>
+        <Text color="#fff" margin="0px 0px 0px 180px" medium bold center>{`Hei, ${text}\n mitä tänään treenattaisiin?`}</Text>
+       
+        </TextContainer>
         
-            <Text>Profile Screen</Text>
-            <TouchableOpacity
-             style={styles.button}
-             onPress={handleLogOut}
-             >
-        <Text style={styles.buttonText}>LogOut</Text>
-            </TouchableOpacity>
-           
-        </View>
+        
+        </Container>
     );
 }
 
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    button: {
-        marginTop: 20,
-        marginBottom: 10,
-        paddingVertical: 5,
-        alignItems: 'center',
-        backgroundColor: '#FFA611',
-        borderColor: '#FFA611',
-        borderWidth: 1,
-        borderRadius: 5,
-        width: 300,
-        height: 50,
-        justifyContent: 'center',
-        borderRadius: 30,
-    },
-    buttonText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#fff'
-    },
-    greeting: {
-        fontSize: 24,
-        fontWeight: "500",
-        marginBottom: 30
-    }
-})
+const Container = styled.View`
+    flex: 1
+
+`;
+
+const HeaderGraphic = styled.View`
+    position: absolute;
+    width: 100%;
+    top: -50px;
+    z-index: -100;
+`;
+
+const RightCircle = styled.View`
+    background-color: rgba(228, 43, 10, 0.87);
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 200px;
+    right: -100px;
+    top: -200px;
+`;
+
+const LeftCircle = styled.View`
+    background-color: rgba(228, 43, 10, 0.87);
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    left: -50px;
+    top: -50px;
+`;
+
+const HeaderContainer = styled.View`
+`;
+
+const TextContainer = styled.View`
+    margin-top: 15px;
+`;
+
+const ProfileIcon = styled.TouchableOpacity`
+    margin-top: 5px;
+`;
+
+   
 
 export default Koti;

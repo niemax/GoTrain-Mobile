@@ -3,7 +3,9 @@ import { TextInput, StyleSheet, TouchableOpacity, ActivityIndicator, Alert } fro
 import styled from 'styled-components/native'; 
 import Text from '../components/Text';
 import { FontAwesome as Icon } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { registration } from '../API/FirebaseMethods'
+
 
 
 
@@ -13,7 +15,6 @@ const Signup = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, seterrorMessage] = useState(null);
-    const [loading, setLoading] = useState(false);
 
     const emptyState = () => {
         setName('');
@@ -23,11 +24,11 @@ const Signup = ({ navigation }) => {
 
     const handleSignUp = () => {
         if (!name) {
-            Alert.alert('Name is required');
+            Alert.alert('Nimi vaaditaan.');
         } else if (!email) {
-            Alert.alert('Email field is required.');
+            Alert.alert('Sähköposti vaaditaan.');
         } else if (!password) {
-            Alert.alert('Password field is required.');
+            Alert.alert('Salasana vaaditaan.');
         } else if (password.length < 6) {
             Alert.alert('Salasanan tulee olla pidempi kuin 6 merkkiä')
         } else {
@@ -45,16 +46,18 @@ const Signup = ({ navigation }) => {
             <Container>
             <Main>
             <Text title semi center>
-            {`Welcome, \n Sign up to proceed.`}{" "}
+            {`Tervetuloa, \n Rekisteröidy aloittaaksesi.`}{" "}
             <Icon 
             name="hand-peace-o" 
             size={32} 
             color="orange"/>
             </Text>
             </Main>
+
             <Auth>
             <AuthContainer>
-                    <AuthTitle>Name</AuthTitle>
+                    <AuthTitle>Nimi *</AuthTitle>
+                    <Ionicons name="md-person-add-outline" size={18} color="gray" />
                     <AuthField 
                     autoCapitalize="none" 
                     autoCorrect={false} 
@@ -62,21 +65,24 @@ const Signup = ({ navigation }) => {
                     value={name}
                     onChangeText={(name) => setName(name)}
                     />
+                    
                 </AuthContainer>
                 <AuthContainer>
-                    <AuthTitle>Email Address</AuthTitle>
+                    <AuthTitle>Sähköposti *</AuthTitle>
+                    <Ionicons name="mail-open-outline" size={18} color="gray" />
                     <AuthField 
                     autoCapitalize="none" 
                     autoCompleteType="email" 
                     autoCorrect={false} 
-                    autoFocus={true}
+                    autoFocus={false}
                     keyboardType="email-address"
                     value={email}
                     onChangeText={(email) => setEmail(email)}
                     />
                 </AuthContainer>
                 <AuthContainer>
-                    <AuthTitle>Password</AuthTitle>
+                    <AuthTitle>Salasana *</AuthTitle>
+                    <MaterialCommunityIcons name="form-textbox-password" size={18} color="gray" />
                     <AuthField 
                     autoCapitalize="none" 
                     autoCompleteType="password" 
@@ -90,16 +96,16 @@ const Signup = ({ navigation }) => {
             </Auth>
 
             <SignUpContainer onPress={handleSignUp}>
-                <Text bold medium center color="#fff">Sign Up</Text>
+                <Text bold medium center color="#fff">Rekisteröidy</Text>
             
                 
             </SignUpContainer>
 
             <SignIn onPress={() => navigation.navigate('Login')}>
             <Text small center>
-            Already registered?{" "} 
+            Oletko jo jäsen?{" "} 
             <Text medium bold color="#CB570F">
-            Sign In
+            Kirjaudu sisään
             </Text>
             </Text>
             </SignIn>
@@ -116,14 +122,14 @@ const Signup = ({ navigation }) => {
     
 
 const Container = styled.View`
-    flex: 1
+    flex: 1;
 
 `;
 
 const AuthField = styled.TextInput`
     border-bottom-color: #8e93a1;
     border-bottom-width: 0.5px;
-    height: 48px;
+    height: 40px;
 
 `;
 
@@ -155,11 +161,11 @@ const LeftCircle = styled.View`
 `;
 
 const Main = styled.View`
-    margin-top: 192px;
+    margin-top: 180px;
 `;
 
 const Auth = styled.View`
-    margin: 64px 32px 32px
+    margin: 50px 15px 5px 15px;
 `;
 
 const AuthContainer = styled.View`
@@ -171,26 +177,22 @@ const AuthTitle = styled(Text)`
     color: #8e93a1;
     font-size: 12px;
     text-transform: uppercase;
-    font-weight: 300
+    font-weight: 300,
 `;
 
 // sign up button
 const SignUpContainer = styled.TouchableOpacity`
-    margin: 32px;
+    margin: 20px;
     height: 48px;
     align-items: center;
     justify-content: center;
     background-color: #CB570F;
     border-radius: 7px;
+    
 `;
 
 const SignIn = styled.TouchableOpacity`
-
 `;
 
-const Loading = styled.ActivityIndicator.attrs(props => ({
-    color: "#ffffff",
-    size: "small"
-}))``;
 
 export default Signup;

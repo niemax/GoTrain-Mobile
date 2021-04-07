@@ -1,38 +1,45 @@
 import React, { useState } from 'react'
-import * as firebase from 'firebase';
 import styled from 'styled-components/native'; 
 import Text from '../components/Text';
 import { FontAwesome as Icon } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { signIn } from '../API/FirebaseMethods';
 import { Alert } from 'react-native';
 
-const Login = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const Login = ({
+        navigation
+    }) => {
+        const [email, setEmail] = useState('');
+        const [password, setPassword] = useState('');
+       
 
+        const handleLogin = () => {
+            if (!email) {
+                Alert.alert('Sähköposti vaaditaan!');
+            } 
 
-    const handleLogin = () => {
-       if (! email){
-           Alert.alert('Email field is required');
-       }
+            if (!password) {
+                Alert.alert('Salasana vaaditaan!');
+            }
 
-       if (! password) {
-           Alert.alert('Password field is required');
-       }
+            if (email !== '' && password.length >= 6) {
+                signIn(email, password);
+                navigation.replace('Loading');
+            } else {
+                Alert.alert('Virheellinen sähköposti tai salasana')
+            }
 
-       signIn(email, password);
-       setEmail('');
-       setPassword('');
-       navigation.navigate('Loading');
-            //alert('success!!');
-    }
+            
+            setEmail('');
+            setPassword('');
+        }
 
 
         return (
             <Container>
             <Main>
-            <Text title semi center>
-            {`Welcome back, \n Sign in.`}{" "}
+            <Text title semi bold center>
+            {`Tervetuloa takaisin, \n Kirjaudu sisään.`}{" "}
             <Icon 
             name="hand-peace-o" 
             size={32} 
@@ -41,7 +48,8 @@ const Login = ({ navigation }) => {
             </Main>
             <Auth>
                 <AuthContainer>
-                    <AuthTitle>Email Address</AuthTitle>
+                    <AuthTitle>Sähköposti</AuthTitle>
+                    <Ionicons name="mail-open-outline" size={18} color="gray" />
                     <AuthField 
                     autoCapitalize="none" 
                     autoCompleteType="email" 
@@ -53,7 +61,8 @@ const Login = ({ navigation }) => {
                     />
                 </AuthContainer>
                 <AuthContainer>
-                    <AuthTitle>Password</AuthTitle>
+                    <AuthTitle>Salasana</AuthTitle>
+                    <MaterialCommunityIcons name="form-textbox-password" size={18} color="gray" />
                     <AuthField 
                     autoCapitalize="none" 
                     autoCompleteType="password" 
@@ -67,14 +76,14 @@ const Login = ({ navigation }) => {
             </Auth>
 
             <SignUpContainer onPress={handleLogin}>
-                <Text bold medium center color="#fff">Sign In</Text>
+                <Text bold medium center color="#fff">Kirjaudu sisään</Text>
             </SignUpContainer>
 
             <SignUp onPress={() => navigation.navigate('Signup')}>
             <Text small center>
-            New to GoTrain?{" "} 
+            Uusi jäsen?{" "} 
             <Text medium bold color="#CB570F">
-            Sign Up
+            Rekisteröidy
             </Text>
             </Text>
             </SignUp>
@@ -155,6 +164,7 @@ const SignUpContainer = styled.TouchableOpacity`
     justify-content: center;
     background-color: #CB570F;
     border-radius: 7px;
+    
 `;
 
 const SignUp = styled.TouchableOpacity`

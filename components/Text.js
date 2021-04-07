@@ -42,7 +42,6 @@ ${({ light, semi, bold, heavy }) => {
 
             case semi:
                 return `font-weight: 300`;
-
             case bold:
                 return `font-weight: 600`;
             case heavy:
@@ -57,16 +56,19 @@ ${({ light, semi, bold, heavy }) => {
 }}
 
 
-${({ center, right }) => {
+${({ center, right, left }) => {
     switch (true) {
             case center:
                 return `text-align: center`;
 
             case right:
-                return `text-align: right`
+                return `text-align: right`;
+                
+            case left:
+                return `text-align: left`;
 
             default:
-                return `text-align: center`
+                return `text-align: center`;
             
     }
 }}
