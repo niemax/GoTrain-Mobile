@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import * as firebase from 'firebase';
 import { loggingOut } from '../API/FirebaseMethods'
 import { Ionicons } from '@expo/vector-icons';

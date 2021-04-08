@@ -7,14 +7,6 @@ export async function registration(name, email, password) {
     await firebase.auth().createUserWithEmailAndPassword(email, password);
     const currentUser = firebase.auth().currentUser;
 
-    var errorCode = error.code;
-  var errorMessage = error.message;
-  if (errorCode == 'auth/weak-password') {
-    alert('The password is too weak.');
-  } else {
-    alert(errorMessage);
-  }
-
     const db = firebase.firestore();
     db.collection("users")
       .doc(currentUser.uid)
