@@ -21,7 +21,6 @@ const LoadingScreen = ({
                 } catch (err) {
                     console.log(err);
                 }
-
             })
         }, []);
 

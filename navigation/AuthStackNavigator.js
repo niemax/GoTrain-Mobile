@@ -6,7 +6,7 @@ import Login from '../screens/Login'
 import Signup from '../screens/Signup'
 import Home from '../screens/Home'
 import LoadingScreen from '../screens/Loading';
-import Koti from '../screens/Koti'
+import Koti from '../tabs/Koti'
 
 
 const Stack = createStackNavigator();

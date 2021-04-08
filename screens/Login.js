@@ -13,23 +13,15 @@ const Login = ({
         const [password, setPassword] = useState('');
        
 
+        
+
         const handleLogin = () => {
-            if (!email) {
-                Alert.alert('Sähköposti vaaditaan!');
-            } 
-
-            if (!password) {
-                Alert.alert('Salasana vaaditaan!');
-            }
-
             if (email !== '' && password.length >= 6) {
                 signIn(email, password);
                 navigation.replace('Loading');
             } else {
                 Alert.alert('Virheellinen sähköposti tai salasana')
             }
-
-            
             setEmail('');
             setPassword('');
         }

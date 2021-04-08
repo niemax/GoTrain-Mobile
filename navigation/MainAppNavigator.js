@@ -1,13 +1,11 @@
 import 'react-native-gesture-handler';
 import React from 'react'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
-import Koti from '../screens/Koti'
+import Koti from '../tabs/Koti'
 import TehdytTreenit from '../tabs/TehdytTreenit'
 import Asetukset from '../tabs/Asetukset'
 import { Ionicons } from '@expo/vector-icons';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 
-const Drawer = createDrawerNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 

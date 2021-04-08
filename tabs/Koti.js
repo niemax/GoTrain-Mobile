@@ -5,6 +5,8 @@ import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components/native'; 
 import Text from '../components/Text';
 import HeaderComponent from '../components/HeaderComponent';
+import Cards from '../components/Cards';
+
 
 
 
@@ -17,7 +19,8 @@ const Koti = ({
         const [text, setText] = useState('');
 
 
-        useEffect(() => {
+      
+      useEffect(() => {
             async function getUserInfo() {
                 try {
                     let doc = await firebase
@@ -37,7 +40,7 @@ const Koti = ({
                 }
             }
             getUserInfo();
-        }, []);  
+        }, []);   
 
     
     const handleLogOut = () => {
@@ -57,16 +60,17 @@ const Koti = ({
             }
             containerStyle={{
             backgroundColor: 'rgba(228, 43, 10, 0.87)',
-            justifyContent: 'space-around'
         }}
         />
         </HeaderContainer>
-
+        
         <TextContainer>
-        <Text color="#fff" margin="0px 0px 0px 180px" medium bold center>{`Hei, ${text}\n mitä tänään treenattaisiin?`}</Text>
+        <Text color="#000" margin="40px 170px 5px 0px" large heavy center>{`Hei, ${text}!\n Mitä tänään treenattaisiin?`}</Text>
        
         </TextContainer>
-        
+        <CardContainer>
+            <Cards />
+        </CardContainer>
         
         </Container>
     );
@@ -78,12 +82,6 @@ const Container = styled.View`
 
 `;
 
-const HeaderGraphic = styled.View`
-    position: absolute;
-    width: 100%;
-    top: -50px;
-    z-index: -100;
-`;
 
 const RightCircle = styled.View`
     background-color: rgba(228, 43, 10, 0.87);
@@ -116,6 +114,8 @@ const ProfileIcon = styled.TouchableOpacity`
     margin-top: 5px;
 `;
 
-   
+const CardContainer = styled.View`
+    padding: 5px;
+`;  
 
 export default Koti;

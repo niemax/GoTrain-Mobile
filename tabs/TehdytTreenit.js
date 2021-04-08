@@ -37,7 +37,6 @@
         
             </TextContainer>
             
-            
             </Container>
         )
     }
