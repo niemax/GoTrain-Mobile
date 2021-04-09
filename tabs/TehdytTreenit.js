@@ -3,17 +3,13 @@
     import styled from 'styled-components/native'; 
     import Text from '../components/Text';
     import HeaderComponent from '../components/HeaderComponent';
-    import { loggingOut } from '../API/FirebaseMethods';
+    import { handleLogOut } from '../components/HeaderComponent';
 
     const TehdytTreenit = ({ navigation }) => {
         const icon = <Ionicons name="log-out-outline" size={32} color="white" />
 
 
-        const handleLogOut = () => {
-            loggingOut();
-            navigation.navigate('Signup');
-            console.log('Logged out!');
-        }
+       
 
 
         return(

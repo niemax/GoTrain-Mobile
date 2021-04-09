@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 
 const TextStyle = ({...props}) => {
-    return <Text {...props}>{props.children}</Text>
+    return <Text style={{fontFamily: 'MontserratBold'}} {...props}>{props.children}</Text>
 }
 
 const Text = styled.Text`

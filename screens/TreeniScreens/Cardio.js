@@ -1,12 +1,13 @@
 import React from 'react'
 import { Image, StyleSheet } from 'react-native';
-import styled from 'styled-components/native';
 import Text from '../../components/Text';
 import { Ionicons } from '@expo/vector-icons'; 
+import { Container, ParagraphContainer, AloitaButton, ButtonContainer, IconTouchable} from '../../components/TrainScreenStyling';
 
 
 
-const RintaTreeni = ({ navigation }) => {
+
+const CardioTreeni = ({ navigation }) => {
     return(
         <Container>
         <Image style={styles.image} source={require('../../assets/cardio.jpg')}></Image>
@@ -14,20 +15,21 @@ const RintaTreeni = ({ navigation }) => {
         <Ionicons name="chevron-back-circle-outline" size={38} color="black" />
         </IconTouchable>
         
-      <Text margin="20px" large heavy>Cardio</Text>
+      <Text center margin="15px" large >Cardio<Image style={{ height: 40, width: 40}} source={require('../../assets/cardioicon.png')}></Image> </Text>
       <ParagraphContainer>
-      <Text medium heavy>Treeni sisältää:</Text>
+      
+      <Text medium >Treeni sisältää:</Text>
       <Text medium welcome>{`- Leuanveto\n- Kulmasoutu\n- Hauiskääntö\n- Soutu alataljassa\n- Vipunosto sivulle\n- Lat pushdown kaapelilla\n- Vasarakäännöt`}</Text>
-      <Text margin="20px" medium heavy>
+      <Text margin="20px" medium >
              Settejä treeneissä on 2-3, joiden välissä aina 2-3 minuutin mittainen tauko.
         </Text>
-        <Text heavy center large>Treeni sopii: Kaikille</Text>
+        <Text  center large>Treeni sopii: Kaikille</Text>
       </ParagraphContainer>
             
            
         <ButtonContainer>
-        <AloitaButton>
-        <Text heavy large color="white">Aloita treeni</Text>
+        <AloitaButton color="#947AFF">
+        <Text  large color="white">Aloita treeni</Text>
         </AloitaButton>
         </ButtonContainer>
         </Container>
@@ -46,37 +48,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const Container = styled.View`
-    flex: 1;
-    background-color: #FEEFE6;
-`;
-
-const ParagraphContainer = styled.View`
-    margin-top: 10px;
-`;
-
-const AloitaButton = styled.TouchableOpacity`
-    margin: 32px;
-    height: 48px;
-    align-items: center;
-    justify-content: center;
-    background-color: #FA4242;
-    border-radius: 50px;
-`;
-
-const ButtonContainer = styled.View`
-    margin-top: 15px;
-`;
-
-const IconTouchable = styled.TouchableOpacity`
-    position: absolute;
-    top: 50px;
-    left: 10px;
-`;
 
 
-const TextContainer = styled.View`
 
-`;
-
-export default RintaTreeni;
+export default CardioTreeni;

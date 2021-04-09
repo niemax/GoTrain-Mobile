@@ -13,7 +13,7 @@ const MainStackNavigator = () => {
     return(
     <NavigationContainer>
       <Stack.Navigator
-       initialRouteName="Signup" // VAIHDA TÄMÄ TAKAISIN SIGNUP
+       initialRouteName="Home" // VAIHDA TÄMÄ TAKAISIN SIGNUP
        >
         <Stack.Screen name="Loading" options={{ headerShown: false, gestureEnabled: false}}  component={LoadingScreen} />
         <Stack.Screen name="Signup" options={{ headerShown: false, gestureEnabled: false}} component={Signup} />
