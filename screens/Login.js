@@ -90,7 +90,8 @@ const Login = ({
 }
 
 const Container = styled.View`
-    flex: 1
+    flex: 1;
+    background-color: #FEEFE6;
 
 `;
 

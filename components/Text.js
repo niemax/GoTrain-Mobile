@@ -7,11 +7,11 @@ const TextStyle = ({...props}) => {
 }
 
 const Text = styled.Text`
-color: ${props => props.color ?? "#414959"};
+color: ${props => props.color ?? "#000"};
 margin: ${props => props.margin ?? 0};
 padding: ${props => props.padding ?? 0};
 
-${({title, large, medium, small, tiny}) => {
+${({ title, large, medium, small, tiny }) => {
     switch (true) {
             case title:
                 return `font-size: 32px`
@@ -28,6 +28,8 @@ ${({title, large, medium, small, tiny}) => {
             case tiny:
                 return `font-size: 11px`
 
+            
+
 
             default:
                 return `font-size: 11px`
@@ -35,17 +37,18 @@ ${({title, large, medium, small, tiny}) => {
     }
 }}
 
-${({ light, semi, bold, heavy }) => {
+${({ light, semi, bold, heavy, welcome }) => {
     switch (true) {
             case light:
                 return `font-weight: 200`;
 
             case semi:
                 return `font-weight: 300`;
+
             case bold:
                 return `font-weight: 600`;
-            case heavy:
 
+            case heavy:
                 return `font-weight: 700`;
 
 

@@ -1,122 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
-import * as firebase from 'firebase';
-import { loggingOut } from '../API/FirebaseMethods'
-import { Ionicons } from '@expo/vector-icons';
-import styled from 'styled-components/native'; 
-import Text from '../components/Text';
-import HeaderComponent from '../components/HeaderComponent';
-import Cards from '../components/Cards';
+import React from 'react'
+import { createStackNavigator } from '@react-navigation/stack'
+import Etusivu from '../screens/Etusivu'
+import RintaTreeni from '../screens/TreeniScreens/Rinta'
+import SelkaTreeni from '../screens/TreeniScreens/Selka'
+import JalkaTreeni from '../screens/TreeniScreens/Jalka'
+import KasiTreeni from '../screens/TreeniScreens/Kasi';
+import CardioTreeni from '../screens/TreeniScreens/Cardio';
 
 
+const Stack = createStackNavigator();
 
-
-const Koti = ({
-        navigation
-    }) => {
-        const icon = <Ionicons name="log-out-outline" size={32} color="white" />
-       
-        let currentUserUID = firebase.auth().currentUser.uid;
-        const [text, setText] = useState('');
-
-
-      
-      useEffect(() => {
-            async function getUserInfo() {
-                try {
-                    let doc = await firebase
-                        .firestore()
-                        .collection('users')
-                        .doc(currentUserUID)
-                        .get();
-
-                    if (!doc.exists) {
-                        Alert.alert('No user data found!');
-                    } else {
-                        let dataObj = doc.data();
-                        setText(dataObj.name);
-                    }
-                } catch (err) {
-                    Alert.alert('There is an error.', err.message)
-                }
-            }
-            getUserInfo();
-        }, []);   
-
-    
-    const handleLogOut = () => {
-        loggingOut();
-        navigation.navigate('Signup');
-        console.log('Logged out!');
-    }
-
-    return (
-        <Container>
-            <LeftCircle />
-            <RightCircle/>
-        <HeaderContainer>
-        <HeaderComponent 
-            rightComponent={
-            <ProfileIcon onPress={handleLogOut}>{icon}</ProfileIcon>
-            }
-            containerStyle={{
-            backgroundColor: 'rgba(228, 43, 10, 0.87)',
-        }}
-        />
-        </HeaderContainer>
-        
-        <TextContainer>
-        <Text color="#000" margin="40px 170px 5px 0px" large heavy center>{`Hei, ${text}!\n Mitä tänään treenattaisiin?`}</Text>
-       
-        </TextContainer>
-        <CardContainer>
-            <Cards />
-        </CardContainer>
-        
-        </Container>
+const MainAppStack = () => {
+    return(
+      <Stack.Navigator
+       initialRouteName="Etusivu" // VAIHDA TÄMÄ TAKAISIN SIGNUP
+       >
+        <Stack.Screen name="Etusivu" options={{ headerShown: false, gestureEnabled: false}}  component={Etusivu} />
+        <Stack.Screen name="RintaTreeni" options={{ headerShown: false }} component={RintaTreeni} />
+        <Stack.Screen name="SelkaTreeni" options={{ headerShown: false }} component={SelkaTreeni} />
+        <Stack.Screen name="JalkaTreeni" options={{ headerShown: false }} component={JalkaTreeni} />
+        <Stack.Screen name="KasiTreeni" options={{ headerShown: false }} component={KasiTreeni} />
+        <Stack.Screen name="CardioTreeni" options={{ headerShown: false }} component={CardioTreeni} />
+      </Stack.Navigator>
     );
 }
 
 
-const Container = styled.View`
-    flex: 1
-
-`;
-
-
-const RightCircle = styled.View`
-    background-color: rgba(228, 43, 10, 0.87);
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 200px;
-    right: -100px;
-    top: -200px;
-`;
-
-const LeftCircle = styled.View`
-    background-color: rgba(228, 43, 10, 0.87);
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-    left: -50px;
-    top: -50px;
-`;
-
-const HeaderContainer = styled.View`
-`;
-
-const TextContainer = styled.View`
-    margin-top: 15px;
-`;
-
-const ProfileIcon = styled.TouchableOpacity`
-    margin-top: 5px;
-`;
-
-const CardContainer = styled.View`
-    padding: 5px;
-`;  
-
-export default Koti;
+export default MainAppStack;

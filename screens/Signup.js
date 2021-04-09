@@ -122,6 +122,7 @@ const Signup = ({ navigation }) => {
 
 const Container = styled.View`
     flex: 1;
+    background-color: #FEEFE6;
 
 `;
 

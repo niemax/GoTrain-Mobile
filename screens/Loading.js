@@ -52,6 +52,8 @@ const LoadingScreen = ({
 
 const Container = styled.View`
     flex: 1
+    background-color: #FEEFE6;
+
 `;
 
 const Main = styled.View`

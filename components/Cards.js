@@ -1,57 +1,71 @@
 import React from 'react'
-import { Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import { Card, Button } from 'react-native-elements';
+import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { Card } from 'react-native-elements';
 import Text from '../components/Text';
 import styled from 'styled-components/native';
+import { useNavigation } from '@react-navigation/native';
+
+
+
 
 const treenit = [{
         id: 1,
         name: 'Rinta',
-        image: require('../assets/rinta.jpg')
+        image: require('../assets/rinta.jpg'),
+        navigationRoute: 'RintaTreeni'
     },
     {
         id: 2,
         name: 'Selkä',
-        image: require('../assets/selka.jpg')
+        image: require('../assets/selka.jpg'),
+        navigationRoute: 'SelkaTreeni'
+
     },
     {
         id: 3,
         name: 'Jalat',
-        image: require('../assets/jalat.jpg')
+        navigationRoute: 'JalkaTreeni',
+        image: require('../assets/jalat.jpg'),
+
     }, 
     {
         id: 4,
         name: 'Kädet',
-        image: require('../assets/kadet.jpg')
+        navigationRoute: 'KasiTreeni',
+        image: require('../assets/kadet.jpg'),
+
     }, 
     {
         id: 5,
         name: 'Cardio',
-        image: require('../assets/cardio.jpg')
+        image: require('../assets/cardio.jpg'),
+        navigationRoute: 'CardioTreeni'
+
     }, 
 ]
 
+
+
 const Cards = () => {
 
+    const navigation = useNavigation();
 
     return(
             <Container>
-            <Container></Container>
+             
             <ScrollView>
             {
                 treenit.map((item, index) => {
                     return(
-                        <TouchableOpacity key={index}>
+                        <TouchableOpacity key={index} onPress={() => navigation.push(item.navigationRoute)}>
                         <Card containerStyle={styles.cards} >
-                        <Card.Title ><Text color="black" large heavy center>{item.name}</Text></Card.Title>
+                        <Card.Title ><Text color="black" medium heavy center>{item.name}</Text></Card.Title>
                         <Card.Image 
                         source={item.image}
                         style={styles.image}>
-                       
                         </Card.Image>
                         </Card>
                         </TouchableOpacity>
-                        
                     );
                 })
             }
@@ -65,13 +79,14 @@ const styles = StyleSheet.create({
     image: {
         resizeMode: 'cover',
         width: '100%',
-        height: '86%',
+        height: '90%',
         borderRadius: 40
     },
     cards: {
-        borderRadius: 60,
+        borderWidth: 0,
         elevation: 3,
         height: 280,
+        backgroundColor: 'rgba(255, 255, 255, 0)',
     }
     
 })
@@ -85,6 +100,9 @@ height: 450px;
 display: flex;
 
 `;
+
+
+
 
 
 

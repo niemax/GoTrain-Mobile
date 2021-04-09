@@ -5,37 +5,40 @@ import * as Location from 'expo-location';
 import Text from '../components/Text';
 
 const GetWeather = () => {
-    const [location, setLocation] = useState(null);
+    const [latitude, setLatitude] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [weatherData, setWeatherData] = useState(null);
+    const [location, setLocation] = useState();
   
     useEffect(() => {
-      (async () => {
-        let { status } = await Location.requestPermissionsAsync();
-        if (status !== 'granted') {
-          setErrorMsg('Permission to access location was denied');
-          return;
-        }
-  
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location.coords);
-        console.log(location.coords);
-      })();
-      getWeatherData();
+      getLocation();
     }, []);
+  
+
+
+  const getLocation = async () => {
+   
+    try {
+      const { granted } = await Location.requestPermissionsAsync();
+      if (!granted) return;
+      const last = await Location.getLastKnownPositionAsync();
+      if (last) setLocation(last);
+      else {
+        const current = await Location.getCurrentPositionAsync();
+        setLocation(current);
+        
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(location)
+  };
+      
+
 
     
-   /*
-   let text = 'Fetching..';
-    
-    if (errorMsg) {
-      text = errorMsg;
-    } else if (location) {
-      text = weatherData
-    }*/ 
-  
     const getWeatherData = () => {
-    fetch(`api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=14371104a5c2fc46b2cbd1a542b603e8`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=d85cb8591b3bf1b13021c27b116b86cd`)
     .then(response=> response.json())
     .then(responseData=> {
         setWeatherData(responseData)
@@ -43,10 +46,11 @@ const GetWeather = () => {
   }) 
     .catch(err => console.error(err))
   }
+  
+ 
 
     return (
       <Container>
-        <Text small bold>{weatherData}</Text>
       </Container>
     );
   }
