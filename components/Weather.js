@@ -41,10 +41,10 @@ const GetWeather = () => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=d85cb8591b3bf1b13021c27b116b86cd`)
     .then(response=> response.json())
     .then(responseData=> {
-        setWeatherData(responseData)
-        console.log(weatherData)
+        setWeatherData(responseData);
+        console.log(weatherData) 
   }) 
-    .catch(err => console.error(err))
+    .catch(err => console.error(err));
   }
   
  

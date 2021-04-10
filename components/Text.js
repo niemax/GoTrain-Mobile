@@ -28,7 +28,7 @@ ${({ title, large, medium, small, tiny }) => {
             case tiny:
                 return `font-size: 11px`
 
-            
+            // #017472
 
 
             default:

@@ -17,10 +17,11 @@ const Etusivu = ({
     }) => {
         
        
-        //let currentUserUID = firebase.auth().currentUser.uid;
+       let currentUserUID = firebase.auth().currentUser.uid;
         const [text, setText] = useState('');
 
-    /**useEffect(() => {
+   
+     useEffect(() => {
             async function getUserInfo() {
                 try {
                     let doc = await firebase
@@ -40,7 +41,7 @@ const Etusivu = ({
                 }
             }
             getUserInfo();
-        }, []);    */ 
+        }, []);   
      
       
     

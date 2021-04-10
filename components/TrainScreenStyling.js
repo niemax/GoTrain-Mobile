@@ -15,16 +15,16 @@ const ParagraphContainer = styled.View`
     height: 48px;
     align-items: center;
     justify-content: center;
-    background-color: #FA4242;
     border-radius: 50px;
     shadow-color: 'rgba(0,0,0, .4)';
     shadow-opacity: 0.5;
+    background-color: ${props => props.color ?? '#FA4242'};
 `;
 
  const ButtonContainer = styled.View`
     margin-top: 30px;
 `;
-
+//#947AFF
  const IconTouchable = styled.TouchableOpacity`
     position: absolute;
     top: 50px;
