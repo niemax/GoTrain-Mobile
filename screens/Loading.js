@@ -15,7 +15,7 @@ const LoadingScreen = ({
                     if (user) {
                         setTimeout(() => {
                             setIsLoggedIn(true)
-                            navigation.navigate('Home');
+                            navigation.navigate('Etusivu');
                         }, 200);
                     }
                 } catch (err) {

@@ -53,7 +53,7 @@ const treeniEsittely = [{
    
 
 //#8292B4
-const KasiTreeni = ({ navigation }) => {
+export default ({ navigation }) => {
     
     return(
         <Container>
@@ -132,6 +132,3 @@ const styles = StyleSheet.create({
 
 
 
-
-
-export default KasiTreeni;

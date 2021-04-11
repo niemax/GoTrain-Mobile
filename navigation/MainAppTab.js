@@ -15,6 +15,7 @@ const MainAppBottomNav = () => {
       initialRouteName="Koti"
       activeColor="black"
       shifting={true}
+      
     >
       <Tab.Screen
         name="Home"

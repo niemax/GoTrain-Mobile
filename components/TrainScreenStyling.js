@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
  const Container = styled.View`
     flex: 1;
     background-color: #FEEFE6;
+    
 `;
 
 const ParagraphContainer = styled.View`
@@ -11,7 +12,7 @@ const ParagraphContainer = styled.View`
 `;
 
  const AloitaButton = styled.TouchableOpacity`
-    margin: 24px;
+    margin: 18px;
     height: 48px;
     align-items: center;
     justify-content: center;
@@ -22,7 +23,6 @@ const ParagraphContainer = styled.View`
 `;
 
  const ButtonContainer = styled.View`
-    margin-top: 30px;
 `;
 //#947AFF
  const IconTouchable = styled.TouchableOpacity`
@@ -31,4 +31,20 @@ const ParagraphContainer = styled.View`
     left: 10px;
 `;
 
-export { Container, ParagraphContainer, AloitaButton, ButtonContainer, IconTouchable};
+const ModalContainer = styled.View`
+    flex: 1;
+    background-color: white;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+`;
+
+const ModalView = styled.View`
+    margin: 20px;
+    background-color: white;
+    border-radius: 20px;;
+    align-items: center;
+    shadow-color: #000;
+    elevation: 5
+`;
+export { Container, ModalContainer, ModalView, ParagraphContainer, AloitaButton, ButtonContainer, IconTouchable};

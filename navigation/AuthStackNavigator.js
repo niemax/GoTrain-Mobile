@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import Login from '../screens/Login'
 import Signup from '../screens/Signup'
-import Home from '../screens/Home'
+import Home from './MainAppTab'
 import LoadingScreen from '../screens/Loading';
 
 
@@ -13,7 +13,7 @@ const MainStackNavigator = () => {
     return(
     <NavigationContainer>
       <Stack.Navigator
-       initialRouteName="Signup" // VAIHDA TÄMÄ TAKAISIN SIGNUP
+       initialRouteName="Home" // VAIHDA TÄMÄ TAKAISIN SIGNUP
        >
         <Stack.Screen name="Loading" options={{ headerShown: false, gestureEnabled: false}}  component={LoadingScreen} />
         <Stack.Screen name="Signup" options={{ headerShown: false, gestureEnabled: false}} component={Signup} />

@@ -16,11 +16,11 @@ const MainAppStack = () => {
        initialRouteName="Etusivu" // VAIHDA TÄMÄ TAKAISIN SIGNUP
        >
         <Stack.Screen name="Etusivu" options={{ headerShown: false, gestureEnabled: false}}  component={Etusivu} />
-        <Stack.Screen name="RintaTreeni" options={{ headerShown: false }} component={RintaTreeni} />
-        <Stack.Screen name="SelkaTreeni" options={{ headerShown: false }} component={SelkaTreeni} />
-        <Stack.Screen name="JalkaTreeni" options={{ headerShown: false }} component={JalkaTreeni} />
-        <Stack.Screen name="KasiTreeni" options={{ headerShown: false }} component={KasiTreeni} />
-        <Stack.Screen name="CardioTreeni" options={{ headerShown: false }} component={CardioTreeni} />
+        <Stack.Screen name="RintaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={RintaTreeni} />
+        <Stack.Screen name="SelkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={SelkaTreeni} />
+        <Stack.Screen name="JalkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={JalkaTreeni} />
+        <Stack.Screen name="KasiTreeni" options={{ headerShown: false, gestureEnabled: false }} component={KasiTreeni} />
+        <Stack.Screen name="CardioTreeni" options={{ headerShown: false, gestureEnabled: false }} component={CardioTreeni} />
       </Stack.Navigator>
     );
 }

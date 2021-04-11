@@ -1,25 +1,33 @@
 import React from 'react'
 import { Image, StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native';
 import styled from 'styled-components/native';
-import Text from '../../components/Text';
 import { Ionicons } from '@expo/vector-icons'; 
-import { Container, ParagraphContainer, AloitaButton, ButtonContainer, IconTouchable} from '../../components/TrainScreenStyling';
-import { Card } from 'react-native-elements';
+import { ModalContainer, ModalView, AloitaButton, ButtonContainer, IconTouchable} from '../../components/TrainScreenStyling';
+
+import TreeniData from '../../components/TreeniEsittely';
+import { createStackNavigator } from '@react-navigation/stack'
+import { WebView } from 'react-native-webview';
+import Text from '../../components/Text'
+import YoutubePlayer from "react-native-youtube-iframe";
 
 
 
-
-const treeniEsittely = [{
+const rintaTreeni = [{
+        
+        
         id: 1,
         name: 'Punnerrukset',
         sarjat: '2-3',
         image: require('../../assets/icons/punnerrukset.png'),
+        navigationRoute: 'Punnerrukset'
     },
     {
         id: 2,
         name: 'Penkkipunnerrus',
         sarjat: '2-3',
         image: require('../../assets/icons/penkkipunnerrus.png'),
+        navigationRoute: 'Penkkipunnerrus'
+
 
     },
     {
@@ -27,6 +35,8 @@ const treeniEsittely = [{
         name: 'Pystypunnerrus',
         sarjat: '2-3',
         image: require('../../assets/icons/pystypunnerrus.png'),
+        navigationRoute: 'Pystypunnerrus'
+
 
     },
     {
@@ -34,6 +44,8 @@ const treeniEsittely = [{
         name: 'Dipit',
         sarjat: 3,
         image: require('../../assets/icons/dipit.png'),
+        navigationRoute: 'Dipit'
+
 
     },
     {
@@ -41,6 +53,8 @@ const treeniEsittely = [{
         name: 'Vipunosto sivulle',
         sarjat: 3,
         image: require('../../assets/icons/vipunosto.png'),
+        navigationRoute: 'Vipunosto'
+
 
     },
     {
@@ -48,6 +62,8 @@ const treeniEsittely = [{
         name: 'Chest fly',
         sarjat: 3,
         image: require('../../assets/icons/chestfly.png'),
+        navigationRoute: 'ChestFly'
+
 
     },
     {
@@ -55,94 +71,105 @@ const treeniEsittely = [{
         name: 'Tricep pushdown',
         sarjat: 3,
         image: require('../../assets/icons/triceps.png'),
+        navigationRoute: 'TricepPushdown'
+
 
     }
-    
-
 
 ]
-   
 
 
-const RintaTreeni = ({ navigation }) => {
-    
+
+
+export const Punnerrukset = ({ navigation }) => {
     return(
         <Container>
+        <WebView
+        source={{ uri: 'https://reactnative.dev/' }}
+      />
+        <ModalView><Text large center>Punnerrukset</Text>
+        <AloitaButton onPress={() => navigation.goBack()}>
         
-        <Image style={styles.image} source={require('../../assets/rinta.jpg')}></Image>
-        <IconTouchable onPress={() => navigation.goBack()}>
-        <Ionicons name="chevron-back-circle-outline" size={38} color="black" />
-        </IconTouchable>
-        <ScrollView>
-        <Text large>Rinta / Ojentaja / Olkapää <Image 
-        style={{height: 40, width: 40,}} 
-        source={require('../../assets/penkki.png')}>
-
-        </Image></Text>
-        
-        {
-                treeniEsittely.map((item, index) => {
-                    return(
-                        <Card key={index} containerStyle={styles.cards} >
-                        <View style={{flexDirection: 'row'}}>
-                        <Card.Image 
-                        source={item.image}
-                        style={styles.iconImage}>
-                        
-                        </Card.Image>
-                        <Text medium>{item.name}</Text>
-                        
-                        </View>
-                        <Text style={styles.toistotText} heavy medium>{item.sarjat} sarjaa</Text>
-                        </Card>
-                    );
-                })
-            }
-           
-        <ButtonContainer>
-        <AloitaButton color="#FDC10B">
-        <Text large >Aloita treeni</Text>
+            <Text>Sulje modal</Text>
         </AloitaButton>
-        </ButtonContainer>
-        </ScrollView>
+         </ModalView>
         </Container>
-        
-      
-        
+            
+       
+    )
+}
+export const Penkkipunnerrus = () => {
+    return(
+       <Text large center>Penkkipunnerrus</Text> 
+    )
+}
+export const Pystypunnerrus = () => {
+    return(
+       <Text large center>Pystypunnerrus</Text> 
+    )
+}
+export const Dipit = () => {
+    return(
+       <Text large center>Dipit</Text> 
+    )
+}
+export const Vipunosto = () => {
+    return(
+       <Text large center>Vipunosto</Text> 
+    )
+}
+export const  ChestFly = () => {
+    return(
+       <Text large center>ChestFly</Text> 
+    )
+}
+export const TricepPushdown = () => {
+    return(
+       <Text large center>TricepPushdown</Text> 
     )
 }
 
+export const Rinta = () => {
+   
+    return(
+        <TreeniData 
+        backgroundImage={require('../../assets/rinta.jpg')}
+        data={rintaTreeni} 
+        treeniText='Rinta / Ojentaja / Olkapää'
+        />
+    );
+}
 
-const styles = StyleSheet.create({
-    image: {
-        width: '100%',
-        height: '35%',
-        opacity: 0.9
+
+    const Stack = createStackNavigator();
+
+    const RintaTreeni = () => {
+     return(
+        <Stack.Navigator
+    mode="modal"
+    initialRouteName="Rinta"
+     >
+      <Stack.Screen name="Rinta" options={{ headerShown: false, gestureEnabled: true}}  component={Rinta} />
+      <Stack.Screen name="Punnerrukset" options={{ headerShown: false, gestureEnabled: false}}  component={Punnerrukset} />
+      <Stack.Screen name="Penkkipunnerrus" options={{ headerShown: false, gestureEnabled: false}}  component={Penkkipunnerrus} />
+      <Stack.Screen name="Pystypunnerrus" options={{ headerShown: false, gestureEnabled: false}}  component={Pystypunnerrus} />
+      <Stack.Screen name="Dipit" options={{ headerShown: false, gestureEnabled: false}}  component={Dipit} />
+      <Stack.Screen name="Vipunosto" options={{ headerShown: false, gestureEnabled: false}}  component={Vipunosto} />
+      <Stack.Screen name="ChestFly" options={{ headerShown: false, gestureEnabled: false}}  component={ChestFly} />
+      <Stack.Screen name="TricepPushdown" options={{ headerShown: false}} component={TricepPushdown} />
         
-    }, 
-    cards: {
-        height: 60,
-        borderWidth: 0,
-        borderRadius: 30,
-        elevation: 3,
-        backgroundColor: '#FDC10B'
-    },
+    </Stack.Navigator>
+     )
     
-    iconImage: {
-        height: 40, width: 40,
-        marginRight: 20,
-        padding: 0
-    },
-
-    toistotText: {
-        position: 'absolute', right: 5, fontFamily: 'MontserratBold'
-    }
-})
-
-
-
-
-
-
+ }
+   
 
 export default RintaTreeni;
+
+
+
+const Container = styled.View`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+`;
