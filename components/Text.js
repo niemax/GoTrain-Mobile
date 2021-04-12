@@ -3,15 +3,19 @@ import styled from 'styled-components/native';
 
 
 const TextStyle = ({...props}) => {
-    return <Text style={{fontFamily: 'MontserratBold'}} {...props}>{props.children}</Text>
+    return <Text style={{fontFamily: 'MontserratSemiBold'}} {...props}>{props.children}</Text>
 }
 
 const Text = styled.Text`
-color: ${props => props.color ?? "#000"};
+color: ${props => props.color ?? "#fff"};
 margin: ${props => props.margin ?? 0};
 padding: ${props => props.padding ?? 0};
+marginLeft: ${props => props.marginLeft ?? 0};
+marginRight: ${props => props.marginRight ?? 0};
+marginTop: ${props => props.marginTop ?? 0};
+marginBottom: ${props => props.marginBottom ?? 0};
 
-${({ title, large, medium, small, tiny }) => {
+${({ title, trainScreen, large, medium, small, tiny }) => {
     switch (true) {
             case title:
                 return `font-size: 32px`
@@ -27,6 +31,9 @@ ${({ title, large, medium, small, tiny }) => {
 
             case tiny:
                 return `font-size: 11px`
+                
+            case trainScreen:
+                return `font-size 20px`
 
             // #017472
 

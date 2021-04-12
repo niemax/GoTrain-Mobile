@@ -30,7 +30,7 @@ const Login = ({
         return (
             <Container>
             <Main>
-            <Text title semi bold center>
+            <Text color="black" title semi bold center>
             {`Tervetuloa takaisin, \n Kirjaudu sisään.`}{" "}
             <Icon 
             name="hand-peace-o" 
@@ -68,11 +68,11 @@ const Login = ({
             </Auth>
 
             <SignUpContainer onPress={handleLogin}>
-                <Text bold medium center color="#fff">Kirjaudu sisään</Text>
+                <Text bold medium center>Kirjaudu sisään</Text>
             </SignUpContainer>
 
             <SignUp onPress={() => navigation.navigate('Signup')}>
-            <Text small center>
+            <Text color="black" small center>
             Uusi jäsen?{" "} 
             <Text medium bold color="#CB570F">
             Rekisteröidy
@@ -91,7 +91,7 @@ const Login = ({
 
 const Container = styled.View`
     flex: 1;
-    background-color: #FEEFE6;
+    background-color: #F5F4F4;
 
 `;
 

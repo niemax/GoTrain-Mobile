@@ -1,15 +1,14 @@
-import React from 'react'
-import { Image, StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native';
+import React, { useState, useCallback } from 'react'
+import { Button, View } from 'react-native';
 import styled from 'styled-components/native';
 import { Ionicons } from '@expo/vector-icons'; 
 import { ModalContainer, ModalView, AloitaButton, ButtonContainer, IconTouchable} from '../../components/TrainScreenStyling';
-
 import TreeniData from '../../components/TreeniEsittely';
 import { createStackNavigator } from '@react-navigation/stack'
 import { WebView } from 'react-native-webview';
 import Text from '../../components/Text'
 import YoutubePlayer from "react-native-youtube-iframe";
-
+import HeaderComponent from '../../components/HeaderComponent';
 
 
 const rintaTreeni = [{
@@ -72,27 +71,49 @@ const rintaTreeni = [{
         sarjat: 3,
         image: require('../../assets/icons/triceps.png'),
         navigationRoute: 'TricepPushdown'
-
-
     }
-
 ]
 
 
-
-
 export const Punnerrukset = ({ navigation }) => {
+    const [playing, setPlaying] = useState(false);
+
+    const onStateChange = useCallback((state) => {
+      if (state === "ended") {
+        setPlaying(false);
+        Alert.alert("video has finished playing!");
+      }
+    }, []);
+  
+    const togglePlaying = useCallback(() => {
+      setPlaying((prev) => !prev);
+    }, []);
+   
+
     return(
         <Container>
-        <WebView
-        source={{ uri: 'https://reactnative.dev/' }}
+
+        <VideoContainer>
+        <YoutubePlayer
+        height={220}
+        play={playing}
+        videoId={"-Mbr55h3BeQ"}
+        onChangeState={onStateChange}
       />
-        <ModalView><Text large center>Punnerrukset</Text>
-        <AloitaButton onPress={() => navigation.goBack()}>
-        
-            <Text>Sulje modal</Text>
-        </AloitaButton>
-         </ModalView>
+      </VideoContainer>
+
+      <Text large left>  Punnerrukset - <Text medium>3 sarjaa 10 toistoa</Text></Text>
+      
+      <TextContainer>
+      
+        <Text medium left>{`Pidä keskivartalo tiukkana ja kroppa suorassa. \n \nHengitä sisään alaslaskun aikana, hengitä ulos kun punnerrat itseäsi ylös (eli muista hengittää!)
+        \nEli kroppa suorana ja keskivartalo tiukkana, pää neutraalissa asennossa. \n\nJos et jaksa tehdä normaaleja punnerruksia, älä mene varpaiden vaan polvien varaan.
+        `}</Text>
+      </TextContainer>
+
+        <SuljeButton onPress={() => navigation.goBack()}>
+            <Text color="white" center large>Sulje</Text>
+        </SuljeButton>
         </Container>
             
        
@@ -129,13 +150,15 @@ export const TricepPushdown = () => {
     )
 }
 
-export const Rinta = () => {
+    const Rinta = () => {
    
     return(
         <TreeniData 
-        backgroundImage={require('../../assets/rinta.jpg')}
+        backgroundImage={require('../../assets/rintaToinen.jpg')}
         data={rintaTreeni} 
         treeniText='Rinta / Ojentaja / Olkapää'
+        treeninKesto='45-60min'
+        kohdeRyhmaText='Rinta'
         />
     );
 }
@@ -143,33 +166,55 @@ export const Rinta = () => {
 
     const Stack = createStackNavigator();
 
-    const RintaTreeni = () => {
+    export default () => {
      return(
         <Stack.Navigator
     mode="modal"
     initialRouteName="Rinta"
+  
+    
      >
-      <Stack.Screen name="Rinta" options={{ headerShown: false, gestureEnabled: true}}  component={Rinta} />
-      <Stack.Screen name="Punnerrukset" options={{ headerShown: false, gestureEnabled: false}}  component={Punnerrukset} />
+      <Stack.Screen name="Rinta" options={{  headerShown: false, headerLeft: null }}  component={Rinta} />
+      <Stack.Screen
+       name="Punnerrukset" 
+       options=
+       {{ headerTintColor: 'white', headerStyle: {backgroundColor: '#000' }, 
+       headerShown: true, headerLeft: null, gestureEnabled: false}}
+         component={Punnerrukset} />
       <Stack.Screen name="Penkkipunnerrus" options={{ headerShown: false, gestureEnabled: false}}  component={Penkkipunnerrus} />
       <Stack.Screen name="Pystypunnerrus" options={{ headerShown: false, gestureEnabled: false}}  component={Pystypunnerrus} />
       <Stack.Screen name="Dipit" options={{ headerShown: false, gestureEnabled: false}}  component={Dipit} />
       <Stack.Screen name="Vipunosto" options={{ headerShown: false, gestureEnabled: false}}  component={Vipunosto} />
       <Stack.Screen name="ChestFly" options={{ headerShown: false, gestureEnabled: false}}  component={ChestFly} />
       <Stack.Screen name="TricepPushdown" options={{ headerShown: false}} component={TricepPushdown} />
-        
+    
     </Stack.Navigator>
      )
     
  }
    
 
-export default RintaTreeni;
-
 
 
 const Container = styled.View`
-    flex: 1;
-    align-items: center;
-    justify-content: center;
+    background-color: #141314;
+    height: 100%;
+
+`;
+
+const VideoContainer = styled.View`
+`;
+
+const TextContainer = styled.View`
+    margin-left: 15px;
+    margin-top: 50px;
+
+`;
+
+const SuljeButton = styled.TouchableOpacity`
+align-items: center;
+height: 48px;
+justify-content: center;
+border-radius: 50px;
+background-color: ${props => props.color ?? '#FA4242'};
 `;

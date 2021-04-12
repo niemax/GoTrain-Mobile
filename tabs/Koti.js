@@ -10,13 +10,15 @@ import CardioTreeni from '../screens/TreeniScreens/Cardio';
 
 const Stack = createStackNavigator();
 
+
+
 const MainAppStack = () => {
     return(
       <Stack.Navigator
        initialRouteName="Etusivu" // VAIHDA TÄMÄ TAKAISIN SIGNUP
        >
-        <Stack.Screen name="Etusivu" options={{ headerShown: false, gestureEnabled: false}}  component={Etusivu} />
-        <Stack.Screen name="RintaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={RintaTreeni} />
+        <Stack.Screen name="Etusivu" options={{ headerShown: false, headerLeft: null}}  component={Etusivu} />
+        <Stack.Screen name="RintaTreeni" options={{ headerShown: false, gestureEnabled: false}} component={RintaTreeni} />
         <Stack.Screen name="SelkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={SelkaTreeni} />
         <Stack.Screen name="JalkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={JalkaTreeni} />
         <Stack.Screen name="KasiTreeni" options={{ headerShown: false, gestureEnabled: false }} component={KasiTreeni} />

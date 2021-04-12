@@ -4,40 +4,42 @@ import Text from '../../components/Text';
 import { Ionicons } from '@expo/vector-icons'; 
 import { Container, ParagraphContainer, AloitaButton, ButtonContainer, IconTouchable} from '../../components/TrainScreenStyling';
 import { Card } from 'react-native-elements';
+import TreeniData from '../../components/TreeniEsittely';
 
 
 
 
-const treeniEsittely = [{
+
+const kasiTreeni = [{
         id: 1,
-        name: 'Leuanveto',
-        sarjat: '2-3',
+        name: 'Hauiskääntö tangolla',
+        sarjat: 3,
         image: require('../../assets/icons/leuanveto.png'),
     },
     {
         id: 2,
-        name: 'Kulmasoutu',
-        sarjat: '2-3',
+        name: 'Hauiskääntö kaapelilla',
+        sarjat: 3,
         image: require('../../assets/icons/kulmasoutu.png'),
 
     },
     {
         id: 3,
-        name: 'Hauiskääntö',
+        name: 'Kallonmurtaja',
         sarjat: '2-3',
         image: require('../../assets/icons/hauiskaanto.png'),
 
     },
     {
         id: 4,
-        name: 'Soutu alataljassa',
+        name: 'Tricep pushdown',
         sarjat: 3,
         image: require('../../assets/icons/alatalja.png'),
 
     },
     {
         id: 5,
-        name: 'Lat Pushdown',
+        name: 'Yhden käden',
         sarjat: 3,
         image: require('../../assets/icons/latpushdown.png'),
 
@@ -53,54 +55,20 @@ const treeniEsittely = [{
    
 
 //#8292B4
-export default ({ navigation }) => {
-    
+const KasiTreeni = () => {
     return(
-        <Container>
-        
-        <Image style={styles.image} source={require('../../assets/kadet.jpg')}></Image>
-        <IconTouchable onPress={() => navigation.goBack()}>
-        <Ionicons name="chevron-back-circle-outline" size={38} color="black" />
-        </IconTouchable>
-        <ScrollView>
-        <Text large>Käsitreeni <Image 
-        style={{height: 40, width: 40,}} 
-        source={require('../../assets/kadeticon.png')}>
-
-        </Image></Text>
-        
-        {
-                treeniEsittely.map((item, index) => {
-                    return(
-                        <Card key={index} containerStyle={styles.cards} >
-                        <View style={{flexDirection: 'row'}}>
-                        <Card.Image 
-                        source={item.image}
-                        style={styles.iconImage}>
-                        
-                        </Card.Image>
-                        <Text color="white" medium>{item.name}</Text>
-                        
-                        </View>
-                        <Text color="white" style={styles.toistotText} heavy medium>{item.sarjat} sarjaa</Text>
-                        </Card>
-                    );
-                })
-            }
-           
-        <ButtonContainer>
-        <AloitaButton color="#8292B4">
-        <Text color="white" large >Aloita treeni</Text>
-        </AloitaButton>
-        </ButtonContainer>
-        </ScrollView>
-        </Container>
-        
-      
-        
-    )
+        <TreeniData 
+        backgroundImage={require('../../assets/kadetToinen.jpg')}
+        data={kasiTreeni} 
+        treeniText='Käsitreeni'
+        treeninKesto='45-60min'
+        kohdeRyhmaText='Hauikset - Ojentajat'
+        />
+    );
+   
 }
 
+export default KasiTreeni;
 
 const styles = StyleSheet.create({
     image: {

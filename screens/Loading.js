@@ -15,7 +15,7 @@ const LoadingScreen = ({
                     if (user) {
                         setTimeout(() => {
                             setIsLoggedIn(true)
-                            navigation.navigate('Etusivu');
+                            navigation.navigate('Koti');
                         }, 200);
                     }
                 } catch (err) {
@@ -52,7 +52,7 @@ const LoadingScreen = ({
 
 const Container = styled.View`
     flex: 1
-    background-color: #FEEFE6;
+    background-color: #F5F4F4;
 
 `;
 

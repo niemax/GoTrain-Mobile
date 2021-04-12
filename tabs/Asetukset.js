@@ -14,8 +14,6 @@ const Asetukset = ({ navigation }) => {
     return(
         <Container>
         <HeaderContainer>
-        <LeftCircle />
-        <RightCircle />
         <HeaderComponent 
             rightComponent={
             <ProfileIcon onPress={handleLogOut}>{icon}</ProfileIcon>

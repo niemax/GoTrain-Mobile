@@ -14,8 +14,6 @@
 
         return(
             <Container>
-            <LeftCircle />
-            <RightCircle />
             <HeaderContainer>
             <HeaderComponent 
                 rightComponent={

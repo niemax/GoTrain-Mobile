@@ -1,5 +1,9 @@
 {
   "expo": {
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true
+    },
     "name": "gotrain-app",
     "slug": "gotrain-app",
     "version": "1.0.0",
@@ -16,9 +20,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",

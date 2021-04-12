@@ -55,50 +55,7 @@ const treeniEsittely = [{
 //#8292B4
 export default ({ navigation }) => {
     
-    return(
-        <Container>
-        
-        <Image style={styles.image} source={require('../../assets/cardio.jpg')}></Image>
-        <IconTouchable onPress={() => navigation.goBack()}>
-        <Ionicons name="chevron-back-circle-outline" size={38} color="black" />
-        </IconTouchable>
-        <ScrollView>
-        <Text large>Cardio <Image 
-        style={{height: 40, width: 40,}} 
-        source={require('../../assets/cardioicon.png')}>
-
-        </Image></Text>
-        
-        {
-                treeniEsittely.map((item, index) => {
-                    return(
-                        <Card key={index} containerStyle={styles.cards} >
-                        <View style={{flexDirection: 'row'}}>
-                        <Card.Image 
-                        source={item.image}
-                        style={styles.iconImage}>
-                        
-                        </Card.Image>
-                        <Text color="white" medium>{item.name}</Text>
-                        
-                        </View>
-                        <Text color="white" style={styles.toistotText} heavy medium>{item.sarjat} sarjaa</Text>
-                        </Card>
-                    );
-                })
-            }
-           
-        <ButtonContainer>
-        <AloitaButton color="#947AFF">
-        <Text color="white" large >Aloita treeni</Text>
-        </AloitaButton>
-        </ButtonContainer>
-        </ScrollView>
-        </Container>
-        
-      
-        
-    )
+   
 }
 
 

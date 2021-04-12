@@ -13,18 +13,18 @@ const MainAppBottomNav = () => {
     return (
       <Tab.Navigator
       initialRouteName="Koti"
-      activeColor="black"
+      activeColor="white"
       shifting={true}
       
     >
       <Tab.Screen
-        name="Home"
+        name="Koti"
         component={Koti}
         options={{
-          tabBarLabel: 'Home',
-          tabBarColor: '#EFEEF0',
+          tabBarLabel: 'Koti',
+          tabBarColor: 'rgba(0, 0, 0, 0.9)',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="ios-home-outline" size={24} color="black" />
+            <Ionicons name="ios-home-outline" size={24} color="white" />
           ),
         }}
       />
@@ -33,9 +33,9 @@ const MainAppBottomNav = () => {
         component={TehdytTreenit}
         options={{
           tabBarLabel: 'Tehdyt treenit',
-          tabBarColor: '#EFEEF0',
+          tabBarColor: 'rgba(0, 0, 0, 0.9)',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="md-checkmark-done-circle-outline" size={24} color="black" />
+            <Ionicons name="md-checkmark-done-circle-outline" size={24} color="white" />
           ),
         }}
         />
@@ -44,9 +44,9 @@ const MainAppBottomNav = () => {
         component={Asetukset}
         options={{
           tabBarLabel: 'Asetukset',
-          tabBarColor: '#EFEEF0',
+          tabBarColor: 'rgba(0, 0, 0, 0.9)',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="ios-settings-outline" size={24} color="black" />
+            <Ionicons name="ios-settings-outline" size={24} color="white" />
           ),
         }}
         />

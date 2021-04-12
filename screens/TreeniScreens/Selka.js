@@ -4,11 +4,13 @@ import Text from '../../components/Text';
 import { Ionicons } from '@expo/vector-icons'; 
 import { Container, ParagraphContainer, AloitaButton, ButtonContainer, IconTouchable} from '../../components/TrainScreenStyling';
 import { Card } from 'react-native-elements';
+import TreeniData from '../../components/TreeniEsittely';
 
 
 
 
-const treeniEsittely = [{
+
+const selkaTreeni = [{
         id: 1,
         name: 'Leuanveto',
         sarjat: '2-3',
@@ -51,56 +53,21 @@ const treeniEsittely = [{
     }
 ]
    
-
-//#8292B4
-export default ({ navigation }) => {
-    
+const SelkaTreeni = () => {
+   
     return(
-        <Container>
-        
-        <Image style={styles.image} source={require('../../assets/selka.jpg')}></Image>
-        <IconTouchable onPress={() => navigation.goBack()}>
-        <Ionicons name="chevron-back-circle-outline" size={38} color="black" />
-        </IconTouchable>
-        <ScrollView>
-        <Text large>Selkä / Hauis <Image 
-        style={{height: 40, width: 40,}} 
-        source={require('../../assets/selkaicon.png')}>
-
-        </Image></Text>
-        
-        {
-                treeniEsittely.map((item, index) => {
-                    return(
-                        <Card key={index} containerStyle={styles.cards} >
-                        <View style={{flexDirection: 'row'}}>
-                        <Card.Image 
-                        source={item.image}
-                        style={styles.iconImage}>
-                        
-                        </Card.Image>
-                        <Text color="white" medium>{item.name}</Text>
-                        
-                        </View>
-                        <Text color="white" style={styles.toistotText} heavy medium>{item.sarjat} sarjaa</Text>
-                        </Card>
-                    );
-                })
-            }
-           
-        <ButtonContainer>
-        <AloitaButton color="#017472">
-        <Text color="white" large >Aloita treeni</Text>
-        </AloitaButton>
-        </ButtonContainer>
-        </ScrollView>
-        </Container>
-        
-      
-        
-    )
+        <TreeniData 
+        backgroundImage={require('../../assets/selkaToinen.jpg')}
+        data={selkaTreeni} 
+        treeniText='Selkä / Hauis'
+        treeninKesto='60-75min'
+        kohdeRyhmaText='Selkä'
+        />
+    );
 }
+//#8292B4
 
+export default SelkaTreeni;
 
 const styles = StyleSheet.create({
     image: {

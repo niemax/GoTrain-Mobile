@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import * as firebase from 'firebase';
 import { loggingOut } from '../API/FirebaseMethods'
 import { Ionicons } from '@expo/vector-icons';
@@ -15,13 +16,12 @@ import styled from 'styled-components/native';
 const Etusivu = ({
         navigation
     }) => {
-        
        
-       //let currentUserUID = firebase.auth().currentUser.uid;
+        let currentUserUID = firebase.auth().currentUser.uid;
         const [text, setText] = useState('');
 
    
-     /* useEffect(() => {
+      useEffect(() => {
             async function getUserInfo() {
                 try {
                     let doc = await firebase
@@ -42,25 +42,24 @@ const Etusivu = ({
             }
             getUserInfo();
         }, []);   
-      */
+      
       
     
     return (
         
             <Container>
-            <LeftCircle />
-            <RightCircle/>
+            <StatusBar style="light" />
         <HeaderContainer>
         <HeaderComponent 
             containerStyle={{
             backgroundColor: '#FA4242',
         }}
-        centerComponent={{text: <Text medium heavy color="white" margin="15px" center>Home</Text>}}
+        centerComponent={{text: <Text medium color="white" center>Home</Text>}}
         
         />
         </HeaderContainer>
         <TextContainer>
-        <Text color="#000" margin="80px 0px 0px 0px" large center>{`Hei, ${text}!\n Mitä tänään treenattaisiin?`}</Text>
+        <Text large center>{`Hei, ${text}!\n Mitä tänään treenattaisiin?`}</Text>
         </TextContainer>
         
         <CardContainer>
@@ -74,42 +73,22 @@ const Etusivu = ({
 
 const Container = styled.View`
     flex: 1;
-    background-color: #FEEFE6;
+    background-color: #141314;
 
 `;
 
 
-const RightCircle = styled.View`
-    background-color: #FA4242
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 200px;
-    right: -100px;
-    top: -200px;
-`;
-
-const LeftCircle = styled.View`
-    background-color: #FA4242
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-    left: -50px;
-    top: -50px;
-`;
 
 const HeaderContainer = styled.View`
 `;
 
 const TextContainer = styled.View`
-    margin-top: 15px;
+    margin-top: 20px;
 `;
 
 
 
 const CardContainer = styled.View`
-    padding: 5px;
 `;  
 
 export default Etusivu;
