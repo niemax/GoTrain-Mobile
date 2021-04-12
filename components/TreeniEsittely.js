@@ -34,7 +34,7 @@ import { ListItem } from 'react-native-elements'
         <View style={{flexDirection: 'row', margin: 15}}>
         <Ionicons name="ios-timer-sharp" size={26} color="white" />
         
-        <Text medium left>{treeninKesto}  <Feather name="target" size={26} color="white" />  Kohderyhmä  - {kohdeRyhmaText} </Text>
+        <Text medium left>{treeninKesto}  <Feather name="target" size={26} color="white" />  Kohderyhmä  -  {kohdeRyhmaText} </Text>
         
         
         </View>

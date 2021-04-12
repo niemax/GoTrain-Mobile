@@ -15,13 +15,7 @@ const Asetukset = ({ navigation }) => {
         <Container>
         <HeaderContainer>
         <HeaderComponent 
-            rightComponent={
-            <ProfileIcon onPress={handleLogOut}>{icon}</ProfileIcon>
-            }
-            containerStyle={{
-            backgroundColor: '#FF8A42',
-            justifyContent: 'space-around',
-        }}
+         centerComponent={{text: <Text medium color="white" center>Home</Text>}}
         />
         </HeaderContainer>
 
@@ -38,6 +32,7 @@ export default Asetukset;
 
 const Container = styled.View`
     flex: 1;
+    background-color: #141314;
 
 `;
 
@@ -52,29 +47,3 @@ const ProfileIcon = styled.TouchableOpacity`
     margin-top: 5px;
 `;
 
-const HeaderGraphic = styled.View`
-position: absolute;
-width: 100%;
-top: -50px;
-z-index: -100;
-`;
-
-const RightCircle = styled.View`
-background-color: #FF8A42;
-position: absolute;
-width: 400px;
-height: 400px;
-border-radius: 200px;
-right: -100px;
-top: -200px;
-`;
-
-const LeftCircle = styled.View`
-background-color: #FF8A42;
-position: absolute;
-width: 200px;
-height: 200px;
-border-radius: 100px;
-left: -50px;
-top: -50px;
-`;

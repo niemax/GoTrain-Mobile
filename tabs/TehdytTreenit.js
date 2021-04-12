@@ -19,10 +19,7 @@
                 rightComponent={
                 <ProfileIcon onPress={handleLogOut}>{icon}</ProfileIcon>
                 }
-                containerStyle={{
-                backgroundColor: '#EA5504',
-                justifyContent: 'space-around',
-            }}
+                
             />
             </HeaderContainer>
 
@@ -35,11 +32,11 @@
         )
     }
 
-
     export default TehdytTreenit;
 
     const Container = styled.View`
         flex: 1;
+        background-color: #141314;
 
     `;
 
@@ -54,29 +51,3 @@
     const ProfileIcon = styled.TouchableOpacity`
         margin-top: 5px;
     `;
-    const HeaderGraphic = styled.View`
-    position: absolute;
-    width: 100%;
-    top: -50px;
-    z-index: -100;
-`;
-
-const RightCircle = styled.View`
-    background-color: #EA5504;
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 200px;
-    right: -100px;
-    top: -200px;
-`;
-
-const LeftCircle = styled.View`
-    background-color: #EA5504;
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-    left: -50px;
-    top: -50px;
-`;

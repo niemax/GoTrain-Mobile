@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import * as firebase from 'firebase';
 import { loggingOut } from '../API/FirebaseMethods'
@@ -9,19 +9,73 @@ import Text from '../components/Text';
 import HeaderComponent from '../components/HeaderComponent';
 import Cards from '../components/Cards';
 import styled from 'styled-components/native'; 
-
+import * as Location from 'expo-location';
+import moment from 'moment';
+import 'moment/locale/fi'
 
 
 
 const Etusivu = ({
         navigation
     }) => {
+
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
+    const [temp, setTemp] = useState(null);
+    const [city, setCity] = useState('')
+    const [errorMsg, setErrorMsg] = useState(null);
+    const [weatherData, setWeatherData] = useState([]);
+    const [location, setLocation] = useState(null);
+    const [currentDate, setCurrentDate] = useState('');
+    
+    
+    
+
+    useEffect(() => {
        
-        let currentUserUID = firebase.auth().currentUser.uid;
+      (async () => {
+        let { status } = await Location.requestPermissionsAsync();
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied');
+          return;
+        }
+  
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
+        setLatitude(location.coords.latitude)
+        setLongitude(location.coords.longitude)
+
+        
+        //console.log(location)
+      })();
+
+      const date = moment().locale('fi')
+        .format('LL')
+        setCurrentDate(date)
+        console.log(currentDate)
+        
+        getWeatherData();
+    }, []);
+
+    
+    const getWeatherData = () => {
+   
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=d85cb8591b3bf1b13021c27b116b86cd`)
+    .then(response => response.json())
+    .then(responseData => {
+        setCity(responseData.name);
+        setTemp(responseData.main.temp.toFixed(0))
+        console.log(city)
+        
+  }) 
+    .catch(err => console.error(err));
+  }
+       
+      // let currentUserUID = firebase.auth().currentUser.uid;
         const [text, setText] = useState('');
 
    
-      useEffect(() => {
+      /*  useEffect(() => {
             async function getUserInfo() {
                 try {
                     let doc = await firebase
@@ -41,8 +95,8 @@ const Etusivu = ({
                 }
             }
             getUserInfo();
-        }, []);   
-      
+        }, []);    
+        */
       
     
     return (
@@ -51,15 +105,14 @@ const Etusivu = ({
             <StatusBar style="light" />
         <HeaderContainer>
         <HeaderComponent 
-            containerStyle={{
-            backgroundColor: '#FA4242',
-        }}
-        centerComponent={{text: <Text medium color="white" center>Home</Text>}}
+        centerComponent={{text: <Text marginTop="10px" medium center>{city},   {temp}{'\u00b0'}C</Text>}}
         
         />
         </HeaderContainer>
         <TextContainer>
-        <Text large center>{`Hei, ${text}!\n Mitä tänään treenattaisiin?`}</Text>
+        
+        <Text marginLeft="10px" marginBottom="25px" medium left>{currentDate.toUpperCase()}</Text>
+        <Text marginTop="15px" large center>{`Hei, ${text}!\n Mitä tänään treenattaisiin?`}</Text>
         </TextContainer>
         
         <CardContainer>
@@ -75,6 +128,9 @@ const Container = styled.View`
     flex: 1;
     background-color: #141314;
 
+`;
+
+const LineBreak = styled.View`
 `;
 
 

@@ -14,7 +14,7 @@ const MainAppBottomNav = () => {
       <Tab.Navigator
       initialRouteName="Koti"
       activeColor="white"
-      shifting={true}
+      barStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.9)' }}
       
     >
       <Tab.Screen

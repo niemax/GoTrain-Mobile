@@ -14,7 +14,7 @@ const treenit = [{
         image: require('../assets/rintaToinen.jpg'),
         navigationRoute: 'RintaTreeni',
         icon: <Ionicons name="ios-timer-sharp" size={28} color="white" />,
-        treeninKesto: '45-70min'
+        treeninKesto: '60-75min'
     },
     {
         id: 2,
@@ -52,6 +52,7 @@ const treenit = [{
         treeninKesto: '45-60min'
 
     }, 
+    
 ]
 
 
@@ -63,7 +64,7 @@ const Cards = () => {
     return(
             <Container>
              
-            <ScrollView style={{marginTop: 20, height: '100%'}}>
+            <ScrollView style={{ height: '100%' }}>
             {
                 treenit.map((item, index) => {
                     return(

@@ -19,11 +19,12 @@ const HeaderComponent = (props) => {
         console.log('Logged out!');
     }
 
-
-
     return(
         <Header
-       // centerComponent={<GetWeather/>}
+        
+       containerStyle={{
+            backgroundColor: '#141314;',
+        }}
        leftComponent={<HeaderImage/>}
         rightComponent={
             <ProfileIcon onPress={handleLogOut}>{icon}</ProfileIcon>
