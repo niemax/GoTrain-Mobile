@@ -31,7 +31,7 @@ const treenit = [{
         navigationRoute: 'JalkaTreeni',
         image: require('../assets/jalatToinen.jpg'),
         icon: <Ionicons name="ios-timer-sharp" size={28} color="white" />,
-        treeninKesto: '45-70min'
+        treeninKesto: '60-75min'
 
     }, 
     {
@@ -40,7 +40,7 @@ const treenit = [{
         navigationRoute: 'KasiTreeni',
         image: require('../assets/kadetToinen.jpg'),
         icon: <Ionicons name="ios-timer-sharp" size={28} color="black" />,
-        treeninKesto: '45-70min'
+        treeninKesto: '60-75min'
 
     }, 
     {

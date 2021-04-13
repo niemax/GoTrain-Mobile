@@ -15,13 +15,19 @@ marginRight: ${props => props.marginRight ?? 0};
 marginTop: ${props => props.marginTop ?? 0};
 marginBottom: ${props => props.marginBottom ?? 0};
 
-${({ title, trainScreen, large, medium, small, tiny }) => {
+${({ title, vinkit, vinkkiTitle, large, medium, small, tiny }) => {
     switch (true) {
             case title:
                 return `font-size: 32px`
 
             case large:
                 return `font-size: 24px`
+
+            case vinkit:
+                return `font-size: 15px`
+            
+            case vinkkiTitle:
+                return `font-size: 20px`
 
             case medium:
                 return `font-size: 16px`
@@ -32,12 +38,6 @@ ${({ title, trainScreen, large, medium, small, tiny }) => {
             case tiny:
                 return `font-size: 11px`
                 
-            case trainScreen:
-                return `font-size 20px`
-
-            // #017472
-
-
             default:
                 return `font-size: 11px`
             

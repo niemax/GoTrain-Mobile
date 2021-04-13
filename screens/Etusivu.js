@@ -54,7 +54,7 @@ const Etusivu = ({
         setCurrentDate(date)
         console.log(currentDate)
         
-        getWeatherData();
+        // getWeatherData();
     }, []);
 
     

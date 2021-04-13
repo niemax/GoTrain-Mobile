@@ -19,7 +19,7 @@ const ParagraphContainer = styled.View`
     border-radius: 50px;
     shadow-color: 'rgba(0,0,0, .4)';
     shadow-opacity: 0.5;
-    background-color: ${props => props.color ?? '#141314'};
+    background-color: ${props => props.color ?? '#FA4242'};
 `;
 
  const ButtonContainer = styled.View`
