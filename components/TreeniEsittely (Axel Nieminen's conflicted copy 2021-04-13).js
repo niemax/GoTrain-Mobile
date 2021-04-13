@@ -8,6 +8,7 @@ import { ListItem } from 'react-native-elements'
 
 
 
+
  const TreeniData = (props) => {
 
     const navigation = useNavigation();
@@ -42,30 +43,30 @@ import { ListItem } from 'react-native-elements'
         {
             data.map((item, index) => {
                 return(
-                    <TouchableOpacity key={index} onPress={() => navigation.navigate(item.navigationRoute)}>
-                    <ListItem containerStyle={styles.cards} bottomDivider >
+                    <ListItem key={index} containerStyle={styles.cards} bottomDivider >
+      
+                <ListItem.Content>
+                <Image 
+                source={item.image}
+                style={styles.iconImage}>
+                </Image>
+                <Text medium>{item.name}</Text>
+                
+                <Text style={styles.toistotText} medium>{item.sarjat} sarjaa</Text>
+                </ListItem.Content>
+                <TouchableOpacity onPress={() => navigation.push(item.navigationRoute)} 
+                hitSlop={{top: 50, bottom: 50, left: 50, right: 50}}>
+                <Ionicons name="ios-chevron-forward-sharp" size={24} color="white" />
+                </TouchableOpacity>
                
-               <ListItem.Content>
-               <Image 
-               source={item.image}
-               style={styles.iconImage}>
-               </Image>
-               <Text medium>{item.name}</Text>
-               
-               <Text style={styles.toistotText} medium>{item.sarjat} sarjaa</Text>
-               </ListItem.Content>
-               <Ionicons name="ios-chevron-forward-sharp" size={24} color="white" />
-              
-               </ListItem>
-                    </TouchableOpacity>
-                   
+                </ListItem>
                 );
             })
         }
         </Container>
         </ScrollView>
         <ButtonContainer>
-                <AloitaButton>
+                <AloitaButton color="white">
                 <Text color="black" large >Aloita treeni</Text>
                 </AloitaButton>
                 </ButtonContainer>
