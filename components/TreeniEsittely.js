@@ -65,8 +65,8 @@ import { ListItem } from 'react-native-elements'
         </Container>
         </ScrollView>
         <ButtonContainer>
-                <AloitaButton>
-                <Text color="black" large >Aloita treeni</Text>
+                <AloitaButton onPress={() => navigation.push('AloitaTreeni')}>
+                <Text large >Aloita treeni</Text>
                 </AloitaButton>
                 </ButtonContainer>
                 </Container>

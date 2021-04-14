@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Card } from 'react-native-elements';
 import Text from '../components/Text';
 import styled from 'styled-components/native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'; 
 import { Ionicons } from '@expo/vector-icons'; 
 
 

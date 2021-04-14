@@ -12,7 +12,7 @@ const ParagraphContainer = styled.View`
 `;
 
  const AloitaButton = styled.TouchableOpacity`
-    margin: 18px;
+    margin-bottom: 40px;
     height: 48px;
     align-items: center;
     justify-content: center;

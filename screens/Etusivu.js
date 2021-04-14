@@ -27,55 +27,57 @@ const Etusivu = ({
     const [weatherData, setWeatherData] = useState([]);
     const [location, setLocation] = useState(null);
     const [currentDate, setCurrentDate] = useState('');
-    
-    
-    
 
-    useEffect(() => {
        
-      (async () => {
-        let { status } = await Location.requestPermissionsAsync();
-        if (status !== 'granted') {
-          setErrorMsg('Permission to access location was denied');
-          return;
+const getLocation = () => {
+        (async () => {
+            let {
+                status
+            } = await Location.requestPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+            setLatitude(location.coords.latitude)
+            setLongitude(location.coords.longitude)
+            //console.log(location)
+        })();
+    }
+
+
+
+        const getWeatherData = () => {
+
+            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=d85cb8591b3bf1b13021c27b116b86cd`)
+                .then(response => response.json())
+                .then(responseData => {
+                    setCity(responseData.name);
+                    setTemp(responseData.main.temp.toFixed(0))
+                  //  console.log(city)
+
+                })
+                .catch(err => console.error(err));
         }
-  
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
-        setLatitude(location.coords.latitude)
-        setLongitude(location.coords.longitude)
 
-        
-        //console.log(location)
-      })();
+        const getCurrentDate = () => {
+            const date = moment().locale('fi')
+                .format('LL')
+            setCurrentDate(date)
+            //console.log(currentDate)
+        }
 
-      const date = moment().locale('fi')
-        .format('LL')
-        setCurrentDate(date)
-        console.log(currentDate)
-        
-        // getWeatherData();
-    }, []);
-
-    
-    const getWeatherData = () => {
-   
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=d85cb8591b3bf1b13021c27b116b86cd`)
-    .then(response => response.json())
-    .then(responseData => {
-        setCity(responseData.name);
-        setTemp(responseData.main.temp.toFixed(0))
-        console.log(city)
-        
-  }) 
-    .catch(err => console.error(err));
-  }
+        useEffect(() => {
+            getLocation(), getCurrentDate(), getWeatherData()
+        }, [location]);
        
-      // let currentUserUID = firebase.auth().currentUser.uid;
+        let currentUserUID = firebase.auth().currentUser.uid;
         const [text, setText] = useState('');
 
    
-      /*  useEffect(() => {
+       useEffect(() => {
             async function getUserInfo() {
                 try {
                     let doc = await firebase
@@ -96,7 +98,7 @@ const Etusivu = ({
             }
             getUserInfo();
         }, []);    
-        */
+        
       
     
     return (
@@ -110,7 +112,6 @@ const Etusivu = ({
         />
         </HeaderContainer>
         <TextContainer>
-        
         <Text marginLeft="10px" marginBottom="25px" medium left>{currentDate.toUpperCase()}</Text>
         <Text marginTop="15px" large center>{`Hei, ${text}!\n Mitä tänään treenattaisiin?`}</Text>
         </TextContainer>

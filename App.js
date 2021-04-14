@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import MainStackNavigator from './navigation/AuthStackNavigator'
+import MainAuthStack from './navigation/MainAppNav'
 import * as firebase from 'firebase';
 import configKeys from './config/Firebase'
 import * as Font from 'expo-font';
@@ -49,7 +49,7 @@ import { NavigationContainer } from '@react-navigation/native';
           <NavigationContainer >
          
           <SafeAreaProvider>
-          <MainStackNavigator />
+          <MainAuthStack />
           
           </SafeAreaProvider>
           </NavigationContainer>

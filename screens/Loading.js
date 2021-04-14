@@ -15,8 +15,8 @@ const LoadingScreen = ({
                     if (user) {
                         setTimeout(() => {
                             setIsLoggedIn(true)
-                            navigation.navigate('Koti');
-                        }, 200);
+                            navigation.navigate('Kotisivu');
+                        }, 400);
                     }
                 } catch (err) {
                     console.log(err);

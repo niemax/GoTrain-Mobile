@@ -1,14 +1,12 @@
 import React, { useState, useCallback } from 'react'
-import { Button, View, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { Ionicons } from '@expo/vector-icons'; 
-import { ModalContainer, ModalView, AloitaButton, ButtonContainer, IconTouchable} from '../../components/TrainScreenStyling';
 import TreeniData from '../../components/TreeniEsittely';
 import { createStackNavigator } from '@react-navigation/stack'
-import { WebView } from 'react-native-webview';
 import Text from '../../components/Text'
 import YoutubePlayer from "react-native-youtube-iframe";
-import HeaderComponent from '../../components/HeaderComponent';
+import AloitaTreeni from './TreeninAloitus';
 
 
 const rintaTreeni = [{
@@ -311,7 +309,7 @@ export const TricepPushdown = ({ navigation }) => {
         <VideoContainer>
         <VideoPlayer
         height={220}
-        videoId={"Z57CtFmRMxA"}
+        videoId={"REWv05om0ho"}
       />
 
       </VideoContainer>
@@ -396,6 +394,8 @@ export const TricepPushdown = ({ navigation }) => {
       <Stack.Screen name="TricepPushdown" options={{ headerTintColor: 'white',
        headerStyle: {backgroundColor: '#FA4242' }, 
        headerShown: true, headerLeft: null, gestureEnabled: false}} component={TricepPushdown} />
+      
+      <Stack.Screen name="AloitaTreeni" options={{ headerShown: false, gestureEnabled: false}} component={AloitaTreeni} />
 
     
     </Stack.Navigator>
@@ -408,7 +408,8 @@ export const TricepPushdown = ({ navigation }) => {
 
 const Container = styled.View`
     background-color: #141314;
-    height: 100%;
+    flex: 1;
+    flex-direction: column;
 `;
 
 const VideoContainer = styled.View`
@@ -428,6 +429,7 @@ const WarningContainer = styled.View`
 
 
 const SuljeButton = styled.TouchableOpacity`
+margin-bottom: 30px;
 align-items: center;
 height: 48px;
 justify-content: center;
