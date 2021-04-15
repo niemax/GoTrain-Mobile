@@ -22,7 +22,7 @@ const MainAuthStack = () => {
     return(
       
       <Stack.Navigator
-       initialRouteName="Signup" // VAIHDA TÄMÄ TAKAISIN SIGNUP
+       initialRouteName="Kotisivu" // VAIHDA TÄMÄ TAKAISIN SIGNUP
        >
        
         <Stack.Screen name="Loading" options={{ headerShown: false, gestureEnabled: false}}  component={LoadingScreen} />

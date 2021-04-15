@@ -49,17 +49,21 @@ const getLocation = () => {
 
 
 
-        const getWeatherData = () => {
-
-            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=d85cb8591b3bf1b13021c27b116b86cd`)
-                .then(response => response.json())
-                .then(responseData => {
-                    setCity(responseData.name);
-                    setTemp(responseData.main.temp.toFixed(0))
-                  //  console.log(city)
-
-                })
-                .catch(err => console.error(err));
+        const getWeatherData = async() => {
+            const API = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=4faa658e0a47cd7c7693d03bf30bf56a`
+            try {
+                let response = await fetch(API)
+                const data = await response.json();
+                return data;
+                
+            } catch(error) {
+                console.error(error);
+            }
+            setCity(data.name);
+            setTemp(data.main.temp.toFixed(0))
+            
+           
+                
         }
 
         const getCurrentDate = () => {
@@ -71,13 +75,14 @@ const getLocation = () => {
 
         useEffect(() => {
             getLocation(), getCurrentDate(), getWeatherData()
-        }, [location]);
+        }, []);
+
        
-        let currentUserUID = firebase.auth().currentUser.uid;
+       // let currentUserUID = firebase.auth().currentUser.uid;
         const [text, setText] = useState('');
 
    
-       useEffect(() => {
+      /*  useEffect(() => {
             async function getUserInfo() {
                 try {
                     let doc = await firebase
@@ -97,7 +102,7 @@ const getLocation = () => {
                 }
             }
             getUserInfo();
-        }, []);    
+        }, []);     */
         
       
     
