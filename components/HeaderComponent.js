@@ -1,6 +1,5 @@
 import React from 'react'
 import { Header } from 'react-native-elements'
-import GetWeather from '../components/Weather';
 import HeaderImage from './HeaderLogo';
 import { loggingOut } from '../API/FirebaseMethods'
 import { Ionicons } from '@expo/vector-icons';

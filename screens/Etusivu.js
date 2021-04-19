@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Text from '../components/Text';
 import HeaderComponent from '../components/HeaderComponent';
-import Cards from '../components/Cards';
+import Cards from '../components/EtusivuCards';
 import styled from 'styled-components/native'; 
 import * as Location from 'expo-location';
 import moment from 'moment';
@@ -29,8 +29,7 @@ const Etusivu = ({
     const [currentDate, setCurrentDate] = useState('');
 
        
-const getLocation = () => {
-        (async () => {
+    const getLocation = async() => {
             let {
                 status
             } = await Location.requestPermissionsAsync();
@@ -39,31 +38,29 @@ const getLocation = () => {
                 return;
             }
 
-            let location = await Location.getCurrentPositionAsync({});
+            let location = await Location.getLastKnownPositionAsync({});
             setLocation(location);
             setLatitude(location.coords.latitude)
             setLongitude(location.coords.longitude)
             //console.log(location)
-        })();
     }
 
 
 
         const getWeatherData = async() => {
-            const API = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=4faa658e0a47cd7c7693d03bf30bf56a`
+                let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=4faa658e0a47cd7c7693d03bf30bf56a`
             try {
-                let response = await fetch(API)
+                let response = await fetch(api)
                 const data = await response.json();
+                setCity(data.name);
+                setTemp(data.main.temp.toFixed(0))
+                console.log(data)
                 return data;
                 
             } catch(error) {
                 console.error(error);
             }
-            setCity(data.name);
-            setTemp(data.main.temp.toFixed(0))
             
-           
-                
         }
 
         const getCurrentDate = () => {
@@ -73,8 +70,10 @@ const getLocation = () => {
             //console.log(currentDate)
         }
 
-        useEffect(() => {
-            getLocation(), getCurrentDate(), getWeatherData()
+         useEffect(() => {
+            getLocation()
+            getCurrentDate()
+            getWeatherData()
         }, []);
 
        
