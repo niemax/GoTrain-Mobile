@@ -15,13 +15,16 @@ const LoadingScreen = ({
                     if (user) {
                         setTimeout(() => {
                             setIsLoggedIn(true)
-                            navigation.navigate('Kotisivu');
+                            navigation.navigate('Kotisivu'); 
                         }, 400);
+                    } else {
+                        navigation.goBack();
                     }
                 } catch (err) {
                     console.log(err);
                 }
             })
+            
         }, []);
 
 

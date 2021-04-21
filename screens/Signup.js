@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Alert } from 'react-native';
 import styled from 'styled-components/native'; 
 import Text from '../components/Text';
 import { FontAwesome as Icon } from '@expo/vector-icons';

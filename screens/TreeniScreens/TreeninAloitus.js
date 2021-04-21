@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { Dimensions } from 'react-native';
 import Text from '../../components/Text';
 import styled from 'styled-components/native';
@@ -12,9 +12,14 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window'
 
 const AloitaTreeni = (props) => {
     const navigation = useNavigation();
-
     const [treeniData, setTreeniData] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [indexes, setIndexes] = useState([]);
+    const [click, setClick] = useState(1)
+    const [teksti, setTeksti] = useState('');
+
+    let currentButton = useRef();
+
+    
 
 
     const [playing, setPlaying] = useState(false);
@@ -46,13 +51,45 @@ const AloitaTreeni = (props) => {
         }
     }
 
+    useEffect(() => {
+        getData();
+    }, [])
+
+    const makeProgress = (itm, idx) => {
+        
+        let completed = [];
+        setClick(click+1);
+        let num = 0;
+       // console.log(currentButton)
+
+           const currentBtn = currentButton[idx]
+           
+
+           if (!completed.includes(currentBtn)) {
+            completed.push(currentBtn);
+            let teksti = `${itm.nimi} sarja valmis` 
+            setTeksti(teksti)
+            console.log(completed)
+           } 
+            
+      
+        console.log(teksti);
+
+
+        
+        
+    }
+
+
+    
+
     const renderItem = ({item, index}) => {
-     setCurrentIndex(index)
         return (
             <RenderContainer>
+            
             <VideoContainer>
             <YoutubePlayer 
-            height={230}
+            height={220}
             videoId={item.videoId}
             play={playing}
             onChangeState={onStateChange}
@@ -61,22 +98,31 @@ const AloitaTreeni = (props) => {
            
            <UtilsContainer>
            <Text title center>{item.nimi} </Text>
+            {currentButton &&  <Text>{teksti}</Text> }
+               
+           
+
                 <Text large center>x{item.toistot} </Text>
-                
                 <ButtonContainer>
-                <PreviousButton onPress={() => { carousel.snapToPrev(); }}>
+                {
+                    index > 0 &&  <PreviousButton onPress={() => carousel.snapToPrev()}>
                 <Ionicons name="ios-chevron-back-outline" size={68} color="white" />
-                </PreviousButton>
-                <DoneButton>
+                </PreviousButton> 
+                }
+               
+                <DoneButton ref={currentButton} onPress={() => makeProgress(item, index)}>
                 <Ionicons name="checkmark-circle-outline" size={92} color="white" />
                 </DoneButton>
-                <NextButton onPress={() => { carousel.snapToNext(); }}>
+                {
+                     index < 6 && <NextButton onPress={() => carousel.snapToNext()}>
                 <Ionicons name="ios-chevron-forward-outline" size={68} color="white" />
                 </NextButton>
+                }
+                
                 </ButtonContainer>
                 <NextContainer>
                 <Text vinkit>Seuraavaksi</Text>
-                <Text medium>Punnerrukset</Text>
+                <Text medium>{}</Text>
                 </NextContainer>
                
                
@@ -87,12 +133,10 @@ const AloitaTreeni = (props) => {
     }
    
 
-    useEffect(() => {
-        getData();
-    }, [])
+   
 
     return(
-             <Carousel
+         <Carousel
               ref={(c) => { carousel = c; }}
               data={treeniData}
               itemWidth={viewportWidth}
@@ -102,6 +146,8 @@ const AloitaTreeni = (props) => {
               inactiveSlideScale={1}
               scrollEnabled={false}
             />
+           
+            
     )
 
 }
@@ -109,7 +155,9 @@ const AloitaTreeni = (props) => {
 export default AloitaTreeni;
 
 
+
 const VideoContainer = styled.View`
+margin-top: 35px;
    `;
 
 const UtilsContainer = styled.View`
@@ -119,13 +167,13 @@ const UtilsContainer = styled.View`
 `;
 
 const RenderContainer = styled.View`
-    flex: 1
-    background-color: #141314
+    flex: 1;
+    background-color: #141314;
 `;
 
 const ButtonContainer = styled.View`
     flex-direction: row;
-    margin-top: 35px;
+    margin-top: 30px;
 `;
 const PreviousButton = styled.TouchableOpacity`
  
@@ -136,6 +184,7 @@ const NextButton = styled.TouchableOpacity`
 const DoneButton = styled.TouchableOpacity`
 
 `;
+
 
 const NextContainer = styled.View`
     margin-top: 130px;

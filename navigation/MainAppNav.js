@@ -1,6 +1,5 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { NavigationContainer } from '@react-navigation/native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { Ionicons } from '@expo/vector-icons';
 import Login from '../screens/Login'

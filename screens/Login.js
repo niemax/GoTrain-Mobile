@@ -11,7 +11,6 @@ const Login = ({
     }) => {
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
-       
 
         
 
@@ -21,6 +20,7 @@ const Login = ({
                 navigation.replace('Loading');
             } else {
                 Alert.alert('Virheellinen sähköposti tai salasana')
+
             }
             setEmail('');
             setPassword('');

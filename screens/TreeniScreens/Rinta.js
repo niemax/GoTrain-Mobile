@@ -3,7 +3,6 @@ import TreeniData from '../../components/TreeniEsittely';
 import { createStackNavigator } from '@react-navigation/stack'
 import Text from '../../components/Text'
 import AloitaTreeni from './TreeninAloitus';
-//import VideoPlayer from '../../components/TreeninEsikatselu';
 import Esikatselu from '../../components/TreeninEsikatselu';
 
 
@@ -222,7 +221,7 @@ export const TricepPushdown = ({ navigation }) => {
        headerStyle: {backgroundColor: '#FA4242' }, 
        headerShown: true, headerLeft: null, gestureEnabled: false}} component={TricepPushdown} />
     
-      <Stack.Screen name="AloitaTreeni" options={{ headerShown: false, gestureEnabled: false}} component={AloitaTreeni} />
+      <Stack.Screen name="AloitaTreeni"  options={{ headerShown: false, gestureEnabled: false, mode: 'card'}} component={AloitaTreeni} />
     </Stack.Navigator>
      )
  }
