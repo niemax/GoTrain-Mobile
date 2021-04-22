@@ -14,6 +14,7 @@ const AloitaTreeni = (props) => {
     const [treeniData, setTreeniData] = useState([]);
     const [tehdytTreenit, setTehdytTreenit] = useState([]);
     const [teksti, setTeksti] = useState('');
+    const [slideIndex, setSlideIndex] = useState(0)
     const [isDone, setIsDone] = useState(false)
     const [btnClicked, setBtnClicked] = useState(false)
     
@@ -59,6 +60,7 @@ const AloitaTreeni = (props) => {
         let teksti;
         
         setTehdytTreenit([...tehdytTreenit, { treeni: item.nimi, id: index}]);
+        setSlideIndex(index);
             
         setIsDone(true);
             
@@ -95,6 +97,7 @@ const AloitaTreeni = (props) => {
            
            <UtilsContainer>
            <Text title center>{item.nimi} </Text>
+           <Text>tämän sliden index: {slideIndex}</Text>
 
                 <Text large center>x{item.toistot} </Text>
                 <ButtonContainer>
