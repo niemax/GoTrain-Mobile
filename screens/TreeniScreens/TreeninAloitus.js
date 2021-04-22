@@ -3,11 +3,12 @@ import { Dimensions } from 'react-native';
 import Text from '../../components/Text';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native'; 
-import Carousel from 'react-native-snap-carousel';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
 import YoutubePlayer from "react-native-youtube-iframe";
 import { Ionicons } from '@expo/vector-icons'; 
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
+
 
 
 const AloitaTreeni = (props) => {
@@ -15,9 +16,8 @@ const AloitaTreeni = (props) => {
     const [tehdytTreenit, setTehdytTreenit] = useState([]);
     const [teksti, setTeksti] = useState('');
     const [slideIndex, setSlideIndex] = useState(0)
-    const [isDone, setIsDone] = useState(false)
-    const [btnClicked, setBtnClicked] = useState(false)
-    
+    const [progress, addProgress] = useState(0);
+    const [showText, setShowText] = useState(false) 
 
 
     const [playing, setPlaying] = useState(false);
@@ -54,37 +54,34 @@ const AloitaTreeni = (props) => {
         getData();
     }, [])
 
+    
+
 
     const setProgress = (item, index) => {
-        
         let teksti;
         
-        setTehdytTreenit([...tehdytTreenit, { treeni: item.nimi, id: index}]);
-        setSlideIndex(index);
+
+        setTehdytTreenit([...tehdytTreenit, { treeni: item.nimi, id: index }]);
+        
+        setShowText(true)
             
-        setIsDone(true);
-            
-        console.log(tehdytTreenit);
     }
     
-    /* const removeProgress = (item, index) => {
-        const paivitaTreenit = [...tehdytTreenit]
+        const removeProgress = (item, index) => {
 
-        const idx = paivitaTreenit.indexOf(index);
+            //setTehdytTreenit(tehdytTreenit.filter((item) => item !== index));
 
-        if (idx !== -1) {
-            paivitaTreenit.splice(idx, 1);
-            setTehdytTreenit(paivitaTreenit);
-        }
         
-        setIsDone(false);
-        console.log(tehdytTreenit)
-    } */
+    } 
+    useEffect(() => {
+        console.log(tehdytTreenit);
+        //console.log(teksti);
+    }, [tehdytTreenit])
 
     const renderItem = ({item, index}) => {
         
         return (
-            <RenderContainer >
+            <RenderContainer key={index}>
             
             <VideoContainer>
             <YoutubePlayer 
@@ -97,7 +94,8 @@ const AloitaTreeni = (props) => {
            
            <UtilsContainer>
            <Text title center>{item.nimi} </Text>
-           <Text>tämän sliden index: {slideIndex}</Text>
+           
+            <Text>tämän sliden index: {slideIndex}</Text>
 
                 <Text large center>x{item.toistot} </Text>
                 <ButtonContainer>
@@ -106,13 +104,13 @@ const AloitaTreeni = (props) => {
                 <Ionicons name="ios-chevron-back-outline" size={68} color="white" />
                 </PreviousButton> 
                 
-               
+                
                
                 <DoneButton onPress={() => setProgress(item, index)}>
                 <Ionicons name="checkmark-circle-outline" size={92} color="white" />
                 </DoneButton>
                 
-                <DeleteButton onPress={() => removeProgress(item.index)}>
+                <DeleteButton onPress={() => removeProgress(item, index)}>
                 <Ionicons name="checkmark-circle-outline" size={92} color="green" />
                 </DeleteButton>
                 
@@ -125,7 +123,7 @@ const AloitaTreeni = (props) => {
                 </ButtonContainer>
                 <NextContainer>
                 <Text vinkit>Seuraavaksi</Text>
-                <Text medium>{}</Text>
+                
                 </NextContainer>
                
                
@@ -148,7 +146,11 @@ const AloitaTreeni = (props) => {
               slideStyle={{ width: viewportWidth }}
               inactiveSlideScale={1}
               scrollEnabled={false}
+              onSnapToItem={(index) => setSlideIndex(index)}
+              useScrollView={true}
+              
             />
+            
            
             
     )
@@ -156,6 +158,7 @@ const AloitaTreeni = (props) => {
 }
 
 export default AloitaTreeni;
+
 
 
 
