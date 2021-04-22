@@ -11,14 +11,11 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window'
 
 
 const AloitaTreeni = (props) => {
-    const navigation = useNavigation();
     const [treeniData, setTreeniData] = useState([]);
-    const [indexes, setIndexes] = useState([]);
-    const [click, setClick] = useState(1)
+    const [tehdytTreenit, setTehdytTreenit] = useState([]);
     const [teksti, setTeksti] = useState('');
-
-    let currentButton = useRef();
-
+    const [isDone, setIsDone] = useState(false)
+    const [btnClicked, setBtnClicked] = useState(false)
     
 
 
@@ -44,6 +41,7 @@ const AloitaTreeni = (props) => {
             const data = await response.json();
             // uudelleenkäyettävä komponentti -- data[0].props.liikkeet
             setTreeniData(data[0].rintatreeni.liikkeet);
+            //console.log(data);
             return data;
 
         } catch (error) {
@@ -55,37 +53,36 @@ const AloitaTreeni = (props) => {
         getData();
     }, [])
 
-    const makeProgress = (itm, idx) => {
+
+    const setProgress = (item, index) => {
         
-        let completed = [];
-        setClick(click+1);
-        let num = 0;
-       // console.log(currentButton)
-
-           const currentBtn = currentButton[idx]
-           
-
-           if (!completed.includes(currentBtn)) {
-            completed.push(currentBtn);
-            let teksti = `${itm.nimi} sarja valmis` 
-            setTeksti(teksti)
-            console.log(completed)
-           } 
+        let teksti;
+        
+        setTehdytTreenit([...tehdytTreenit, { treeni: item.nimi, id: index}]);
             
-      
-        console.log(teksti);
-
-
-        
-        
+        setIsDone(true);
+            
+        console.log(tehdytTreenit);
     }
-
-
     
+    /* const removeProgress = (item, index) => {
+        const paivitaTreenit = [...tehdytTreenit]
+
+        const idx = paivitaTreenit.indexOf(index);
+
+        if (idx !== -1) {
+            paivitaTreenit.splice(idx, 1);
+            setTehdytTreenit(paivitaTreenit);
+        }
+        
+        setIsDone(false);
+        console.log(tehdytTreenit)
+    } */
 
     const renderItem = ({item, index}) => {
+        
         return (
-            <RenderContainer>
+            <RenderContainer >
             
             <VideoContainer>
             <YoutubePlayer 
@@ -98,26 +95,29 @@ const AloitaTreeni = (props) => {
            
            <UtilsContainer>
            <Text title center>{item.nimi} </Text>
-            {currentButton &&  <Text>{teksti}</Text> }
-               
-           
 
                 <Text large center>x{item.toistot} </Text>
                 <ButtonContainer>
-                {
-                    index > 0 &&  <PreviousButton onPress={() => carousel.snapToPrev()}>
+                
+                    <PreviousButton onPress={() => {carousel.snapToPrev();}}>
                 <Ionicons name="ios-chevron-back-outline" size={68} color="white" />
                 </PreviousButton> 
-                }
+                
                
-                <DoneButton ref={currentButton} onPress={() => makeProgress(item, index)}>
+               
+                <DoneButton onPress={() => setProgress(item, index)}>
                 <Ionicons name="checkmark-circle-outline" size={92} color="white" />
                 </DoneButton>
-                {
-                     index < 6 && <NextButton onPress={() => carousel.snapToNext()}>
+                
+                <DeleteButton onPress={() => removeProgress(item.index)}>
+                <Ionicons name="checkmark-circle-outline" size={92} color="green" />
+                </DeleteButton>
+                
+                
+                    <NextButton onPress={() => {carousel.snapToNext();}}>
                 <Ionicons name="ios-chevron-forward-outline" size={68} color="white" />
                 </NextButton>
-                }
+                
                 
                 </ButtonContainer>
                 <NextContainer>
@@ -182,6 +182,9 @@ const NextButton = styled.TouchableOpacity`
    
 `;
 const DoneButton = styled.TouchableOpacity`
+
+`;
+const DeleteButton = styled.TouchableOpacity`
 
 `;
 
