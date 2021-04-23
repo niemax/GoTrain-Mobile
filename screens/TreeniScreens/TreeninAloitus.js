@@ -19,8 +19,9 @@ const AloitaTreeni = (props) => {
     const [progress, addProgress] = useState(0);
     const [showText, setShowText] = useState(false)
 
-
     const [playing, setPlaying] = useState(false);
+
+    const carousel = useRef();
 
     const onStateChange = useCallback((state) => {
         if (state === "ended") {
@@ -58,14 +59,15 @@ const AloitaTreeni = (props) => {
     const setProgress = (item, index) => {
         console.log("setProgress", item, index);
 
-        const treenit = tehdytTreenit;
+        const treenit = {...tehdytTreenit};
 
         if (!(item.nimi in treenit)) {
             treenit[item.nimi] = { sarjat: item.sarjat, toistot: item.toistot };
-            setTehdytTreenit(treenit);
         } else {
             delete treenit[item.nimi];
         }
+
+        setTehdytTreenit(treenit);
 
         console.log("treenit", treenit, Object.keys(treenit).length);
     }
@@ -83,13 +85,13 @@ const AloitaTreeni = (props) => {
 
 
     }
+
     useEffect(() => {
         console.log("useEffect", tehdytTreenit);
         //console.log(teksti);
     }, [tehdytTreenit])
 
     const renderItem = ({ item, index }) => {
-
         return (
             <RenderContainer key={index}>
 
@@ -110,7 +112,7 @@ const AloitaTreeni = (props) => {
                     <Text large center>x{item.toistot} </Text>
                     <ButtonContainer>
 
-                        <PreviousButton onPress={() => { carousel.snapToPrev(); }}>
+                        <PreviousButton onPress={() => carousel.current.snapToPrev()}>
                             <Ionicons name="ios-chevron-back-outline" size={68} color="white" />
                         </PreviousButton>
 
@@ -127,7 +129,7 @@ const AloitaTreeni = (props) => {
                         </DeleteButton>
 
 
-                        <NextButton onPress={() => { carousel.snapToNext(); }}>
+                        <NextButton onPress={() => { carousel.current.snapToNext(); }}>
                             <Ionicons name="ios-chevron-forward-outline" size={68} color="white" />
                         </NextButton>
 
@@ -150,7 +152,8 @@ const AloitaTreeni = (props) => {
 
     return (
         <Carousel
-            ref={(c) => { carousel = c; }}
+            shouldOptimizeUpdates={false}
+            ref={carousel}
             data={treeniData}
             itemWidth={viewportWidth}
             sliderWidth={viewportWidth}
