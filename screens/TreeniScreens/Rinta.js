@@ -1,7 +1,6 @@
 import React from 'react'
 import TreeniData from '../../components/TreeniEsittely';
 import { createStackNavigator } from '@react-navigation/stack'
-import Text from '../../components/Text'
 import AloitaTreeni from './TreeninAloitus';
 import Esikatselu from '../../components/TreeninEsikatselu';
 
@@ -138,7 +137,7 @@ export const Vipunosto = () => {
     )
 }
 
-export const  ChestFly = ({ navigation }) => {
+export const  ChestFly = () => {
     return(
       <Esikatselu
       videoID={"Z57CtFmRMxA"}
@@ -152,7 +151,7 @@ export const  ChestFly = ({ navigation }) => {
     )
 }
 
-export const TricepPushdown = ({ navigation }) => {
+export const TricepPushdown = () => {
     return(
         <Esikatselu 
         videoID={"REWv05om0ho"}

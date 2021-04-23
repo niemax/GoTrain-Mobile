@@ -7,7 +7,7 @@ import Signup from '../screens/Signup'
 import TehdytTreenit from '../tabs/TehdytTreenit'
 import Asetukset from '../tabs/Asetukset'
 import LoadingScreen from '../screens/Loading';
-import Etusivu from '../screens/Etusivu'
+import Etusivu from '../tabs/Etusivu'
 import RintaTreeni from '../screens/TreeniScreens/Rinta'
 import SelkaTreeni from '../screens/TreeniScreens/Selka'
 import JalkaTreeni from '../screens/TreeniScreens/Jalka'
@@ -21,7 +21,7 @@ const MainAuthStack = () => {
     return(
       
       <Stack.Navigator
-       initialRouteName="Kotisivu" // VAIHDA TÄMÄ TAKAISIN SIGNUP
+       initialRouteName="Signup" // VAIHDA TÄMÄ TAKAISIN SIGNUP
        >
        
         <Stack.Screen name="Loading" options={{ headerShown: false, gestureEnabled: false}}  component={LoadingScreen} />
