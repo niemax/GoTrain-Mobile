@@ -67,7 +67,7 @@ const AloitaTreeni = (props) => {
             delete treenit[item.nimi];
         }
         console.log("treenit", treenit, Object.keys(treenit).length);
-        setPaivita(!paivita);
+        setPaivita(paivita);
         setPbProgress(Object.keys(tehdytTreenit).length / treeniData.length);
         
         
@@ -92,7 +92,7 @@ const AloitaTreeni = (props) => {
                 </VideoContainer>
                 
                 <ProgressBarContainer>
-                <Progress.Bar progress={pbProgress} width={null} height={6} borderWidth={null} color={"#3FBF3F"} />
+                <Progress.Bar progress={pbProgress} width={null} height={3} borderWidth={null} color={"#3FBF3F"} />
                 </ProgressBarContainer>
 
                 <UtilsContainer>

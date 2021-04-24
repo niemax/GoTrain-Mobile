@@ -187,7 +187,7 @@ export const TricepPushdown = () => {
     initialRouteName="Rinta"
      >
 
-      <Stack.Screen name="Rinta" options={{  headerShown: false, headerLeft: null }}  component={Rinta} />
+      <Stack.Screen name="Rinta" options={{  headerShown: false, headerLeft: null, gestureEnabled: false }}  component={Rinta} />
       <Stack.Screen
        name="Punnerrukset" 
        options=
