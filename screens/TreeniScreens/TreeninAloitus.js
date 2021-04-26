@@ -23,6 +23,8 @@ const AloitaTreeni = (props) => {
 
     const navigation = useNavigation();
 
+    const { treeni } = props;
+
     const onStateChange = useCallback((state) => {
         if (state === "ended") {
             setPlaying(false);
@@ -37,10 +39,10 @@ const AloitaTreeni = (props) => {
 
     const getData = async () => {
         try {
-            let response = await fetch('https://mun-treeni-api.herokuapp.com/treenit')
+            let response = await fetch(`https://mun-treeni-api.herokuapp.com/${treeni}`);
             const data = await response.json();
             // uudelleenkäyettävä komponentti -- data[0].props.liikkeet
-            setTreeniData(data[0].rintatreeni.liikkeet);
+            setTreeniData(data[0].liikkeet);
             console.log(data);
             return data;
 

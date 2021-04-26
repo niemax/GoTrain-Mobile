@@ -39,7 +39,7 @@ const KotiScreens = () => {
      initialRouteName="Koti" // VAIHDA TÄMÄ TAKAISIN SIGNUP
      >
       <Stack.Screen name="KotiTab" options={{ headerShown: false, headerLeft: null}}  component={KotiMainTab} />
-      <Stack.Screen name="RintaTreeni" options={{ headerShown: false, gestureEnabled: true}} component={RintaTreeni} />
+      <Stack.Screen name="RintaTreeni" options={{ headerShown: false, gestureEnabled: false}} component={RintaTreeni} />
       <Stack.Screen name="SelkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={SelkaTreeni} />
       <Stack.Screen name="JalkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={JalkaTreeni} />
       <Stack.Screen name="KasiTreeni" options={{ headerShown: false, gestureEnabled: false }} component={KasiTreeni} />

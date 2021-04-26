@@ -6,18 +6,6 @@ import Text from '../components/Text'
 import YoutubePlayer from "react-native-youtube-iframe";
 import { useNavigation } from '@react-navigation/native'; 
 
-//import VideoPlayer from '../../components/TreeninEsikatselu';
-
-/* 
-
-
-    return(
-        <Text>Hi</Text>
-    )
-} */
-
-
-
 
 const Esikatselu = (props) => {
     const navigation = useNavigation();

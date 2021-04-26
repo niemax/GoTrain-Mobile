@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack'
 import AloitaTreeni from './TreeninAloitus';
 import Esikatselu from '../../components/TreeninEsikatselu';
 
-
 const rintaTreeni = [{
         
         id: 1,
@@ -63,6 +62,14 @@ const rintaTreeni = [{
 ]
 
 
+export const AloitaRinta = () => {
+    return (
+        <AloitaTreeni treeni={"rintatreeni"}/>
+    );
+
+}
+
+
 export const Punnerrukset = () => {
     return(
       <Esikatselu
@@ -70,6 +77,7 @@ export const Punnerrukset = () => {
       liike="Punnerrukset"
       toistot="3 sarjaa 10 toistoa"
       ohjeet="awdawdawaaaaaa"
+      
       />
        
     )
@@ -174,6 +182,7 @@ export const TricepPushdown = () => {
         treeniText='Rinta / Ojentaja / Olkapää'
         treeninKesto='60-75min'
         kohdeRyhmaText='Rinta'
+        aloitaRoute={'AloitaRinta'}
         />
     );
 }
@@ -187,16 +196,10 @@ export const TricepPushdown = () => {
     initialRouteName="Rinta"
      >
 
-      <Stack.Screen name="Rinta" options={{  headerShown: false, headerLeft: null, gestureEnabled: false }}  component={Rinta} />
-      <Stack.Screen
-       name="Punnerrukset" 
-       options=
-       {{ headerTintColor: 'white', headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}}
-         component={Punnerrukset} />
-      <Stack.Screen name="Penkkipunnerrus" 
-      options=
-      {{ headerTintColor: 'white',
+      <Stack.Screen name="Rinta" options={{  headerShown: false, headerLeft: null, gestureEnabled: true }}  component={Rinta} />
+      <Stack.Screen name="Punnerrukset" options={{ headerTintColor: 'white', headerStyle: {backgroundColor: '#FA4242' }, 
+       headerShown: true, headerLeft: null, gestureEnabled: false}} component={Punnerrukset} />
+      <Stack.Screen name="Penkkipunnerrus" options={{ headerTintColor: 'white',
        headerStyle: {backgroundColor: '#FA4242' }, 
        headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Penkkipunnerrus} />
 
@@ -220,7 +223,7 @@ export const TricepPushdown = () => {
        headerStyle: {backgroundColor: '#FA4242' }, 
        headerShown: true, headerLeft: null, gestureEnabled: false}} component={TricepPushdown} />
     
-      <Stack.Screen name="AloitaTreeni"  options={{ headerShown: false, gestureEnabled: false, mode: 'card'}} component={AloitaTreeni} />
+      <Stack.Screen name="AloitaRinta"  options={{ headerShown: false, gestureEnabled: false, mode: 'card'}} component={AloitaRinta} />
     </Stack.Navigator>
      )
  }

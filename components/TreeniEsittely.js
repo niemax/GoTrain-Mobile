@@ -12,7 +12,7 @@ import { ListItem } from 'react-native-elements'
 
     const navigation = useNavigation();
 
-    const { data, backgroundImage, treeniText, treeninKesto, kohdeRyhmaText } = props;
+    const { data, backgroundImage, treeniText, treeninKesto, kohdeRyhmaText, aloitaRoute } = props;
 
 
     return(
@@ -33,7 +33,7 @@ import { ListItem } from 'react-native-elements'
         <View style={{flexDirection: 'row', margin: 15}}>
         <Ionicons name="ios-timer-sharp" size={26} color="white" />
         
-        <Text medium left>{treeninKesto}  <Feather name="target" size={26} color="white" />  Kohderyhmä  -  {kohdeRyhmaText} </Text>
+        <Text medium left>  {treeninKesto}  <Feather name="target" size={26} color="white" />  Kohderyhmä  -  {kohdeRyhmaText}</Text>
         
         
         </View>
@@ -65,7 +65,7 @@ import { ListItem } from 'react-native-elements'
         </Container>
         </ScrollView>
         <ButtonContainer>
-                <AloitaButton onPress={() => navigation.navigate('AloitaTreeni')}>
+                <AloitaButton onPress={() => navigation.navigate(aloitaRoute)}>
                 <Text large >Aloita treeni</Text>
                 </AloitaButton>
                 </ButtonContainer>
