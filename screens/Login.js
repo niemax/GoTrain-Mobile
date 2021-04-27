@@ -46,7 +46,6 @@ const Login = ({
                     autoCapitalize="none" 
                     autoCompleteType="email" 
                     autoCorrect={false} 
-                    autoFocus={true}
                     keyboardType="email-address"
                     value={email}
                     onChangeText={(email) => setEmail(email)}
@@ -59,7 +58,6 @@ const Login = ({
                     autoCapitalize="none" 
                     autoCompleteType="password" 
                     autoCorrect={false} 
-                    autoFocus={true}
                     secureTextEntry={true}
                     value={password}
                     onChangeText={(password) => setPassword(password)}

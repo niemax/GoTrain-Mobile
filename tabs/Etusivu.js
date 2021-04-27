@@ -23,10 +23,9 @@ const Etusivu = ({
     const [longitude, setLongitude] = useState(null);
     const [temp, setTemp] = useState(null);
     const [city, setCity] = useState('')
-    const [errorMsg, setErrorMsg] = useState(null);
-    const [weatherData, setWeatherData] = useState([]);
     const [location, setLocation] = useState(null);
     const [currentDate, setCurrentDate] = useState('');
+    const [text, setText] = useState('');
 
        
     const getLocation = async () => {
@@ -38,10 +37,10 @@ const Etusivu = ({
             return;
         }
 
-        let location = await Location.getLastKnownPositionAsync({});
+        let location = await Location.getCurrentPositionAsync({});
         setLocation(location);
-        setLatitude(location.coords.latitude)
-        setLongitude(location.coords.longitude)
+        setLatitude(location.coords.latitude);
+        setLongitude(location.coords.longitude);
         //console.log(location)
     }
 
@@ -50,10 +49,10 @@ const Etusivu = ({
     const getWeatherData = async () => {
         let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=4faa658e0a47cd7c7693d03bf30bf56a`
         try {
-            let response = await fetch(api)
+            let response = await fetch(api);
             const data = await response.json();
             setCity(data.name);
-            setTemp(data.main.temp.toFixed(0))
+            setTemp(data.main.temp.toFixed(0));
             //console.log(data)
             return data;
 
@@ -71,17 +70,15 @@ const Etusivu = ({
     }
 
     useEffect(() => {
-        getLocation()
-        getCurrentDate()
-        getWeatherData()
+        getLocation();
+        getCurrentDate();
+        getWeatherData();
     }, []);
 
 
-    //let currentUserUID = firebase.auth().currentUser.uid;
-    const [text, setText] = useState('');
+     let currentUserUID = firebase.auth().currentUser.uid;
 
-
-     /* useEffect(() => {
+     useEffect(() => {
           async function getUserInfo() {
               try {
                   let doc = await firebase
@@ -91,7 +88,7 @@ const Etusivu = ({
                       .get();
 
                   if (!doc.exists) {
-                      Alert.alert('No user data found!');
+                      console.error('No user data found!');
                   } else {
                       let dataObj = doc.data();
                       setText(dataObj.name);
@@ -101,7 +98,7 @@ const Etusivu = ({
               }
           }
           getUserInfo();
-      }, []);      */
+      }, []);      
         
       
     
@@ -135,19 +132,12 @@ const Container = styled.View`
 
 `;
 
-const LineBreak = styled.View`
-`;
-
-
-
 const HeaderContainer = styled.View`
 `;
 
 const TextContainer = styled.View`
     margin-top: 20px;
 `;
-
-
 
 const CardContainer = styled.View`
 `;  

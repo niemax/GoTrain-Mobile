@@ -35,4 +35,4 @@ const ModalContainer = styled.View`
 `;
 
 
-export { Container, ModalContainer,  ParagraphContainer, AloitaButton, ButtonContainer, IconTouchable};
+export { Container, ModalContainer,  ParagraphContainer, AloitaButton, ButtonContainer, IconTouchable };

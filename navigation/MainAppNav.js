@@ -21,7 +21,7 @@ const MainAuthStack = () => {
     return(
       
       <Stack.Navigator
-       initialRouteName="Kotisivu" // VAIHDA TÄMÄ TAKAISIN SIGNUP
+       initialRouteName="Signup" // VAIHDA TÄMÄ TAKAISIN SIGNUP
        >
        
         <Stack.Screen name="Loading" options={{ headerShown: false, gestureEnabled: false}}  component={LoadingScreen} />
@@ -36,7 +36,7 @@ const KotiScreens = () => {
 
   return(
     <Stack.Navigator
-     initialRouteName="Koti" // VAIHDA TÄMÄ TAKAISIN SIGNUP
+     initialRouteName="Koti"
      >
       <Stack.Screen name="KotiTab" options={{ headerShown: false, headerLeft: null}}  component={KotiMainTab} />
       <Stack.Screen name="RintaTreeni" options={{ headerShown: false, gestureEnabled: false}} component={RintaTreeni} />

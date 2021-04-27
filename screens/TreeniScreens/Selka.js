@@ -3,65 +3,8 @@ import TreeniData from '../../components/TreeniEsittely';
 import AloitaTreeni from './TreeninAloitus';
 import Esikatselu from '../../components/TreeninEsikatselu';
 import { createStackNavigator } from '@react-navigation/stack'
+import { selkaTreeniData } from '../../components/TreeniEsikatseluData'
 
-
-
-const selkaTreeni = [{
-    
-
-        
-        id: 1,
-        name: 'Leuanveto',
-        sarjat: '2-3',
-        image: require('../../assets/icons/leuanveto.png'),
-        navigationRoute: 'Leuanveto'
-
-    },
-    {
-        id: 2,
-        name: 'Kulmasoutu',
-        sarjat: '2-3',
-        image: require('../../assets/icons/kulmasoutu.png'),
-        navigationRoute: 'Kulmasoutu'
-
-
-    },
-    {
-        id: 3,
-        name: 'Hauiskääntö',
-        sarjat: '2-3',
-        image: require('../../assets/icons/hauiskaanto.png'),
-        navigationRoute: 'Hauiskaanto'
-        
-
-    },
-    {
-        id: 4,
-        name: 'Soutu alataljassa',
-        sarjat: 3,
-        image: require('../../assets/icons/alatalja.png'),
-        navigationRoute: 'Alatalja'
-
-
-    },
-    {
-        id: 5,
-        name: 'Lat Pushdown',
-        sarjat: 3,
-        image: require('../../assets/icons/latpushdown.png'),
-        navigationRoute: 'Ylatalja'
-
-
-    },
-    {
-        id: 6,
-        name: 'Vasarakäännöt',
-        sarjat: 3,
-        image: require('../../assets/icons/vasarakaannot.png'),
-        navigationRoute: 'Vasarakaannot'
-    },
-    
-]
 
 export const AloitaSelka = () => {
     return (
@@ -72,10 +15,13 @@ export const AloitaSelka = () => {
 export const Leuanveto = () => {
     return(
       <Esikatselu
-      videoID={"-Mbr55h3BeQ"}
+      videoID={"3YvfRx31xDE"}
       liike="Leuanveto"
-      toistot="2 sarjaa 10 toistoa"
-      ohjeet="awdawdawaaaaaa"
+      toistot="1-2 sarjaa x toistoa"
+      ohjeet={`- Voit ottaa avuksesi voimakuminauhan ja keventää leuanvetojasi sillä. Muista kuminauhaa valitessasi, että leuanveto on sinulle maksimivoimaa vaativa suoritus. Valitse siis mahdollisimman vähän keventävä kuminauha, jonka avulla pystyt tekemään 1-5 leukaa.
+      \n\n- Kuminauhan sijaan, voit pyytää kaveriasi keventämään leuanvetoasi nostamalla jaloista samalla kun sinä vedät.
+      
+      `}
       />
        
     )
@@ -84,7 +30,7 @@ export const Leuanveto = () => {
 export const Kulmasoutu = () => {
     return(
       <Esikatselu
-      videoID={"-6oBbHy_zjM"}
+      videoID={"kBWAon7ItDw"}
       liike="Kulmasoutu"
       toistot="3 sarjaa 10 toistoa"
       ohjeet={`Aseta jalat penkin alle. Vedä jalat siis kuitenkin koukkuun kohti takapuoltasi niin, että pystyt työntämään reisilläsi kohti yläkroppaasi. 
@@ -100,7 +46,7 @@ export const Kulmasoutu = () => {
 export const Hauiskaanto = () => {
     return(
       <Esikatselu
-      videoID={"2yjwXTZQDDI"}
+      videoID={"yTWO2th-RIY"}
       liike="Hauiskääntö"
       toistot="3 sarjaa 10 toistoa"
        ohjeet= {`- Asetelma. Seiso pitäen tankoa olkapäidesi edessä, ylläolevan videon mukaisesti. Kapea ote, ranteet suorassa linjassa ja pystysuunnassa olevat kyynärvarret. Lukitse polvesi ja lantiosi.
@@ -116,7 +62,7 @@ export const Hauiskaanto = () => {
 export const Alatalja = () => {
     return(
        <Esikatselu
-      videoID={"dX_nSOOJIsE"}
+      videoID={"4mRy8U542Fo"}
       liike="Soutu Alataljassa"
       toistot="3 sarjaa 10-12 toistoa"
       ohjeet={`- Asetu dippitelineeseen ja ota noin olkapäiden levyinen ote tangoista. Ponnista suorille käsille, vie olkapäitä alas ja vedä lapoja yhteen. Pidä jännitys koko kropassa ja taivuta jalkoja hieman taakse.
@@ -132,8 +78,8 @@ export const Alatalja = () => {
 export const Ylatalja = () => {
     return(
        <Esikatselu
-      videoID={"FeJP4E4Z-PY"}
-      liike="Lat Pushdown"
+      videoID={"XhRpjxcKrJY"}
+      liike="Ylätalja"
       toistot="3 sarjaa 10 toistoa"
        ohjeet= {`- Asetu dippitelineeseen ja ota noin olkapäiden levyinen ote tangoista. Ponnista suorille käsille, vie olkapäitä alas ja vedä lapoja yhteen. Pidä jännitys koko kropassa ja taivuta jalkoja hieman taakse.
         \n- Käännä ylävartaloa hieman eteenpäin ja laskeudu alas taivuttaen kyynärpäitä niiden osoittaessa samalla suoraan taaksepäin. Laskeudu vähintään 90 asteen kulmaan. Pidä olkapäät ja lavat tiukassa kontrollissa, jotta vältyt vammoilta. Saavutettuasi ala-asennon, lähde nousemaan takaisin ylös räjähtävästi mutta samalla kontrolloidusti, kunnes olet jälleen suorilla käsillä.
@@ -146,7 +92,7 @@ export const Ylatalja = () => {
 export const Vasarakaannot = () => {
     return(
       <Esikatselu
-      videoID={"Z57CtFmRMxA"}
+      videoID={"zC3nLlEvin4"}
       liike="Vasarakäännöt"
       toistot="3 sarjaa 10-15 toistoa"
        ohjeet= {`- Asetu dippitelineeseen ja ota noin olkapäiden levyinen ote tangoista. Ponnista suorille käsille, vie olkapäitä alas ja vedä lapoja yhteen. Pidä jännitys koko kropassa ja taivuta jalkoja hieman taakse.
@@ -162,7 +108,7 @@ const Selka = () => {
     return(
         <TreeniData 
         backgroundImage={require('../../assets/selkaToinen.jpg')}
-        data={selkaTreeni} 
+        data={selkaTreeniData} 
         treeniText='Selkä / Hauis'
         treeninKesto='60-75min'
         kohdeRyhmaText='Selkä'

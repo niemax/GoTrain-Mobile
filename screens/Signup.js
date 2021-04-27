@@ -61,7 +61,7 @@ const Signup = ({ navigation }) => {
                     <AuthField 
                     autoCapitalize="none" 
                     autoCorrect={false} 
-                    autoFocus={true}
+                    autoFocus={false}
                     value={name}
                     onChangeText={(name) => setName(name)}
                     />
@@ -87,7 +87,7 @@ const Signup = ({ navigation }) => {
                     autoCapitalize="none" 
                     autoCompleteType="password" 
                     autoCorrect={false} 
-                    autoFocus={true}
+                    autoFocus={false}
                     secureTextEntry={true}
                     value={password}
                     onChangeText={(password) => setPassword(password)}

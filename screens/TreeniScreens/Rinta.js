@@ -1,76 +1,20 @@
 import React from 'react'
+import { Button } from 'react-native';
 import TreeniData from '../../components/TreeniEsittely';
 import { createStackNavigator } from '@react-navigation/stack'
 import AloitaTreeni from './TreeninAloitus';
 import Esikatselu from '../../components/TreeninEsikatselu';
-
-const rintaTreeni = [{
-        
-        id: 1,
-        name: 'Punnerrukset',
-        sarjat: '2-3',
-        image: require('../../assets/icons/punnerrukset.png'),
-        navigationRoute: 'Punnerrukset'
-    },
-    {
-        id: 2,
-        name: 'Penkkipunnerrus',
-        sarjat: '2-3',
-        image: require('../../assets/icons/penkkipunnerrus.png'),
-        navigationRoute: 'Penkkipunnerrus'
+import { rintaTreeniData } from '../../components/TreeniEsikatseluData'
 
 
-    },
-    {
-        id: 3,
-        name: 'Pystypunnerrus',
-        sarjat: '2-3',
-        image: require('../../assets/icons/pystypunnerrus.png'),
-        navigationRoute: 'Pystypunnerrus'
-    },
-    {
-        id: 4,
-        name: 'Dipit',
-        sarjat: 3,
-        image: require('../../assets/icons/dipit.png'),
-        navigationRoute: 'Dipit'
-
-    },
-    {
-        id: 5,
-        name: 'Vipunosto sivulle',
-        sarjat: 3,
-        image: require('../../assets/icons/vipunosto.png'),
-        navigationRoute: 'Vipunosto'
-
-    },
-    {
-        id: 6,
-        name: 'Chest fly',
-        sarjat: 3,
-        image: require('../../assets/icons/chestfly.png'),
-        navigationRoute: 'ChestFly'
-
-    },
-    {
-        id: 7,
-        name: 'Tricep pushdown',
-        sarjat: 3,
-        image: require('../../assets/icons/triceps.png'),
-        navigationRoute: 'TricepPushdown'
-    }
-]
-
-
-export const AloitaRinta = () => {
+    const AloitaRinta = () => {
     return (
         <AloitaTreeni treeni={"rintatreeni"}/>
     );
 
 }
 
-
-export const Punnerrukset = () => {
+    const Punnerrukset = () => {
     return(
       <Esikatselu
       videoID={"-Mbr55h3BeQ"}
@@ -83,7 +27,7 @@ export const Punnerrukset = () => {
     )
 }
 
-export const Penkkipunnerrus = () => {
+    const Penkkipunnerrus = () => {
     return(
       <Esikatselu
       videoID={"-6oBbHy_zjM"}
@@ -99,7 +43,7 @@ export const Penkkipunnerrus = () => {
     )
 }
 
-export const Pystypunnerrus = () => {
+    const Pystypunnerrus = () => {
     return(
       <Esikatselu
       videoID={"2yjwXTZQDDI"}
@@ -115,7 +59,7 @@ export const Pystypunnerrus = () => {
     )
 }
 
-export const Dipit = () => {
+    const Dipit = () => {
     return(
        <Esikatselu
       videoID={"dX_nSOOJIsE"}
@@ -131,7 +75,7 @@ export const Dipit = () => {
     )
 }
 
-export const Vipunosto = () => {
+    const Vipunosto = () => {
     return(
        <Esikatselu
       videoID={"FeJP4E4Z-PY"}
@@ -145,7 +89,7 @@ export const Vipunosto = () => {
     )
 }
 
-export const  ChestFly = () => {
+    const  ChestFly = () => {
     return(
       <Esikatselu
       videoID={"Z57CtFmRMxA"}
@@ -159,7 +103,7 @@ export const  ChestFly = () => {
     )
 }
 
-export const TricepPushdown = () => {
+    const TricepPushdown = () => {
     return(
         <Esikatselu 
         videoID={"REWv05om0ho"}
@@ -178,7 +122,7 @@ export const TricepPushdown = () => {
     return(
         <TreeniData 
         backgroundImage={require('../../assets/rintaToinen.jpg')}
-        data={rintaTreeni} 
+        data={rintaTreeniData} 
         treeniText='Rinta / Ojentaja / Olkapää'
         treeninKesto='60-75min'
         kohdeRyhmaText='Rinta'
@@ -197,8 +141,10 @@ export const TricepPushdown = () => {
      >
 
       <Stack.Screen name="Rinta" options={{  headerShown: false, headerLeft: null, gestureEnabled: true }}  component={Rinta} />
+      
       <Stack.Screen name="Punnerrukset" options={{ headerTintColor: 'white', headerStyle: {backgroundColor: '#FA4242' }, 
        headerShown: true, headerLeft: null, gestureEnabled: false}} component={Punnerrukset} />
+      
       <Stack.Screen name="Penkkipunnerrus" options={{ headerTintColor: 'white',
        headerStyle: {backgroundColor: '#FA4242' }, 
        headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Penkkipunnerrus} />
@@ -224,7 +170,10 @@ export const TricepPushdown = () => {
        headerShown: true, headerLeft: null, gestureEnabled: false}} component={TricepPushdown} />
     
       <Stack.Screen name="AloitaRinta"  options={{ headerShown: false, gestureEnabled: false, mode: 'card'}} component={AloitaRinta} />
+      
     </Stack.Navigator>
+
+    
      )
  }
    

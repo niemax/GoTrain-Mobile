@@ -6141,6 +6141,11 @@ react-native-appearance@~0.3.3:
     invariant "^2.2.4"
     use-subscription "^1.0.0"
 
+react-native-confetti-cannon@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-confetti-cannon/-/react-native-confetti-cannon-1.2.0.tgz#3876968e9c2184864514900adbf6da74ec22d19d"
+  integrity sha512-E5D1nYZa6vij0r5YveRWej07igtjhg+xTQY9mwEb/tUOq29E5GYcTzfobAcfopoxvOKo1AWgAIl8yXGudoi/Kg==
+
 react-native-elements@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-3.3.2.tgz#42cc05c90a5c85c8aee95ce363bce0c5a39fe633"
