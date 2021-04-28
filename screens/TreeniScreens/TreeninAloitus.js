@@ -20,27 +20,17 @@ const AloitaTreeni = (props) => {
     const [pbProgress, setPbProgress] = useState(0)
     const [playing, setPlaying] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     const { treeni } = props;
-
  
     const navigation = useNavigation();
-
-
-    const toggleOverlay = () => {
-        setVisible(!visible);
-      };
 
     const onStateChange = useCallback((state) => {
         if (state === "ended") {
             setPlaying(false);
             //Alert.alert("video has finished playing!");
         }
-    }, []);
-
-    const togglePlaying = useCallback(() => {
-        setPlaying((prev) => !prev);
     }, []);
 
 
@@ -74,11 +64,15 @@ const AloitaTreeni = (props) => {
 
         if (!(item.nimi in treenit)) {
             treenit[item.nimi] = { sarjat: item.sarjat, toistot: item.toistot, id: index };
-            
+            setCurrentSlide(currentSlide + 1);
         } else {
             delete treenit[item.nimi];
+            setCurrentSlide(currentSlide - 1);
             
         }
+
+         
+         console.log(currentSlide);
 
         setTehdytTreenit(treenit);
         setPbProgress(Object.keys(treenit).length / treeniData.length);
@@ -91,9 +85,7 @@ const AloitaTreeni = (props) => {
 
 
     const _renderItem = ({ item, index }) => {
-        const doneIcon = <Ionicons name="ios-checkmark-done-outline" size={32} color="green" />
-        const btnColor = tehdytTreenit.hasOwnProperty(item.nimi) ? "#3FBF3F" : "#FFF";
-        const doneCheck =  tehdytTreenit.hasOwnProperty(item.nimi) ? doneIcon : null;
+        const btnColor = tehdytTreenit.hasOwnProperty(item.nimi) ? "#054dd9" : "#FFF";
         const treenitLength = Object.keys(treeniData).length;
 
         
@@ -101,7 +93,14 @@ const AloitaTreeni = (props) => {
             return (<LopetaTreeni data={tehdytTreenit} />)
         } else if(!isLoading) {
             return (
+                
                 <RenderContainer key={index}>
+                <ExtraContainer>
+                <Text left marginLeft="15px"><Ionicons name="chevron-back-circle-outline" size={38} color="white"/></Text> 
+                <Text vinkit right marginLeft="275px" marginTop="10px">{currentSlide} / {treeniData.length}</Text>
+                </ExtraContainer>
+               
+                
 
                      <VideoContainer>
                          <YoutubePlayer
@@ -113,13 +112,13 @@ const AloitaTreeni = (props) => {
                      </VideoContainer>
                      
                      <ProgressBarContainer>
-                     <Progress.Bar progress={pbProgress} width={null} height={3} borderWidth={null} color={"#3FBF3F"} />
+                     <Progress.Bar progress={pbProgress} width={null} height={3} borderWidth={null} color={"#054dd9"} />
                      </ProgressBarContainer>
      
                      <UtilsContainer>
-                        <Text title center>{item.nimi} <Text>{doneCheck}</Text></Text>
+                        <Text vinkkiTitle >{item.nimi}</Text>
      
-                         <Text large center>x{item.toistot} </Text>
+                         <Text title color="#054dd9" vinkkiTitle >x{item.toistot} </Text>
      
                          <ButtonContainer>
                          
@@ -140,13 +139,11 @@ const AloitaTreeni = (props) => {
      
                          </ButtonContainer>
                          <NextContainer>
-                         <Text large center>{item.sarjat} sarjaa </Text>
+                         <Text vinkkiTitle >{item.sarjat} sarjaa </Text>
                          </NextContainer>
                      
                      </UtilsContainer>
-                     <PoistuButton onPress={() => navigation.goBack()}>
-                         <Text padding="13px" center medium>Poistu</Text>
-                     </PoistuButton>
+                     
                     
                  </RenderContainer>
                 
@@ -179,11 +176,11 @@ export default AloitaTreeni;
 
 
 const VideoContainer = styled.View`
-margin-top: 35px;
+    margin-top: 20px;
    `;
 
 const UtilsContainer = styled.View`
-    margin-top: 80px;
+    margin-top: 50px;
     align-items: center;
     justify-content: center;
 `;
@@ -197,6 +194,11 @@ const ButtonContainer = styled.View`
     flex-direction: row;
     margin-top: 25px;
 `;
+
+const ExtraContainer = styled.View`
+    flex-direction: row;
+`;
+
 const PreviousButton = styled.TouchableOpacity`
  
 `;
@@ -215,7 +217,7 @@ const LoadingView = styled.View`
 
 const Loading = styled.ActivityIndicator.attrs(props => ({
     color: '#fff',
-    size: "small",
+    size: "large",
     align: "center",
 }))``;
 
@@ -225,7 +227,7 @@ const PoistuButton = styled.TouchableOpacity`
     width: 120px;
     height: 48px;
     border-radius: 50px;
-    background-color: ${props => props.color ?? '#FA4242'};
+    background-color: ${props => props.color ?? '#054dd9'};
 `;
 
 

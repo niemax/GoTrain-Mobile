@@ -138,36 +138,14 @@ import { rintaTreeniData } from '../../components/TreeniEsikatseluData'
      >
 
       <Stack.Screen name="Rinta" options={{  headerShown: false, headerLeft: null, gestureEnabled: true }}  component={Rinta} />
-      
-      <Stack.Screen name="Punnerrukset" options={{ headerTintColor: 'white', headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}} component={Punnerrukset} />
-      
-      <Stack.Screen name="Penkkipunnerrus" options={{ headerTintColor: 'white',
-       headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Penkkipunnerrus} />
-
-      <Stack.Screen name="Pystypunnerrus" options={{ headerTintColor: 'white',
-       headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Pystypunnerrus} />
-
-      <Stack.Screen name="Dipit" options={{ headerTintColor: 'white',
-       headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Dipit} />
-
-      <Stack.Screen name="Vipunosto" options={{ headerTintColor: 'white',
-       headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Vipunosto} />
-
-      <Stack.Screen name="ChestFly" options={{ headerTintColor: 'white',
-       headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}}  component={ChestFly} />
-
-      <Stack.Screen name="TricepPushdown" options={{ headerTintColor: 'white',
-       headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}} component={TricepPushdown} />
-    
-      <Stack.Screen name="AloitaRinta"  options={{ headerShown: false, gestureEnabled: false, cardStyle: { backgroundColor: 'transparent' }}} component={AloitaRinta} />
-      
+      <Stack.Screen name="Punnerrukset" options={{  headerShown: false, headerLeft: null, gestureEnabled: false}} component={Punnerrukset} />
+      <Stack.Screen name="Penkkipunnerrus" options={{ headerShown: false, gestureEnabled: false}}  component={Penkkipunnerrus} />
+      <Stack.Screen name="Pystypunnerrus" options={{ headerShown: false, gestureEnabled: false}}  component={Pystypunnerrus} />
+      <Stack.Screen name="Dipit" options={{ headerShown: false,  gestureEnabled: false}}  component={Dipit} />
+      <Stack.Screen name="Vipunosto" options={{ headerShown: false,  gestureEnabled: false}}  component={Vipunosto} />
+      <Stack.Screen name="ChestFly" options={{  headerShown: false, hgestureEnabled: false}}  component={ChestFly} />
+      <Stack.Screen name="TricepPushdown" options={{ headerShown: false,  gestureEnabled: false}} component={TricepPushdown} />
+      <Stack.Screen name="AloitaRinta"  options={{ headerShown: true, headerTitle: '', headerLeft: null, gestureEnabled: false, headerStyle: { backgroundColor: '#141314', shadowColor: 'transparent' }}} component={AloitaRinta} />
     </Stack.Navigator>
 
     

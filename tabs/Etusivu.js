@@ -77,7 +77,7 @@ const Etusivu = ({
     }, []);
 
 
-     let currentUserUID = firebase.auth().currentUser.uid;
+    /*  let currentUserUID = firebase.auth().currentUser.uid;
 
      useEffect(() => {
           async function getUserInfo() {
@@ -99,7 +99,7 @@ const Etusivu = ({
               }
           }
           getUserInfo();
-      }, []);       
+      }, []);        */
         
       
     

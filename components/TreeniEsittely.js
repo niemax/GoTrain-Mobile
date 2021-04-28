@@ -27,7 +27,7 @@ import { ListItem } from 'react-native-elements'
             // MAIN FETCH
             let response = await fetch(`https://mun-treeni-api.herokuapp.com/${treeni}`);
             const data = await response.json();
-            setTreeniData(data?.liikkeet);
+            setTreeniData(data.liikkeet);
             setTreeninKesto(data.kuvaus.treeninkesto);
             setKohderyhma(data.kuvaus.kohderyhma);
             setTreeniText(data.kuvaus.treenitext);
@@ -56,13 +56,15 @@ import { ListItem } from 'react-native-elements'
 
             return(
                 <Container> 
-                <Text medium left marginLeft="15px" marginTop="15px" >{treeniText} </Text>
+                <Text treeninNimi left marginLeft="15px" marginTop="15px" >{treeniText.toUpperCase()} </Text>
                 <View style={{flexDirection: 'row', margin: 15}}>
                 <Ionicons name="ios-timer-sharp" size={26} color="white" />
             
                  <Text medium left>  {treeninKesto}  <Feather name="target" size={26} color="white" />  Kohderyhmä  -  {kohderyhma}</Text>
             
-                     </View></Container>
+                     </View>
+                     <Text left marginLeft="12px" marginTop="15px" medium> LIIKKEET  ({treeniData.length})</Text>
+                     </Container>
             )
     }
 
@@ -136,7 +138,7 @@ import { ListItem } from 'react-native-elements'
 const styles = StyleSheet.create({
     image: {
         width: '100%',
-        height: '27%',
+        height: '25%',
         opacity: 0.7,
         borderRadius: 30,
         
@@ -162,12 +164,12 @@ const styles = StyleSheet.create({
 
     const Loading = styled.ActivityIndicator.attrs(props => ({
         color: '#fff',
-        size: "small",
+        size: "large",
         align: "center",
         marginTop: 200
     }))``;
 
-
+  
 
 
 

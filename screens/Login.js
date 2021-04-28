@@ -17,7 +17,7 @@ const Login = ({
         const handleLogin = () => {
             if (email !== '' && password.length >= 6) {
                 signIn(email, password);
-                navigation.replace('Loading');
+                navigation.navigate('Loading');
             } else {
                 Alert.alert('Virheellinen sähköposti tai salasana')
 

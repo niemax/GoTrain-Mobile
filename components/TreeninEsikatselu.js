@@ -3,25 +3,16 @@ import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { Ionicons } from '@expo/vector-icons'; 
 import Text from '../components/Text'
+import ButtonContainer from './TrainScreenStyling'
 import YoutubePlayer from "react-native-youtube-iframe";
 import { useNavigation } from '@react-navigation/native'; 
 
 
 const Esikatselu = (props) => {
-    const [playing, setPlaying] = useState(false);
     
     const navigation = useNavigation();
 
-    const onStateChange = useCallback((state) => {
-        if (state === "ended") {
-            setPlaying(false);
-            Alert.alert("video has finished playing!");
-        }
-    }, []);
-
-    const togglePlaying = useCallback(() => {
-        setPlaying((prev) => !prev);
-    }, []);
+   
 
     const icon = <Ionicons name="ios-alert-circle-outline" size={24} color="white" />
     
@@ -47,9 +38,13 @@ const Esikatselu = (props) => {
       </TextContainer>
         </ScrollView>
 
-        <SuljeButton onPress={() => navigation.goBack()}>
-            <Text color="white" center large>Sulje</Text>
-        </SuljeButton>
+    <SuljeContainer>
+    <SuljeButton onPress={() => navigation.goBack()}>
+              <Text color="white" center large>Sulje</Text>
+         </SuljeButton>
+    </SuljeContainer>
+
+       
         </Container>
         
     )
@@ -62,16 +57,16 @@ export default Esikatselu;
 const Container = styled.View`
     background-color: #141314;
     flex: 1;
-    flex-direction: column;
 `;
 
 const VideoContainer = styled.View`
+    margin-top: 35px;
 `;
 
 const TextContainer = styled.View`
     margin-left: 15px;
     margin-top: 50px;
-    flex-direction: row
+    flex-direction: row;
 `;
 
 const WarningContainer = styled.View`
@@ -83,9 +78,19 @@ const WarningContainer = styled.View`
 
 const SuljeButton = styled.TouchableOpacity`
 margin-bottom: 30px;
-align-items: center;
-height: 48px;
-justify-content: center;
-border-radius: 50px;
-background-color: ${props => props.color ?? '#FA4242'};
+    margin-left: 35px;
+    width: 80%;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    shadow-color: 'rgba(0,0,0, .4)';
+    shadow-opacity: 0.5;
+    background-color: #054dd9;
+`;
+
+const SuljeContainer = styled.View`
+    justify-content: center;
+    height: 12%;
+    padding: 15px;
 `;

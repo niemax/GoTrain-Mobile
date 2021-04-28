@@ -18,17 +18,22 @@ export const ParagraphContainer = styled.View`
 `;
 
  export const AloitaButton = styled.TouchableOpacity`
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    margin-left: 35px;
+    width: 80%;
     height: 48px;
     align-items: center;
     justify-content: center;
-    border-radius: 50px;
+    border-radius: 30px;
     shadow-color: 'rgba(0,0,0, .4)';
     shadow-opacity: 0.5;
-    background-color: ${props => props.color ?? '#FA4242'};
+    background-color: ${props => props.color ?? '#054dd9'};
 `;
 
  export const ButtonContainer = styled.View`
+    justify-content: center;
+    height: 12%;
+    padding: 15px;
 `;
 //#947AFF
  export const IconTouchable = styled.TouchableOpacity`
