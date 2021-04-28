@@ -1,17 +1,23 @@
 import React from 'react'
 import styled from 'styled-components/native';
 
- const Container = styled.View`
+ export const Container = styled.View`
     flex: 1;
     background-color: #141314;
     
 `;
 
-const ParagraphContainer = styled.View`
+export const RenderContainer = styled.View`
+    flex: 1;
+    background-color: #141314;
+    border-radius: 100px;
+`;
+
+export const ParagraphContainer = styled.View`
     margin-top: 10px;
 `;
 
- const AloitaButton = styled.TouchableOpacity`
+ export const AloitaButton = styled.TouchableOpacity`
     margin-bottom: 40px;
     height: 48px;
     align-items: center;
@@ -22,17 +28,15 @@ const ParagraphContainer = styled.View`
     background-color: ${props => props.color ?? '#FA4242'};
 `;
 
- const ButtonContainer = styled.View`
+ export const ButtonContainer = styled.View`
 `;
 //#947AFF
- const IconTouchable = styled.TouchableOpacity`
+ export const IconTouchable = styled.TouchableOpacity`
     position: absolute;
     top: 50px;
     left: 10px;
 `;
 
-const ModalContainer = styled.View`
+export const ModalContainer = styled.View`
 `;
 
-
-export { Container, ModalContainer,  ParagraphContainer, AloitaButton, ButtonContainer, IconTouchable };

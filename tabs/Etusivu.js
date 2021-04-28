@@ -23,6 +23,7 @@ const Etusivu = ({
     const [longitude, setLongitude] = useState(null);
     const [temp, setTemp] = useState(null);
     const [city, setCity] = useState('')
+    const [isLoading, setIsLoading] = useState(true)
     const [location, setLocation] = useState(null);
     const [currentDate, setCurrentDate] = useState('');
     const [text, setText] = useState('');
@@ -37,7 +38,7 @@ const Etusivu = ({
             return;
         }
 
-        let location = await Location.getCurrentPositionAsync({});
+        let location = await Location.getLastKnownPositionAsync({});
         setLocation(location);
         setLatitude(location.coords.latitude);
         setLongitude(location.coords.longitude);
@@ -98,7 +99,7 @@ const Etusivu = ({
               }
           }
           getUserInfo();
-      }, []);      
+      }, []);       
         
       
     
@@ -108,7 +109,7 @@ const Etusivu = ({
             <StatusBar style="light" />
         <HeaderContainer>
         <HeaderComponent 
-        centerComponent={{text: <Text marginTop="10px" medium center>{city},   {temp}{'\u00b0'}C</Text>}}
+        centerComponent={ isLoading ? (<Text marginTop="10px" medium center>{city},   {temp}{'\u00b0'}C</Text>) : (<Text medium>Loading...</Text>)}
         
         />
         </HeaderContainer>

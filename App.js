@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
-
 import 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import MainAuthStack from './navigation/MainAppNav'
+import MainAppStack from './navigation/MainAppNav'
 import * as firebase from 'firebase';
 import configKeys from './config/Firebase'
 import * as Font from 'expo-font';
@@ -49,7 +47,7 @@ import { NavigationContainer } from '@react-navigation/native';
           <NavigationContainer >
          
           <SafeAreaProvider>
-          <MainAuthStack />
+          <MainAppStack />
           
           </SafeAreaProvider>
           </NavigationContainer>
@@ -61,20 +59,3 @@ import { NavigationContainer } from '@react-navigation/native';
     }
     
 
-
-    const styles = StyleSheet.create({
-      container: {
-      },
-      lightContainer: {
-        backgroundColor: '#D0D0C0',
-      },
-      darkContainer: {
-        backgroundColor: '#242C40',
-      },
-      lightThemeText: {
-        color: '#242C40',
-      },
-      darkThemeText: {
-        color: '#D0D0C0',
-      },
-    });

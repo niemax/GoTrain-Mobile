@@ -17,7 +17,7 @@ import CardioTreeni from '../screens/TreeniScreens/Cardio';
 
 const Stack = createStackNavigator();
 
-const MainAuthStack = () => {
+const MainAppStack = () => {
     return(
       
       <Stack.Navigator
@@ -38,7 +38,7 @@ const KotiScreens = () => {
     <Stack.Navigator
      initialRouteName="Koti"
      >
-      <Stack.Screen name="KotiTab" options={{ headerShown: false, headerLeft: null}}  component={KotiMainTab} />
+      <Stack.Screen name="KotiTab" options={{ headerShown: false}}  component={KotiMainTab} />
       <Stack.Screen name="RintaTreeni" options={{ headerShown: false, gestureEnabled: false}} component={RintaTreeni} />
       <Stack.Screen name="SelkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={SelkaTreeni} />
       <Stack.Screen name="JalkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={JalkaTreeni} />
@@ -98,4 +98,4 @@ const KotiMainTab = () => {
 }
 
 
-export default MainAuthStack
+export default MainAppStack;

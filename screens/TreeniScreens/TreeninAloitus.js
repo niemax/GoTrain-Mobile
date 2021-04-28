@@ -1,6 +1,6 @@
   
-import React, { useState, useEffect, useCallback, useRef } from 'react'
-import { Dimensions, Modal, Button } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react'
+import { Dimensions, ActivityIndicator } from 'react-native';
 import Text from '../../components/Text';
 import styled from 'styled-components/native';
 import Carousel from 'react-native-snap-carousel';
@@ -9,7 +9,6 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress';
 import { useNavigation, useRoute } from '@react-navigation/native'; 
 import LopetaTreeni from './TreeninLopetus';
-import { LocationEventEmitter } from 'expo-location/build/LocationEventEmitter';
 
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
@@ -20,13 +19,13 @@ const AloitaTreeni = (props) => {
     const [tehdytTreenit, setTehdytTreenit] = useState({});
     const [pbProgress, setPbProgress] = useState(0)
     const [playing, setPlaying] = useState(false);
-    const [modalVisible, setModalVisible] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
 
     const { treeni } = props;
 
  
     const navigation = useNavigation();
-    const route = useRoute();
 
 
     const toggleOverlay = () => {
@@ -49,8 +48,13 @@ const AloitaTreeni = (props) => {
         try {
             let response = await fetch(`https://mun-treeni-api.herokuapp.com/${treeni}`);
             const data = await response.json();
-            setTreeniData(data[0].liikkeet);
-            console.log(data);
+            setTreeniData(data.liikkeet);
+           // console.log(data);
+
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 800);
+
             return data;
 
         } catch (error) {
@@ -76,9 +80,10 @@ const AloitaTreeni = (props) => {
             
         }
 
-        console.log("treenit", treenit, Object.keys(treenit).length);
         setTehdytTreenit(treenit);
         setPbProgress(Object.keys(treenit).length / treeniData.length);
+        
+        console.log("treenit", treenit, Object.keys(treenit).length);
         
        // setPbProgress(Object.keys(tehdytTreenit).length / treeniData.length);
        
@@ -94,9 +99,8 @@ const AloitaTreeni = (props) => {
         
         if (pbProgress >= 1) {
             return (<LopetaTreeni data={tehdytTreenit} />)
-        } else {
+        } else if(!isLoading) {
             return (
-            
                 <RenderContainer key={index}>
 
                      <VideoContainer>
@@ -147,6 +151,11 @@ const AloitaTreeni = (props) => {
                  </RenderContainer>
                 
              );
+        } else {
+            return(
+                <LoadingView><Loading/></LoadingView>
+                
+            )
         }
         
         
@@ -168,9 +177,6 @@ const AloitaTreeni = (props) => {
 
 export default AloitaTreeni;
 
-const Container = styled.View`
-
-`;
 
 const VideoContainer = styled.View`
 margin-top: 35px;
@@ -200,6 +206,18 @@ const NextButton = styled.TouchableOpacity`
 const DoneButton = styled.TouchableOpacity`
 `;
 
+const LoadingView = styled.View`
+    flex: 1;
+    justifyContent: center;
+    alignItems: center;
+    background-color: #141314;
+`;
+
+const Loading = styled.ActivityIndicator.attrs(props => ({
+    color: '#fff',
+    size: "small",
+    align: "center",
+}))``;
 
 const PoistuButton = styled.TouchableOpacity`
     margin-top: 120px;

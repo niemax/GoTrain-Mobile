@@ -1,21 +1,74 @@
-import React from 'react'
-import { Image, StyleSheet, TouchableOpacity, ScrollView, View, Modal, Pressable } from 'react-native';
+import React, { useState, useEffect } from 'react'
+import styled from 'styled-components/native';
+import { Image, StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native';
 import Text from '../components/Text';
 import { Ionicons, Feather } from '@expo/vector-icons'; 
-import { Container, AloitaButton, ButtonContainer, IconTouchable } from '../components/TrainScreenStyling';
+import { Container, AloitaButton, ButtonContainer, IconTouchable, RenderContainer } from '../components/TrainScreenStyling';
 import { useNavigation } from '@react-navigation/native';
 import { ListItem } from 'react-native-elements'
 
 
+ const TreeniEsittelyData = (props) => {
+     const [treeniData, setTreeniData] = useState([]);
+     const [treeninKesto, setTreeninKesto] = useState('');
+     const [kohderyhma, setKohderyhma] = useState('');
+     const [treeniText, setTreeniText] = useState('');
+     const [aloitaRoute, setAloitaRoute] = useState('');
+     const [isLoading, setIsLoading] = useState(true);
 
- const TreeniData = (props) => {
 
     const navigation = useNavigation();
 
-    const { data, backgroundImage, treeniText, treeninKesto, kohdeRyhmaText, aloitaRoute } = props;
+    const { treeni, backgroundImage } = props;
 
 
-    return(
+    const _getData = async () => {
+        try {
+            // MAIN FETCH
+            let response = await fetch(`https://mun-treeni-api.herokuapp.com/${treeni}`);
+            const data = await response.json();
+            setTreeniData(data?.liikkeet);
+            setTreeninKesto(data.kuvaus.treeninkesto);
+            setKohderyhma(data.kuvaus.kohderyhma);
+            setTreeniText(data.kuvaus.treenitext);
+            setAloitaRoute(data.kuvaus.aloitaRoute);
+            //console.log("kuvaus", data.kuvaus);
+
+            if (data) {
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 300)
+            }
+            
+            return data;
+
+        } catch (error) {
+            console.error(error);
+        }
+        
+    }
+
+    useEffect(() => {
+        _getData();
+    }, []);
+
+    const _renderTreeninKuvausData = () => {
+
+            return(
+                <Container> 
+                <Text medium left marginLeft="15px" marginTop="15px" >{treeniText} </Text>
+                <View style={{flexDirection: 'row', margin: 15}}>
+                <Ionicons name="ios-timer-sharp" size={26} color="white" />
+            
+                 <Text medium left>  {treeninKesto}  <Feather name="target" size={26} color="white" />  Kohderyhmä  -  {kohderyhma}</Text>
+            
+                     </View></Container>
+            )
+    }
+
+    
+       return(
+        
         <Container>
         
         <Image style={styles.image} source={backgroundImage}></Image>
@@ -26,33 +79,28 @@ import { ListItem } from 'react-native-elements'
         </View>
        
         </IconTouchable>
-        <ScrollView style={{marginTop: 10}}>
-        <Container>
         
-        <Text medium left marginLeft="20px" marginTop="10px" >{treeniText.toUpperCase()} </Text>
-        <View style={{flexDirection: 'row', margin: 15}}>
-        <Ionicons name="ios-timer-sharp" size={26} color="white" />
-        
-        <Text medium left>  {treeninKesto}  <Feather name="target" size={26} color="white" />  Kohderyhmä  -  {kohdeRyhmaText}</Text>
-        
-        
-        </View>
-        
+        {!isLoading ? (<ScrollView style={{marginTop: 10}}>
 
-        {
-            data.map((item, index) => {
+        <RenderContainer>
+      
+      {_renderTreeninKuvausData()}
+
+      { 
+            treeniData.map((item, index) => {
+
                 return(
                     <TouchableOpacity key={index} onPress={() => navigation.navigate(item.navigationRoute)}>
                     <ListItem containerStyle={styles.cards} bottomDivider >
                
                <ListItem.Content>
-               <Image 
-               source={item.image}
+              {/*  <Image 
+               source={require(`../../assets/icons/${item.image}`)}
                style={styles.iconImage}>
-               </Image>
-               <Text medium>{item.name}</Text>
+               </Image> */}
+               <Text marginLeft="3px" medium>{item.nimi}</Text>
                
-               <Text style={styles.toistotText} medium>{item.sarjat} sarjaa</Text>
+               <Text style={styles.sarjatText} medium>{item.sarjat} sarjaa</Text>
                </ListItem.Content>
                <Ionicons name="ios-chevron-forward-sharp" size={24} color="white" />
               
@@ -61,15 +109,25 @@ import { ListItem } from 'react-native-elements'
                    
                 );
             })
-        }
-        </Container>
+        }  
+        
+        </RenderContainer>
+        
         </ScrollView>
-        <ButtonContainer>
+        
+        ) :
+
+         (<Loading/>)}
+         
+         {!isLoading && <ButtonContainer>
                 <AloitaButton onPress={() => navigation.navigate(aloitaRoute)}>
                 <Text large >Aloita treeni</Text>
                 </AloitaButton>
-                </ButtonContainer>
+                </ButtonContainer> }
+        
+         
                 </Container>
+                
         
     );
 }
@@ -78,16 +136,13 @@ import { ListItem } from 'react-native-elements'
 const styles = StyleSheet.create({
     image: {
         width: '100%',
-        height: '36%',
-        opacity: 0.9,
+        height: '27%',
+        opacity: 0.7,
         borderRadius: 30,
         
     }, 
     cards: {
-        height: 70,
-        borderWidth: 0,
-        borderRadius: 15,
-        elevation: 3,
+        height: 90,
         backgroundColor: '#141314',
         margin: 0.3,
     },
@@ -97,15 +152,23 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
 
-    toistotText: {
-        position: 'absolute', right: 10, fontFamily: 'MontserratBold'
+    sarjatText: {
+        position: 'absolute', right: 3, fontFamily: 'MontserratBold'
     }, 
    
      
     });
 
 
+    const Loading = styled.ActivityIndicator.attrs(props => ({
+        color: '#fff',
+        size: "small",
+        align: "center",
+        marginTop: 200
+    }))``;
 
 
 
-export default TreeniData;
+
+
+export default TreeniEsittelyData;

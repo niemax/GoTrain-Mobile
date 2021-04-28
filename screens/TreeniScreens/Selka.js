@@ -108,11 +108,7 @@ const Selka = () => {
     return(
         <TreeniData 
         backgroundImage={require('../../assets/selkaToinen.jpg')}
-        data={selkaTreeniData} 
-        treeniText='Selkä / Hauis'
-        treeninKesto='60-75min'
-        kohdeRyhmaText='Selkä'
-        aloitaRoute={'AloitaSelka'}
+        treeni={'selkatreeni'} 
         />
     );
 }

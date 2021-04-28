@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'react-native';
-import TreeniData from '../../components/TreeniEsittely';
+import TreeniEsittelyData from '../../components/TreeniEsittely';
 import { createStackNavigator } from '@react-navigation/stack'
 import AloitaTreeni from './TreeninAloitus';
 import Esikatselu from '../../components/TreeninEsikatselu';
@@ -120,13 +120,10 @@ import { rintaTreeniData } from '../../components/TreeniEsikatseluData'
 
     const Rinta = () => {
     return(
-        <TreeniData 
+        // MITÄ NÄISTÄ APISTA? TREENITEXT, TREENINKESTO, KOHDERYHMÄ, ALOITAROUTE -> poistas rintatreenidata
+        <TreeniEsittelyData 
         backgroundImage={require('../../assets/rintaToinen.jpg')}
-        data={rintaTreeniData} 
-        treeniText='Rinta / Ojentaja / Olkapää'
-        treeninKesto='60-75min'
-        kohdeRyhmaText='Rinta'
-        aloitaRoute={'AloitaRinta'}
+        treeni={'rintatreeni'} 
         />
     );
 }
@@ -169,7 +166,7 @@ import { rintaTreeniData } from '../../components/TreeniEsikatseluData'
        headerStyle: {backgroundColor: '#FA4242' }, 
        headerShown: true, headerLeft: null, gestureEnabled: false}} component={TricepPushdown} />
     
-      <Stack.Screen name="AloitaRinta"  options={{ headerShown: false, gestureEnabled: false, mode: 'card'}} component={AloitaRinta} />
+      <Stack.Screen name="AloitaRinta"  options={{ headerShown: false, gestureEnabled: false, cardStyle: { backgroundColor: 'transparent' }}} component={AloitaRinta} />
       
     </Stack.Navigator>
 

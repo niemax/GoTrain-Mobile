@@ -8,9 +8,9 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const Esikatselu = (props) => {
-    const navigation = useNavigation();
     const [playing, setPlaying] = useState(false);
-
+    
+    const navigation = useNavigation();
 
     const onStateChange = useCallback((state) => {
         if (state === "ended") {
