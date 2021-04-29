@@ -12,7 +12,6 @@ const Esikatselu = (props) => {
     
     const navigation = useNavigation();
 
-   
 
     const icon = <Ionicons name="ios-alert-circle-outline" size={24} color="white" />
     

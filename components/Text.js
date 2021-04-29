@@ -15,7 +15,7 @@ marginRight: ${props => props.marginRight ?? 0};
 marginTop: ${props => props.marginTop ?? 0};
 marginBottom: ${props => props.marginBottom ?? 0};
 
-${({ title, vinkit, vinkkiTitle, large, medium, small, tiny, treeninNimi }) => {
+${({ title, vinkit, vinkkiTitle, large, medium, small, tiny, treeninNimi, toistot }) => {
     switch (true) {
             case title:
                 return `font-size: 32px`
@@ -40,6 +40,9 @@ ${({ title, vinkit, vinkkiTitle, large, medium, small, tiny, treeninNimi }) => {
             
             case treeninNimi:
                 return `font-size: 18px`
+
+            case toistot:
+                return `font-size: 44px`
                 
             default:
                 return `font-size: 11px`

@@ -42,6 +42,10 @@ export const ParagraphContainer = styled.View`
     left: 10px;
 `;
 
+export const PalauteIcon = styled.TouchableOpacity`
+    
+`;
+
 export const ModalContainer = styled.View`
 `;
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from 'react-native';
 import TreeniEsittelyData from '../../components/TreeniEsittely';
 import { createStackNavigator } from '@react-navigation/stack'
 import AloitaTreeni from './TreeninAloitus';
@@ -145,7 +144,7 @@ import { rintaTreeniData } from '../../components/TreeniEsikatseluData'
       <Stack.Screen name="Vipunosto" options={{ headerShown: false,  gestureEnabled: false}}  component={Vipunosto} />
       <Stack.Screen name="ChestFly" options={{  headerShown: false, hgestureEnabled: false}}  component={ChestFly} />
       <Stack.Screen name="TricepPushdown" options={{ headerShown: false,  gestureEnabled: false}} component={TricepPushdown} />
-      <Stack.Screen name="AloitaRinta"  options={{ headerShown: true, headerTitle: '', headerLeft: null, gestureEnabled: false, headerStyle: { backgroundColor: '#141314', shadowColor: 'transparent' }}} component={AloitaRinta} />
+      <Stack.Screen name="AloitaRinta"  options={{ headerShown: false, gestureEnabled: false, headerStyle: { backgroundColor: '#141314', shadowColor: 'transparent' }}} component={AloitaRinta} />
     </Stack.Navigator>
 
     

@@ -23,7 +23,7 @@ import { NavigationContainer } from '@react-navigation/native';
         MontserratBold: require('./assets/fonts/Montserrat-Bold.ttf'),
         MontserratSemiBold: require('./assets/fonts/Montserrat-SemiBold.ttf'),
         MontserratRegular: require('./assets/fonts/Montserrat-Regular.ttf'),
-
+        MontserratExtraBold: require('./assets/fonts/Montserrat-ExtraBold.ttf')
         
       });
       setFontsLoaded(true);

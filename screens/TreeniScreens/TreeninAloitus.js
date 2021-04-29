@@ -7,7 +7,7 @@ import Carousel from 'react-native-snap-carousel';
 import YoutubePlayer from "react-native-youtube-iframe";
 import { Ionicons } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress';
-import { useNavigation, useRoute } from '@react-navigation/native'; 
+import { useNavigation  } from '@react-navigation/native'; 
 import LopetaTreeni from './TreeninLopetus';
 
 
@@ -18,21 +18,12 @@ const AloitaTreeni = (props) => {
     const [treeniData, setTreeniData] = useState([]);
     const [tehdytTreenit, setTehdytTreenit] = useState({});
     const [pbProgress, setPbProgress] = useState(0)
-    const [playing, setPlaying] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const { treeni } = props;
  
     const navigation = useNavigation();
-
-    const onStateChange = useCallback((state) => {
-        if (state === "ended") {
-            setPlaying(false);
-            //Alert.alert("video has finished playing!");
-        }
-    }, []);
-
 
     const getData = async () => {
         try {
@@ -96,18 +87,16 @@ const AloitaTreeni = (props) => {
                 
                 <RenderContainer key={index}>
                 <ExtraContainer>
-                <Text left marginLeft="15px"><Ionicons name="chevron-back-circle-outline" size={38} color="white"/></Text> 
-                <Text vinkit right marginLeft="275px" marginTop="10px">{currentSlide} / {treeniData.length}</Text>
+                <IconTouchable onPress={() => navigation.goBack()} left marginLeft="15px">
+                <Ionicons name="ios-chevron-back" size={24} color="white" />
+                </IconTouchable> 
+                <Text medium marginTop="3px" marginLeft="285px" >{currentSlide} / {treeniData.length}</Text>
                 </ExtraContainer>
-               
-                
 
                      <VideoContainer>
                          <YoutubePlayer
                              height={220}
                              videoId={item.videoId}
-                             play={playing}
-                             onChangeState={onStateChange}
                          />
                      </VideoContainer>
                      
@@ -116,14 +105,14 @@ const AloitaTreeni = (props) => {
                      </ProgressBarContainer>
      
                      <UtilsContainer>
-                        <Text vinkkiTitle >{item.nimi}</Text>
+                        <Text vinkkiTitle >{item.nimi.toUpperCase()}</Text>
      
-                         <Text title color="#054dd9" vinkkiTitle >x{item.toistot} </Text>
+                         <Text color="#054dd9" toistot >x {item.toistot} </Text>
      
                          <ButtonContainer>
                          
                          {index > 0 && <PreviousButton onPress={() => { carousel.snapToPrev(); }}>
-                                 <Ionicons name="ios-chevron-back-outline" size={82} color="white" />
+                                 <Ionicons name="ios-chevron-back-outline" size={48} color="white" />
                              </PreviousButton>}
      
                              <DoneButton onPress={() => setProgress(item, index)}>
@@ -133,7 +122,7 @@ const AloitaTreeni = (props) => {
                              </DoneButton>
      
                              {index < treenitLength -1 &&  <NextButton onPress={() => { carousel.snapToNext(); }}>
-                                 <Ionicons name="ios-chevron-forward-outline" size={82} color="white" />
+                                 <Ionicons name="ios-chevron-forward-outline" size={48} color="white" />
                              </NextButton>
                              }
      
@@ -197,12 +186,19 @@ const ButtonContainer = styled.View`
 
 const ExtraContainer = styled.View`
     flex-direction: row;
+    margin-top: 60px;
+`;
+
+const IconTouchable = styled.TouchableOpacity`
+    margin-left: 10px;
 `;
 
 const PreviousButton = styled.TouchableOpacity`
+    margin-top: 15px;
  
 `;
 const NextButton = styled.TouchableOpacity`
+    margin-top: 15px;
    
 `;
 const DoneButton = styled.TouchableOpacity`
