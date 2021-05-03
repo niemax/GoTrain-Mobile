@@ -3,7 +3,6 @@ import TreeniEsittelyData from '../../components/TreeniEsittely';
 import { createStackNavigator } from '@react-navigation/stack'
 import AloitaTreeni from './TreeninAloitus';
 import Esikatselu from '../../components/TreeninEsikatselu';
-import { rintaTreeniData } from '../../components/TreeniEsikatseluData'
 
 
     const AloitaRinta = () => {

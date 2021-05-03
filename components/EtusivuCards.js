@@ -6,8 +6,6 @@ import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native'; 
 import { Ionicons } from '@expo/vector-icons'; 
 
-
-
 const treenit = [{
         id: 1,
         name: 'Rinta',

@@ -18,7 +18,7 @@ const LoadingScreen = ({
                             navigation.navigate('Kotisivu'); 
                         }, 400);
                     } else {
-                        navigation.goBack();
+                        navigation.navigate('Signup');
                     }
                 } catch (err) {
                     console.log(err);

@@ -49,3 +49,10 @@ export const PalauteIcon = styled.TouchableOpacity`
 export const ModalContainer = styled.View`
 `;
 
+export const Loading = styled.ActivityIndicator.attrs(props => ({
+    color: 'orange',
+    size: "large",
+    align: "center",
+    marginTop: 40
+}))``;
+

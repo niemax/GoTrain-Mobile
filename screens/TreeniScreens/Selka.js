@@ -3,7 +3,6 @@ import TreeniData from '../../components/TreeniEsittely';
 import AloitaTreeni from './TreeninAloitus';
 import Esikatselu from '../../components/TreeninEsikatselu';
 import { createStackNavigator } from '@react-navigation/stack'
-import { selkaTreeniData } from '../../components/TreeniEsikatseluData'
 
 
 export const AloitaSelka = () => {
@@ -124,31 +123,19 @@ const Stack = createStackNavigator();
 
       <Stack.Screen name="Selka" options={{  headerShown: false, headerLeft: null, gestureEnabled: true}}  component={Selka} />
       <Stack.Screen
-       name="Leuanveto" options={{ headerTintColor: 'white', headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}} component={Leuanveto} />
+       name="Leuanveto" options={{ headerShown: true, headerLeft: null, gestureEnabled: false}} component={Leuanveto} />
 
-      <Stack.Screen name="Kulmasoutu" options={{ headerTintColor: 'white',
-       headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Kulmasoutu} />
+      <Stack.Screen name="Kulmasoutu" options={{ headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Kulmasoutu} />
 
-      <Stack.Screen name="Hauiskaanto" options={{ headerTintColor: 'white',
-       headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Hauiskaanto} />
+      <Stack.Screen name="Hauiskaanto" options={{ headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Hauiskaanto} />
 
-      <Stack.Screen name="Alatalja" options={{ headerTintColor: 'white',
-       headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Alatalja} />
+      <Stack.Screen name="Alatalja" options={{ headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Alatalja} />
 
-      <Stack.Screen name="Ylatalja" options={{ headerTintColor: 'white',
-       headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Ylatalja} />
+      <Stack.Screen name="Ylatalja" options={{ headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Ylatalja} />
 
-      <Stack.Screen name="Vasarakaannot" options={{ headerTintColor: 'white',
-       headerStyle: {backgroundColor: '#FA4242' }, 
-       headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Vasarakaannot} />
-
+      <Stack.Screen name="Vasarakaannot" options={{  headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Vasarakaannot} />
     
-      <Stack.Screen name="AloitaSelka"  options={{ headerShown: false, gestureEnabled: false, mode: 'card'}} component={AloitaSelka} />
+      <Stack.Screen name="AloitaSelka"  options={{ headerShown: false, gestureEnabled: false }} component={AloitaSelka} />
     </Stack.Navigator>
      )
  }

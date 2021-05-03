@@ -30,7 +30,7 @@ const Signup = ({ navigation }) => {
         } else if (!password) {
             Alert.alert('Salasana vaaditaan.');
         } else if (password.length < 6) {
-            Alert.alert('Salasanan tulee olla pidempi kuin 6 merkkiä')
+            Alert.alert('Salasanan tulee olla enemmän kuin 6 merkkiä')
         } else {
             registration(
                 name,

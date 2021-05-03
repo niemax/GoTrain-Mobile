@@ -22,19 +22,23 @@ const AloitaTreeni = (props) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const { treeni } = props;
- 
+    //console.log(treeni)
     const navigation = useNavigation();
 
     const getData = async () => {
         try {
             let response = await fetch(`https://mun-treeni-api.herokuapp.com/${treeni}`);
             const data = await response.json();
-            setTreeniData(data.liikkeet);
-           // console.log(data);
 
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 800);
+            if (data) {
+                setTreeniData(data.liikkeet);
+
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 800);
+            }
+            
+            console.log(data);
 
             return data;
 
@@ -47,6 +51,7 @@ const AloitaTreeni = (props) => {
         getData();
     }, [])
 
+    
 
     const setProgress = (item, index) => {
      //console.log console.log("setProgress", item, index);
@@ -61,9 +66,6 @@ const AloitaTreeni = (props) => {
             setCurrentSlide(currentSlide - 1);
             
         }
-
-         
-         console.log(currentSlide);
 
         setTehdytTreenit(treenit);
         setPbProgress(Object.keys(treenit).length / treeniData.length);
@@ -81,8 +83,8 @@ const AloitaTreeni = (props) => {
 
         
         if (pbProgress >= 1) {
-            return (<LopetaTreeni data={tehdytTreenit} />)
-        } else if(!isLoading) {
+            return (<LopetaTreeni treeni={treeni} data={tehdytTreenit} />)
+        } else if (! isLoading) {
             return (
                 
                 <RenderContainer key={index}>

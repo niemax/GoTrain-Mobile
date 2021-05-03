@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { Image, StyleSheet } from 'react-native';
-import React, { useState , useEffect } from "react";
+import React from "react";
 import Text from '../../components/Text';
 import ConfettiCannon from 'react-native-confetti-cannon';
 import { Card } from 'react-native-elements';
@@ -8,32 +8,37 @@ import { ButtonContainer, PalauteIcon } from '../../components/TrainScreenStylin
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native';
 import * as firebase from 'firebase';
-import "firebase/firestore";
+import moment from 'moment';
+import 'moment/locale/fi'
 
 
 const LopetaTreeni = (props) => {
         const {
-            data
+            data,
+            treeni
         } = props;
 
+        console.log(treeni);
+        //console.log(treeni)
         const navigation = useNavigation();
-       
 
         const saveToDatabase = async () => {
             const db = firebase.firestore();
-            const treeniData = {...data};
-            
 
             const currentUser = firebase.auth().currentUser;
-            
 
-            console.log("tehdyt",treeniData);
+            const ref = db.collection('users').doc(currentUser.uid)
+                .collection('treenidata');
+
+            const date = moment().locale('fi')
+                .format('LL')
 
             try {
-                const treeniRef = db.collection('users').doc(currentUser.uid);
-               await treeniRef.set({
-                   tehdytTreenit: data
-                }, { merge: true });
+                await ref.add({
+                    treeni: treeni,
+                    pvm: date,
+                    treeniData: data
+                });
 
             } catch (err) {
                 console.error(err)
@@ -41,12 +46,13 @@ const LopetaTreeni = (props) => {
 
             setTimeout(() => {
                 navigation.goBack();
-            }, 1000)
- 
+            }, 400)
+
         }
 
+        
 
-    console.log("tehdyt treenit data", data);
+   // console.log("tehdyt treenit data", data);
 
 
     return (
@@ -88,8 +94,8 @@ const LopetaTreeni = (props) => {
         count={60}
         origin={{x: 0, y: -20}}
         autoStart={true}
-        fallSpeed={7000}
-        fadeOut={false}
+        fallSpeed={10000}
+        fadeOut={true}
         
       />
       

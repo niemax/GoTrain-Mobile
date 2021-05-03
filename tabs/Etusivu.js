@@ -38,7 +38,7 @@ const Etusivu = ({
             return;
         }
 
-        let location = await Location.getLastKnownPositionAsync({});
+        let location = await Location.getCurrentPositionAsync({});
         setLocation(location);
         setLatitude(location.coords.latitude);
         setLongitude(location.coords.longitude);
@@ -54,6 +54,8 @@ const Etusivu = ({
             const data = await response.json();
             setCity(data.name);
             setTemp(data.main.temp.toFixed(0));
+            setIsLoading(false)
+
             //console.log(data)
             return data;
 
@@ -76,16 +78,15 @@ const Etusivu = ({
         getWeatherData();
     }, []);
 
+      let currentUser = firebase.auth().currentUser
 
-     let currentUserUID = firebase.auth().currentUser.uid;
-
-     useEffect(() => {
+      useEffect(() => {
           async function getUserInfo() {
               try {
                   let doc = await firebase
                       .firestore()
                       .collection('users')
-                      .doc(currentUserUID)
+                      .doc(currentUser.uid)
                       .get();
 
                   if (!doc.exists) {
@@ -99,8 +100,8 @@ const Etusivu = ({
               }
           }
           getUserInfo();
-      }, []);       
-        
+      }, []);        
+         
       
     
     return (
@@ -109,7 +110,7 @@ const Etusivu = ({
             <StatusBar style="light" />
         <HeaderContainer>
         <HeaderComponent 
-        centerComponent={ isLoading ? (<Text marginTop="10px" medium center>{city},   {temp}{'\u00b0'}C</Text>) : (<Text medium>Loading...</Text>)}
+        centerComponent={ isLoading ? (<Text marginTop="10px" medium center>{city},  {temp}{'\u00b0'}</Text>) : (<Text medium>Loading...</Text>)}
         
         />
         </HeaderContainer>

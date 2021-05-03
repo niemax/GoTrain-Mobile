@@ -35,9 +35,7 @@ import { ListItem } from 'react-native-elements'
             //console.log("kuvaus", data.kuvaus);
 
             if (data) {
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 300)
+                setIsLoading(false);
             }
             
             return data;
@@ -82,7 +80,8 @@ import { ListItem } from 'react-native-elements'
        
         </IconTouchable>
         
-        {!isLoading ? (<ScrollView style={{marginTop: 10}}>
+        {!isLoading ? (
+            <ScrollView style={{marginTop: 10}}>
 
         <RenderContainer>
       
@@ -118,10 +117,9 @@ import { ListItem } from 'react-native-elements'
         </ScrollView>
         
         ) :
-
-         (<Loading/>)}
+         ( <Loading/>)}
          
-         {!isLoading && <ButtonContainer>
+         {! isLoading && <ButtonContainer>
                 <AloitaButton onPress={() => navigation.navigate(aloitaRoute)}>
                 <Text large >Aloita treeni</Text>
                 </AloitaButton>
