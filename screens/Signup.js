@@ -5,6 +5,8 @@ import Text from '../components/Text';
 import { FontAwesome as Icon } from '@expo/vector-icons';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { registration } from '../API/FirebaseMethods'
+import { Appearance, useColorScheme } from 'react-native-appearance';
+
 
 
 
@@ -15,6 +17,9 @@ const Signup = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, seterrorMessage] = useState(null);
+
+    Appearance.getColorScheme();
+    const colorScheme = useColorScheme();
 
     const emptyState = () => {
         setName('');
@@ -43,7 +48,7 @@ const Signup = ({ navigation }) => {
     };
     
         return (
-            <Container>
+            <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
             <Main>
             <Text color="black" title semi center>
             {`Tervetuloa, \n Rekisteröidy aloittaaksesi.`}{" "}
@@ -56,8 +61,8 @@ const Signup = ({ navigation }) => {
 
             <Auth>
             <AuthContainer>
-                    <AuthTitle>Nimi *</AuthTitle>
-                    <Ionicons name="md-person-add-outline" size={18} color="gray" />
+                    <AuthTitle style={{color: colorScheme === 'dark' ? 'white' : 'black'}}>Nimi *</AuthTitle>
+                    <Ionicons name="md-person-add-outline" size={18} color={colorScheme === 'dark' ? 'white' : 'black'} />
                     <AuthField 
                     autoCapitalize="none" 
                     autoCorrect={false} 
@@ -68,8 +73,8 @@ const Signup = ({ navigation }) => {
                     
                 </AuthContainer>
                 <AuthContainer>
-                    <AuthTitle>Sähköposti *</AuthTitle>
-                    <Ionicons name="mail-open-outline" size={18} color="gray" />
+                    <AuthTitle style={{color: colorScheme === 'dark' ? 'white' : 'black'}}>Sähköposti *</AuthTitle>
+                    <Ionicons name="mail-open-outline" size={18} color={colorScheme === 'dark' ? 'white' : 'black'} />
                     <AuthField 
                     autoCapitalize="none" 
                     autoCompleteType="email" 
@@ -81,8 +86,8 @@ const Signup = ({ navigation }) => {
                     />
                 </AuthContainer>
                 <AuthContainer>
-                    <AuthTitle>Salasana *</AuthTitle>
-                    <MaterialCommunityIcons name="form-textbox-password" size={18} color="gray" />
+                    <AuthTitle style={{color: colorScheme === 'dark' ? 'white' : 'black'}}>Salasana *</AuthTitle>
+                    <MaterialCommunityIcons name="form-textbox-password" size={18} color={colorScheme === 'dark' ? 'white' : 'black'} />
                     <AuthField 
                     autoCapitalize="none" 
                     autoCompleteType="password" 

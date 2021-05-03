@@ -1,9 +1,15 @@
 import React from 'react'
 import styled from 'styled-components/native'; 
+import { Appearance, useColorScheme } from 'react-native-appearance';
+
+
+Appearance.getColorScheme();
 
 
 const TextStyle = ({...props}) => {
-    return <Text style={{fontFamily: 'MontserratSemiBold'}} {...props}>{props.children}</Text>
+    const colorScheme = useColorScheme();
+
+    return <Text style={{fontFamily: 'MontserratSemiBold', color: colorScheme === 'dark' ? ('#fff') : ('#000')}} {...props}>{props.children}</Text>
 }
 
 const Text = styled.Text`

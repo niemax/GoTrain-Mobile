@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import * as firebase from 'firebase';
 import Text from '../components/Text';
+import { Appearance, useColorScheme } from 'react-native-appearance';
+
 
 const LoadingScreen = ({
         navigation
     }) => {
         const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+        Appearance.getColorScheme();
+        const colorScheme = useColorScheme();
 
 
         useEffect(() => {
@@ -30,7 +35,7 @@ const LoadingScreen = ({
 
     return(
         
-        <Container>
+        <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
         <HeaderGraphic>
                 <RightCircle />
                 <LeftCircle />

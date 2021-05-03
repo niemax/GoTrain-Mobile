@@ -10,6 +10,8 @@ import { useNavigation } from '@react-navigation/native';
 import * as firebase from 'firebase';
 import moment from 'moment';
 import 'moment/locale/fi'
+import { Appearance, useColorScheme } from 'react-native-appearance';
+
 
 
 const LopetaTreeni = (props) => {
@@ -17,6 +19,9 @@ const LopetaTreeni = (props) => {
             data,
             treeni
         } = props;
+
+        Appearance.getColorScheme();
+        const colorScheme = useColorScheme();
 
         console.log(treeni);
         //console.log(treeni)
@@ -56,23 +61,38 @@ const LopetaTreeni = (props) => {
 
 
     return (
-        <Container>
+        <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
         
         <BackgroundContainer>
         <Image style={{height: 100, width: 100}} source={require('../../assets/icons/applause.png')} />
         <Text style={{fontFamily: 'MontserratExtraBold'}} marginTop="20px" large medium>TREENI SUORITETTU!</Text>
         </BackgroundContainer>
-            <Card containerStyle={styles.cards} >
-            <Text style={{fontFamily: 'MontserratExtraBold'}} medium >TREENIT </Text>
+            <Card containerStyle={{borderWidth: 0,
+            elevation: 3,
+            height: 100,
+            width: '92%',
+            backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+            borderRadius: 15,}} >
+            <Text style={{fontFamily: 'MontserratExtraBold', color: colorScheme === 'dark' ? 'white' : 'black'}} medium >TREENIT </Text>
             <Text style={{fontFamily: 'MontserratExtraBold'}} title color="#054dd9">{Object.keys(data).length}</Text>
             
             </Card>
-            <Card containerStyle={styles.cards} >
-            <Text style={{fontFamily: 'MontserratExtraBold'}} medium >SUORITUS </Text>
+            <Card containerStyle={{borderWidth: 0,
+            elevation: 3,
+            height: 100,
+            width: '92%',
+            backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+            borderRadius: 15,}} >
+            <Text style={{fontFamily: 'MontserratExtraBold', color: colorScheme === 'dark' ? 'white' : 'black'}} medium >SUORITUS </Text>
             <Text style={{fontFamily: 'MontserratExtraBold'}} title color="#054dd9">100%</Text>
             
             </Card>
-            <Card containerStyle={styles.feedbackCard} >
+            <Card containerStyle={{borderWidth: 0,
+            elevation: 3,
+            height: 200,
+            width: '92%',
+            backgroundColor: '#212121',
+            borderRadius: 15,}} >
             <Text style={{fontFamily: 'MontserratExtraBold'}} medium >Oliko treeni mieluisa? </Text>
             <Text style={{fontFamily: 'MontserratExtraBold'}} marginTop="10px" small >Annathan palautetta, jotta voin kehittää treenitarjontaa</Text>
             <PalauteButtonContainer>
@@ -115,31 +135,6 @@ const LopetaTreeni = (props) => {
    
 }
 
-const styles = StyleSheet.create({
-    image: {
-        width: '100%',
-        height: '35%',
-        opacity: 0.8,
-},
-cards: {
-    borderWidth: 0,
-    elevation: 3,
-    height: 100,
-    width: '92%',
-    backgroundColor: '#212121',
-    borderRadius: 15,
-},
-
-feedbackCard: {
-    borderWidth: 0,
-    elevation: 3,
-    height: 200,
-    width: '92%',
-    backgroundColor: '#212121',
-    borderRadius: 15,
-}
-
-});
 
 const BackgroundContainer = styled.View`
     background: #054dd9;
@@ -171,11 +166,8 @@ const PalauteButtonContainer = styled.View`
 `;
 
 
-
-
 const Container = styled.View`
      flex: 1;
-    background-color: #141314;
 `;
 
 export default LopetaTreeni;

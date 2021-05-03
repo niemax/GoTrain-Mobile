@@ -6,6 +6,7 @@ import { Ionicons, Feather } from '@expo/vector-icons';
 import { Container, AloitaButton, ButtonContainer, IconTouchable, RenderContainer } from '../components/TrainScreenStyling';
 import { useNavigation } from '@react-navigation/native';
 import { ListItem } from 'react-native-elements'
+import { Appearance, useColorScheme } from 'react-native-appearance';
 
 
  const TreeniEsittelyData = (props) => {
@@ -15,6 +16,9 @@ import { ListItem } from 'react-native-elements'
      const [treeniText, setTreeniText] = useState('');
      const [aloitaRoute, setAloitaRoute] = useState('');
      const [isLoading, setIsLoading] = useState(true);
+
+    Appearance.getColorScheme();
+    const colorScheme = useColorScheme();
 
 
     const navigation = useNavigation();
@@ -27,23 +31,22 @@ import { ListItem } from 'react-native-elements'
             // MAIN FETCH
             let response = await fetch(`https://mun-treeni-api.herokuapp.com/${treeni}`);
             const data = await response.json();
-            setTreeniData(data.liikkeet);
-            setTreeninKesto(data.kuvaus.treeninkesto);
-            setKohderyhma(data.kuvaus.kohderyhma);
-            setTreeniText(data.kuvaus.treenitext);
-            setAloitaRoute(data.kuvaus.aloitaRoute);
             //console.log("kuvaus", data.kuvaus);
 
-            if (data) {
+            if (response.status === 200) {
+                setTreeniData(data.liikkeet);
+                setTreeninKesto(data.kuvaus.treeninkesto);
+                setKohderyhma(data.kuvaus.kohderyhma);
+                setTreeniText(data.kuvaus.treenitext);
+                setAloitaRoute(data.kuvaus.aloitaRoute);
                 setIsLoading(false);
             }
             
-            return data;
+            return;
 
         } catch (error) {
             console.error(error);
         }
-        
     }
 
     useEffect(() => {
@@ -53,12 +56,12 @@ import { ListItem } from 'react-native-elements'
     const _renderTreeninKuvausData = () => {
 
             return(
-                <Container> 
+                <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}}> 
                 <Text treeninNimi left marginLeft="15px" marginTop="15px" >{treeniText.toUpperCase()} </Text>
                 <View style={{flexDirection: 'row', margin: 15}}>
-                <Ionicons name="ios-timer-sharp" size={26} color="white" />
+                <Ionicons name="ios-timer-sharp" size={26} color={colorScheme === 'dark' ? 'white' : 'black'} />
             
-                 <Text medium left>  {treeninKesto}  <Feather name="target" size={26} color="white" />  Kohderyhmä  -  {kohderyhma}</Text>
+                 <Text medium left>  {treeninKesto}  <Feather name="target" size={26} color={colorScheme === 'dark' ? 'white' : 'black'}/>  Kohderyhmä  -  {kohderyhma}</Text>
             
                      </View>
                      <Text left marginLeft="12px" marginTop="15px" medium> LIIKKEET  ({treeniData.length})</Text>
@@ -69,7 +72,7 @@ import { ListItem } from 'react-native-elements'
     
        return(
         
-        <Container>
+        <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
         
         <Image style={styles.image} source={backgroundImage}></Image>
         <IconTouchable onPress={() => navigation.goBack()}>
@@ -83,7 +86,7 @@ import { ListItem } from 'react-native-elements'
         {!isLoading ? (
             <ScrollView style={{marginTop: 10}}>
 
-        <RenderContainer>
+        <RenderContainer style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
       
       {_renderTreeninKuvausData()}
 
@@ -92,18 +95,23 @@ import { ListItem } from 'react-native-elements'
 
                 return(
                     <TouchableOpacity key={index} onPress={() => navigation.navigate(item.navigationRoute)}>
-                    <ListItem containerStyle={styles.cards} bottomDivider >
+                    <ListItem containerStyle={{ height: 90,
+                 backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}} bottomDivider >
                
                <ListItem.Content>
               {/*  <Image 
                source={require(`../../assets/icons/${item.image}`)}
                style={styles.iconImage}>
                </Image> */}
+               <TextContainer>
                <Text marginLeft="3px" medium>{item.nimi}</Text>
+               <Text style={{fontFamily: 'MontserratSemiBold', position: 'absolute', left: 250, color: colorScheme === 'dark' ? ('#fff') : ('#000') }} medium>{item.sarjat} sarjaa</Text>
+               </TextContainer>
                
-               <Text style={styles.sarjatText} medium>{item.sarjat} sarjaa</Text>
+               
+               
                </ListItem.Content>
-               <Ionicons name="ios-chevron-forward-sharp" size={24} color="white" />
+               <Ionicons name="ios-chevron-forward-sharp" size={24} color={colorScheme === 'dark' ? ('#fff') : ('#000')} />
               
                </ListItem>
                     </TouchableOpacity>
@@ -137,25 +145,15 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '25%',
-        opacity: 0.7,
         borderRadius: 30,
         
     }, 
-    cards: {
-        height: 90,
-        backgroundColor: '#141314',
-        margin: 0.3,
-    },
-    
+   
     iconImage: {
         height: 40, width: 40,
         marginTop: 15,
     },
 
-    sarjatText: {
-        position: 'absolute', right: 3, fontFamily: 'MontserratBold'
-    }, 
-   
      
     });
 
@@ -167,6 +165,9 @@ const styles = StyleSheet.create({
         marginTop: 200
     }))``;
 
+    const TextContainer = styled.View`
+        flex-direction: row;
+    `;
   
 
 

@@ -5,12 +5,18 @@ import { FontAwesome as Icon } from '@expo/vector-icons';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { signIn } from '../API/FirebaseMethods';
 import { Alert } from 'react-native';
+import { Appearance, useColorScheme } from 'react-native-appearance';
+
+
 
 const Login = ({
         navigation
     }) => {
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
+
+        Appearance.getColorScheme();
+        const colorScheme = useColorScheme();
 
         
 
@@ -28,7 +34,7 @@ const Login = ({
 
 
         return (
-            <Container>
+            <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
             <Main>
             <Text color="black" title semi bold center>
             {`Tervetuloa takaisin, \n Kirjaudu sisään.`}{" "}
@@ -40,8 +46,8 @@ const Login = ({
             </Main>
             <Auth>
                 <AuthContainer>
-                    <AuthTitle>Sähköposti</AuthTitle>
-                    <Ionicons name="mail-open-outline" size={18} color="gray" />
+                    <AuthTitle style={{color: colorScheme === 'dark' ? 'white' : 'black'}}>Sähköposti</AuthTitle>
+                    <Ionicons name="mail-open-outline" size={18} color={colorScheme === 'dark' ? 'white' : 'black'} />
                     <AuthField 
                     autoCapitalize="none" 
                     autoCompleteType="email" 
@@ -52,8 +58,8 @@ const Login = ({
                     />
                 </AuthContainer>
                 <AuthContainer>
-                    <AuthTitle>Salasana</AuthTitle>
-                    <MaterialCommunityIcons name="form-textbox-password" size={18} color="gray" />
+                    <AuthTitle style={{color: colorScheme === 'dark' ? 'white' : 'black'}}>Salasana</AuthTitle>
+                    <MaterialCommunityIcons name="form-textbox-password" size={18} color={colorScheme === 'dark' ? 'white' : 'black'} />
                     <AuthField 
                     autoCapitalize="none" 
                     autoCompleteType="password" 
@@ -141,7 +147,6 @@ const AuthContainer = styled.View`
 
 // welcome back
 const AuthTitle = styled(Text)`
-    color: #8e93a1;
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 300

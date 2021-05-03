@@ -12,12 +12,15 @@ import styled from 'styled-components/native';
 import * as Location from 'expo-location';
 import moment from 'moment';
 import 'moment/locale/fi'
-
+import { Appearance, useColorScheme } from 'react-native-appearance';
 
 
 const Etusivu = ({
         navigation
     }) => {
+
+    Appearance.getColorScheme();
+    const colorScheme = useColorScheme();
 
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
@@ -45,25 +48,30 @@ const Etusivu = ({
         //console.log(location)
     }
 
-
-
-    const getWeatherData = async () => {
-        let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=4faa658e0a47cd7c7693d03bf30bf56a`
-        try {
-            let response = await fetch(api);
-            const data = await response.json();
-            setCity(data.name);
-            setTemp(data.main.temp.toFixed(0));
-            setIsLoading(false)
-
-            //console.log(data)
-            return data;
-
-        } catch (error) {
-            console.error(error);
+    useEffect(() => {
+        const getWeatherData = async () => {
+            let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=4faa658e0a47cd7c7693d03bf30bf56a`
+            try {
+                let response = await fetch(api);
+                const data = await response.json();
+    
+                if (data) {
+                    setCity(data.name);
+                    setTemp(data.main.temp.toFixed(0));
+                    setIsLoading(false)
+                }
+    
+                //console.log(data)
+                return;
+    
+            } catch (error) {
+                console.error(error);
+            }
+    
         }
-
-    }
+        getWeatherData();
+    }, [])
+    
 
     const getCurrentDate = () => {
         const date = moment().locale('fi')
@@ -75,13 +83,12 @@ const Etusivu = ({
     useEffect(() => {
         getLocation();
         getCurrentDate();
-        getWeatherData();
     }, []);
 
-      let currentUser = firebase.auth().currentUser
+       let currentUser = firebase.auth().currentUser
 
       useEffect(() => {
-          async function getUserInfo() {
+          const getUserInfo = async () => {
               try {
                   let doc = await firebase
                       .firestore()
@@ -100,17 +107,17 @@ const Etusivu = ({
               }
           }
           getUserInfo();
-      }, []);        
-         
-      
-    
+      }, []);       
+     
+
     return (
         
-            <Container>
-            <StatusBar style="light" />
+            <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
+            
         <HeaderContainer>
         <HeaderComponent 
-        centerComponent={ isLoading ? (<Text marginTop="10px" medium center>{city},  {temp}{'\u00b0'}</Text>) : (<Text medium>Loading...</Text>)}
+        centerComponent={ isLoading ? (<Text marginTop="10px" medium center>{city},  {temp}{'\u00b0'}</Text>) 
+        : (<Text medium>Loading...</Text>)}
         
         />
         </HeaderContainer>
@@ -130,7 +137,6 @@ const Etusivu = ({
 
 const Container = styled.View`
     flex: 1;
-    background-color: #141314;
 
 `;
 

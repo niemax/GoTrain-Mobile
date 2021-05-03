@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress';
 import { useNavigation  } from '@react-navigation/native'; 
 import LopetaTreeni from './TreeninLopetus';
+import { Appearance, useColorScheme } from 'react-native-appearance';
 
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
@@ -21,6 +22,9 @@ const AloitaTreeni = (props) => {
     const [isLoading, setIsLoading] = useState(true);
     const [currentSlide, setCurrentSlide] = useState(0);
 
+    Appearance.getColorScheme();
+    const colorScheme = useColorScheme();
+
     const { treeni } = props;
     //console.log(treeni)
     const navigation = useNavigation();
@@ -30,12 +34,10 @@ const AloitaTreeni = (props) => {
             let response = await fetch(`https://mun-treeni-api.herokuapp.com/${treeni}`);
             const data = await response.json();
 
-            if (data) {
+            if (response.status === 200) {
                 setTreeniData(data.liikkeet);
 
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 800);
+                setIsLoading(false);
             }
             
             console.log(data);
@@ -78,7 +80,7 @@ const AloitaTreeni = (props) => {
 
 
     const _renderItem = ({ item, index }) => {
-        const btnColor = tehdytTreenit.hasOwnProperty(item.nimi) ? "#054dd9" : "#FFF";
+        const btnColor = tehdytTreenit.hasOwnProperty(item.nimi) ? "#054dd9" : (colorScheme === 'dark' ? 'white' : 'black')
         const treenitLength = Object.keys(treeniData).length;
 
         
@@ -87,10 +89,10 @@ const AloitaTreeni = (props) => {
         } else if (! isLoading) {
             return (
                 
-                <RenderContainer key={index}>
+                <RenderContainer key={index} style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
                 <ExtraContainer>
                 <IconTouchable onPress={() => navigation.goBack()} left marginLeft="15px">
-                <Ionicons name="ios-chevron-back" size={24} color="white" />
+                <Ionicons name="ios-chevron-back" size={24} color={colorScheme === 'dark' ? 'white' : 'black'} />
                 </IconTouchable> 
                 <Text medium marginTop="3px" marginLeft="285px" >{currentSlide} / {treeniData.length}</Text>
                 </ExtraContainer>
@@ -114,7 +116,7 @@ const AloitaTreeni = (props) => {
                          <ButtonContainer>
                          
                          {index > 0 && <PreviousButton onPress={() => { carousel.snapToPrev(); }}>
-                                 <Ionicons name="ios-chevron-back-outline" size={48} color="white" />
+                                 <Ionicons name="ios-chevron-back-outline" size={48} color={colorScheme === 'dark' ? 'white' : 'black'} />
                              </PreviousButton>}
      
                              <DoneButton onPress={() => setProgress(item, index)}>
@@ -124,7 +126,7 @@ const AloitaTreeni = (props) => {
                              </DoneButton>
      
                              {index < treenitLength -1 &&  <NextButton onPress={() => { carousel.snapToNext(); }}>
-                                 <Ionicons name="ios-chevron-forward-outline" size={48} color="white" />
+                                 <Ionicons name="ios-chevron-forward-outline" size={48} color={colorScheme === 'dark' ? 'white' : 'black'} />
                              </NextButton>
                              }
      

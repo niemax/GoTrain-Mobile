@@ -5,13 +5,27 @@ import Text from '../components/Text';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native'; 
 import { Ionicons } from '@expo/vector-icons'; 
+import { Appearance, useColorScheme } from 'react-native-appearance';
 
-const treenit = [{
+
+
+
+
+
+
+const Cards = () => {
+    Appearance.getColorScheme();
+    const colorScheme = useColorScheme();
+    
+    const navigation = useNavigation();
+    
+    const treenit = [{
+    
         id: 1,
         name: 'Rinta',
         image: require('../assets/rintaToinen.jpg'),
         navigationRoute: 'RintaTreeni',
-        icon: <Ionicons name="ios-timer-sharp" size={28} color="white" />,
+        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('#white') : ('black')} />,
         treeninKesto: '60-75min'
     },
     {
@@ -19,7 +33,7 @@ const treenit = [{
         name: 'Selkä',
         image: require('../assets/selkaToinen.jpg'),
         navigationRoute: 'SelkaTreeni',
-        icon: <Ionicons name="ios-timer-sharp" size={28} color="white" />,
+        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('#white') : ('black')} />,
         treeninKesto: '45-70min'
 
     },
@@ -28,7 +42,7 @@ const treenit = [{
         name: 'Jalat',
         navigationRoute: 'JalkaTreeni',
         image: require('../assets/jalatToinen.jpg'),
-        icon: <Ionicons name="ios-timer-sharp" size={28} color="white" />,
+        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('white') : ('black')} />,
         treeninKesto: '60-75min'
 
     }, 
@@ -37,7 +51,7 @@ const treenit = [{
         name: 'Kädet',
         navigationRoute: 'KasiTreeni',
         image: require('../assets/kadetToinen.jpg'),
-        icon: <Ionicons name="ios-timer-sharp" size={28} color="black" />,
+        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('#white') : ('black')}/>,
         treeninKesto: '60-75min'
 
     }, 
@@ -46,18 +60,13 @@ const treenit = [{
         name: 'Cardio',
         image: require('../assets/cardioToinen.jpg'),
         navigationRoute: 'CardioTreeni',
-        icon: <Ionicons name="ios-timer-sharp" size={28} color="black" />,
+        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')} />,
         treeninKesto: '45-60min'
 
     }, 
     
 ]
 
-
-
-const Cards = () => {
-
-    const navigation = useNavigation();
 
     return(
             <Container>

@@ -57,7 +57,7 @@ const KotiMainTab = () => {
       <Tab.Navigator
       initialRouteName="Koti"
       activeColor="white"
-      barStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.9)' }}
+      barStyle={{ backgroundColor: '#141314' }}
       
     >
       <Tab.Screen

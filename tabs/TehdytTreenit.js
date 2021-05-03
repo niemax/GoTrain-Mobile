@@ -7,17 +7,22 @@
     import { handleLogOut } from '../components/HeaderComponent';
     import * as firebase from 'firebase';
     import { ListItem } from 'react-native-elements'
+    import { Appearance, useColorScheme } from 'react-native-appearance';
+
+
 
     const wait = (timeout) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
       }
 
     const TehdytTreenit = () => {
-        const icon = <Ionicons name="log-out-outline" size={32} color="white" />
 
         const [treenit, setTreenit] = useState([]);
         const [refreshing, setRefreshing] = useState(false);
         const [loading, setLoading] = useState(false);
+
+        Appearance.getColorScheme();
+        const colorScheme = useColorScheme();
 
 
         const getData = () => {
@@ -50,16 +55,10 @@
         
 
         return(
-            <Container>
+            <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
            
             <HeaderContainer>
-
-            <HeaderComponent 
-                rightComponent={
-                <ProfileIcon onPress={handleLogOut}>{icon}</ProfileIcon>
-                }
-                
-            />
+            <HeaderComponent />
             </HeaderContainer>
                 
                 {loading ? ( <Loading /> ) : (
@@ -73,7 +72,11 @@
                    {
                        treenit.map((item, index) => {
                            return(
-                               <ListItem containerStyle={styles.cards} key={index} bottomDivider>
+                               <ListItem containerStyle=
+                               {{
+                                height: 90,
+                                backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',                                margin: 0
+                                }} key={index} bottomDivider>
                                <ListItem.Content>
                                <Text medium>{item.pvm} - {item.treeni.charAt(0).toUpperCase() + item.treeni.slice(1)}</Text>
                                </ListItem.Content>
@@ -91,17 +94,9 @@
         )
     }
 
-    const  styles = StyleSheet.create({
-        cards: {
-            height: 90,
-            backgroundColor: '#141314',
-            margin: 0.3,
-        },
-    })
 
     const Container = styled.View`
         flex: 1;
-        background-color: #141314;
 
     `;
     const Loading = styled.ActivityIndicator.attrs(props => ({

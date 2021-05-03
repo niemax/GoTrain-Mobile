@@ -6,18 +6,23 @@ import Text from '../components/Text'
 import ButtonContainer from './TrainScreenStyling'
 import YoutubePlayer from "react-native-youtube-iframe";
 import { useNavigation } from '@react-navigation/native'; 
+import { Appearance, useColorScheme } from 'react-native-appearance';
 
 
 const Esikatselu = (props) => {
+
+    Appearance.getColorScheme();
+    const colorScheme = useColorScheme();
+
     
     const navigation = useNavigation();
 
 
-    const icon = <Ionicons name="ios-alert-circle-outline" size={24} color="white" />
+    const icon = <Ionicons name="ios-alert-circle-outline" size={24} color={colorScheme === 'dark' ? 'white' : 'black'} />
     
 
     return(
-        <Container>
+        <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}}>
         <VideoContainer>
         <YoutubePlayer 
              height={220}
@@ -26,7 +31,7 @@ const Esikatselu = (props) => {
             />
       </VideoContainer>
         <ScrollView>
-        <Text vinkkiTitle left>  {props.liike} - <Text medium>{props.toistot}</Text></Text>
+        <Text vinkkiTitle left>  {props.liike} </Text>
       <WarningContainer>
         {icon}
         <Text vinkit left>Muista aina ennen liikettä lämmitellä välttyäksesi loukkaantumisilta.</Text>
@@ -54,7 +59,6 @@ const Esikatselu = (props) => {
 export default Esikatselu;
 
 const Container = styled.View`
-    background-color: #141314;
     flex: 1;
 `;
 

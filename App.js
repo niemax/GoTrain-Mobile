@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { StatusBar } from 'react-native';
 import 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MainAppStack from './navigation/MainAppNav'
@@ -7,15 +8,24 @@ import configKeys from './config/Firebase'
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
+import { Appearance, AppearanceProvider, useColorScheme } from 'react-native-appearance';
 
 
 
-  
-/**/ 
-  export default App = () => {
-    const [fontsLoaded, setFontsLoaded] = useState(false);
+export default AppContainer = () => {
+  Appearance.getColorScheme();
+    const colorScheme = useColorScheme();
     
-
+  return (
+    <AppearanceProvider>
+    <StatusBar style={colorScheme === 'dark' ? "light" : "dark"} />
+      <App />
+    </AppearanceProvider>
+  );
+}
+  
+  const App = () => {
+    const [fontsLoaded, setFontsLoaded] = useState(false);
   
     async function loadFonts() {
       await Font.loadAsync({
