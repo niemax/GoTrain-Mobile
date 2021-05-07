@@ -18,10 +18,7 @@ const LoadingScreen = ({
             firebase.auth().onAuthStateChanged((user) => {
                 try {
                     if (user) {
-                        setTimeout(() => {
-                            setIsLoggedIn(true)
-                            navigation.navigate('Kotisivu'); 
-                        }, 400);
+                        navigation.navigate('Kotisivu'); 
                     } else {
                         navigation.navigate('Signup');
                     }

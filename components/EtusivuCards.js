@@ -8,11 +8,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 
 
-
-
-
-
-
 const Cards = () => {
     Appearance.getColorScheme();
     const colorScheme = useColorScheme();
@@ -25,7 +20,7 @@ const Cards = () => {
         name: 'Rinta',
         image: require('../assets/rintaToinen.jpg'),
         navigationRoute: 'RintaTreeni',
-        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('#white') : ('black')} />,
+        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('white') : ('black')} />,
         treeninKesto: '60-75min'
     },
     {
@@ -33,7 +28,7 @@ const Cards = () => {
         name: 'Selkä',
         image: require('../assets/selkaToinen.jpg'),
         navigationRoute: 'SelkaTreeni',
-        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('#white') : ('black')} />,
+        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('white') : ('black')} />,
         treeninKesto: '45-70min'
 
     },
@@ -51,7 +46,7 @@ const Cards = () => {
         name: 'Kädet',
         navigationRoute: 'KasiTreeni',
         image: require('../assets/kadetToinen.jpg'),
-        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('#white') : ('black')}/>,
+        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('white') : ('black')}/>,
         treeninKesto: '60-75min'
 
     }, 
@@ -60,7 +55,7 @@ const Cards = () => {
         name: 'Cardio',
         image: require('../assets/cardioToinen.jpg'),
         navigationRoute: 'CardioTreeni',
-        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')} />,
+        icon: <Ionicons name="ios-timer-sharp" size={28} color={colorScheme === 'dark' ? ('white') : ('black')} />,
         treeninKesto: '45-60min'
 
     }, 

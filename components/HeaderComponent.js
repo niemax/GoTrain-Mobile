@@ -1,6 +1,5 @@
 import React from 'react'
 import { Header } from 'react-native-elements'
-import HeaderImage from './HeaderLogo';
 import { loggingOut } from '../API/FirebaseMethods'
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components/native'; 
@@ -28,7 +27,7 @@ const HeaderComponent = (props) => {
        containerStyle={{
             backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'
         }}
-       leftComponent={<HeaderImage/>}
+       
         rightComponent={
             <ProfileIcon onPress={handleLogOut}>{icon}</ProfileIcon>
             }

@@ -4,11 +4,9 @@
     import styled from 'styled-components/native'; 
     import Text from '../components/Text';
     import HeaderComponent from '../components/HeaderComponent';
-    import { handleLogOut } from '../components/HeaderComponent';
     import * as firebase from 'firebase';
-    import { ListItem } from 'react-native-elements'
     import { Appearance, useColorScheme } from 'react-native-appearance';
-
+    import { List } from 'react-native-paper';
 
 
     const wait = (timeout) => {
@@ -20,6 +18,8 @@
         const [treenit, setTreenit] = useState([]);
         const [refreshing, setRefreshing] = useState(false);
         const [loading, setLoading] = useState(false);
+        const [liikkeet, setLiikkeet] = useState([])
+
 
         Appearance.getColorScheme();
         const colorScheme = useColorScheme();
@@ -35,15 +35,21 @@
             .collection('treenidata')
             .get()
             .then(snapshot => {
-                snapshot.docs.map(treeni => {
+                snapshot.docs.forEach(treeni => {
                     treeniArray.push(treeni.data())
+                    setLiikkeet(treeni.data().treeniData)
+                 //   console.log(treeni.data().treeniData)
+                    
                 })
             })
-            setTreenit(treeniArray)
+            setTreenit(treeniArray);
+            console.log(treenit)
+            console.log(liikkeet)
 
-            console.log("tehdyt treenit", (treenit))
+           
+            //console.log("treeniData", treenit)
+            
         }
-
 
         const onRefresh = useCallback(() => {
             setLoading(true)
@@ -52,16 +58,23 @@
             wait(1500).then(() => setRefreshing(false));
             wait(1500).then(() => setLoading(false));
         })
-        
+
+
 
         return(
             <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
            
             <HeaderContainer>
-            <HeaderComponent />
+            <HeaderComponent 
+        leftComponent={{text:<Text medium>MINÄ</Text>}}
+
+            />
             </HeaderContainer>
-                
-                {loading ? ( <Loading /> ) : (
+            <Text large>Täältä näet tehdyt treenisi</Text>
+            
+                {loading ? ( <Loading style={{color: colorScheme === 'dark' ? 'white' : 'black'}}/> 
+                ) : (
+                    
                     <ScrollView
                     refreshControl={
                     <RefreshControl
@@ -69,23 +82,35 @@
                     onRefresh={onRefresh}
                     />
                     }>
+                    
+                    <List.Section title="Vedä ylös päivittääksesi">
                    {
                        treenit.map((item, index) => {
+                        
                            return(
-                               <ListItem containerStyle=
-                               {{
-                                height: 90,
-                                backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',                                margin: 0
-                                }} key={index} bottomDivider>
-                               <ListItem.Content>
-                               <Text medium>{item.pvm} - {item.treeni.charAt(0).toUpperCase() + item.treeni.slice(1)}</Text>
-                               </ListItem.Content>
+                            
+                        <List.Accordion key={index}
+                        title={`${item.pvm} - ${item.treeni}`}
+                        left={props => <List.Icon {...props} icon="folder" />}
+                        >
+                     {
+                           Object.keys(liikkeet).map(key, idx => {
+                               return(
+                                <List.Item title={key} />
+                               )
                                
-                               </ListItem>
+                           })
+                       }
+                     
+                    </List.Accordion>
+                               
                               
                            )
                        })
                    }
+                   </List.Section>
+
+                   
                    
                     </ScrollView>
                 )}
@@ -100,7 +125,6 @@
 
     `;
     const Loading = styled.ActivityIndicator.attrs(props => ({
-        color: '#fff',
         size: "large",
         align: "center",
         marginTop: 20

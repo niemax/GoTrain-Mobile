@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Image } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { Alert  } from 'react-native';
 import * as firebase from 'firebase';
-import { loggingOut } from '../API/FirebaseMethods'
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Text from '../components/Text';
 import HeaderComponent from '../components/HeaderComponent';
 import Cards from '../components/EtusivuCards';
@@ -15,9 +11,8 @@ import 'moment/locale/fi'
 import { Appearance, useColorScheme } from 'react-native-appearance';
 
 
-const Etusivu = ({
-        navigation
-    }) => {
+const Etusivu = (
+) => {
 
     Appearance.getColorScheme();
     const colorScheme = useColorScheme();
@@ -55,14 +50,13 @@ const Etusivu = ({
                 let response = await fetch(api);
                 const data = await response.json();
     
-                if (data) {
-                    setCity(data.name);
-                    setTemp(data.main.temp.toFixed(0));
-                    setIsLoading(false)
+                if (response.status === 200) {
+                    setCity(data?.name);
+                    setTemp(data?.main.temp.toFixed(0));
                 }
-    
+                setIsLoading(false)
                 //console.log(data)
-                return;
+                return data;
     
             } catch (error) {
                 console.error(error);
@@ -85,7 +79,7 @@ const Etusivu = ({
         getCurrentDate();
     }, []);
 
-       let currentUser = firebase.auth().currentUser
+        let currentUser = firebase.auth().currentUser
 
       useEffect(() => {
           const getUserInfo = async () => {
@@ -107,7 +101,7 @@ const Etusivu = ({
               }
           }
           getUserInfo();
-      }, []);       
+      }, []);   
      
 
     return (
@@ -118,11 +112,13 @@ const Etusivu = ({
         <HeaderComponent 
         centerComponent={ isLoading ? (<Text marginTop="10px" medium center>{city},  {temp}{'\u00b0'}</Text>) 
         : (<Text medium>Loading...</Text>)}
+        leftComponent={{text:<Text medium>KOTI</Text>}}
         
         />
         </HeaderContainer>
         <TextContainer>
-        <Text marginLeft="10px" marginBottom="25px" medium left>{currentDate.toUpperCase()}</Text>
+
+        <Text marginLeft="25px" marginBottom="25px" medium left>{currentDate.toUpperCase()}</Text>
         <Text marginTop="15px" large center>{`Hei, ${text}!\n Mitä tänään treenattaisiin?`}</Text>
         </TextContainer>
         

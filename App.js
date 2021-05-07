@@ -9,12 +9,13 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { Appearance, AppearanceProvider, useColorScheme } from 'react-native-appearance';
+import Toast from 'react-native-toast-message';
 
 
 
 export default AppContainer = () => {
   Appearance.getColorScheme();
-    const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme();
     
   return (
     <AppearanceProvider>
@@ -53,15 +54,18 @@ export default AppContainer = () => {
       if (fontsLoaded) {
        
         return ( 
-          
+          <>
           <NavigationContainer >
          
           <SafeAreaProvider>
           <MainAppStack />
-          
+          <Toast ref={(ref) => Toast.setRef(ref)} 
+          />
           </SafeAreaProvider>
+          
           </NavigationContainer>
           
+          </>
         )
       } else {
         return <AppLoading />

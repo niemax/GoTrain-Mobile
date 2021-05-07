@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { Image, StyleSheet } from 'react-native';
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Text from '../../components/Text';
 import ConfettiCannon from 'react-native-confetti-cannon';
 import { Card } from 'react-native-elements';
@@ -11,6 +11,7 @@ import * as firebase from 'firebase';
 import moment from 'moment';
 import 'moment/locale/fi'
 import { Appearance, useColorScheme } from 'react-native-appearance';
+import Toast from 'react-native-toast-message';
 
 
 
@@ -20,12 +21,13 @@ const LopetaTreeni = (props) => {
             treeni
         } = props;
 
+        const [shoot, setShoot] = useState(false);
+
         Appearance.getColorScheme();
         const colorScheme = useColorScheme();
 
-        console.log(treeni);
-        //console.log(treeni)
         const navigation = useNavigation();
+        
 
         const saveToDatabase = async () => {
             const db = firebase.firestore();
@@ -48,13 +50,28 @@ const LopetaTreeni = (props) => {
             } catch (err) {
                 console.error(err)
             }
-
-            setTimeout(() => {
-                navigation.goBack();
-            }, 400)
+            
+            Toast.show({
+                text2: 'Treeni lisätty tehtyihin treeneihin',
+                type: 'success',
+                visibilityTime: 2500
+    
+              });
+             setTimeout(() => {
+                navigation.pop();
+            }, 3000) 
 
         }
 
+       
+        
+    useEffect(() => {
+        
+        setTimeout(() => {
+            setShoot(true)
+            
+        }, 300)
+    })
         
 
    // console.log("tehdyt treenit data", data);
@@ -62,17 +79,17 @@ const LopetaTreeni = (props) => {
 
     return (
         <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
-        
         <BackgroundContainer>
         <Image style={{height: 100, width: 100}} source={require('../../assets/icons/applause.png')} />
-        <Text style={{fontFamily: 'MontserratExtraBold'}} marginTop="20px" large medium>TREENI SUORITETTU!</Text>
+        <Text style={{fontFamily: 'MontserratExtraBold'}} marginTop="20px" large medium>{treeni.toUpperCase()} SUORITETTU</Text>
         </BackgroundContainer>
             <Card containerStyle={{borderWidth: 0,
             elevation: 3,
             height: 100,
             width: '92%',
             backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-            borderRadius: 15,}} >
+            borderRadius: 15}} 
+            >
             <Text style={{fontFamily: 'MontserratExtraBold', color: colorScheme === 'dark' ? 'white' : 'black'}} medium >TREENIT </Text>
             <Text style={{fontFamily: 'MontserratExtraBold'}} title color="#054dd9">{Object.keys(data).length}</Text>
             
@@ -83,53 +100,52 @@ const LopetaTreeni = (props) => {
             width: '92%',
             backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
             borderRadius: 15,}} >
-            <Text style={{fontFamily: 'MontserratExtraBold', color: colorScheme === 'dark' ? 'white' : 'black'}} medium >SUORITUS </Text>
-            <Text style={{fontFamily: 'MontserratExtraBold'}} title color="#054dd9">100%</Text>
+            <Text style={{fontFamily: 'MontserratExtraBold', color: colorScheme === 'dark' ? 'white' : 'black'}} medium >SUORITUS % </Text>
+            <Text style={{fontFamily: 'MontserratExtraBold'}} title color="#054dd9">100</Text>
             
             </Card>
             <Card containerStyle={{borderWidth: 0,
             elevation: 3,
             height: 200,
             width: '92%',
-            backgroundColor: '#212121',
+            backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
             borderRadius: 15,}} >
-            <Text style={{fontFamily: 'MontserratExtraBold'}} medium >Oliko treeni mieluisa? </Text>
-            <Text style={{fontFamily: 'MontserratExtraBold'}} marginTop="10px" small >Annathan palautetta, jotta voin kehittää treenitarjontaa</Text>
+            <Text style={{fontFamily: 'MontserratExtraBold', color: colorScheme === 'dark' ? 'white' : 'black'}} medium >Oliko treeni mieluisa? </Text>
+            <Text style={{fontFamily: 'MontserratExtraBold', color: colorScheme === 'dark' ? 'white' : 'black'}} marginTop="10px" small >Annathan palautetta, jotta voin kehittää treenitarjontaa</Text>
             <PalauteButtonContainer>
             <PalauteIcon>
-            <Ionicons name="ios-sad-outline" size={64} color="white" />
+            <Ionicons name="ios-sad-outline" size={64} color={colorScheme === 'dark' ? 'white' : 'black'} />
             </PalauteIcon>
             <PalauteIcon>
-            <FontAwesome5 name="smile-beam" size={64} color="white" />
+            <FontAwesome5 name="smile-beam" size={64} color={colorScheme === 'dark' ? 'white' : 'black'} />
             </PalauteIcon>
             <PalauteIcon>
-            <Ionicons name="ios-sad-outline" size={64} color="white" />
+            <Ionicons name="ios-sad-outline" size={64} color={colorScheme === 'dark' ? 'white' : 'black'} />
             </PalauteIcon>
             
             </PalauteButtonContainer>
             </Card>
         
-       
+        {shoot ? (
         <ConfettiCannon
-        count={60}
+        count={70}
         origin={{x: 0, y: -20}}
-        autoStart={true}
-        fallSpeed={10000}
+        autoStart={false}
+        fallSpeed={6000}
         fadeOut={true}
-        
       />
+        ) : (null)
+        }
+       
+         
       
       <ButtonContainer>
         <LopetaButton onPress={() => saveToDatabase()}>
         <Ionicons name="ios-checkmark-outline" size={24} color="white" />
         <Text medium>Lopeta</Text>
-
         </LopetaButton>
-
             </ButtonContainer>
         </Container>
-        
-        
          
     );
    

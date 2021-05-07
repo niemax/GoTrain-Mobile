@@ -10,6 +10,7 @@ import * as Progress from 'react-native-progress';
 import { useNavigation  } from '@react-navigation/native'; 
 import LopetaTreeni from './TreeninLopetus';
 import { Appearance, useColorScheme } from 'react-native-appearance';
+import Toast from 'react-native-toast-message';
 
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
@@ -37,7 +38,11 @@ const AloitaTreeni = (props) => {
             if (response.status === 200) {
                 setTreeniData(data.liikkeet);
 
-                setIsLoading(false);
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 800)
+
+                
             }
             
             console.log(data);
@@ -61,11 +66,23 @@ const AloitaTreeni = (props) => {
         const treenit = {...tehdytTreenit};
 
         if (!(item.nimi in treenit)) {
-            treenit[item.nimi] = { sarjat: item.sarjat, toistot: item.toistot, id: index };
+            treenit[item.nimi] = { nimi: item.nimi, sarjat: item.sarjat, toistot: item.toistot };
             setCurrentSlide(currentSlide + 1);
+            Toast.show({
+                text2: `${item.nimi} tehty!`,
+                type: 'success',
+                visibilityTime: 1000
+    
+              });
         } else {
             delete treenit[item.nimi];
             setCurrentSlide(currentSlide - 1);
+            Toast.show({
+                text2: `${item.nimi} poistettu!`,
+                type: 'error',
+                visibilityTime: 1000
+    
+              });
             
         }
 

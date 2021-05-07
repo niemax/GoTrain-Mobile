@@ -7,6 +7,7 @@ import { Container, AloitaButton, ButtonContainer, IconTouchable, RenderContaine
 import { useNavigation } from '@react-navigation/native';
 import { ListItem } from 'react-native-elements'
 import { Appearance, useColorScheme } from 'react-native-appearance';
+import Toast from 'react-native-toast-message';
 
 
  const TreeniEsittelyData = (props) => {
@@ -53,6 +54,16 @@ import { Appearance, useColorScheme } from 'react-native-appearance';
         _getData();
     }, []);
 
+    const showToast = () => {
+        return(
+            Toast.show({
+                text2: 'IMPLEMENTED SOON',
+                type: 'info',
+    
+              })
+        )
+    }
+
     const _renderTreeninKuvausData = () => {
 
             return(
@@ -78,7 +89,9 @@ import { Appearance, useColorScheme } from 'react-native-appearance';
         <IconTouchable onPress={() => navigation.goBack()}>
         <View style={{flexDirection: 'row'}}>
         <Ionicons name="chevron-back-circle-outline" size={38} color="white" />
-        <IconTouchable><Ionicons style={{position: 'absolute', left: 300, bottom: 10}} name="ios-heart-outline" size={38} color="white" /></IconTouchable>
+        <IconTouchable onPress={() => showToast()}>
+        <Ionicons style={{position: 'absolute', left: 300, bottom: 10}} name="ios-heart-outline" size={38} color="white" />
+        </IconTouchable>
         </View>
        
         </IconTouchable>
@@ -125,7 +138,7 @@ import { Appearance, useColorScheme } from 'react-native-appearance';
         </ScrollView>
         
         ) :
-         ( <Loading/>)}
+         ( <Loading style={{color: colorScheme === 'dark' ? 'white' : 'black'}}/>)}
          
          {! isLoading && <ButtonContainer>
                 <AloitaButton onPress={() => navigation.navigate(aloitaRoute)}>
@@ -153,13 +166,11 @@ const styles = StyleSheet.create({
         height: 40, width: 40,
         marginTop: 15,
     },
-
      
     });
 
-
     const Loading = styled.ActivityIndicator.attrs(props => ({
-        color: '#fff',
+        
         size: "large",
         align: "center",
         marginTop: 200

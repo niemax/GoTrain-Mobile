@@ -82,17 +82,6 @@ const KotiMainTab = () => {
           ),
         }}
         />
-        <Tab.Screen
-        name="Asetukset"
-        component={Asetukset}
-        options={{
-          tabBarLabel: 'Asetukset',
-          tabBarColor: 'rgba(0, 0, 0, 0.9)',
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="ios-settings-outline" size={24} color="white" />
-          ),
-        }}
-        />
     </Tab.Navigator>
         );
 }

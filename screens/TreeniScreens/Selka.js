@@ -15,7 +15,6 @@ export const Leuanveto = () => {
     return(
       <Esikatselu
       videoID={"3YvfRx31xDE"}
-      liike="Leuanveto"
       toistot="1-2 sarjaa x toistoa"
       ohjeet={`- Voit ottaa avuksesi voimakuminauhan ja keventää leuanvetojasi sillä. Muista kuminauhaa valitessasi, että leuanveto on sinulle maksimivoimaa vaativa suoritus. Valitse siis mahdollisimman vähän keventävä kuminauha, jonka avulla pystyt tekemään 1-5 leukaa.
       \n\n- Kuminauhan sijaan, voit pyytää kaveriasi keventämään leuanvetoasi nostamalla jaloista samalla kun sinä vedät.
@@ -30,7 +29,6 @@ export const Kulmasoutu = () => {
     return(
       <Esikatselu
       videoID={"kBWAon7ItDw"}
-      liike="Kulmasoutu"
       toistot="3 sarjaa 10 toistoa"
       ohjeet={`Aseta jalat penkin alle. Vedä jalat siis kuitenkin koukkuun kohti takapuoltasi niin, että pystyt työntämään reisilläsi kohti yläkroppaasi. 
       \n\n- Nosta selkä kaarelle. Mitä enemmän selkäsi on kaarella, sitä lyhyempi on nostomatka ja sitä enemmän saat painoa liikuteltua.
@@ -47,7 +45,6 @@ export const Hauiskaanto = () => {
       <Esikatselu
       videoID={"yTWO2th-RIY"}
       liike="Hauiskääntö"
-      toistot="3 sarjaa 10 toistoa"
        ohjeet= {`- Asetelma. Seiso pitäen tankoa olkapäidesi edessä, ylläolevan videon mukaisesti. Kapea ote, ranteet suorassa linjassa ja pystysuunnassa olevat kyynärvarret. Lukitse polvesi ja lantiosi.
        \n- Nosta rintaasi. Nosta rintasi kohti kattoa taivuttamalla hieman yläselkääsi. Kuvittele, että yrität koskettaa leukaasi rinnallasi. 
        \n\n- Työnnä. Ota iso hengenveto sisään, pidä se sisälläsi ja työnnä tankoa pystysuorassa linjassa. Älä työnnä sitä pääsi eteen tai taakse, vaan yli.
@@ -63,7 +60,6 @@ export const Alatalja = () => {
        <Esikatselu
       videoID={"4mRy8U542Fo"}
       liike="Soutu Alataljassa"
-      toistot="3 sarjaa 10-12 toistoa"
       ohjeet={`- Asetu dippitelineeseen ja ota noin olkapäiden levyinen ote tangoista. Ponnista suorille käsille, vie olkapäitä alas ja vedä lapoja yhteen. Pidä jännitys koko kropassa ja taivuta jalkoja hieman taakse.
         \n- Käännä ylävartaloa hieman eteenpäin ja laskeudu alas taivuttaen kyynärpäitä niiden osoittaessa samalla suoraan taaksepäin. Laskeudu vähintään 90 asteen kulmaan. Pidä olkapäät ja lavat tiukassa kontrollissa, jotta vältyt vammoilta. Saavutettuasi ala-asennon, lähde nousemaan takaisin ylös räjähtävästi mutta samalla kontrolloidusti, kunnes olet jälleen suorilla käsillä.
         \n\n- Mikäli olet epävarma tekniikan tai voimiesi suhteen, käytä apuna kuminauhaa tai anna treenikaverin ottaa kiinni jaloistasi ja avustaa tarpeen tullen. Näin liike kevenee hieman ja pystyt pitämään tasapainon paremmin. Tällä tavoin saat myös täyden liikeradan liikkeeseen, mikä auttaa kehittämään paremmin lihasmassaa.
@@ -79,7 +75,6 @@ export const Ylatalja = () => {
        <Esikatselu
       videoID={"XhRpjxcKrJY"}
       liike="Ylätalja"
-      toistot="3 sarjaa 10 toistoa"
        ohjeet= {`- Asetu dippitelineeseen ja ota noin olkapäiden levyinen ote tangoista. Ponnista suorille käsille, vie olkapäitä alas ja vedä lapoja yhteen. Pidä jännitys koko kropassa ja taivuta jalkoja hieman taakse.
         \n- Käännä ylävartaloa hieman eteenpäin ja laskeudu alas taivuttaen kyynärpäitä niiden osoittaessa samalla suoraan taaksepäin. Laskeudu vähintään 90 asteen kulmaan. Pidä olkapäät ja lavat tiukassa kontrollissa, jotta vältyt vammoilta. Saavutettuasi ala-asennon, lähde nousemaan takaisin ylös räjähtävästi mutta samalla kontrolloidusti, kunnes olet jälleen suorilla käsillä.
         \n\n- Mikäli olet epävarma tekniikan tai voimiesi suhteen, käytä apuna kuminauhaa tai anna treenikaverin ottaa kiinni jaloistasi ja avustaa tarpeen tullen. Näin liike kevenee hieman ja pystyt pitämään tasapainon paremmin. Tällä tavoin saat myös täyden liikeradan liikkeeseen, mikä auttaa kehittämään paremmin lihasmassaa.
@@ -93,7 +88,6 @@ export const Vasarakaannot = () => {
       <Esikatselu
       videoID={"zC3nLlEvin4"}
       liike="Vasarakäännöt"
-      toistot="3 sarjaa 10-15 toistoa"
        ohjeet= {`- Asetu dippitelineeseen ja ota noin olkapäiden levyinen ote tangoista. Ponnista suorille käsille, vie olkapäitä alas ja vedä lapoja yhteen. Pidä jännitys koko kropassa ja taivuta jalkoja hieman taakse.
         \n- Käännä ylävartaloa hieman eteenpäin ja laskeudu alas taivuttaen kyynärpäitä niiden osoittaessa samalla suoraan taaksepäin. Laskeudu vähintään 90 asteen kulmaan. Pidä olkapäät ja lavat tiukassa kontrollissa, jotta vältyt vammoilta. Saavutettuasi ala-asennon, lähde nousemaan takaisin ylös räjähtävästi mutta samalla kontrolloidusti, kunnes olet jälleen suorilla käsillä.
         \n\n- Mikäli olet epävarma tekniikan tai voimiesi suhteen, käytä apuna kuminauhaa tai anna treenikaverin ottaa kiinni jaloistasi ja avustaa tarpeen tullen. Näin liike kevenee hieman ja pystyt pitämään tasapainon paremmin. Tällä tavoin saat myös täyden liikeradan liikkeeseen, mikä auttaa kehittämään paremmin lihasmassaa.
@@ -123,18 +117,12 @@ const Stack = createStackNavigator();
 
       <Stack.Screen name="Selka" options={{  headerShown: false, headerLeft: null, gestureEnabled: true}}  component={Selka} />
       <Stack.Screen
-       name="Leuanveto" options={{ headerShown: true, headerLeft: null, gestureEnabled: false}} component={Leuanveto} />
-
-      <Stack.Screen name="Kulmasoutu" options={{ headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Kulmasoutu} />
-
-      <Stack.Screen name="Hauiskaanto" options={{ headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Hauiskaanto} />
-
-      <Stack.Screen name="Alatalja" options={{ headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Alatalja} />
-
-      <Stack.Screen name="Ylatalja" options={{ headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Ylatalja} />
-
-      <Stack.Screen name="Vasarakaannot" options={{  headerShown: true, headerLeft: null, gestureEnabled: false}}  component={Vasarakaannot} />
-    
+       name="Leuanveto" options={{ headerShown: false, headerLeft: null, gestureEnabled: false}} component={Leuanveto} />
+      <Stack.Screen name="Kulmasoutu" options={{ headerShown: false, headerLeft: null, gestureEnabled: false}}  component={Kulmasoutu} />
+      <Stack.Screen name="Hauiskaanto" options={{ headerShown: false, headerLeft: null, gestureEnabled: false}}  component={Hauiskaanto} />
+      <Stack.Screen name="Alatalja" options={{ headerShown: false, headerLeft: null, gestureEnabled: false}}  component={Alatalja} />
+      <Stack.Screen name="Ylatalja" options={{ headerShown: false, headerLeft: null, gestureEnabled: false}}  component={Ylatalja} />
+      <Stack.Screen name="Vasarakaannot" options={{  headerShown: false, headerLeft: null, gestureEnabled: false}}  component={Vasarakaannot} />
       <Stack.Screen name="AloitaSelka"  options={{ headerShown: false, gestureEnabled: false }} component={AloitaSelka} />
     </Stack.Navigator>
      )
