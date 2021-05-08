@@ -3,6 +3,7 @@ import { Alert  } from 'react-native';
 import * as firebase from 'firebase';
 import Text from '../components/Text';
 import HeaderComponent from '../components/HeaderComponent';
+import { Container } from '../components/TrainScreenStyling';
 import Cards from '../components/EtusivuCards';
 import styled from 'styled-components/native'; 
 import * as Location from 'expo-location';
@@ -77,11 +78,11 @@ const Etusivu = (
     useEffect(() => {
         getLocation();
         getCurrentDate();
+        getUserInfo();
     }, []);
 
         let currentUser = firebase.auth().currentUser
 
-      useEffect(() => {
           const getUserInfo = async () => {
               try {
                   let doc = await firebase
@@ -101,7 +102,6 @@ const Etusivu = (
               }
           }
           getUserInfo();
-      }, []);   
      
 
     return (
@@ -110,7 +110,7 @@ const Etusivu = (
             
         <HeaderContainer>
         <HeaderComponent 
-        centerComponent={ isLoading ? (<Text marginTop="10px" medium center>{city},  {temp}{'\u00b0'}</Text>) 
+        centerComponent={ !isLoading ? (<Text marginTop="10px" medium center>{city},  {temp}{'\u00b0'}</Text>) 
         : (<Text medium>Loading...</Text>)}
         leftComponent={{text:<Text medium>KOTI</Text>}}
         
@@ -130,11 +130,6 @@ const Etusivu = (
     );
 }
 
-
-const Container = styled.View`
-    flex: 1;
-
-`;
 
 const HeaderContainer = styled.View`
 `;

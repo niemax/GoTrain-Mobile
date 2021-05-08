@@ -13,6 +13,7 @@ import 'moment/locale/fi'
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 
+import { BackgroundContainer, LopetaButton, PalauteButtonContainer, Container } from '../../components/TrainScreenStyling';
 
 
 const LopetaTreeni = (props) => {
@@ -25,7 +26,7 @@ const LopetaTreeni = (props) => {
 
         Appearance.getColorScheme();
         const colorScheme = useColorScheme();
-
+        const themeColor = colorScheme === 'dark' ? 'white' : 'black';
         const navigation = useNavigation();
         
 
@@ -59,26 +60,19 @@ const LopetaTreeni = (props) => {
               });
              setTimeout(() => {
                 navigation.pop();
-            }, 3000) 
+            }, 2000) 
 
         }
-
-       
         
     useEffect(() => {
-        
         setTimeout(() => {
             setShoot(true)
-            
-        }, 300)
+        }, 100)
     })
-        
-
    // console.log("tehdyt treenit data", data);
 
-
     return (
-        <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
+        <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}}>
         <BackgroundContainer>
         <Image style={{height: 100, width: 100}} source={require('../../assets/icons/applause.png')} />
         <Text style={{fontFamily: 'MontserratExtraBold'}} marginTop="20px" large medium>{treeni.toUpperCase()} SUORITETTU</Text>
@@ -90,7 +84,7 @@ const LopetaTreeni = (props) => {
             backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
             borderRadius: 15}} 
             >
-            <Text style={{fontFamily: 'MontserratExtraBold', color: colorScheme === 'dark' ? 'white' : 'black'}} medium >TREENIT </Text>
+            <Text style={{fontFamily: 'MontserratExtraBold', color: themeColor}} medium >TREENIT </Text>
             <Text style={{fontFamily: 'MontserratExtraBold'}} title color="#054dd9">{Object.keys(data).length}</Text>
             
             </Card>
@@ -100,7 +94,7 @@ const LopetaTreeni = (props) => {
             width: '92%',
             backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
             borderRadius: 15,}} >
-            <Text style={{fontFamily: 'MontserratExtraBold', color: colorScheme === 'dark' ? 'white' : 'black'}} medium >SUORITUS % </Text>
+            <Text style={{fontFamily: 'MontserratExtraBold', color: themeColor}} medium >SUORITUS % </Text>
             <Text style={{fontFamily: 'MontserratExtraBold'}} title color="#054dd9">100</Text>
             
             </Card>
@@ -110,17 +104,17 @@ const LopetaTreeni = (props) => {
             width: '92%',
             backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
             borderRadius: 15,}} >
-            <Text style={{fontFamily: 'MontserratExtraBold', color: colorScheme === 'dark' ? 'white' : 'black'}} medium >Oliko treeni mieluisa? </Text>
-            <Text style={{fontFamily: 'MontserratExtraBold', color: colorScheme === 'dark' ? 'white' : 'black'}} marginTop="10px" small >Annathan palautetta, jotta voin kehittää treenitarjontaa</Text>
+            <Text style={{fontFamily: 'MontserratExtraBold', color: themeColor}} medium >Oliko treeni mieluisa? </Text>
+            <Text style={{fontFamily: 'MontserratExtraBold', color: themeColor}} marginTop="10px" small >Annathan palautetta, jotta voin kehittää treenitarjontaa</Text>
             <PalauteButtonContainer>
             <PalauteIcon>
-            <Ionicons name="ios-sad-outline" size={64} color={colorScheme === 'dark' ? 'white' : 'black'} />
+            <Ionicons name="ios-sad-outline" size={64} color={themeColor} />
             </PalauteIcon>
             <PalauteIcon>
-            <FontAwesome5 name="smile-beam" size={64} color={colorScheme === 'dark' ? 'white' : 'black'} />
+            <FontAwesome5 name="smile-beam" size={64} color={themeColor} />
             </PalauteIcon>
             <PalauteIcon>
-            <Ionicons name="ios-sad-outline" size={64} color={colorScheme === 'dark' ? 'white' : 'black'} />
+            <Ionicons name="ios-sad-outline" size={64} color={themeColor} />
             </PalauteIcon>
             
             </PalauteButtonContainer>
@@ -150,40 +144,5 @@ const LopetaTreeni = (props) => {
     );
    
 }
-
-
-const BackgroundContainer = styled.View`
-    background: #054dd9;
-    height: 30%;
-    border-radius: 30px;
-    align-items: center;
-    justify-content: center;
-`;
-
-
-const LopetaButton = styled.TouchableOpacity`
-     margin-bottom: 30px;
-    margin-left: 35px;
-    width: 80%;
-    height: 48px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 30px;
-    shadow-color: 'rgba(0,0,0, .4)';
-    shadow-opacity: 0.5;
-    background-color: ${props => props.color ?? '#054dd9'};
-    flex-direction: row;
-`;
-
-const PalauteButtonContainer = styled.View`
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin-top: 10px;
-`;
-
-
-const Container = styled.View`
-     flex: 1;
-`;
 
 export default LopetaTreeni;

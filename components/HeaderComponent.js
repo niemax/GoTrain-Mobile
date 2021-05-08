@@ -10,10 +10,10 @@ import { Appearance, useColorScheme } from 'react-native-appearance';
 
 const HeaderComponent = (props) => {
     const navigation = useNavigation();
-    const icon = <Ionicons name="log-out-outline" size={32} color={colorScheme === 'dark' ? 'white' : 'black'} />
-   
+    
     Appearance.getColorScheme();
     const colorScheme = useColorScheme();
+    const icon = <Ionicons name="log-out-outline" size={32} color={colorScheme === 'dark' ? 'white' : 'black'} />
 
     const handleLogOut = () => {
         loggingOut();
@@ -25,7 +25,7 @@ const HeaderComponent = (props) => {
         <Header
         
        containerStyle={{
-            backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'
+            backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5', borderBottomWidth: 0
         }}
        
         rightComponent={

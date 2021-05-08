@@ -21,7 +21,7 @@ marginRight: ${props => props.marginRight ?? 0};
 marginTop: ${props => props.marginTop ?? 0};
 marginBottom: ${props => props.marginBottom ?? 0};
 
-${({ title, vinkit, vinkkiTitle, large, medium, small, tiny, treeninNimi, toistot }) => {
+${({ title, vinkit, vinkkiTitle, large, medium, small, tiny, treeninNimi, sarjat }) => {
     switch (true) {
             case title:
                 return `font-size: 32px`
@@ -39,7 +39,7 @@ ${({ title, vinkit, vinkkiTitle, large, medium, small, tiny, treeninNimi, toisto
                 return `font-size: 16px`
 
             case small:
-                return `font-size: 13px`
+                return `font-size: 14px`
 
             case tiny:
                 return `font-size: 11px`
@@ -47,32 +47,11 @@ ${({ title, vinkit, vinkkiTitle, large, medium, small, tiny, treeninNimi, toisto
             case treeninNimi:
                 return `font-size: 18px`
 
-            case toistot:
-                return `font-size: 44px`
+            case sarjat:
+                return `font-size: 26px`
                 
             default:
                 return `font-size: 11px`
-            
-    }
-}}
-
-${({ light, semi, bold, heavy, welcome }) => {
-    switch (true) {
-            case light:
-                return `font-weight: 200`;
-
-            case semi:
-                return `font-weight: 300`;
-
-            case bold:
-                return `font-weight: 600`;
-
-            case heavy:
-                return `font-weight: 700`;
-
-
-            default:
-                return `font-weight: 400`
             
     }
 }}

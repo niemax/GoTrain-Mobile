@@ -1,6 +1,6 @@
   
 import React, { useState, useEffect, useCallback } from 'react'
-import { Dimensions, ActivityIndicator } from 'react-native';
+import { Dimensions, TouchableOpacity } from 'react-native';
 import Text from '../../components/Text';
 import styled from 'styled-components/native';
 import Carousel from 'react-native-snap-carousel';
@@ -12,9 +12,24 @@ import LopetaTreeni from './TreeninLopetus';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 
+import { VideoContainer,
+    UtilsContainer, 
+    AloitusRenderContainer, 
+    AloitusButtonContainer, 
+    ExtraContainer, 
+    PreviousButton,
+    NextButton,
+    DoneButton,
+    LoadingView,
+    ProgressBarContainer,
+    InputField,
+    ToistotContainer,
+    PainotContainer,
+    AdditionalContainer
+    } from '../../components/TrainScreenStyling'
+
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
-
 
 const AloitaTreeni = (props) => {
     const [treeniData, setTreeniData] = useState([]);
@@ -22,6 +37,13 @@ const AloitaTreeni = (props) => {
     const [pbProgress, setPbProgress] = useState(0)
     const [isLoading, setIsLoading] = useState(true);
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [toisto1, setToisto1] = useState('');
+    const [toisto2, setToisto2] = useState('');
+    const [toisto3, setToisto3] = useState('');
+    const [paino1, setPaino1] = useState('');
+    const [paino2, setPaino2] = useState('');
+    const [paino3, setPaino3] = useState('');
+
 
     Appearance.getColorScheme();
     const colorScheme = useColorScheme();
@@ -36,16 +58,13 @@ const AloitaTreeni = (props) => {
             const data = await response.json();
 
             if (response.status === 200) {
-                setTreeniData(data.liikkeet);
+                setTreeniData(data?.liikkeet);
 
                 setTimeout(() => {
                     setIsLoading(false);
                 }, 800)
-
                 
             }
-            
-            console.log(data);
 
             return data;
 
@@ -56,17 +75,21 @@ const AloitaTreeni = (props) => {
 
     useEffect(() => {
         getData();
-    }, [])
-
-    
+    }, []);
 
     const setProgress = (item, index) => {
      //console.log console.log("setProgress", item, index);
 
         const treenit = {...tehdytTreenit};
+        const painot = `${paino1} - ${paino2} - ${paino3}`
+        const toistot = `${toisto1} - ${toisto2} - ${toisto3}`
 
         if (!(item.nimi in treenit)) {
-            treenit[item.nimi] = { nimi: item.nimi, sarjat: item.sarjat, toistot: item.toistot };
+            treenit[item.nimi] = { nimi: item.nimi, sarjat: item.sarjat, 
+            toistot: { toistot },
+            painot: { painot }  
+        
+        };
             setCurrentSlide(currentSlide + 1);
             Toast.show({
                 text2: `${item.nimi} tehty!`,
@@ -88,28 +111,25 @@ const AloitaTreeni = (props) => {
 
         setTehdytTreenit(treenit);
         setPbProgress(Object.keys(treenit).length / treeniData.length);
-        
+        setToisto1(''), setToisto2(''), setToisto3(''), setPaino1(''),setPaino2(''), setPaino3('')
         console.log("treenit", treenit, Object.keys(treenit).length);
-        
-       // setPbProgress(Object.keys(tehdytTreenit).length / treeniData.length);
        
     }
-
 
     const _renderItem = ({ item, index }) => {
         const btnColor = tehdytTreenit.hasOwnProperty(item.nimi) ? "#054dd9" : (colorScheme === 'dark' ? 'white' : 'black')
         const treenitLength = Object.keys(treeniData).length;
-
+        const colorIcon = colorScheme === 'dark' ? 'white' : 'black';
         
         if (pbProgress >= 1) {
             return (<LopetaTreeni treeni={treeni} data={tehdytTreenit} />)
         } else if (! isLoading) {
             return (
                 
-                <RenderContainer key={index} style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
+                <AloitusRenderContainer key={index} style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
                 <ExtraContainer>
                 <IconTouchable onPress={() => navigation.goBack()} left marginLeft="15px">
-                <Ionicons name="ios-chevron-back" size={24} color={colorScheme === 'dark' ? 'white' : 'black'} />
+                <Ionicons name="ios-chevron-back" size={24} color={colorIcon} />
                 </IconTouchable> 
                 <Text medium marginTop="3px" marginLeft="285px" >{currentSlide} / {treeniData.length}</Text>
                 </ExtraContainer>
@@ -126,14 +146,14 @@ const AloitaTreeni = (props) => {
                      </ProgressBarContainer>
      
                      <UtilsContainer>
-                        <Text vinkkiTitle >{item.nimi.toUpperCase()}</Text>
+                        <Text large >{item.nimi.toUpperCase()}</Text>
      
-                         <Text color="#054dd9" toistot >x {item.toistot} </Text>
+                         <Text marginTop="15px" color="#000" vinkkiTitle >{item.sarjat} sarjaa </Text>
      
-                         <ButtonContainer>
+                         <AloitusButtonContainer>
                          
                          {index > 0 && <PreviousButton onPress={() => { carousel.snapToPrev(); }}>
-                                 <Ionicons name="ios-chevron-back-outline" size={48} color={colorScheme === 'dark' ? 'white' : 'black'} />
+                                 <Ionicons name="ios-chevron-back-outline" size={48} color={colorIcon} />
                              </PreviousButton>}
      
                              <DoneButton onPress={() => setProgress(item, index)}>
@@ -143,28 +163,77 @@ const AloitaTreeni = (props) => {
                              </DoneButton>
      
                              {index < treenitLength -1 &&  <NextButton onPress={() => { carousel.snapToNext(); }}>
-                                 <Ionicons name="ios-chevron-forward-outline" size={48} color={colorScheme === 'dark' ? 'white' : 'black'} />
+                                 <Ionicons name="ios-chevron-forward-outline" size={48} color={colorIcon} />
                              </NextButton>
                              }
      
-                         </ButtonContainer>
-                         <NextContainer>
-                         <Text vinkkiTitle >{item.sarjat} sarjaa </Text>
-                         </NextContainer>
-                     
+                         </AloitusButtonContainer>
+                         <AdditionalContainer>
+                         <Text vinkkiTitle>Toistot
+                         
+                        </Text>
+                         <ToistotContainer >
+
+                         <InputField
+                         style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
+                        onChangeText={(toisto1) => setToisto1(toisto1)}
+                        value={toisto1}
+                        placeholder="Sarja 1"
+                        keyboardType='numeric'
+                        />
+                         <InputField
+                         style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
+                        onChangeText={(toisto2) => setToisto2(toisto2)}
+                        value={toisto2}
+                        placeholder="Sarja 2"
+                        keyboardType='numeric'
+                        />
+                         <InputField
+                         style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
+                        onChangeText={(toisto3) => setToisto3(toisto3)}
+                        value={toisto3}
+                        placeholder="Sarja 3"
+                        keyboardType='numeric'
+                        />
+                        </ToistotContainer>
+                        <Text vinkkiTitle>Painot(kg)
+                        
+                        </Text>
+                         <PainotContainer>
+                         <InputField
+                         style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
+                        onChangeText={(paino1) => setPaino1(paino1)}
+                        value={paino1}
+                        placeholder="Sarja 1"
+                        keyboardType='numeric'
+                        />
+                         <InputField
+                         style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
+                        onChangeText={(paino2) => setPaino2(paino2)}
+                        value={paino2}
+                        placeholder="Sarja 2"
+                        keyboardType='numeric'
+                        />
+                         <InputField
+                         style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
+                        onChangeText={(paino3) => setPaino3(paino3)}
+                        value={paino3}
+                        placeholder="Sarja 3"
+                        keyboardType='numeric'
+                        />
+                        </PainotContainer>
+                         </AdditionalContainer>
+                        
                      </UtilsContainer>
-                     
                     
-                 </RenderContainer>
-                
+                 </AloitusRenderContainer>
              );
+
         } else {
             return(
                 <LoadingView><Loading/></LoadingView>
-                
             )
         }
-        
         
     }
 
@@ -182,55 +251,8 @@ const AloitaTreeni = (props) => {
     )
 }
 
+
 export default AloitaTreeni;
-
-
-const VideoContainer = styled.View`
-    margin-top: 20px;
-   `;
-
-const UtilsContainer = styled.View`
-    margin-top: 50px;
-    align-items: center;
-    justify-content: center;
-`;
-
-const RenderContainer = styled.View`
-    flex: 1;
-    background-color: #141314;
-`;
-
-const ButtonContainer = styled.View`
-    flex-direction: row;
-    margin-top: 25px;
-`;
-
-const ExtraContainer = styled.View`
-    flex-direction: row;
-    margin-top: 60px;
-`;
-
-const IconTouchable = styled.TouchableOpacity`
-    margin-left: 10px;
-`;
-
-const PreviousButton = styled.TouchableOpacity`
-    margin-top: 15px;
- 
-`;
-const NextButton = styled.TouchableOpacity`
-    margin-top: 15px;
-   
-`;
-const DoneButton = styled.TouchableOpacity`
-`;
-
-const LoadingView = styled.View`
-    flex: 1;
-    justifyContent: center;
-    alignItems: center;
-    background-color: #141314;
-`;
 
 const Loading = styled.ActivityIndicator.attrs(props => ({
     color: '#fff',
@@ -238,20 +260,9 @@ const Loading = styled.ActivityIndicator.attrs(props => ({
     align: "center",
 }))``;
 
-const PoistuButton = styled.TouchableOpacity`
-    margin-top: 120px;
-    margin-left: 15px;
-    width: 120px;
-    height: 48px;
-    border-radius: 50px;
-    background-color: ${props => props.color ?? '#054dd9'};
+export const IconTouchable = styled.TouchableOpacity`
+    margin-left: 10px;
 `;
 
 
-const ProgressBarContainer = styled.View`
-    
-`;
 
-const NextContainer = styled.View`
-    margin-top: 50px;
-`;

@@ -5,7 +5,6 @@ import { Ionicons } from '@expo/vector-icons';
 import Login from '../screens/Login'
 import Signup from '../screens/Signup'
 import TehdytTreenit from '../tabs/TehdytTreenit'
-import Asetukset from '../tabs/Asetukset'
 import LoadingScreen from '../screens/Loading';
 import Etusivu from '../tabs/Etusivu'
 import RintaTreeni from '../screens/TreeniScreens/Rinta'
@@ -13,6 +12,7 @@ import SelkaTreeni from '../screens/TreeniScreens/Selka'
 import JalkaTreeni from '../screens/TreeniScreens/Jalka'
 import KasiTreeni from '../screens/TreeniScreens/Kasi';
 import CardioTreeni from '../screens/TreeniScreens/Cardio';
+import { Appearance, useColorScheme } from 'react-native-appearance';
 
 
 const Stack = createStackNavigator();
@@ -53,11 +53,16 @@ const KotiScreens = () => {
 const Tab = createMaterialBottomTabNavigator();
 
 const KotiMainTab = () => {
+  Appearance.getColorScheme();
+        const colorScheme = useColorScheme();
+        const themeColor = colorScheme === 'dark' ? '#141314' : '#F9F8F5';
+        const activeColor = colorScheme === 'dark' ? 'white' : 'black';
+
     return (
       <Tab.Navigator
       initialRouteName="Koti"
-      activeColor="white"
-      barStyle={{ backgroundColor: '#141314' }}
+      activeColor={activeColor}
+      barStyle={{ backgroundColor: themeColor }}
       
     >
       <Tab.Screen
@@ -65,9 +70,9 @@ const KotiMainTab = () => {
         component={Etusivu}
         options={{
           tabBarLabel: 'Koti',
-          tabBarColor: 'rgba(0, 0, 0, 0.9)',
+          tabBarColor: themeColor,
           tabBarIcon: ({ color }) => (
-            <Ionicons name="ios-home-outline" size={24} color="white" />
+            <Ionicons name="ios-home-outline" size={24} color={activeColor} />
           ),
         }}
       />
@@ -75,10 +80,10 @@ const KotiMainTab = () => {
         name="TehdytTreenit"
         component={TehdytTreenit}
         options={{
-          tabBarLabel: 'Tehdyt treenit',
-          tabBarColor: 'rgba(0, 0, 0, 0.9)',
+          tabBarLabel: 'Edistymiseni',
+          tabBarColor: themeColor,
           tabBarIcon: ({ color }) => (
-            <Ionicons name="md-checkmark-done-circle-outline" size={24} color="white" />
+            <Ionicons name="md-checkmark-done-circle-outline" size={24} color={activeColor} />
           ),
         }}
         />

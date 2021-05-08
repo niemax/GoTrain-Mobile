@@ -6,7 +6,17 @@ import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { signIn } from '../API/FirebaseMethods';
 import { Alert } from 'react-native';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-
+import { Container, 
+    HeaderGraphic, 
+    RightCircle, 
+    LeftCircle, 
+    Main, 
+    Auth, 
+    AuthContainer, 
+    AuthTitle, 
+    AuthField, 
+    SignUpContainer,
+    SignUp } from '../components/TrainScreenStyling';
 
 
 const Login = ({
@@ -17,7 +27,7 @@ const Login = ({
 
         Appearance.getColorScheme();
         const colorScheme = useColorScheme();
-
+        const themeColor = colorScheme === 'dark' ? 'white' : 'black';
         
 
         const handleLogin = () => {
@@ -46,8 +56,8 @@ const Login = ({
             </Main>
             <Auth>
                 <AuthContainer>
-                    <AuthTitle style={{color: colorScheme === 'dark' ? 'white' : 'black'}}>Sähköposti</AuthTitle>
-                    <Ionicons name="mail-open-outline" size={18} color={colorScheme === 'dark' ? 'white' : 'black'} />
+                    <AuthTitle style={{color: themeColor}}>Sähköposti</AuthTitle>
+                    <Ionicons name="mail-open-outline" size={18} color={themeColor} />
                     <AuthField 
                     autoCapitalize="none" 
                     autoCompleteType="email" 
@@ -57,9 +67,9 @@ const Login = ({
                     onChangeText={(email) => setEmail(email)}
                     />
                 </AuthContainer>
-                <AuthContainer>
-                    <AuthTitle style={{color: colorScheme === 'dark' ? 'white' : 'black'}}>Salasana</AuthTitle>
-                    <MaterialCommunityIcons name="form-textbox-password" size={18} color={colorScheme === 'dark' ? 'white' : 'black'} />
+                <AuthContainer >
+                    <AuthTitle style={{color: themeColor}} >Salasana</AuthTitle>
+                    <MaterialCommunityIcons name="form-textbox-password" size={18} color={themeColor} />
                     <AuthField 
                     autoCapitalize="none" 
                     autoCompleteType="password" 
@@ -93,78 +103,6 @@ const Login = ({
         );
 }
 
-const Container = styled.View`
-    flex: 1;
-    background-color: #F5F4F4;
 
-`;
-
-const AuthField = styled.TextInput`
-    border-bottom-color: #8e93a1;
-    border-bottom-width: 0.5px;
-    height: 48px;
-
-`;
-
-const HeaderGraphic = styled.View`
-    position: absolute;
-    width: 100%;
-    top: -50px;
-    z-index: -100;
-`;
-
-const RightCircle = styled.View`
-    background-color: #CB570F;
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 200px;
-    right: -100px;
-    top: -200px;
-`;
-
-const LeftCircle = styled.View`
-    background-color: rgba(228, 43, 10, 0.87);
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-    left: -50px;
-    top: -50px;
-`;
-
-const Main = styled.View`
-    margin-top: 192px;
-`;
-
-const Auth = styled.View`
-    margin: 64px 32px 32px
-`;
-
-const AuthContainer = styled.View`
-    margin-bottom: 15px;
-`;
-
-// welcome back
-const AuthTitle = styled(Text)`
-    font-size: 12px;
-    text-transform: uppercase;
-    font-weight: 300
-`;
-
-// sign up button
-const SignUpContainer = styled.TouchableOpacity`
-    margin: 32px;
-    height: 48px;
-    align-items: center;
-    justify-content: center;
-    background-color: #CB570F;
-    border-radius: 7px;
-    
-`;
-
-const SignUp = styled.TouchableOpacity`
-
-`;
 
 export default Login;

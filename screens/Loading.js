@@ -3,7 +3,13 @@ import styled from 'styled-components/native';
 import * as firebase from 'firebase';
 import Text from '../components/Text';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-
+import { 
+    Container,
+    Main, 
+    LoadingView, 
+    RightCircle, 
+    LeftCircle, 
+    HeaderGraphic } from '../components/TrainScreenStyling';
 
 const LoadingScreen = ({
         navigation
@@ -18,6 +24,7 @@ const LoadingScreen = ({
             firebase.auth().onAuthStateChanged((user) => {
                 try {
                     if (user) {
+                        setIsLoggedIn(true);
                         navigation.navigate('Kotisivu'); 
                     } else {
                         navigation.navigate('Signup');
@@ -54,55 +61,13 @@ const LoadingScreen = ({
 }
 
 
-
-const Container = styled.View`
-    flex: 1
-    background-color: #F5F4F4;
-
-`;
-
-const Main = styled.View`
-    margin-top: 150px;
-`;
-
 const Loading = styled.ActivityIndicator.attrs(props => ({
-    color: 'orange',
+    color: 'black',
     size: "large",
     align: "center",
-    marginTop: 40
+    marginTop: 200
 }))``;
 
-const LoadingView = styled.View`
-    margin-top: 230px;
-    justifyContent: center;
-    alignItems: center;
-`;
 
-const RightCircle = styled.View`
-    background-color: #CB570F;
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 200px;
-    right: -100px;
-    top: -200px;
-`;
-
-const LeftCircle = styled.View`
-    background-color: rgba(228, 43, 10, 0.87);
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-    left: -50px;
-    top: -50px;
-`;
-
-const HeaderGraphic = styled.View`
-    position: absolute;
-    width: 100%;
-    top: -50px;
-    z-index: -100;
-`;
 
 export default LoadingScreen;

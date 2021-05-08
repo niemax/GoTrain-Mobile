@@ -1,5 +1,5 @@
-    import React, { useState , useEffect, useCallback } from "react";
-    import { RefreshControl, ScrollView, StyleSheet } from 'react-native';
+    import React, { useState, useCallback } from "react";
+    import { RefreshControl, ScrollView } from 'react-native';
     import { Ionicons } from '@expo/vector-icons';
     import styled from 'styled-components/native'; 
     import Text from '../components/Text';
@@ -11,6 +11,7 @@
 
     const wait = (timeout) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
+
       }
 
     const TehdytTreenit = () => {
@@ -20,9 +21,9 @@
         const [loading, setLoading] = useState(false);
         const [liikkeet, setLiikkeet] = useState([])
 
-
         Appearance.getColorScheme();
         const colorScheme = useColorScheme();
+        const themeColor = colorScheme === 'dark' ? 'white' : 'black';
 
 
         const getData = () => {
@@ -45,8 +46,6 @@
             setTreenit(treeniArray);
             console.log(treenit)
             console.log(liikkeet)
-
-           
             //console.log("treeniData", treenit)
             
         }
@@ -70,9 +69,9 @@
 
             />
             </HeaderContainer>
-            <Text large>Täältä näet tehdyt treenisi</Text>
+            <Text marginTop="30px" large>Suoritukset</Text>
             
-                {loading ? ( <Loading style={{color: colorScheme === 'dark' ? 'white' : 'black'}}/> 
+                {loading ? ( <Loading style={{color: themeColor}}/> 
                 ) : (
                     
                     <ScrollView
@@ -83,35 +82,41 @@
                     />
                     }>
                     
-                    <List.Section title="Vedä ylös päivittääksesi">
+                    <List.Section 
+                    title={<Text left>Vedä alas päivittääksesi<Ionicons name="arrow-down" size={24} color={themeColor} /> </Text> } > 
                    {
                        treenit.map((item, index) => {
                         
                            return(
                             
-                        <List.Accordion key={index}
-                        title={`${item.pvm} - ${item.treeni}`}
-                        left={props => <List.Icon {...props} icon="folder" />}
+                        <List.Accordion 
+                        key={index}
+                        title={<Text small left>{item.pvm} - {item.treeni}</Text>}
+                        left={props => <List.Icon {...props} icon="calendar" color={themeColor} />}
                         >
                      {
-                           Object.keys(liikkeet).map(key, idx => {
+                           Object.values(item.treeniData).map(treeni => {
+                               let desc = 
+                               `Sarjat: ${treeni.sarjat}\nToistot: ${Object.values(treeni.toistot)}\nPainot: ${Object.values(treeni.painot)}`;
+
                                return(
-                                <List.Item title={key} />
+                                <List.Item 
+                                descriptionNumberOfLines={3}
+                                descriptionStyle={{fontFamily: 'MontserratRegular', color: themeColor}}
+                                titleStyle={{fontFamily: 'MontserratSemiBold', color: themeColor}}
+                                key={treeni.nimi} title={treeni.nimi} 
+                                description={desc} />
                                )
                                
                            })
                        }
                      
                     </List.Accordion>
-                               
                               
-                           )
+                           );
                        })
                    }
                    </List.Section>
-
-                   
-                   
                     </ScrollView>
                 )}
              
@@ -132,9 +137,6 @@
 
     const HeaderContainer = styled.View`
     `;
-    
-    const ProfileIcon = styled.TouchableOpacity`
-        margin-top: 5px;
-    `;
+  
     
     export default TehdytTreenit;
