@@ -37,7 +37,6 @@ const AloitaTreeni = (props) => {
     const [tehdytTreenit, setTehdytTreenit] = useState({});
     const [pbProgress, setPbProgress] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
-    const [visible, setVisible] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [toisto1, setToisto1] = useState('');
     const [toisto2, setToisto2] = useState('');
