@@ -17,7 +17,9 @@ import Esikatselu from '../../components/TreeninEsikatselu';
       <Esikatselu
       videoID={"-Mbr55h3BeQ"}
       liike="Punnerrukset"
-      ohjeet="awdawdawaaaaaa"
+      ohjeet={`Aseta kätesi tukevasti maahan, suoraan olkapäittesi alle. Pidä varpaat maassa tukemassa alavartaloasi. Ota keskivartalotuki: jännitä vatsalihaksiasi, aktivoi pakarat, ja jännitä selkääsi niin että koko vartalosi on neutraalissa ja suorassa asennossa. Alaselkä ei saa olla notkolla!
+      \n\n- Aloita laskeutuminen kohti maata hengittämällä sisään, aktivoi lapaluusi ja pidä kyynärpääsi lähellä kroppaa. Lähde laskeutumaan kohti maata selkä suorassa, katse alaviistossa, ja niska neutraalina, kunnes rintasi koskettaa lattiaa. Älä anna takapuolesi notkahtaa tai nousta pystyyn missään vaiheessa liikettä – kroppasi kuuluisi olla yhtenä suorana linjana päästä varpaisiin, koko liikkeen ajan.
+      \n\n- Pidä keskivartalo edelleen tiukkana, hengitä ulos samalla kun punnerrat takaisin aloitusasentoon. Toista liikettä, niin monta kertaa kuin kykenet, hyvällä asennolla.`}
       
       />
        
@@ -74,10 +76,10 @@ import Esikatselu from '../../components/TreeninEsikatselu';
        <Esikatselu
       videoID={"FeJP4E4Z-PY"}
       liike="Vipunosto Sivulle"
-       ohjeet= {`- Asetu dippitelineeseen ja ota noin olkapäiden levyinen ote tangoista. Ponnista suorille käsille, vie olkapäitä alas ja vedä lapoja yhteen. Pidä jännitys koko kropassa ja taivuta jalkoja hieman taakse.
-        \n- Käännä ylävartaloa hieman eteenpäin ja laskeudu alas taivuttaen kyynärpäitä niiden osoittaessa samalla suoraan taaksepäin. Laskeudu vähintään 90 asteen kulmaan. Pidä olkapäät ja lavat tiukassa kontrollissa, jotta vältyt vammoilta. Saavutettuasi ala-asennon, lähde nousemaan takaisin ylös räjähtävästi mutta samalla kontrolloidusti, kunnes olet jälleen suorilla käsillä.
-        \n\n- Mikäli olet epävarma tekniikan tai voimiesi suhteen, käytä apuna kuminauhaa tai anna treenikaverin ottaa kiinni jaloistasi ja avustaa tarpeen tullen. Näin liike kevenee hieman ja pystyt pitämään tasapainon paremmin. Tällä tavoin saat myös täyden liikeradan liikkeeseen, mikä auttaa kehittämään paremmin lihasmassaa.
-        \n\n- Kun saat suoritettua 10 puhdasta dippiä ilman apua, voit lisätä vaikeusastetta ottamalla käyttöön lisäpainot: kiinnitä painolevy painovyöhön tai aseta käsipaino jalkojen väliin.
+       ohjeet= {`- Valitse itsellesi sopiva paino (yleensä alle 10 kg oikealla tekniikalla), seiso suorana.
+        \n- Valitse yksi seuraavista lähtöasennoista: painot lantion edessä, painot lantion sivulla tai painot juuri ja juuri lantion takana. Lähtöasennosta päädytään kuitenkin samaan yläasentoon.
+        \n\n- Pidä kätesi pienessä koukussa. Nosta painot noin horisontaaliseen asentoon siten, että kyynärpää ei roiku yhtään (jos haluat treenata epäkäslihaksen yläosaa, nosta painot horisontaalisen viivan yläpuolelle).
+        \n\n- Tehdäksesi liikkeestä haastavamman, pysäytä liike muutamaksi sekunniksi yläasentoon ja palauta sitten hallitusti takaisin alas. Älä lepää ala-asennossa, vaan pidä lihas koko ajan aktiivisena.
         `} />
     )
 }
@@ -87,10 +89,7 @@ import Esikatselu from '../../components/TreeninEsikatselu';
       <Esikatselu
       videoID={"Z57CtFmRMxA"}
       liike="Chest Fly"
-       ohjeet= {`- Asetu dippitelineeseen ja ota noin olkapäiden levyinen ote tangoista. Ponnista suorille käsille, vie olkapäitä alas ja vedä lapoja yhteen. Pidä jännitys koko kropassa ja taivuta jalkoja hieman taakse.
-        \n- Käännä ylävartaloa hieman eteenpäin ja laskeudu alas taivuttaen kyynärpäitä niiden osoittaessa samalla suoraan taaksepäin. Laskeudu vähintään 90 asteen kulmaan. Pidä olkapäät ja lavat tiukassa kontrollissa, jotta vältyt vammoilta. Saavutettuasi ala-asennon, lähde nousemaan takaisin ylös räjähtävästi mutta samalla kontrolloidusti, kunnes olet jälleen suorilla käsillä.
-        \n\n- Mikäli olet epävarma tekniikan tai voimiesi suhteen, käytä apuna kuminauhaa tai anna treenikaverin ottaa kiinni jaloistasi ja avustaa tarpeen tullen. Näin liike kevenee hieman ja pystyt pitämään tasapainon paremmin. Tällä tavoin saat myös täyden liikeradan liikkeeseen, mikä auttaa kehittämään paremmin lihasmassaa.
-        \n\n- Kun saat suoritettua 10 puhdasta dippiä ilman apua, voit lisätä vaikeusastetta ottamalla käyttöön lisäpainot: kiinnitä painolevy painovyöhön tai aseta käsipaino jalkojen väliin.
+       ohjeet= {`-
         `} />
     )
 }

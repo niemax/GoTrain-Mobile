@@ -1,4 +1,4 @@
-    import React, { useState, useCallback } from "react";
+    import React, { useState, useCallback, useRef, useEffect } from "react";
     import { RefreshControl, ScrollView } from 'react-native';
     import { Ionicons } from '@expo/vector-icons';
     import styled from 'styled-components/native'; 
@@ -7,7 +7,7 @@
     import * as firebase from 'firebase';
     import { Appearance, useColorScheme } from 'react-native-appearance';
     import { List } from 'react-native-paper';
-
+    import { LottieAnimationTehdytTreenit, LottieAnimationMain } from '../components/Lottie'
 
     const wait = (timeout) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
@@ -15,11 +15,11 @@
       }
 
     const TehdytTreenit = () => {
-
         const [treenit, setTreenit] = useState([]);
         const [refreshing, setRefreshing] = useState(false);
         const [loading, setLoading] = useState(false);
-        const [liikkeet, setLiikkeet] = useState([])
+        const [liikkeet, setLiikkeet] = useState([]);
+        const [refreshed, setRefreshed] = useState(false);
 
         Appearance.getColorScheme();
         const colorScheme = useColorScheme();
@@ -54,14 +54,15 @@
             setLoading(true)
             setRefreshing(true);
             getData();
-            wait(1500).then(() => setRefreshing(false));
-            wait(1500).then(() => setLoading(false));
+            wait(2000).then(() => setRefreshing(false));
+            wait(2000).then(() => setLoading(false));
+            setRefreshed(true)
         })
 
 
 
         return(
-            <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
+            <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}}>
            
             <HeaderContainer>
             <HeaderComponent 
@@ -69,9 +70,10 @@
 
             />
             </HeaderContainer>
+           
             <Text marginTop="30px" large>Suoritukset</Text>
-            
-                {loading ? ( <Loading style={{color: themeColor}}/> 
+            {! refreshed && <LottieAnimationMain />}
+                {loading ? ( <LottieAnimationTehdytTreenit /> 
                 ) : (
                     
                     <ScrollView
@@ -81,6 +83,7 @@
                     onRefresh={onRefresh}
                     />
                     }>
+                    
                     
                     <List.Section 
                     title={<Text left>Vedä alas päivittääksesi<Ionicons name="arrow-down" size={24} color={themeColor} /> </Text> } > 
@@ -129,11 +132,7 @@
         flex: 1;
 
     `;
-    const Loading = styled.ActivityIndicator.attrs(props => ({
-        size: "large",
-        align: "center",
-        marginTop: 20
-    }))``;
+    
 
     const HeaderContainer = styled.View`
     `;

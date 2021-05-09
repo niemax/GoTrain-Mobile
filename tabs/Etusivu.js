@@ -3,7 +3,7 @@ import { Alert  } from 'react-native';
 import * as firebase from 'firebase';
 import Text from '../components/Text';
 import HeaderComponent from '../components/HeaderComponent';
-import { Container } from '../components/TrainScreenStyling';
+import { Container } from '../utils/Styling';
 import Cards from '../components/EtusivuCards';
 import styled from 'styled-components/native'; 
 import * as Location from 'expo-location';
@@ -46,9 +46,9 @@ const Etusivu = (
 
     useEffect(() => {
         const getWeatherData = async () => {
-            let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=4faa658e0a47cd7c7693d03bf30bf56a`
+            let API = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=4faa658e0a47cd7c7693d03bf30bf56a`
             try {
-                let response = await fetch(api);
+                let response = await fetch(API);
                 const data = await response.json();
     
                 if (response.status === 200) {
@@ -79,7 +79,7 @@ const Etusivu = (
         getLocation();
         getCurrentDate();
         getUserInfo();
-    }, []);
+    }, [currentUser]);
 
         let currentUser = firebase.auth().currentUser
 
@@ -101,7 +101,7 @@ const Etusivu = (
                   Alert.alert('There is an error.', err.message)
               }
           }
-          getUserInfo();
+          
      
 
     return (

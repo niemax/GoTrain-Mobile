@@ -39,7 +39,7 @@ const Cards = () => {
         navigationRoute: 'JalkaTreeni',
         image: require('../assets/jalatToinen.jpg'),
         icon: <Ionicons name="ios-timer-sharp" size={28} color={themeColor} />,
-        treeninKesto: '60-75min'
+        treeninKesto: '45-60min'
 
     }, 
     {
@@ -48,19 +48,10 @@ const Cards = () => {
         navigationRoute: 'KasiTreeni',
         image: require('../assets/kadetToinen.jpg'),
         icon: <Ionicons name="ios-timer-sharp" size={28} color={themeColor}/>,
-        treeninKesto: '60-75min'
-
-    }, 
-    {
-        id: 5,
-        name: 'Cardio',
-        image: require('../assets/cardioToinen.jpg'),
-        navigationRoute: 'CardioTreeni',
-        icon: <Ionicons name="ios-timer-sharp" size={28} color={themeColor} />,
         treeninKesto: '45-60min'
 
     }, 
-    
+   
 ]
 
 

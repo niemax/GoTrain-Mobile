@@ -13,4 +13,4 @@ config/Firebase.js
 # macOS
 .DS_Store
 
-npm-shrinkwrap.json
+yarn-error-log

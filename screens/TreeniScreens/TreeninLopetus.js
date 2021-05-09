@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Text from '../../components/Text';
 import ConfettiCannon from 'react-native-confetti-cannon';
 import { Card } from 'react-native-elements';
-import { ButtonContainer, PalauteIcon } from '../../components/TrainScreenStyling';
+import { ButtonContainer, PalauteIcon } from '../../utils/Styling';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native';
 import * as firebase from 'firebase';
@@ -12,8 +12,9 @@ import moment from 'moment';
 import 'moment/locale/fi'
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
+import { LottieAnimationCongratulations } from '../../components/Lottie';
 
-import { BackgroundContainer, LopetaButton, PalauteButtonContainer, Container } from '../../components/TrainScreenStyling';
+import { LopetaButton, PalauteButtonContainer, Container } from '../../utils/Styling';
 
 
 const LopetaTreeni = (props) => {
@@ -73,10 +74,9 @@ const LopetaTreeni = (props) => {
 
     return (
         <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}}>
-        <BackgroundContainer>
-        <Image style={{height: 100, width: 100}} source={require('../../assets/icons/applause.png')} />
-        <Text style={{fontFamily: 'MontserratExtraBold'}} marginTop="20px" large medium>{treeni.toUpperCase()} SUORITETTU</Text>
-        </BackgroundContainer>
+       <LottieAnimationCongratulations />
+       <Text style={{fontFamily: 'MontserratExtraBold', color: themeColor}} marginTop="20px" large medium>{treeni.toUpperCase()} SUORITETTU</Text>
+        
             <Card containerStyle={{borderWidth: 0,
             elevation: 3,
             height: 100,

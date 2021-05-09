@@ -16,7 +16,7 @@ import { Container,
     AuthTitle, 
     AuthField, 
     SignUpContainer,
-    SignUp } from '../components/TrainScreenStyling';
+    SignUp } from '../utils/Styling';
 
 
 const Login = ({
@@ -31,16 +31,12 @@ const Login = ({
         
 
         const handleLogin = () => {
-            if (email !== '' && password.length >= 6) {
                 signIn(email, password);
-                navigation.navigate('Loading');
-            } else {
-                Alert.alert('Virheellinen sähköposti tai salasana')
+                navigation.replace('Loading');
+                setEmail('');
+                setPassword('');
 
             }
-            setEmail('');
-            setPassword('');
-        }
 
 
         return (

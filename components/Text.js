@@ -9,7 +9,7 @@ Appearance.getColorScheme();
 const TextStyle = ({...props}) => {
     const colorScheme = useColorScheme();
 
-    return <Text style={{fontFamily: 'MontserratSemiBold', color: colorScheme === 'dark' ? ('#fff') : ('#000')}} {...props}>{props.children}</Text>
+    return <Text style={{fontFamily: 'MontserratSemiBold', color: colorScheme === 'dark' ? '#fff' : '#000'}} {...props}>{props.children}</Text>
 }
 
 const Text = styled.Text`

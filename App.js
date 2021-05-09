@@ -12,7 +12,6 @@ import { Appearance, AppearanceProvider, useColorScheme } from 'react-native-app
 import Toast from 'react-native-toast-message';
 
 
-
 export default AppContainer = () => {
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();

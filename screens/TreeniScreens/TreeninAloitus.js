@@ -1,6 +1,6 @@
   
-import React, { useState, useEffect, useCallback } from 'react'
-import { Dimensions, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react'
+import { Dimensions } from 'react-native';
 import Text from '../../components/Text';
 import styled from 'styled-components/native';
 import Carousel from 'react-native-snap-carousel';
@@ -11,6 +11,7 @@ import { useNavigation  } from '@react-navigation/native';
 import LopetaTreeni from './TreeninLopetus';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
+
 
 import { VideoContainer,
     UtilsContainer, 
@@ -26,7 +27,7 @@ import { VideoContainer,
     ToistotContainer,
     PainotContainer,
     AdditionalContainer
-    } from '../../components/TrainScreenStyling'
+    } from '../../utils/Styling'
 
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
@@ -34,8 +35,9 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window'
 const AloitaTreeni = (props) => {
     const [treeniData, setTreeniData] = useState([]);
     const [tehdytTreenit, setTehdytTreenit] = useState({});
-    const [pbProgress, setPbProgress] = useState(0)
+    const [pbProgress, setPbProgress] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+    const [visible, setVisible] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [toisto1, setToisto1] = useState('');
     const [toisto2, setToisto2] = useState('');
@@ -80,7 +82,7 @@ const AloitaTreeni = (props) => {
     const setProgress = (item, index) => {
      //console.log console.log("setProgress", item, index);
 
-        const treenit = {...tehdytTreenit};
+        const treenit = { ...tehdytTreenit };
         const painot = `${paino1} - ${paino2} - ${paino3}`
         const toistot = `${toisto1} - ${toisto2} - ${toisto3}`
 
@@ -103,7 +105,7 @@ const AloitaTreeni = (props) => {
             Toast.show({
                 text2: `${item.nimi} poistettu!`,
                 type: 'error',
-                visibilityTime: 1000
+                visibilityTime: 1500
     
               });
             
@@ -115,6 +117,7 @@ const AloitaTreeni = (props) => {
         console.log("treenit", treenit, Object.keys(treenit).length);
        
     }
+
 
     const _renderItem = ({ item, index }) => {
         const btnColor = tehdytTreenit.hasOwnProperty(item.nimi) ? "#054dd9" : (colorScheme === 'dark' ? 'white' : 'black')

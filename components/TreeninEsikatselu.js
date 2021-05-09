@@ -3,7 +3,6 @@ import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { Ionicons } from '@expo/vector-icons'; 
 import Text from '../components/Text'
-import ButtonContainer from './TrainScreenStyling'
 import YoutubePlayer from "react-native-youtube-iframe";
 import { useNavigation } from '@react-navigation/native'; 
 import { Appearance, useColorScheme } from 'react-native-appearance';
@@ -31,7 +30,7 @@ const Esikatselu = (props) => {
             />
       </VideoContainer>
         <ScrollView>
-        <Text vinkkiTitle left>  {props.liike} </Text>
+        <Text large left>  {props.liike} </Text>
       <WarningContainer>
         {icon}
         <Text vinkit left>Muista aina ennen liikettä lämmitellä välttyäksesi loukkaantumisilta.</Text>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert } from 'react-native';
+import { Alert, Image } from 'react-native';
 import Text from '../components/Text';
 import { FontAwesome as Icon } from '@expo/vector-icons';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -16,7 +16,7 @@ import {
     LeftCircle, 
     RightCircle, 
     HeaderGraphic,
-    AuthField } from '../components/TrainScreenStyling';
+    AuthField } from '../utils/Styling';
 
 
 const Signup = ({ navigation }) => {
@@ -107,7 +107,7 @@ const Signup = ({ navigation }) => {
             </Auth>
 
             <SignUpContainer onPress={handleSignUp}>
-                <Text bold medium center color="#fff">Rekisteröidy</Text>
+                <Text medium center>Rekisteröidy</Text>
             
                 
             </SignUpContainer>
@@ -115,14 +115,17 @@ const Signup = ({ navigation }) => {
             <SignIn onPress={() => navigation.navigate('Login')}>
             <Text color="black" small center>
             Oletko jo jäsen?{" "} 
-            <Text medium bold color="#CB570F">
+            <Text medium>
             Kirjaudu sisään
             </Text>
             </Text>
             </SignIn>
 
                 <HeaderGraphic>
-                <RightCircle />
+                
+                <RightCircle
+
+                 />
                 <LeftCircle />
                 
             </HeaderGraphic>
@@ -130,8 +133,5 @@ const Signup = ({ navigation }) => {
         );
        
 }
-    
-
-
 
 export default Signup;

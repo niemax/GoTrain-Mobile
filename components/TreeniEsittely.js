@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { Image, StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native';
 import Text from '../components/Text';
 import { Ionicons, Feather } from '@expo/vector-icons'; 
-import { Container, AloitaButton, ButtonContainer, IconTouchable, RenderContainer } from '../components/TrainScreenStyling';
+import { Container, AloitaButton, ButtonContainer, IconTouchable, RenderContainer } from '../utils/Styling';
 import { useNavigation } from '@react-navigation/native';
 import { ListItem } from 'react-native-elements'
 import { Appearance, useColorScheme } from 'react-native-appearance';
@@ -115,7 +115,7 @@ import Toast from 'react-native-toast-message';
               
                <TextContainer>
                <Text marginLeft="3px" medium>{item.nimi}</Text>
-               <Text style={{fontFamily: 'MontserratSemiBold', position: 'absolute', left: 240, color: colorScheme === 'dark' ? '#fff' : '#000' }} medium>{item.sarjat} sarjaa</Text>
+               <Text style={{fontFamily: 'MontserratSemiBold', position: 'absolute', left: 247, color: colorScheme === 'dark' ? '#fff' : '#000' }} medium>{item.sarjat} sarjaa</Text>
                </TextContainer>
                
                

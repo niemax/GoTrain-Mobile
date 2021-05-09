@@ -17,7 +17,16 @@ import Esikatselu from '../../components/TreeninEsikatselu';
       <Esikatselu
       videoID={"U3HlEF_E9fo"}
       liike="Kyykyt"
-      ohjeet="awdawdawaaaaaa"
+      ohjeet={`Hengitä sisään ja jännitä vatsaa, jotta keskivartalon tuki pitää koko liikkeen ajan. Työnnä takamusta taaksepäin kuin olisit istumassa tuolille. 
+      \n\n- Nouse ripeästi takaisin ylös, ojenna jalat ja jännitä pakarat. Varo yliojentamasta polvia noustessasi. Paina kantapäitä alustaan, niin vaikutus tuntuu myös pakaroissa. 
+      \n- Pidä ylävartalo mahdollisimman suorana, rinta eteenpäin. Varo nojaamasta eteenpäin. Pidä myös katse eteenpäin, jotta niska pysyy suorana eikä selkä pääse pyöristymään.
+      \n\n- Ojenna kädet suorina eteen, niin saat lisätukea tasapainon pitämiseen.
+      \n\n- Kyykisty niin alas, että polvet ovat 90 asteen kulmassa ja reidet alustan suuntaisesti. Kun tekniikka on hallussa, voit syventää kyykkyä entisestään.
+      \n\n- Varmista, että polvet ovat kyykätessäsi jalkaterien suuntaisesti, mutta eivät varpaita pidemmällä.
+      \n\n- Älä päästä polvia kääntymään kyykyn aikana sisään- tai ulospäin.
+      \n\n- Seiso jalat lantion leveydellä jalkaterät hieman ulospäin. Pidä paino koko jalalla tai kantapäillä kyykyn aikana.
+
+      `}
       
       />
        
@@ -29,11 +38,10 @@ import Esikatselu from '../../components/TreeninEsikatselu';
       <Esikatselu
       videoID={"GvRgijoJ2xY"}
       liike="Jalkaprässi"
-      ohjeet={`Aseta jalat penkin alle. Vedä jalat siis kuitenkin koukkuun kohti takapuoltasi niin, että pystyt työntämään reisilläsi kohti yläkroppaasi. 
-      \n\n- Nosta selkä kaarelle. Mitä enemmän selkäsi on kaarella, sitä lyhyempi on nostomatka ja sitä enemmän saat painoa liikuteltua.
-      \n- Vedä lavat yhteen. Yhteen vedetyt lavat luovat penkin päälle ”hyllyn”, josta painoa on helppo puskea ylös. Kun lavat ovat tukevasti yhdessä, lyhenee nostomatka ja kädet tulevat luonnollisemmin kropan sivuille. 
-      \n\n- Ota tukeva ote tangosta. Aseta tanko kämmenen alaosalle ja Purista KUNNOLLA.
-      \n\n- Puske koko kropalla. 
+      ohjeet={`Aseta jalat hartianleveydelle jalkatukea vasten.
+      \n\n- Koukista polvet, älä anna vatsan pullahtaa ulos. Pidä polvet ja varpaat samassa linjassa ja paino kantapäällä.
+      \n- Ojenna polvet suoriksi, mutta älä lukkoon asti.
+      \n\n- Tuntuma tulisi olla suhteellisen tasapuolinen sekä reisissä että pakarassa.
       `}
       />
     )
@@ -44,11 +52,9 @@ import Esikatselu from '../../components/TreeninEsikatselu';
       <Esikatselu
       videoID={"HBYGeyb4sSM"}
       liike="Bulgarialainen askelkyykky"
-       ohjeet= {`- Asetelma. Seiso pitäen tankoa olkapäidesi edessä, ylläolevan videon mukaisesti. Kapea ote, ranteet suorassa linjassa ja pystysuunnassa olevat kyynärvarret. Lukitse polvesi ja lantiosi.
-       \n- Nosta rintaasi. Nosta rintasi kohti kattoa taivuttamalla hieman yläselkääsi. Kuvittele, että yrität koskettaa leukaasi rinnallasi. 
-       \n\n- Työnnä. Ota iso hengenveto sisään, pidä se sisälläsi ja työnnä tankoa pystysuorassa linjassa. Älä työnnä sitä pääsi eteen tai taakse, vaan yli.
-       \n\n- Liiku eteenpäin. Pysy lähellä tankoa, kun työnnät sitä ylöspäin, liikuta vartaloasi hieman eteenpäin kun tanko on mennyt otsasi ohitse.
-       \n\n- Lukitse. Pidä tankoa olkapäidesi yläpuolella ja jalkojen keskellä täydellisen tasapainon ylläpitämiseksi. Lukitse kyynärpääsi ja kohauta olkapäitäsi kohti kattoa.
+       ohjeet= {`- Ota steppilauta, tai pieni koroke ja aseta se vartalosi taakse.
+       \n- Aseta toinen jalka tukijalaksi korokkeen päälle ja pidä paino etummaisen jalan päällä.
+       \n\n- Lähde tekemään askelkyykkyliikettä, siten, että polvet taipuvat varpaiden kanssa samaan suuntaan. Etummaisen jalan kantapää pysyy kiinni lattiassa ja ylävartalo säilyy ryhdikkäässä asennossa. Voit haastaa itseäsi lisää ottamalla käsipainot kumpaankin käteesi. Tee liike kummallekin puolelle.
        `}
        />
     )
@@ -59,10 +65,7 @@ import Esikatselu from '../../components/TreeninEsikatselu';
        <Esikatselu
       videoID={"dX_nSOOJIsE"}
       liike="Lantionnosto"
-      ohjeet={`- Asetu dippitelineeseen ja ota noin olkapäiden levyinen ote tangoista. Ponnista suorille käsille, vie olkapäitä alas ja vedä lapoja yhteen. Pidä jännitys koko kropassa ja taivuta jalkoja hieman taakse.
-        \n- Käännä ylävartaloa hieman eteenpäin ja laskeudu alas taivuttaen kyynärpäitä niiden osoittaessa samalla suoraan taaksepäin. Laskeudu vähintään 90 asteen kulmaan. Pidä olkapäät ja lavat tiukassa kontrollissa, jotta vältyt vammoilta. Saavutettuasi ala-asennon, lähde nousemaan takaisin ylös räjähtävästi mutta samalla kontrolloidusti, kunnes olet jälleen suorilla käsillä.
-        \n\n- Mikäli olet epävarma tekniikan tai voimiesi suhteen, käytä apuna kuminauhaa tai anna treenikaverin ottaa kiinni jaloistasi ja avustaa tarpeen tullen. Näin liike kevenee hieman ja pystyt pitämään tasapainon paremmin. Tällä tavoin saat myös täyden liikeradan liikkeeseen, mikä auttaa kehittämään paremmin lihasmassaa.
-        \n\n- Kun saat suoritettua 10 puhdasta dippiä ilman apua, voit lisätä vaikeusastetta ottamalla käyttöön lisäpainot: kiinnitä painolevy painovyöhön tai aseta käsipaino jalkojen väliin.
+      ohjeet={`- 
         `} 
 
         />

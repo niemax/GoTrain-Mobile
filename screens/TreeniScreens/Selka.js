@@ -15,7 +15,7 @@ export const Leuanveto = () => {
     return(
       <Esikatselu
       videoID={"3YvfRx31xDE"}
-      toistot="1-2 sarjaa x toistoa"
+      liike="Leuanveto"
       ohjeet={`- Voit ottaa avuksesi voimakuminauhan ja keventää leuanvetojasi sillä. Muista kuminauhaa valitessasi, että leuanveto on sinulle maksimivoimaa vaativa suoritus. Valitse siis mahdollisimman vähän keventävä kuminauha, jonka avulla pystyt tekemään 1-5 leukaa.
       \n\n- Kuminauhan sijaan, voit pyytää kaveriasi keventämään leuanvetoasi nostamalla jaloista samalla kun sinä vedät.
       
@@ -29,12 +29,11 @@ export const Kulmasoutu = () => {
     return(
       <Esikatselu
       videoID={"kBWAon7ItDw"}
-      toistot="3 sarjaa 10 toistoa"
-      ohjeet={`Aseta jalat penkin alle. Vedä jalat siis kuitenkin koukkuun kohti takapuoltasi niin, että pystyt työntämään reisilläsi kohti yläkroppaasi. 
-      \n\n- Nosta selkä kaarelle. Mitä enemmän selkäsi on kaarella, sitä lyhyempi on nostomatka ja sitä enemmän saat painoa liikuteltua.
-      \n- Vedä lavat yhteen. Yhteen vedetyt lavat luovat penkin päälle ”hyllyn”, josta painoa on helppo puskea ylös. Kun lavat ovat tukevasti yhdessä, lyhenee nostomatka ja kädet tulevat luonnollisemmin kropan sivuille. 
-      \n\n- Ota tukeva ote tangosta. Aseta tanko kämmenen alaosalle ja Purista KUNNOLLA.
-      \n\n- Puske koko kropalla. 
+      liike="Kulmasoutu"
+      ohjeet={`- Asetu levytangon luokse. Taivuta hiukan polvia ja nojaudu eteenpäin lantiota taivuttamalla, samalla kun selkä säilyttää neutraalin kaarevuutensa. 
+      \n\n- Tartu tankoon hartialevyisellä tai hieman leveämmällä myötä- tai vastaotteella. Alkuasennossa käsivarret ovat täysin ojennetut ja hartiat rentoina. Tanko voi olla joko lattialla tai roikkua vapaasti ilmassa. 
+      \n- Aloita sen jälkeen soutu levytangolla vetämällä hartiat mahdollisimman lähelle toisiaan ja taivuttamalla samalla käsivarsia siten, että tanko nousee rintakehän alaosaa tai vyötärön yläosaa vasten. Se, mihin kohtaan tanko osuu, riippuu siitä, kuinka paljon nojaat eteenpäin. 
+      \n\n- Laske sen jälkeen tanko alkuasentoon hallitulla liikkeellä.
       `}
       />
     )
@@ -45,11 +44,9 @@ export const Hauiskaanto = () => {
       <Esikatselu
       videoID={"yTWO2th-RIY"}
       liike="Hauiskääntö"
-       ohjeet= {`- Asetelma. Seiso pitäen tankoa olkapäidesi edessä, ylläolevan videon mukaisesti. Kapea ote, ranteet suorassa linjassa ja pystysuunnassa olevat kyynärvarret. Lukitse polvesi ja lantiosi.
-       \n- Nosta rintaasi. Nosta rintasi kohti kattoa taivuttamalla hieman yläselkääsi. Kuvittele, että yrität koskettaa leukaasi rinnallasi. 
-       \n\n- Työnnä. Ota iso hengenveto sisään, pidä se sisälläsi ja työnnä tankoa pystysuorassa linjassa. Älä työnnä sitä pääsi eteen tai taakse, vaan yli.
-       \n\n- Liiku eteenpäin. Pysy lähellä tankoa, kun työnnät sitä ylöspäin, liikuta vartaloasi hieman eteenpäin kun tanko on mennyt otsasi ohitse.
-       \n\n- Lukitse. Pidä tankoa olkapäidesi yläpuolella ja jalkojen keskellä täydellisen tasapainon ylläpitämiseksi. Lukitse kyynärpääsi ja kohauta olkapäitäsi kohti kattoa.
+       ohjeet= {`- Asetu seisomaan pieneen haara-asentoon. Ota käsipainot käsiisi ja aseta kädet siten, että kämmenet osoittavat itseäsi kohden.
+       \n- Lähde koukistamaan toisen käden kyynärniveltä ja kierrä samalla kättä siten, että kämmenpohja on kohti kattoa ennen kuin kyynärvarsi on vaakatasossa ja vie käsi ylös asti.
+       \n\n- Palauta liike hallitusti takaisin. Tee nyt toinen käsi tai jatka tämän käden määrätyt toistot loppuun.
        `}
        />
     )
@@ -60,10 +57,10 @@ export const Alatalja = () => {
        <Esikatselu
       videoID={"4mRy8U542Fo"}
       liike="Soutu Alataljassa"
-      ohjeet={`- Asetu dippitelineeseen ja ota noin olkapäiden levyinen ote tangoista. Ponnista suorille käsille, vie olkapäitä alas ja vedä lapoja yhteen. Pidä jännitys koko kropassa ja taivuta jalkoja hieman taakse.
-        \n- Käännä ylävartaloa hieman eteenpäin ja laskeudu alas taivuttaen kyynärpäitä niiden osoittaessa samalla suoraan taaksepäin. Laskeudu vähintään 90 asteen kulmaan. Pidä olkapäät ja lavat tiukassa kontrollissa, jotta vältyt vammoilta. Saavutettuasi ala-asennon, lähde nousemaan takaisin ylös räjähtävästi mutta samalla kontrolloidusti, kunnes olet jälleen suorilla käsillä.
-        \n\n- Mikäli olet epävarma tekniikan tai voimiesi suhteen, käytä apuna kuminauhaa tai anna treenikaverin ottaa kiinni jaloistasi ja avustaa tarpeen tullen. Näin liike kevenee hieman ja pystyt pitämään tasapainon paremmin. Tällä tavoin saat myös täyden liikeradan liikkeeseen, mikä auttaa kehittämään paremmin lihasmassaa.
-        \n\n- Kun saat suoritettua 10 puhdasta dippiä ilman apua, voit lisätä vaikeusastetta ottamalla käyttöön lisäpainot: kiinnitä painolevy painovyöhön tai aseta käsipaino jalkojen väliin.
+      ohjeet={`- Hengitä sisään ja vedä kahvaa olkapääjohtoisesti kohti itseäsi ja pidä rankasi neutraaliasennossa
+        \n- Jatka vetoa, kunnes kahva osuu alimpien kylkiluiden kohdalle
+        \n\n- Varmista liikkeen loppuvaiheessa, että vedät voimakkaasti lapoja kohti rankaa
+        \n\n- Palauta kahva uloshengityksellä alkuasentoon
         `} 
 
         />
@@ -75,10 +72,11 @@ export const Ylatalja = () => {
        <Esikatselu
       videoID={"XhRpjxcKrJY"}
       liike="Ylätalja"
-       ohjeet= {`- Asetu dippitelineeseen ja ota noin olkapäiden levyinen ote tangoista. Ponnista suorille käsille, vie olkapäitä alas ja vedä lapoja yhteen. Pidä jännitys koko kropassa ja taivuta jalkoja hieman taakse.
-        \n- Käännä ylävartaloa hieman eteenpäin ja laskeudu alas taivuttaen kyynärpäitä niiden osoittaessa samalla suoraan taaksepäin. Laskeudu vähintään 90 asteen kulmaan. Pidä olkapäät ja lavat tiukassa kontrollissa, jotta vältyt vammoilta. Saavutettuasi ala-asennon, lähde nousemaan takaisin ylös räjähtävästi mutta samalla kontrolloidusti, kunnes olet jälleen suorilla käsillä.
-        \n\n- Mikäli olet epävarma tekniikan tai voimiesi suhteen, käytä apuna kuminauhaa tai anna treenikaverin ottaa kiinni jaloistasi ja avustaa tarpeen tullen. Näin liike kevenee hieman ja pystyt pitämään tasapainon paremmin. Tällä tavoin saat myös täyden liikeradan liikkeeseen, mikä auttaa kehittämään paremmin lihasmassaa.
-        \n\n- Kun saat suoritettua 10 puhdasta dippiä ilman apua, voit lisätä vaikeusastetta ottamalla käyttöön lisäpainot: kiinnitä painolevy painovyöhön tai aseta käsipaino jalkojen väliin.
+       ohjeet= {`- Vedä ensin hartiat ja lavat alas. Nojaa hieman taaksepäin.
+        \n- Tuo kahva rintaan nopeasti ykkösellä. Nosta samalla rintaa ylös ja vedä hartioita taakse. Kyynärpäät tulevat kohti kylkiä.
+        \n\n- Palauta kahva hallitusti hidastellen ylös. Anna hartioiden nousta vasta liikkeen lopussa. Voit jättää kyynärpäät ääriasennossa pikkuisen koukkuun, jos haluat tehdä liikkeen enemmän selälle ja vähemmän hauikselle. Jos suoristat kädet kokonaan yläasennossa, niin hauis joutuu tekemään enemmän töitä. Todennäköisesti hauiksesta tulee silloin heikoin lenkki etkä pysty tekemään selälle maksimaalista treeniä.
+        \n\n- Kainalon alapuolella tuntuu venytys yläasennossa.
+        \n\n- Liikkeen pitäisi tuntua leveässä selkälihaksessa. Jos tuntuu jossain muualla, niin tarkista suoritustekniikka.
         `} />
     )
 }
@@ -88,10 +86,7 @@ export const Vasarakaannot = () => {
       <Esikatselu
       videoID={"zC3nLlEvin4"}
       liike="Vasarakäännöt"
-       ohjeet= {`- Asetu dippitelineeseen ja ota noin olkapäiden levyinen ote tangoista. Ponnista suorille käsille, vie olkapäitä alas ja vedä lapoja yhteen. Pidä jännitys koko kropassa ja taivuta jalkoja hieman taakse.
-        \n- Käännä ylävartaloa hieman eteenpäin ja laskeudu alas taivuttaen kyynärpäitä niiden osoittaessa samalla suoraan taaksepäin. Laskeudu vähintään 90 asteen kulmaan. Pidä olkapäät ja lavat tiukassa kontrollissa, jotta vältyt vammoilta. Saavutettuasi ala-asennon, lähde nousemaan takaisin ylös räjähtävästi mutta samalla kontrolloidusti, kunnes olet jälleen suorilla käsillä.
-        \n\n- Mikäli olet epävarma tekniikan tai voimiesi suhteen, käytä apuna kuminauhaa tai anna treenikaverin ottaa kiinni jaloistasi ja avustaa tarpeen tullen. Näin liike kevenee hieman ja pystyt pitämään tasapainon paremmin. Tällä tavoin saat myös täyden liikeradan liikkeeseen, mikä auttaa kehittämään paremmin lihasmassaa.
-        \n\n- Kun saat suoritettua 10 puhdasta dippiä ilman apua, voit lisätä vaikeusastetta ottamalla käyttöön lisäpainot: kiinnitä painolevy painovyöhön tai aseta käsipaino jalkojen väliin.
+       ohjeet= {`- 
         `} />
     )
 }

@@ -11,7 +11,6 @@ import RintaTreeni from '../screens/TreeniScreens/Rinta'
 import SelkaTreeni from '../screens/TreeniScreens/Selka'
 import JalkaTreeni from '../screens/TreeniScreens/Jalka'
 import KasiTreeni from '../screens/TreeniScreens/Kasi';
-import CardioTreeni from '../screens/TreeniScreens/Cardio';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 
 
@@ -43,7 +42,6 @@ const KotiScreens = () => {
       <Stack.Screen name="SelkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={SelkaTreeni} />
       <Stack.Screen name="JalkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={JalkaTreeni} />
       <Stack.Screen name="KasiTreeni" options={{ headerShown: false, gestureEnabled: false }} component={KasiTreeni} />
-      <Stack.Screen name="CardioTreeni" options={{ headerShown: false, gestureEnabled: false }} component={CardioTreeni} />
      
     </Stack.Navigator>
   );

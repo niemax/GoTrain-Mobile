@@ -9,7 +9,7 @@ import {
     LoadingView, 
     RightCircle, 
     LeftCircle, 
-    HeaderGraphic } from '../components/TrainScreenStyling';
+    HeaderGraphic } from '../utils/Styling';
 
 const LoadingScreen = ({
         navigation
