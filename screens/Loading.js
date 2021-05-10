@@ -3,6 +3,8 @@ import styled from 'styled-components/native';
 import * as firebase from 'firebase';
 import Text from '../components/Text';
 import { Appearance, useColorScheme } from 'react-native-appearance';
+import { LottieLoading } from '../components/Lottie';
+
 import { 
     Container,
     Main, 
@@ -49,7 +51,7 @@ const LoadingScreen = ({
             {! isLoggedIn ? (
             <LoadingView>
             <Text title bold center>GoTrain</Text>
-            <Loading />
+            <LottieLoading />
             </LoadingView>
         ) : (console.log('Logged in!')
         )} 

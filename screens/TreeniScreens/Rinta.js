@@ -135,7 +135,7 @@ import Esikatselu from '../../components/TreeninEsikatselu';
       <Stack.Screen name="Vipunosto" options={{ headerShown: false,  gestureEnabled: false}}  component={Vipunosto} />
       <Stack.Screen name="ChestFly" options={{  headerShown: false, hgestureEnabled: false}}  component={ChestFly} />
       <Stack.Screen name="TricepPushdown" options={{ headerShown: false,  gestureEnabled: false}} component={TricepPushdown} />
-      <Stack.Screen name="AloitaRinta"  options={{ headerShown: false, gestureEnabled: false, headerStyle: { backgroundColor: '#141314', shadowColor: 'transparent' }}} component={AloitaRinta} />
+      <Stack.Screen name="AloitaRinta"  options={{ headerShown: false, gestureEnabled: false}} component={AloitaRinta} />
     </Stack.Navigator>
 
     

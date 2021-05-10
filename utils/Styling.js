@@ -88,10 +88,12 @@ export const ExtraContainer = styled.View `
 
 export const PreviousButton = styled.TouchableOpacity `
     margin-top: 15px;
+    margin-right: 30px;
  
 `;
 export const NextButton = styled.TouchableOpacity `
     margin-top: 15px;
+    margin-left: 30px;
    
 `;
 export const DoneButton = styled.TouchableOpacity `

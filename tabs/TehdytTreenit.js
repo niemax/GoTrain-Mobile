@@ -96,6 +96,7 @@
                         key={index}
                         title={<Text small left>{item.pvm} - {item.treeni}</Text>}
                         left={props => <List.Icon {...props} icon="calendar" color={themeColor} />}
+
                         >
                      {
                            Object.values(item.treeniData).map(treeni => {

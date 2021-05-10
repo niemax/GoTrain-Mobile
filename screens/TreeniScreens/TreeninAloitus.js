@@ -1,5 +1,5 @@
   
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Dimensions } from 'react-native';
 import Text from '../../components/Text';
 import styled from 'styled-components/native';
@@ -11,6 +11,7 @@ import { useNavigation  } from '@react-navigation/native';
 import LopetaTreeni from './TreeninLopetus';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
+import { LottieLoading } from '../../components/Lottie';
 
 
 import { VideoContainer,
@@ -30,6 +31,7 @@ import { VideoContainer,
     } from '../../utils/Styling'
 
 
+
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
 const AloitaTreeni = (props) => {
@@ -45,6 +47,7 @@ const AloitaTreeni = (props) => {
     const [paino2, setPaino2] = useState('');
     const [paino3, setPaino3] = useState('');
 
+    const carousel = useRef(null)
 
     Appearance.getColorScheme();
     const colorScheme = useColorScheme();
@@ -63,7 +66,7 @@ const AloitaTreeni = (props) => {
 
                 setTimeout(() => {
                     setIsLoading(false);
-                }, 800)
+                }, 1500)
                 
             }
 
@@ -154,7 +157,7 @@ const AloitaTreeni = (props) => {
      
                          <AloitusButtonContainer>
                          
-                         {index > 0 && <PreviousButton onPress={() => { carousel.snapToPrev(); }}>
+                         {index > 0 && <PreviousButton onPress={() => { carousel.current.snapToPrev(); }}>
                                  <Ionicons name="ios-chevron-back-outline" size={48} color={colorIcon} />
                              </PreviousButton>}
      
@@ -164,7 +167,7 @@ const AloitaTreeni = (props) => {
                                  />
                              </DoneButton>
      
-                             {index < treenitLength -1 &&  <NextButton onPress={() => { carousel.snapToNext(); }}>
+                             {index < treenitLength -1 &&  <NextButton onPress={() => { carousel.current.snapToNext(); }}>
                                  <Ionicons name="ios-chevron-forward-outline" size={48} color={colorIcon} />
                              </NextButton>
                              }
@@ -233,7 +236,7 @@ const AloitaTreeni = (props) => {
 
         } else {
             return(
-                <LoadingView><Loading/></LoadingView>
+                <LoadingView><LottieLoading/></LoadingView>
             )
         }
         
@@ -241,14 +244,15 @@ const AloitaTreeni = (props) => {
 
     return (
              <Carousel
-                ref={(c) => { carousel = c; }}
+                ref={carousel}
                 data={treeniData}
                 itemWidth={viewportWidth}
                 sliderWidth={viewportWidth}
                 renderItem={_renderItem}
                 slideStyle={{ width: viewportWidth }}
+                scrollEnabled={true}
                 inactiveSlideScale={1}
-                scrollEnabled={false}
+                inactiveSlideOpacity={1}
                 /> 
     )
 }
@@ -256,11 +260,7 @@ const AloitaTreeni = (props) => {
 
 export default AloitaTreeni;
 
-const Loading = styled.ActivityIndicator.attrs(props => ({
-    color: '#fff',
-    size: "large",
-    align: "center",
-}))``;
+
 
 export const IconTouchable = styled.TouchableOpacity`
     margin-left: 10px;

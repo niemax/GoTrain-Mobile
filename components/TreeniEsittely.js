@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { ListItem } from 'react-native-elements'
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
+import { LottieLoading } from '../components/Lottie';
 
 
  const TreeniEsittelyData = (props) => {
@@ -135,7 +136,7 @@ import Toast from 'react-native-toast-message';
         </ScrollView>
         
         ) :
-         ( <Loading style={{color: themeColor}}/>)}
+         ( <LottieLoading />)}
          
          {! isLoading && <ButtonContainer>
                 <AloitaButton onPress={() => navigation.navigate(aloitaRoute)}>

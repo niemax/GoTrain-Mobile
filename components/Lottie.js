@@ -60,6 +60,26 @@ export const LottieAnimationMain = () => {
     );
 }
 
+export const LottieLoading = () => {
+  
+  const animation = useRef(null);
+
+  useEffect(() => {
+    animation.current.play();
+  })
+ 
+
+    return (
+       <LottieView
+        ref={animation}
+        source={require('../assets/json/16404-loading-dialogue.json')}
+      />
+
+      
+    );
+
+}
+
 
 
 
