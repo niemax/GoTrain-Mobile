@@ -126,9 +126,7 @@ const AloitaTreeni = (props) => {
         const treenitLength = Object.keys(treeniData).length;
         const colorIcon = colorScheme === 'dark' ? 'white' : 'black';
         
-        if (pbProgress >= 1) {
-            return (<LopetaTreeni treeni={treeni} data={tehdytTreenit} />)
-        } else if (! isLoading) {
+        if (! isLoading) {
             return (
                 
                 <AloitusRenderContainer key={index} style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
@@ -242,19 +240,29 @@ const AloitaTreeni = (props) => {
         
     }
 
-    return (
-             <Carousel
-                ref={carousel}
-                data={treeniData}
-                itemWidth={viewportWidth}
-                sliderWidth={viewportWidth}
-                renderItem={_renderItem}
-                slideStyle={{ width: viewportWidth }}
-                scrollEnabled={true}
-                inactiveSlideScale={1}
-                inactiveSlideOpacity={1}
-                /> 
-    )
+
+    if (pbProgress >= 1) {
+        return (
+        
+            <LopetaTreeni treeni={treeni} data={tehdytTreenit} />
+   )
+       
+    } else {
+        return (
+            <Carousel
+            ref={carousel}
+            data={treeniData}
+            itemWidth={viewportWidth}
+            sliderWidth={viewportWidth}
+            renderItem={_renderItem}
+            slideStyle={{ width: viewportWidth }}
+            scrollEnabled={false}
+            inactiveSlideScale={1}
+            inactiveSlideOpacity={1}
+            /> 
+        )
+    }
+    
 }
 
 
