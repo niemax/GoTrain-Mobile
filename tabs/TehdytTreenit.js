@@ -1,4 +1,4 @@
-    import React, { useState, useCallback, useRef, useEffect } from "react";
+    import React, { useState, useCallback } from "react";
     import { RefreshControl, ScrollView } from 'react-native';
     import { Ionicons } from '@expo/vector-icons';
     import styled from 'styled-components/native'; 
@@ -11,7 +11,6 @@
 
     const wait = (timeout) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
-
       }
 
     const TehdytTreenit = () => {
