@@ -56,19 +56,20 @@ const LopetaTreeni = (props) => {
             Toast.show({
                 text2: 'Treeni lisätty tehtyihin treeneihin',
                 type: 'success',
-                visibilityTime: 2500
+                visibilityTime: 2500,
     
               });
+
              setTimeout(() => {
-                navigation.pop();
-            }, 2000) 
+                    navigation.pop()
+                    navigation.pop()
+
+            }, 500);
 
         }
         
     useEffect(() => {
-        setTimeout(() => {
             setShoot(true)
-        }, 100)
     })
    // console.log("tehdyt treenit data", data);
 
@@ -122,10 +123,10 @@ const LopetaTreeni = (props) => {
         
         {shoot ? (
         <ConfettiCannon
-        count={70}
+        count={250}
         origin={{x: 0, y: -20}}
         autoStart={false}
-        fallSpeed={6000}
+        fallSpeed={7000}
         fadeOut={true}
       />
         ) : (null)
