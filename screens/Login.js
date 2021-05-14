@@ -1,104 +1,100 @@
 import React, { useState } from 'react'
-import styled from 'styled-components/native'; 
+import { Alert, ScrollView, KeyboardAvoidingView } from 'react-native';
 import Text from '../components/Text';
-import { FontAwesome as Icon } from '@expo/vector-icons'; 
-import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
-import { signIn } from '../API/FirebaseMethods';
-import { Alert } from 'react-native';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { signIn } from '../API/FirebaseMethods'
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import { Container, 
-    HeaderGraphic, 
-    RightCircle, 
-    LeftCircle, 
-    Main, 
-    Auth, 
-    AuthContainer, 
-    AuthTitle, 
-    AuthField, 
-    SignUpContainer,
-    SignUp } from '../utils/Styling';
+import { LottieSignup } from '../components/Lottie';
+import { 
+    SignupContainer, 
+    SignupButtonContainer,
+    SignIn, 
+    SignUp,
+    Actions,
+    Footer,
+    AuthField } from '../utils/Styling';
 
 
-const Login = ({
-        navigation
-    }) => {
+    const Login = ({ navigation }) => {
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
-
+    
         Appearance.getColorScheme();
         const colorScheme = useColorScheme();
-        const themeColor = colorScheme === 'dark' ? 'white' : 'black';
+
+         const handleLogin = () => {
+                 signIn(email, password);
+                 navigation.replace('Loading');
+                 setEmail('');
+                 setPassword('');
+ 
+             }
+    
         
-
-        const handleLogin = () => {
-                signIn(email, password);
-                navigation.replace('Loading');
-                setEmail('');
-                setPassword('');
-
-            }
-
-
-        return (
-            <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
-            <Main>
-            <Text color="black" title semi bold center>
-            {`Tervetuloa takaisin, \n Kirjaudu sisään.`}{" "}
-            <Icon 
-            name="hand-peace-o" 
-            size={32} 
-            color="orange"/>
-            </Text>
-            </Main>
-            <Auth>
-                <AuthContainer>
-                    <AuthTitle style={{color: themeColor}}>Sähköposti</AuthTitle>
-                    <Ionicons name="mail-open-outline" size={18} color={themeColor} />
-                    <AuthField 
-                    autoCapitalize="none" 
-                    autoCompleteType="email" 
-                    autoCorrect={false} 
-                    keyboardType="email-address"
-                    value={email}
-                    onChangeText={(email) => setEmail(email)}
-                    />
-                </AuthContainer>
-                <AuthContainer >
-                    <AuthTitle style={{color: themeColor}} >Salasana</AuthTitle>
-                    <MaterialCommunityIcons name="form-textbox-password" size={18} color={themeColor} />
-                    <AuthField 
-                    autoCapitalize="none" 
-                    autoCompleteType="password" 
-                    autoCorrect={false} 
-                    secureTextEntry={true}
-                    value={password}
-                    onChangeText={(password) => setPassword(password)}
-                    />
-                </AuthContainer>
-            </Auth>
-
-            <SignUpContainer onPress={handleLogin}>
-                <Text bold medium center>Kirjaudu sisään</Text>
-            </SignUpContainer>
-
-            <SignUp onPress={() => navigation.navigate('Signup')}>
-            <Text color="black" small center>
-            Uusi jäsen?{" "} 
-            <Text medium bold color="#CB570F">
-            Rekisteröidy
-            </Text>
-            </Text>
-            </SignUp>
-
-                <HeaderGraphic>
-                <RightCircle />
-                <LeftCircle />
+            return (
+                <KeyboardAvoidingView 
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5', flex: 1}}>
+    
+            <SignupContainer >
+                <LottieSignup />
+    
+                 
+     
+                 </SignupContainer>
+                 
+                 <Footer>
+                 <KeyboardAvoidingView></KeyboardAvoidingView>
+                 <ScrollView>
+                 <Text style={{color: '#fff', fontFamily: 'MontserratSemiBold'}} marginTop="35px" large>Tervetuloa takaisin!</Text>
+                     <Actions>
+                        
+                         
+                         <Text left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SÄHKÖPOSTI *</Text>
+                         <Ionicons name="md-person-add-outline" size={18} color='white' />
+                         <AuthField 
+                         autoCapitalize="none" 
+                         autoCorrect={false} 
+                         autoFocus={false}
+                         value={email}
+                         onChangeText={(email) => setEmail(email)}
+                         />
+                         
+                         <Text left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SALASANA *</Text>
+                         <Ionicons name="md-person-add-outline" size={18} color='white' />
+                         <AuthField 
+                         autoCapitalize="none" 
+                         autoCorrect={false} 
+                         autoFocus={false}
+                         secureTextEntry={true}
+                         value={password}
+                         onChangeText={(password) => setPassword(password)}
+                         />
+                         
+                     </Actions>
+                 <SignupButtonContainer>
+                 <SignIn onPress={handleLogin}>
+                     <Text medium style={{color: '#000', fontFamily: 'MontserratSemiBold'}}>Kirjaudu sisään</Text>
+                 </SignIn>
+                 <SignUp onPress={() => navigation.navigate('Signup')}>
+                     <Text medium style={{color: '#000', fontFamily: 'MontserratSemiBold'}}>Rekisteröidy</Text>
+                 </SignUp>
+                 </SignupButtonContainer>
+                     
+                 </ScrollView>
+    
+                     
+                 </Footer>
+    
+                 
+                </KeyboardAvoidingView>
+               
                 
-            </HeaderGraphic>
-            </Container>
-        );
-}
-
-
-
+            );
+           
+    }
+        
+        
+        
+        
 export default Login;

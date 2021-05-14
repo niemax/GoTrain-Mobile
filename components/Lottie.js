@@ -81,6 +81,22 @@ export const LottieLoading = () => {
 }
 
 
+export const LottieSignup = () => {
 
+  const animation = useRef(null);
 
+  useEffect(() => {
+    animation.current.play();
+  })
+ 
 
+    return (
+      <LottieContainer>
+        <LottieView
+        ref={animation}
+        source={require('../assets/json/36914-women-online-exercises.json')}
+      />
+      </LottieContainer>
+      
+    );
+}

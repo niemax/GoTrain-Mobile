@@ -9,8 +9,6 @@ import {
     Container,
     Main, 
     LoadingView, 
-    RightCircle, 
-    LeftCircle, 
     HeaderGraphic } from '../utils/Styling';
 
 const LoadingScreen = ({
@@ -28,8 +26,6 @@ const LoadingScreen = ({
                     if (user) {
                         setIsLoggedIn(true);
                         navigation.navigate('Kotisivu'); 
-                    } else {
-                        navigation.navigate('Signup');
                     }
                 } catch (err) {
                     console.log(err);
@@ -41,13 +37,8 @@ const LoadingScreen = ({
 
     return(
         
-        <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
-        <HeaderGraphic>
-                <RightCircle />
-                <LeftCircle />
+        <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}}>
                 
-            </HeaderGraphic>
-            <Main>
             {! isLoggedIn ? (
             <LoadingView>
             <Text title bold center>GoTrain</Text>
@@ -55,21 +46,11 @@ const LoadingScreen = ({
             </LoadingView>
         ) : (console.log('Logged in!')
         )} 
-            </Main>
         
     
         </Container>
     )
 }
-
-
-const Loading = styled.ActivityIndicator.attrs(props => ({
-    color: 'black',
-    size: "large",
-    align: "center",
-    marginTop: 200
-}))``;
-
 
 
 export default LoadingScreen;

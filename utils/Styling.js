@@ -6,6 +6,23 @@ export const Container = styled.View `
     
 `;
 
+export const SignupContainer = styled.View `
+    flex: 1;
+`;
+
+export const Footer = styled.View `
+    flex: 2;
+    background-color: #054dd9;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    padding: 10px;
+`;
+
+export const Actions = styled.View `
+
+`;
+
+
 export const RenderContainer = styled.View `
     flex: 1;
     background-color: #141314;
@@ -33,6 +50,11 @@ export const ButtonContainer = styled.View `
     justify-content: center;
     height: 12%;
     padding: 15px;
+`;
+
+export const SignupButtonContainer = styled.View `
+    margin-top: 30px;
+
 `;
 //#947AFF
 export const IconTouchable = styled.TouchableOpacity `
@@ -168,8 +190,9 @@ export const PalauteButtonContainer = styled.View `
 
 export const AuthField = styled.TextInput `
     border-bottom-color: #8e93a1;
-    border-bottom-width: 0.5px;
-    height: 48px;
+    border-bottom-width: 0.3px;
+    color: #fff;
+    margin-top: 10px;
 
 `;
 
@@ -181,11 +204,7 @@ export const AuthContainer = styled.View `
 `;
 
 // welcome back
-export const AuthTitle = styled(Text) `   
-    font-size: 12px;
-    text-transform: uppercase;
-    font-weight: 300;
-`;
+
 
 export const HeaderGraphic = styled.View `
     position: absolute;
@@ -194,44 +213,32 @@ export const HeaderGraphic = styled.View `
     z-index: -100;
 `;
 
-export const RightCircle = styled.View `
-    background-color: #054dd9;
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 200px;
-    right: -100px;
-    top: -200px;
-`;
-
-export const LeftCircle = styled.View `
-    background-color: #000;
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-    left: -50px;
-    top: -50px;
-`;
-
-export const Main = styled.View `
-    margin-top: 192px;
-`;
-
 
 // sign up // sign in button
-export const SignUpContainer = styled.TouchableOpacity `
-    margin: 32px;
+
+
+export const SignUp = styled.TouchableOpacity `
+margin-bottom: 30px;
+    margin-left: 35px;
+    width: 80%;
     height: 48px;
     align-items: center;
     justify-content: center;
-    background-color: #054dd9;
     border-radius: 30px;
-    
-`;
-
-export const SignUp = styled.TouchableOpacity `
+    shadow-color: 'rgba(0,0,0, .4)';
+    shadow-opacity: 0.5;
+    background-color: ${props => props.color ?? '#fff'};
 `;
 
 export const SignIn = styled.TouchableOpacity `
+margin-bottom: 30px;
+    margin-left: 35px;
+    width: 80%;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    shadow-color: 'rgba(0,0,0, .4)';
+    shadow-opacity: 0.5;
+    background-color: ${props => props.color ?? '#fff'};
 `;

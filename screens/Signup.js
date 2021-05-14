@@ -1,21 +1,17 @@
 import React, { useState } from 'react'
-import { Alert, Image } from 'react-native';
+import { Alert, ScrollView, KeyboardAvoidingView } from 'react-native';
 import Text from '../components/Text';
-import { FontAwesome as Icon } from '@expo/vector-icons';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { registration } from '../API/FirebaseMethods'
 import { Appearance, useColorScheme } from 'react-native-appearance';
+import { LottieSignup } from '../components/Lottie';
 import { 
-    Container, 
+    SignupContainer, 
+    SignupButtonContainer,
     SignIn, 
-    SignUpContainer, 
-    AuthTitle, 
-    AuthContainer, 
-    Auth, 
-    Main, 
-    LeftCircle, 
-    RightCircle, 
-    HeaderGraphic,
+    SignUp,
+    Actions,
+    Footer,
     AuthField } from '../utils/Styling';
 
 
@@ -54,82 +50,72 @@ const Signup = ({ navigation }) => {
     };
     
         return (
-            <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
-            <Main>
-            <Text color="black" title semi center>
-            {`Tervetuloa, \n Rekisteröidy aloittaaksesi.`}{" "}
-            <Icon 
-            name="hand-peace-o" 
-            size={32} 
-            color="orange"/>
-            </Text>
-            </Main>
+            <KeyboardAvoidingView 
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5'), flex: 1}}>
 
-            <Auth>
-            <AuthContainer>
-                    <AuthTitle style={{color: colorScheme === 'dark' ? 'white' : 'black'}}>Nimi *</AuthTitle>
-                    <Ionicons name="md-person-add-outline" size={18} color={colorScheme === 'dark' ? 'white' : 'black'} />
-                    <AuthField 
-                    autoCapitalize="none" 
-                    autoCorrect={false} 
-                    autoFocus={false}
-                    value={name}
-                    onChangeText={(name) => setName(name)}
-                    />
-                    
-                </AuthContainer>
-                <AuthContainer>
-                    <AuthTitle style={{color: colorScheme === 'dark' ? 'white' : 'black'}}>Sähköposti *</AuthTitle>
-                    <Ionicons name="mail-open-outline" size={18} color={colorScheme === 'dark' ? 'white' : 'black'} />
-                    <AuthField 
-                    autoCapitalize="none" 
-                    autoCompleteType="email" 
-                    autoCorrect={false} 
-                    autoFocus={false}
-                    keyboardType="email-address"
-                    value={email}
-                    onChangeText={(email) => setEmail(email)}
-                    />
-                </AuthContainer>
-                <AuthContainer>
-                    <AuthTitle style={{color: colorScheme === 'dark' ? 'white' : 'black'}}>Salasana *</AuthTitle>
-                    <MaterialCommunityIcons name="form-textbox-password" size={18} color={colorScheme === 'dark' ? 'white' : 'black'} />
-                    <AuthField 
-                    autoCapitalize="none" 
-                    autoCompleteType="password" 
-                    autoCorrect={false} 
-                    autoFocus={false}
-                    secureTextEntry={true}
-                    value={password}
-                    onChangeText={(password) => setPassword(password)}
-                    />
-                </AuthContainer>
-            </Auth>
+        <SignupContainer >
+            <LottieSignup />
 
-            <SignUpContainer onPress={handleSignUp}>
-                <Text medium center>Rekisteröidy</Text>
+             
+ 
+             </SignupContainer>
+             
+             <Footer>
+             <KeyboardAvoidingView></KeyboardAvoidingView>
+             <ScrollView>
+             <Text style={{color: '#fff', fontFamily: 'MontserratSemiBold'}} marginTop="35px" large>Tervetuloa!</Text>
+                 <Actions>
+                     <Text left marginBottom="15px" marginTop="15px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>NIMI *</Text>
+                     <Ionicons name="md-person-add-outline" size={18} color='white' />
+                     <AuthField 
+                     autoCapitalize="none" 
+                     autoCorrect={false} 
+                     autoFocus={false}
+                     value={name}
+                     onChangeText={(name) => setName(name)}
+                     />
+                     
+                     <Text left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SÄHKÖPOSTI *</Text>
+                     <Ionicons name="md-person-add-outline" size={18} color='white' />
+                     <AuthField 
+                     autoCapitalize="none" 
+                     autoCorrect={false} 
+                     autoFocus={false}
+                     value={email}
+                     onChangeText={(email) => setEmail(email)}
+                     />
+                     
+                     <Text left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SALASANA *</Text>
+                     <Ionicons name="md-person-add-outline" size={18} color='white' />
+                     <AuthField 
+                     autoCapitalize="none" 
+                     autoCorrect={false} 
+                     autoFocus={false}
+                     value={password}
+                     secureTextEntry={true}
+                     onChangeText={(password) => setPassword(password)}
+                     />
+                     
+                 </Actions>
+             <SignupButtonContainer>
+             <SignUp onPress={handleSignUp}>
+                 <Text medium style={{color: '#000', fontFamily: 'MontserratSemiBold'}}>Rekisteröidy</Text>
+             </SignUp>
+             <SignIn onPress={() => navigation.navigate('Login')}>
+                 <Text medium style={{color: '#000', fontFamily: 'MontserratSemiBold'}} >Kirjaudu sisään</Text>
+             </SignIn>
+             </SignupButtonContainer>
+                 
+             </ScrollView>
+
+                 
+             </Footer>
+
+             
+            </KeyboardAvoidingView>
+           
             
-                
-            </SignUpContainer>
-
-            <SignIn onPress={() => navigation.navigate('Login')}>
-            <Text color="black" small center>
-            Oletko jo jäsen?{" "} 
-            <Text medium>
-            Kirjaudu sisään
-            </Text>
-            </Text>
-            </SignIn>
-
-                <HeaderGraphic>
-                
-                <RightCircle
-
-                 />
-                <LeftCircle />
-                
-            </HeaderGraphic>
-            </Container>
         );
        
 }
