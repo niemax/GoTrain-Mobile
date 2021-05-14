@@ -7,7 +7,7 @@
     import * as firebase from 'firebase';
     import { Appearance, useColorScheme } from 'react-native-appearance';
     import { List } from 'react-native-paper';
-    import { LottieAnimationTehdytTreenit, LottieAnimationMain } from '../components/Lottie'
+    import { LottieAnimationTehdytTreenit, LottieAnimationMain, LottieLoading } from '../components/Lottie'
 
     const wait = (timeout) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
@@ -72,7 +72,7 @@
            
             <Text marginTop="30px" large>Suoritukset</Text>
             {! refreshed && <LottieAnimationMain />}
-                {loading ? ( <LottieAnimationTehdytTreenit /> 
+                {loading ? ( <LottieLoading /> 
                 ) : (
                     
                     <ScrollView

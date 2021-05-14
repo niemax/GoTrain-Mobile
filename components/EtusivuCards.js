@@ -58,7 +58,7 @@ const Cards = () => {
     return(
             <Container>
              
-            <ScrollView style={{ height: '100%' }}>
+            <ScrollView style={{width: '100%'}}>
             {
                 treenit.map((item, index) => {
                     return(
@@ -67,7 +67,7 @@ const Cards = () => {
                         <Card.Title >
                         <KuvausContainer>
                         <Text medium center>{item.name} </Text>
-                        <View style={{marginLeft: 170, flexDirection: 'row'}}>{item.icon}<Text margin="5px">{item.treeninKesto}</Text></View>
+                        <View style={{marginLeft: 170, flexDirection: 'row'}}>{item.icon}<Text >{item.treeninKesto}</Text></View>
                         </KuvausContainer>
                        
                         
@@ -90,15 +90,15 @@ const Cards = () => {
 const styles = StyleSheet.create({
     image: {
         resizeMode: 'cover',
-        width: '100%',
-        height: '90%',
-        borderRadius: 30
+        borderRadius: 15,
+        marginRight: 30
     },
     cards: {
         borderWidth: 0,
         elevation: 3,
-        height: 250,
-        marginBottom: 25,
+        height: 150,
+        width: '100%',
+        marginBottom: 60,
         backgroundColor: 'rgba(255, 255, 255, 0)',
     }
     
@@ -107,9 +107,8 @@ export default Cards;
 
 const Container = styled.View`
 align-items: center;
-justify-content: center;
 height: 500px;
-
+justify-content: center;
 `;
 
 const KuvausContainer = styled.View`

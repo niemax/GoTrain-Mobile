@@ -44,7 +44,7 @@ import { LottieLoading } from '../components/Lottie';
                 setIsLoading(false);
             }
             
-            return;
+            return data;
 
         } catch (error) {
             console.error(error);
@@ -155,8 +155,8 @@ import { LottieLoading } from '../components/Lottie';
 const styles = StyleSheet.create({
     image: {
         width: '100%',
-        height: '25%',
-        borderRadius: 30,
+        height: '30%',
+        borderRadius: 15,
         
     }, 
    
@@ -167,12 +167,6 @@ const styles = StyleSheet.create({
      
     });
 
-    const Loading = styled.ActivityIndicator.attrs(props => ({
-        
-        size: "large",
-        align: "center",
-        marginTop: 200
-    }))``;
 
     const TextContainer = styled.View`
         flex-direction: row;
