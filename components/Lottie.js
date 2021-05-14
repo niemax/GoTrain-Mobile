@@ -94,7 +94,7 @@ export const LottieSignup = () => {
       <LottieContainer>
         <LottieView
         ref={animation}
-        source={require('../assets/json/36914-women-online-exercises.json')}
+        source={require('../assets/json/60820-bicycle-riding.json')}
       />
       </LottieContainer>
       
