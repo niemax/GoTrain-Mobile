@@ -50,7 +50,7 @@ const Cards = () => {
 
     return(
              
-            <ScrollView >
+            <ScrollView style={{marginTop: 25}}>
             {
                 treenit.map((item, index) => {
                     return(
@@ -61,13 +61,14 @@ const Cards = () => {
                         title={<Text title style={{color: '#FFF', fontFamily: 'MontserratBold'}}>{item.name}</Text>} featured
                         caption=
                         {<View style={{ flexDirection: 'row'}}>{item.icon}
-                        <Text vinkkiTitle style={{color: '#FFF', fontFamily: 'MontserratSemiBold'}} >{item.treeninKesto}
+                        <Text medium style={{color: '#FFF', fontFamily: 'MontserratSemiBold'}} >{item.treeninKesto}
                         </Text>
                         </View>
                         }
-                        containerStyle={{ marginBottom: 5}}  
-                        height={150}     
-                        imageContainerStyle={{opacity: 0.9}}
+                        containerStyle={{ marginBottom: 5, marginLeft: 8.5}}  
+                        height={150}  
+                        width={'98%'}   
+                        imageContainerStyle={{opacity: 0.9, borderRadius: 10}}
                                                 
                         />
                        

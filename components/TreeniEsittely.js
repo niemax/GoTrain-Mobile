@@ -51,9 +51,22 @@ import TreeninKuvausData from '../components/TreeninKuvausData';
         }
     }
 
+    
+
     useEffect(() => {
         _getData();
     }, []);
+
+    const showToast = () => {
+        
+        Toast.show({
+            text2: 'Implemented soon!',
+            type: 'info',
+            visibilityTime: 2500
+    
+          });
+    }
+
 
     
        return(
@@ -61,13 +74,16 @@ import TreeninKuvausData from '../components/TreeninKuvausData';
         <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',}}>
         
         <Image style={styles.image} source={backgroundImage}></Image>
+        <View style={{flexDirection: 'row', position: 'absolute', top: 35}}>
         <IconTouchable onPress={() => navigation.goBack()}>
-        <View style={{flexDirection: 'row',}}>
         <Ionicons name="chevron-back-circle-outline" size={38} color="white" />
-        <Ionicons style={{position: 'absolute', left: 300, bottom: 10}} name="ios-heart-outline" size={38} color="white" />
+        </IconTouchable>
+        <IconTouchable onPress={() => showToast()}>
+        <Text right marginLeft="290px"><Ionicons name="ios-heart-outline" size={38} color="white" /></Text>
+        </IconTouchable>
+        
         </View>
        
-        </IconTouchable>
         
         {!isLoading ? (
             <MainDataContainer>

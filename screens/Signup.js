@@ -64,9 +64,9 @@ const Signup = ({ navigation }) => {
              <Footer>
              <KeyboardAvoidingView></KeyboardAvoidingView>
              <ScrollView>
-             <Text style={{color: '#fff', fontFamily: 'MontserratSemiBold'}} marginTop="35px" large>Tervetuloa!</Text>
+             <Text style={{color: '#fff', fontFamily: 'MontserratSemiBold'}} marginTop="35px" title>Tervetuloa!</Text>
                  <Actions>
-                     <Text left marginBottom="15px" marginTop="15px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>NIMI *</Text>
+                     <Text small left marginBottom="15px" marginTop="15px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>NIMI *</Text>
                      <Ionicons name="md-person-add-outline" size={18} color='white' />
                      <AuthField 
                      autoCapitalize="none" 
@@ -76,7 +76,7 @@ const Signup = ({ navigation }) => {
                      onChangeText={(name) => setName(name)}
                      />
                      
-                     <Text left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SÄHKÖPOSTI *</Text>
+                     <Text small left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SÄHKÖPOSTI *</Text>
                      <Ionicons name="md-person-add-outline" size={18} color='white' />
                      <AuthField 
                      autoCapitalize="none" 
@@ -86,7 +86,7 @@ const Signup = ({ navigation }) => {
                      onChangeText={(email) => setEmail(email)}
                      />
                      
-                     <Text left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SALASANA *</Text>
+                     <Text small left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SALASANA *</Text>
                      <Ionicons name="md-person-add-outline" size={18} color='white' />
                      <AuthField 
                      autoCapitalize="none" 

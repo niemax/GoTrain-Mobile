@@ -45,11 +45,11 @@ import {
                  
                  <Footer>
                  <ScrollView>
-                 <Text style={{color: '#fff', fontFamily: 'MontserratSemiBold'}} marginTop="35px" large>Tervetuloa takaisin!</Text>
+                 <Text title style={{color: '#fff', fontFamily: 'MontserratSemiBold'}} marginTop="35px" large>Tervetuloa takaisin!</Text>
                      <Actions>
                         
                          
-                         <Text left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SÄHKÖPOSTI *</Text>
+                         <Text small left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SÄHKÖPOSTI *</Text>
                          <Ionicons name="md-person-add-outline" size={18} color='white' />
                          <AuthField 
                          autoCapitalize="none" 
@@ -59,7 +59,7 @@ import {
                          onChangeText={(email) => setEmail(email)}
                          />
                          
-                         <Text left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SALASANA *</Text>
+                         <Text small left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SALASANA *</Text>
                          <Ionicons name="md-person-add-outline" size={18} color='white' />
                          <AuthField 
                          autoCapitalize="none" 

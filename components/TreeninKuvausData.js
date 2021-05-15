@@ -15,8 +15,8 @@ export default function TreeninKuvausData(props) {
     const { treeninKesto, kohderyhma, treeniText, treeniData } = props;
 
     return (
-        <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}}> 
-        <Text treeninNimi left marginLeft="15px" marginTop="15px" >{treeniText.toUpperCase()} </Text>
+        <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',}}> 
+        <Text treeninNimi left marginLeft="15px"  >{treeniText.toUpperCase()} </Text>
         <View style={{flexDirection: 'row', margin: 15}}>
         <Ionicons name="ios-timer-sharp" size={26} color={themeColor} />
     

@@ -1,6 +1,6 @@
   
 import React, { useState, useEffect, useRef } from 'react'
-import { Dimensions } from 'react-native';
+import { Dimensions, ScrollView } from 'react-native';
 import Text from '../../components/Text';
 import styled from 'styled-components/native';
 import Carousel from 'react-native-snap-carousel';
@@ -130,11 +130,12 @@ const AloitaTreeni = (props) => {
             return (
                 
                 <AloitusRenderContainer key={index} style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}}>
+                <ScrollView>
                 <ExtraContainer>
                 <IconTouchable onPress={() => navigation.goBack()} left marginLeft="15px">
                 <Ionicons name="ios-chevron-back" size={24} color={colorIcon} />
                 </IconTouchable> 
-                <Text medium marginTop="3px" marginLeft="285px" >{currentSlide} / {treeniData.length}</Text>
+                <Text medium marginTop="3px" marginLeft="240px" ><Text small>TEHTY</Text> {currentSlide} / {treeniData.length}</Text>
                 </ExtraContainer>
 
                      <VideoContainer>
@@ -155,7 +156,7 @@ const AloitaTreeni = (props) => {
      
                          <AloitusButtonContainer>
                          
-                         {index > 0 && <PreviousButton onPress={() => { carousel.current.snapToPrev(); }}>
+                         {index > 0 && <PreviousButton onPress={() => { carousel.current.snapToPrev() }}>
                                  <Ionicons name="ios-chevron-back-outline" size={48} color={colorIcon} />
                              </PreviousButton>}
      
@@ -165,7 +166,7 @@ const AloitaTreeni = (props) => {
                                  />
                              </DoneButton>
      
-                             {index < treenitLength -1 &&  <NextButton onPress={() => { carousel.current.snapToNext(); }}>
+                             {index < treenitLength -1 &&  <NextButton onPress={() => { carousel.current.snapToNext() }}>
                                  <Ionicons name="ios-chevron-forward-outline" size={48} color={colorIcon} />
                              </NextButton>
                              }
@@ -228,6 +229,8 @@ const AloitaTreeni = (props) => {
                          </AdditionalContainer>
                         
                      </UtilsContainer>
+                </ScrollView>
+                
                     
                  </AloitusRenderContainer>
              );

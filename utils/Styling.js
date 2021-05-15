@@ -56,9 +56,6 @@ export const SignupButtonContainer = styled.View `
 `;
 //#947AFF
 export const IconTouchable = styled.TouchableOpacity `
-    position: absolute;
-    top: 50px;
-    left: 10px;
 `;
 
 export const PalauteIcon = styled.TouchableOpacity `
@@ -73,13 +70,6 @@ export const LottieContainer = styled.View `
     margin-top: 20px;
 `;
 
-export const Loading = styled.ActivityIndicator.attrs(props => ({
-    color: 'orange',
-    size: "large",
-    align: "center",
-    marginTop: 40
-}))
-``;
 
 export const VideoContainer = styled.View `
     margin-top: 20px;
@@ -94,6 +84,10 @@ export const UtilsContainer = styled.View `
 export const AloitusRenderContainer = styled.View `
     flex: 1;
     background-color: #141314;
+`;
+
+export const MainDataContainer = styled.View`
+    flex: 2;
 `;
 
 export const AloitusButtonContainer = styled.View `
