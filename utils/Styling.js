@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import Text from '../components/Text'
 
 export const Container = styled.View `
     flex: 1;
@@ -26,7 +25,6 @@ export const Actions = styled.View `
 export const RenderContainer = styled.View `
     flex: 1;
     background-color: #141314;
-    border-radius: 100px;
 `;
 
 export const ParagraphContainer = styled.View `

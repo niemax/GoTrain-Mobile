@@ -10,6 +10,7 @@ import * as Location from 'expo-location';
 import moment from 'moment';
 import 'moment/locale/fi'
 import { Appearance, useColorScheme } from 'react-native-appearance';
+import TervetuloaText from '../components/TervetuloaText';
 
 
 const Etusivu = (
@@ -79,7 +80,7 @@ const Etusivu = (
         getLocation();
         getCurrentDate();
         getUserInfo();
-    }, [currentUser]);
+    }, []);
 
         let currentUser = firebase.auth().currentUser
 
@@ -100,7 +101,7 @@ const Etusivu = (
               } catch (err) {
                   Alert.alert('There is an error.', err.message)
               }
-          }
+          } 
           
      
 
@@ -119,12 +120,12 @@ const Etusivu = (
         <TextContainer>
 
         <Text marginLeft="25px" marginBottom="25px" medium left>{currentDate.toUpperCase()}</Text>
-        <Text marginTop="15px" large center>{`Hei, ${text}!\n Mitä tänään treenattaisiin?`}</Text>
+        <TervetuloaText
+        teksti={text}
+        />
         </TextContainer>
         
-        <CardContainer>
             <Cards />
-        </CardContainer>
         </Container>
         
     );
@@ -138,7 +139,6 @@ const TextContainer = styled.View`
     margin-top: 20px;
 `;
 
-const CardContainer = styled.View`
-`;  
+
 
 export default Etusivu;

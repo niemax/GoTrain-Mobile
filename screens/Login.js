@@ -44,7 +44,6 @@ import {
                  </SignupContainer>
                  
                  <Footer>
-                 <KeyboardAvoidingView></KeyboardAvoidingView>
                  <ScrollView>
                  <Text style={{color: '#fff', fontFamily: 'MontserratSemiBold'}} marginTop="35px" large>Tervetuloa takaisin!</Text>
                      <Actions>

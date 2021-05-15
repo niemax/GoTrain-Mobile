@@ -129,7 +129,7 @@ const AloitaTreeni = (props) => {
         if (! isLoading) {
             return (
                 
-                <AloitusRenderContainer key={index} style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
+                <AloitusRenderContainer key={index} style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}}>
                 <ExtraContainer>
                 <IconTouchable onPress={() => navigation.goBack()} left marginLeft="15px">
                 <Ionicons name="ios-chevron-back" size={24} color={colorIcon} />

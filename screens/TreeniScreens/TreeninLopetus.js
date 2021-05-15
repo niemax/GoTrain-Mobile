@@ -86,7 +86,7 @@ const LopetaTreeni = (props) => {
             borderRadius: 15}} 
             >
             <Text style={{fontFamily: 'MontserratExtraBold', color: themeColor}} medium >TREENIT </Text>
-            <Text style={{fontFamily: 'MontserratExtraBold'}} title color="#054dd9">{Object.keys(data).length}</Text>
+            <Text style={{fontFamily: 'MontserratExtraBold', color: '#054dd9'}} title color="#054dd9">{Object.keys(data).length}</Text>
             
             </Card>
             <Card containerStyle={{borderWidth: 0,
@@ -96,7 +96,7 @@ const LopetaTreeni = (props) => {
             backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
             borderRadius: 15,}} >
             <Text style={{fontFamily: 'MontserratExtraBold', color: themeColor}} medium >SUORITUS % </Text>
-            <Text style={{fontFamily: 'MontserratExtraBold'}} title color="#054dd9">100</Text>
+            <Text style={{fontFamily: 'MontserratExtraBold', color: '#054dd9'}} title color="#054dd9">100</Text>
             
             </Card>
             <Card containerStyle={{borderWidth: 0,
