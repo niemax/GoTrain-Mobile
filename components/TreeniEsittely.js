@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { Image, StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native';
 import Text from '../components/Text';
 import { Ionicons, Feather } from '@expo/vector-icons'; 
-import { Container, AloitaButton, ButtonContainer, IconTouchable, RenderContainer } from '../utils/Styling';
+import { Container, AloitaButton, ButtonContainer, IconTouchable, } from '../utils/Styling';
 import { useNavigation } from '@react-navigation/native';
 import { ListItem } from 'react-native-elements'
 import { Appearance, useColorScheme } from 'react-native-appearance';
