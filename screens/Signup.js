@@ -52,21 +52,19 @@ const Signup = ({ navigation }) => {
         return (
             <KeyboardAvoidingView 
             behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5'), flex: 1}}>
+            style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5', flex: 1}}>
 
         <SignupContainer >
             <LottieSignup />
-
-             
  
              </SignupContainer>
              
              <Footer>
-             <KeyboardAvoidingView></KeyboardAvoidingView>
              <ScrollView>
-             <Text style={{color: '#fff', fontFamily: 'MontserratSemiBold'}} marginTop="35px" title>Tervetuloa!</Text>
+             <Text style={{color: '#fff', fontFamily: 'MontserratSemiBold', fontSize: 24}} marginTop="35px" title>Tervetuloa!</Text>
+                 
                  <Actions>
-                     <Text small left marginBottom="15px" marginTop="15px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>NIMI *</Text>
+                     <Text left marginBottom="15px" marginTop="15px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>NIMI *</Text>
                      <Ionicons name="md-person-add-outline" size={18} color='white' />
                      <AuthField 
                      autoCapitalize="none" 
@@ -76,7 +74,7 @@ const Signup = ({ navigation }) => {
                      onChangeText={(name) => setName(name)}
                      />
                      
-                     <Text small left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SÄHKÖPOSTI *</Text>
+                     <Text left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SÄHKÖPOSTI *</Text>
                      <Ionicons name="md-person-add-outline" size={18} color='white' />
                      <AuthField 
                      autoCapitalize="none" 
@@ -86,7 +84,7 @@ const Signup = ({ navigation }) => {
                      onChangeText={(email) => setEmail(email)}
                      />
                      
-                     <Text small left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SALASANA *</Text>
+                     <Text left marginBottom="15px" marginTop="35px" style={{color: '#fff', fontFamily: 'MontserratSemiBold'}}>SALASANA *</Text>
                      <Ionicons name="md-person-add-outline" size={18} color='white' />
                      <AuthField 
                      autoCapitalize="none" 

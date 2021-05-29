@@ -1,11 +1,9 @@
 import React from 'react'
-import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Card, Tile } from 'react-native-elements';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { Tile } from 'react-native-elements';
 import Text from '../components/Text';
-import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native'; 
 import { Ionicons } from '@expo/vector-icons'; 
-import { Appearance, useColorScheme } from 'react-native-appearance';
 
 
 const Cards = () => {
@@ -83,11 +81,6 @@ const Cards = () => {
 
 
 export default Cards;
-
-const Container = styled.View`
-height: 100%;
-margin-top: 15px;
-`;
 
 
 

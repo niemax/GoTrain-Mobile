@@ -15,12 +15,12 @@ const TextStyle = ({...props}) => {
 const Text = styled.Text`
 margin: ${props => props.margin ?? 0};
 padding: ${props => props.padding ?? 0};
-marginLeft: ${props => props.marginLeft ?? 0};
+marginLeft: ${props => props.marginLeft ?? 0}
 marginRight: ${props => props.marginRight ?? 0};
 marginTop: ${props => props.marginTop ?? 0};
 marginBottom: ${props => props.marginBottom ?? 0};
 
-${({ title, vinkit, vinkkiTitle, large, medium, small, tiny, treeninNimi, sarjat }) => {
+${({ title, vinkit, vinkkiTitle, large, medium, small, treeninNimi, sarjat }) => {
     switch (true) {
             case title:
                 return `font-size: 32px`
@@ -40,8 +40,6 @@ ${({ title, vinkit, vinkkiTitle, large, medium, small, tiny, treeninNimi, sarjat
             case small:
                 return `font-size: 14px`
 
-            case tiny:
-                return `font-size: 11px`
             
             case treeninNimi:
                 return `font-size: 18px`

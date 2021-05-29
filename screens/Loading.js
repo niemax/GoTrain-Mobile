@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components/native';
-import * as firebase from 'firebase';
+
 import Text from '../components/Text';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import { LottieLoading } from '../components/Lottie';
 
 import { 
     Container,
-    Main, 
     LoadingView, 
-    HeaderGraphic } from '../utils/Styling';
+   } from '../utils/Styling';
 
 const LoadingScreen = ({
         navigation
@@ -21,16 +19,7 @@ const LoadingScreen = ({
 
 
         useEffect(() => {
-            firebase.auth().onAuthStateChanged((user) => {
-                try {
-                    if (user) {
-                        setIsLoggedIn(true);
-                        navigation.navigate('Kotisivu'); 
-                    }
-                } catch (err) {
-                    console.log(err);
-                }
-            })
+            
             
         }, []);
 

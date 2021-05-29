@@ -22,8 +22,8 @@ const Etusivu = (
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
     const [temp, setTemp] = useState(null);
-    const [city, setCity] = useState('')
-    const [isLoading, setIsLoading] = useState(true)
+    const [city, setCity] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
     const [location, setLocation] = useState(null);
     const [currentDate, setCurrentDate] = useState('');
     const [text, setText] = useState('');
@@ -72,7 +72,7 @@ const Etusivu = (
     const getCurrentDate = () => {
         const date = moment().locale('fi')
             .format('LL')
-        setCurrentDate(date)
+        setCurrentDate(date);
         //console.log(currentDate)
     }
 

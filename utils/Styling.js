@@ -120,6 +120,10 @@ export const LoadingView = styled.View `
     background-color: #141314;
 `;
 
+export const Loading = styled.ActivityIndicator`
+    margin-top: 30px;
+`;
+
 export const ProgressBarContainer = styled.View `
     
 `;
