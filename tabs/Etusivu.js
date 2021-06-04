@@ -79,10 +79,10 @@ const Etusivu = (
     useEffect(() => {
         getLocation();
         getCurrentDate();
-        getUserInfo();
+       // getUserInfo();
     }, []);
 
-        let currentUser = firebase.auth().currentUser
+        /* let currentUser = firebase.auth().currentUser
 
           const getUserInfo = async () => {
               try {
@@ -101,7 +101,7 @@ const Etusivu = (
               } catch (err) {
                   Alert.alert('There is an error.', err.message)
               }
-          } 
+          }  */
           
      
 

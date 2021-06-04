@@ -31,9 +31,13 @@ import TreeninKuvausData from '../components/TreeninKuvausData';
     const _getData = async () => {
         try {
             // MAIN FETCH
-            let response = await fetch(`https://mun-treeni-api.herokuapp.com/${treeni}`);
-            const data = await response.json();
+          /*   let response = await fetch(`https://mun-treeni-api.herokuapp.com/${treeni}`);
+            const data = await response.json(); */
             //console.log("kuvaus", data.kuvaus);
+
+            // TEST FETCH
+
+            let response = await fetch(``);
 
             if (response.status === 200) {
                 setTreeniData(data?.liikkeet);
