@@ -28,7 +28,7 @@ import { VideoContainer,
     ToistotContainer,
     PainotContainer,
     AdditionalContainer
-    } from '../../utils/Styling'
+    } from '../../utils/Styling';
 
 
 
@@ -47,7 +47,7 @@ const AloitaTreeni = (props) => {
     const [paino2, setPaino2] = useState('');
     const [paino3, setPaino3] = useState('');
 
-    const carousel = useRef(null)
+    const carousel = useRef(null);
 
     Appearance.getColorScheme();
     const colorScheme = useColorScheme();
@@ -107,7 +107,7 @@ const AloitaTreeni = (props) => {
             Toast.show({
                 text2: `${item.nimi} poistettu!`,
                 type: 'error',
-                visibilityTime: 1500
+                visibilityTime: 1000
     
               });
             
@@ -115,7 +115,7 @@ const AloitaTreeni = (props) => {
 
         setTehdytTreenit(treenit);
         setPbProgress(Object.keys(treenit).length / treeniData.length);
-        setToisto1(''), setToisto2(''), setToisto3(''), setPaino1(''),setPaino2(''), setPaino3('')
+        setToisto1(''), setToisto2(''), setToisto3(''), setPaino1(''),setPaino2(''), setPaino3('');
         console.log("treenit", treenit, Object.keys(treenit).length);
        
     }
