@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/native';
 import { Image, StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native';
 import Text from '../components/Text';
-import { Ionicons, Feather } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons'; 
 import { Container, AloitaButton, ButtonContainer, IconTouchable, } from '../utils/Styling';
 import { useNavigation } from '@react-navigation/native';
 import { ListItem } from 'react-native-elements'
@@ -10,67 +10,67 @@ import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import { LottieLoading } from '../components/Lottie';
 import TreeninKuvausData from '../components/TreeninKuvausData';
+import axios from 'axios';
 
 
  const TreeniEsittelyData = (props) => {
-     const [treeniData, setTreeniData] = useState([]);
-     const [treeninKesto, setTreeninKesto] = useState('');
-     const [kohderyhma, setKohderyhma] = useState('');
-     const [treeniText, setTreeniText] = useState('');
-     const [aloitaRoute, setAloitaRoute] = useState('');
-     const [isLoading, setIsLoading] = useState(true);
-
-    Appearance.getColorScheme();
-    const colorScheme = useColorScheme();
-    const themeColor = colorScheme === 'dark' ? 'white' : 'black';
-    const navigation = useNavigation();
-
-    const { treeni, backgroundImage } = props;
+         const [treeniData, setTreeniData] = useState([]);
+         const [treeninKesto, setTreeninKesto] = useState('');
+         const [kohderyhma, setKohderyhma] = useState('');
+         const [treeniText, setTreeniText] = useState('');
+         const [aloitaRoute, setAloitaRoute] = useState('');
+         const [isLoading, setIsLoading] = useState(true);
 
 
-    const _getData = async () => {
-        try {
-            // MAIN FETCH
-          /*   let response = await fetch(`https://mun-treeni-api.herokuapp.com/${treeni}`);
-            const data = await response.json(); */
-            //console.log("kuvaus", data.kuvaus);
+         Appearance.getColorScheme();
+         const colorScheme = useColorScheme();
+         const themeColor = colorScheme === 'dark' ? 'white' : 'black';
+         const navigation = useNavigation();
 
-            // TEST FETCH
+         const {
+             treeni,
+             backgroundImage
+         } = props;
 
-            let response = await fetch(``);
 
-            if (response.status === 200) {
-                setTreeniData(data?.liikkeet);
-                setTreeninKesto(data?.kuvaus.treeninkesto);
-                setKohderyhma(data?.kuvaus.kohderyhma);
-                setTreeniText(data?.kuvaus.treenitext);
-                setAloitaRoute(data?.kuvaus.aloitaRoute);
-                setIsLoading(false);
-            }
-            
-            return data;
+         const _getData = async () => {
+             try {
 
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
-    
+                 axios.get(`http://192.168.1.160:3000/api/treenit/${treeni}`)
+                     .then(response => {
+                         setTreeniData(response.data[0].liikkeet);
+                         setTreeninKesto(response.data[0].kuvaus.treeninkesto);
+                         setKohderyhma(response.data[0].kuvaus.kohderyhma);
+                         setTreeniText(response.data[0].kuvaus.treenitext);
+                         setAloitaRoute(response.data[0].kuvaus.aloitaRoute);
+                         //   console.log(response.data.data);
+                     })
+                     .catch(err => {
+                         console.log(err);
+                     })
+                     .then(() => {
+                         setIsLoading(false);
+                     })
 
-    useEffect(() => {
-        _getData();
-    }, []);
+             } catch (error) {
+                 console.error(error);
+             }
+         }
 
-    const showToast = () => {
-        
-        Toast.show({
-            text2: 'Implemented soon!',
-            type: 'info',
-            visibilityTime: 2500
-    
-          });
-    }
+         useEffect(() => {
+             _getData();
+         }, []);
 
+         const showToast = () => {
+
+             Toast.show({
+                 text2: 'Implemented soon!',
+                 type: 'info',
+                 visibilityTime: 2500
+
+             });
+         }
 
     
        return(
@@ -95,12 +95,12 @@ import TreeninKuvausData from '../components/TreeninKuvausData';
 
 
 
-<TreeninKuvausData
-treeninKesto={treeninKesto}
-kohderyhma={kohderyhma}
-treeniText={treeniText}
-treeniData={treeniData}
-/>
+        <TreeninKuvausData
+        treeninKesto={treeninKesto}
+        kohderyhma={kohderyhma}
+        treeniText={treeniText}
+        treeniData={treeniData}
+        />
 
 { 
 treeniData.map((item, index) => {
@@ -111,29 +111,29 @@ treeniData.map((item, index) => {
         containerStyle={{ height: 90,
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}} bottomDivider >
    
-   <ListItem.Content>
+    <ListItem.Content>
   
-   <TextContainer>
-   <Text marginLeft="3px" medium>{item.nimi}</Text>
-   <Text 
-   style=
-   {{
-       fontFamily: 'MontserratSemiBold', 
-       position: 'absolute', left: 247, 
-       color: colorScheme === 'dark' ? '#fff' : '#000' 
-       }} medium>{item.sarjat} sarjaa
-       </Text>
-   </TextContainer>
-   
-   </ListItem.Content>
-   <Ionicons name="ios-chevron-forward-sharp" size={24} color={themeColor} />
-  
-   </ListItem>
-        </TouchableOpacity>
+    <TextContainer>
+    <Text marginLeft="3px" medium>{item.nimi}</Text>
+    <Text 
+    style=
+    {{
+            fontFamily: 'MontserratSemiBold', 
+            position: 'absolute', left: 247, 
+        color: colorScheme === 'dark' ? '#fff' : '#000' 
+        }} medium>{item.sarjat} sarjaa
+        </Text>
+    </TextContainer>
        
-    );
-})
-}  
+    </ListItem.Content>
+    <Ionicons name="ios-chevron-forward-sharp" size={24} color={themeColor} />
+       
+    </ListItem>
+         </TouchableOpacity>
+
+      );
+    })
+    }  
 
 
 </ScrollView>

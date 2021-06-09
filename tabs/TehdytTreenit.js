@@ -1,63 +1,83 @@
-    import React, { useState, useCallback } from "react";
-    import { RefreshControl, ScrollView } from 'react-native';
-    import { Ionicons } from '@expo/vector-icons';
-    import styled from 'styled-components/native'; 
-    import Text from '../components/Text';
-    import HeaderComponent from '../components/HeaderComponent';
-    import * as firebase from 'firebase';
-    import { Appearance, useColorScheme } from 'react-native-appearance';
-    import { List } from 'react-native-paper';
-    import { LottieAnimationMain } from '../components/Lottie';
-    import { Loading } from '../utils/Styling';
+import React, { useState, useCallback, useEffect } from "react";
+import { RefreshControl, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import styled from 'styled-components/native'; 
+import Text from '../components/Text';
+import HeaderComponent from '../components/HeaderComponent';
+import * as firebase from 'firebase';
+import { Appearance, useColorScheme } from 'react-native-appearance';
+import { List } from 'react-native-paper';
+import { LottieAnimationMain } from '../components/Lottie';
+import { Loading } from '../utils/Styling';
+import moment from 'moment';
 
-    const wait = (timeout) => {
-        return new Promise(resolve => setTimeout(resolve, timeout));
-      }
+
+   
 
     const TehdytTreenit = () => {
-        const [treenit, setTreenit] = useState([]);
-        const [refreshing, setRefreshing] = useState(false);
-        const [loading, setLoading] = useState(false);
-        const [liikkeet, setLiikkeet] = useState([]);
-        const [refreshed, setRefreshed] = useState(false);
+            const [treenit, setTreenit] = useState([]);
+            const [refreshing, setRefreshing] = useState(false);
+            const [loading, setLoading] = useState(false);
+            const [liikkeet, setLiikkeet] = useState([]);
+            const [refreshed, setRefreshed] = useState(false);
+            const [currentDate, setCurrentDate] = useState('')
 
-        Appearance.getColorScheme();
-        const colorScheme = useColorScheme();
-        const themeColor = colorScheme === 'dark' ? 'white' : 'black';
-
-
-        const getData = () => {
-            const db = firebase.firestore();
-            const currentUser = firebase.auth().currentUser;
-            let treeniArray = [];
+            Appearance.getColorScheme();
+            const colorScheme = useColorScheme();
+            const themeColor = colorScheme === 'dark' ? 'white' : 'black';
 
 
-            db.collection("users").doc(currentUser.uid)
-            .collection('treenidata')
-            .get()
-            .then(snapshot => {
-                snapshot.docs.forEach(treeni => {
-                    treeniArray.push(treeni.data())
-                    setLiikkeet(treeni.data().treeniData)
-                 //   console.log(treeni.data().treeniData)
-                    
-                })
+            const getData = () => {
+                const db = firebase.firestore();
+                const currentUser = firebase.auth().currentUser;
+                let treeniArray = [];
+
+                const collectionRef = db.collection("users").doc(currentUser.uid)
+                    .collection('treenidata')
+
+                collectionRef.orderBy("pvm", "asc");
+
+
+                collectionRef
+                    .get()
+                    .then(snapshot => {
+                        snapshot.docs.forEach(treeni => {
+                            treeniArray.push(treeni.data())
+                            setLiikkeet(treeni.data().treeniData)
+                            //   console.log(treeni.data().treeniData)
+
+                        })
+                    })
+                setTreenit(treeniArray);
+                console.log(treenit)
+                console.log(liikkeet)
+                //console.log("treeniData", treenit)
+
+            }
+
+            const wait = (timeout) => {
+                return new Promise(resolve => setTimeout(resolve, timeout));
+            }
+
+            const onRefresh = useCallback(() => {
+                setLoading(true)
+                setRefreshing(true);
+                getData();
+                wait(2000).then(() => setRefreshing(false));
+                wait(2000).then(() => setLoading(false));
+                setRefreshed(true);
             })
-            setTreenit(treeniArray);
-            console.log(treenit)
-            console.log(liikkeet)
-            //console.log("treeniData", treenit)
-            
-        }
 
-        const onRefresh = useCallback(() => {
-            setLoading(true)
-            setRefreshing(true);
-            getData();
-            wait(2000).then(() => setRefreshing(false));
-            wait(2000).then(() => setLoading(false));
-            setRefreshed(true)
-        })
+            const getCurrentDate = () => {
+                const date = moment().locale('fi')
+                    .format('LL')
+                setCurrentDate(date);
+                //console.log(currentDate)
+            }
+
+            useEffect(() => {
+                getCurrentDate();
+            }, []);
 
 
 
@@ -70,7 +90,11 @@
 
             />
             </HeaderContainer>
-           
+            <TextContainer>
+
+        <Text marginLeft="25px" marginBottom="25px" medium left>{currentDate.toUpperCase()}</Text>
+        </TextContainer>
+
             <Text marginTop="30px" large>Suoritukset</Text>
             {! refreshed && <LottieAnimationMain />}
                 {loading ? ( <Loading size="large" /> 
@@ -129,14 +153,17 @@
     }
 
 
-    const Container = styled.View`
-        flex: 1;
+ const Container = styled.View `
+    flex: 1;
+`;
 
-    `;
-    
 
-    const HeaderContainer = styled.View`
-    `;
+const HeaderContainer = styled.View `
+`;
+
+const TextContainer = styled.View `
+    margin-top: 20px;
+`;
   
     
     export default TehdytTreenit;
