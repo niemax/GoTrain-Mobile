@@ -1,14 +1,16 @@
-    import React, { useState, useCallback } from "react";
-    import { RefreshControl, ScrollView } from 'react-native';
-    import { Ionicons } from '@expo/vector-icons';
-    import styled from 'styled-components/native'; 
-    import Text from '../components/Text';
-    import HeaderComponent from '../components/HeaderComponent';
-    import * as firebase from 'firebase';
-    import { Appearance, useColorScheme } from 'react-native-appearance';
-    import { List } from 'react-native-paper';
-    import { LottieAnimationMain } from '../components/Lottie';
-    import { Loading } from '../utils/Styling';
+import React, { useState, useCallback, useEffect } from "react";
+import { RefreshControl, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import styled from 'styled-components/native'; 
+import Text from '../components/Text';
+import HeaderComponent from '../components/HeaderComponent';
+import * as firebase from 'firebase';
+import { Appearance, useColorScheme } from 'react-native-appearance';
+import { List } from 'react-native-paper';
+import { LottieAnimationMain } from '../components/Lottie';
+import { Loading } from '../utils/Styling';
+import moment from 'moment';
+import 'moment/locale/fi'
 
     const wait = (timeout) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
@@ -20,6 +22,8 @@
         const [loading, setLoading] = useState(false);
         const [liikkeet, setLiikkeet] = useState([]);
         const [refreshed, setRefreshed] = useState(false);
+        const [currentDate, setCurrentDate] = useState('');
+
 
         Appearance.getColorScheme();
         const colorScheme = useColorScheme();
@@ -37,8 +41,8 @@
             .get()
             .then(snapshot => {
                 snapshot.docs.forEach(treeni => {
-                    treeniArray.push(treeni.data())
-                    setLiikkeet(treeni.data().treeniData)
+                    treeniArray.push(treeni.data());
+                    setLiikkeet(treeni.data().treeniData);
                  //   console.log(treeni.data().treeniData)
                     
                 })
@@ -59,6 +63,16 @@
             setRefreshed(true)
         })
 
+        const getCurrentDate = () => {
+            const date = moment().locale('fi')
+            .format('LL')
+            setCurrentDate(date);
+            //console.log(currentDate)
+        }
+
+        useEffect(() => {
+            getCurrentDate();
+        }, []);
 
 
         return(
@@ -71,7 +85,13 @@
             />
             </HeaderContainer>
            
-            <Text marginTop="30px" large>Suoritukset</Text>
+           <TextContainer>
+            <Text marginLeft="25px" marginBottom="25px" medium left>{currentDate.toUpperCase()}</Text>
+
+           </TextContainer>
+       
+
+            <Text marginTop="30px" large>Suoritukset </Text>
             {! refreshed && <LottieAnimationMain />}
                 {loading ? ( <Loading size="large" /> 
                 ) : (
@@ -137,6 +157,10 @@
 
     const HeaderContainer = styled.View`
     `;
+
+    const TextContainer = styled.View`
+    margin-top: 20px;
+`;
   
     
     export default TehdytTreenit;

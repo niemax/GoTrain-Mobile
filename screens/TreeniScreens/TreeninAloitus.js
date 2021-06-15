@@ -47,7 +47,7 @@ const AloitaTreeni = (props) => {
     const [paino2, setPaino2] = useState('');
     const [paino3, setPaino3] = useState('');
 
-    const carousel = useRef(null)
+    const carousel = useRef(null);
 
     Appearance.getColorScheme();
     const colorScheme = useColorScheme();
@@ -85,8 +85,8 @@ const AloitaTreeni = (props) => {
      //console.log console.log("setProgress", item, index);
 
         const treenit = { ...tehdytTreenit };
-        const painot = `${paino1} - ${paino2} - ${paino3}`
-        const toistot = `${toisto1} - ${toisto2} - ${toisto3}`
+        const painot = `${paino1} - ${paino2} - ${paino3}`;
+        const toistot = `${toisto1} - ${toisto2} - ${toisto3}`;
 
         if (!(item.nimi in treenit)) {
             treenit[item.nimi] = { nimi: item.nimi, sarjat: item.sarjat, 
@@ -122,7 +122,7 @@ const AloitaTreeni = (props) => {
 
 
     const _renderItem = ({ item, index }) => {
-        const btnColor = tehdytTreenit.hasOwnProperty(item.nimi) ? "#054dd9" : (colorScheme === 'dark' ? 'white' : 'black')
+        const btnColor = tehdytTreenit.hasOwnProperty(item.nimi) ? "#054dd9" : colorScheme === 'dark' ? 'white' : 'black'
         const treenitLength = Object.keys(treeniData).length;
         const colorIcon = colorScheme === 'dark' ? 'white' : 'black';
         

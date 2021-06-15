@@ -33,11 +33,11 @@ import axios from 'axios';
          } = props;
 
 
-         const _getData = async () => {
+         async function _getData() {
              try {
 
 
-                 axios.get(`http://192.168.1.160:3000/api/treenit/${treeni}`)
+                 axios.get(`http://192.168.1.164:3000/api/treenit/${treeni}`)
                      .then(response => {
                          setTreeniData(response.data[0].liikkeet);
                          setTreeninKesto(response.data[0].kuvaus.treeninkesto);
@@ -49,7 +49,7 @@ import axios from 'axios';
                      .catch(err => {
                          console.log(err);
                      })
-                     .then(() => {
+                     .finally(() => {
                          setIsLoading(false);
                      })
 

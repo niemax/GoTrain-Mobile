@@ -100,3 +100,23 @@ export const LottieSignup = () => {
       
     );
 }
+
+export const LottieAlternateLoading = () => {
+
+  const animation = useRef(null);
+
+  useEffect(() => {
+    animation.current.play();
+  })
+ 
+
+    return (
+      <LottieContainer>
+        <LottieView
+        ref={animation}
+        source={require('../assets/json/60820-bicycle-riding.json')}
+      />
+      </LottieContainer>
+      
+    );
+}

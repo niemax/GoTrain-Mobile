@@ -1,65 +1,82 @@
-import React from 'react'
-import { ScrollView, TouchableOpacity, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { ScrollView, TouchableOpacity, View, Image } from 'react-native';
 import { Tile } from 'react-native-elements';
 import Text from '../components/Text';
-import { useNavigation } from '@react-navigation/native'; 
 import { Ionicons } from '@expo/vector-icons'; 
+import axios from 'axios';
+import { ContentLoaderView } from '../utils/Styling';
+import { useNavigation } from '@react-navigation/native'; 
+import { LottieLoading } from '../components/Lottie';
+import ContentLoader, { Facebook, Code } from 'react-content-loader/native';
 
 
 const Cards = () => {
+    const [cardData, setCardData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [imageUrl, setImageUrl] = useState('');
+
+   const navigation = useNavigation();
+
+   const MyCodeLoader = () => <Code 
+       backgroundColor = {
+           '#BFBFBF'
+       }
+   />
+
+    async function _getCardData() {
+        try {
+
+            await axios.get('http://192.168.1.164:3000/api/cards/etusivucards')
+                .then(response => {
+                    console.log(response.data);
+                    setCardData(response.data);
+
+
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        setLoading(false);
+                    }, 2000);
+                })
+        } catch (err) {
+            console.error(error);
+        }
+
+    }
+
+    useEffect(() => {
+        _getCardData();
+    }, []);
+
     
-    const navigation = useNavigation();
-    
-    const treenit = [{
-    
-        name: 'Rinta',
-        image: require('../assets/rintaToinen.jpg'),
-        navigationRoute: 'RintaTreeni',
-        icon: <Ionicons name="ios-timer-sharp" size={28} color={'#FFF'} />,
-        treeninKesto: '60-75min'
-    },
-    {
-        name: 'Selkä',
-        image: require('../assets/selkaToinen.jpg'),
-        navigationRoute: 'SelkaTreeni',
-        icon: <Ionicons name="ios-timer-sharp" size={28} color={'#FFF'} />,
-        treeninKesto: '60-75min'
-
-    },
-    {
-        name: 'Jalat',
-        navigationRoute: 'JalkaTreeni',
-        image: require('../assets/jalatToinen.jpg'),
-        icon: <Ionicons name="ios-timer-sharp" size={28} color={'#FFF'} />,
-        treeninKesto: '45-60min'
-
-    }, 
-    {
-        name: 'Kädet',
-        navigationRoute: 'KasiTreeni',
-        image: require('../assets/kadetToinen.jpg'),
-        icon: <Ionicons name="ios-timer-sharp" size={28} color={'#FFF'}/>,
-        treeninKesto: '45-60min'
-
-    }, 
-   
-]
-
-
-    return(
-             
-            <ScrollView style={{marginTop: 25}}>
+    if (loading) {
+        return (
+            <ContentLoaderView>
+            <MyCodeLoader />
+            </ContentLoaderView>
+        )
+            
+     } else {
+            return (
+                <ScrollView style={{marginTop: 25}}>
             {
-                treenit.map((item, index) => {
+                cardData.map((item, index) => {
+                    const img = item.image;
+
                     return(
                         <TouchableOpacity key={index}>
                         <Tile
                         onPress={() => navigation.navigate(item.navigationRoute)}
-                        imageSrc={item.image}     
-                        title={<Text title style={{color: '#FFF', fontFamily: 'MontserratBold'}}>{item.name}</Text>} featured
+                        imageSrc={{ uri: `http://192.168.1.164:3000/api/${img}` }}
+                        title={<Text title style={{color: '#FFF', fontFamily: 'MontserratBold'}}>{item.nimi}</Text>} featured
                         caption=
-                        {<View style={{ flexDirection: 'row'}}>{item.icon}
-                        <Text medium style={{color: '#FFF', fontFamily: 'MontserratSemiBold'}} >{item.treeninKesto}
+                        {
+                        <View style={{ flexDirection: 'row'}}>
+                        { <Ionicons name="ios-timer-sharp" size={28} color={'#FFF'} /> }
+                        <Text medium style={{color: '#FFF', fontFamily: 'MontserratSemiBold'}} >{item.treeninkesto}
                         </Text>
                         </View>
                         }
@@ -75,7 +92,9 @@ const Cards = () => {
                 })
             }
             </ScrollView>
-    );
+            )
+        }
+            
 }
 
 

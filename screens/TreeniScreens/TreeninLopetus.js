@@ -61,16 +61,16 @@ const LopetaTreeni = (props) => {
               });
 
              setTimeout(() => {
-                    navigation.pop()
-                    navigation.pop()
+                    navigation.pop();
+                    navigation.pop();
 
             }, 500);
 
         }
         
     useEffect(() => {
-            setShoot(true)
-    })
+        setShoot(true);
+    }, []);
    // console.log("tehdyt treenit data", data);
 
     return (

@@ -18,7 +18,6 @@ const Etusivu = (
 
     Appearance.getColorScheme();
     const colorScheme = useColorScheme();
-
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
     const [temp, setTemp] = useState(null);
@@ -38,7 +37,9 @@ const Etusivu = (
             return;
         }
 
-        let location = await Location.getCurrentPositionAsync({});
+        let location = await Location.getCurrentPositionAsync({
+            accuracy: Location.Accuracy.Highest
+        });
         setLocation(location);
         setLatitude(location.coords.latitude);
         setLongitude(location.coords.longitude);
@@ -52,11 +53,9 @@ const Etusivu = (
                 let response = await fetch(API);
                 const data = await response.json();
     
-                if (response.status === 200) {
-                    setCity(data?.name);
-                    setTemp(data?.main.temp.toFixed(0));
-                }
-                setIsLoading(false)
+                setCity(data?.name);
+                setTemp(data?.main.temp.toFixed(0));
+                setIsLoading(false);
                 //console.log(data)
                 return data;
     
@@ -71,7 +70,7 @@ const Etusivu = (
 
     const getCurrentDate = () => {
         const date = moment().locale('fi')
-            .format('LL')
+        .format('LL')
         setCurrentDate(date);
         //console.log(currentDate)
     }
