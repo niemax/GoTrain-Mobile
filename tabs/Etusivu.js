@@ -11,7 +11,6 @@ import moment from 'moment';
 import 'moment/locale/fi'
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import TervetuloaText from '../components/TervetuloaText';
-import axios from 'axios';
 
 
 
