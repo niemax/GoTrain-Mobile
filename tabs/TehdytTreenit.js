@@ -38,6 +38,7 @@ import 'moment/locale/fi'
 
             db.collection("users").doc(currentUser.uid)
             .collection('treenidata')
+            .orderBy('pvm', 'asc')
             .get()
             .then(snapshot => {
                 snapshot.docs.forEach(treeni => {
@@ -60,7 +61,7 @@ import 'moment/locale/fi'
             getData();
             wait(2000).then(() => setRefreshing(false));
             wait(2000).then(() => setLoading(false));
-            setRefreshed(true)
+            setRefreshed(true);
         })
 
         const getCurrentDate = () => {

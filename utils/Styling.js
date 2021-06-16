@@ -22,8 +22,9 @@ export const Actions = styled.View `
 `;
 
 export const ContentLoaderView = styled.View`
-    margin-top: 100px;
-    margin-left: 20px;
+    margin-top: 20px;
+    flex: 1;
+    margin-left: 4px;
 `;
 
 

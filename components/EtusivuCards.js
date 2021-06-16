@@ -7,21 +7,34 @@ import axios from 'axios';
 import { ContentLoaderView } from '../utils/Styling';
 import { useNavigation } from '@react-navigation/native'; 
 import { LottieLoading } from '../components/Lottie';
-import ContentLoader, { Facebook, Code } from 'react-content-loader/native';
+import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
+const Skeleton = ( { width, height, borderRadius, marginBottom }) => {
+
+    width = '99%',
+    height = 150,
+    borderRadius = 15,
+    marginBottom = 5;
+
+        return (
+            <SkeletonPlaceholder backgroundColor={'#E0E0E0'}>
+            
+              <SkeletonPlaceholder.Item width={width} height={height} borderRadius={borderRadius} marginBottom={marginBottom} />
+              <SkeletonPlaceholder.Item width={width} height={height} borderRadius={borderRadius} marginBottom={marginBottom} />
+              <SkeletonPlaceholder.Item width={width} height={height} borderRadius={borderRadius} marginBottom={marginBottom} />
+              <SkeletonPlaceholder.Item width={width} height={height} borderRadius={borderRadius} marginBottom={marginBottom} />
+              <SkeletonPlaceholder.Item width={width} height={height} borderRadius={borderRadius} marginBottom={marginBottom} />
+            </SkeletonPlaceholder>
+            
+        );
+}
 
 const Cards = () => {
     const [cardData, setCardData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [imageUrl, setImageUrl] = useState('');
 
-   const navigation = useNavigation();
-
-   const MyCodeLoader = () => <Code 
-       backgroundColor = {
-           '#BFBFBF'
-       }
-   />
+    const navigation = useNavigation();
+   
 
     async function _getCardData() {
         try {
@@ -39,7 +52,7 @@ const Cards = () => {
                 .finally(() => {
                     setTimeout(() => {
                         setLoading(false);
-                    }, 2000);
+                    }, 1500);
                 })
         } catch (err) {
             console.error(error);
@@ -55,13 +68,15 @@ const Cards = () => {
     if (loading) {
         return (
             <ContentLoaderView>
-            <MyCodeLoader />
+
+            <Skeleton />
             </ContentLoaderView>
         )
             
      } else {
             return (
-                <ScrollView style={{marginTop: 25}}>
+                <ContentLoaderView>
+                    <ScrollView >
             {
                 cardData.map((item, index) => {
                     const img = item.image;
@@ -71,19 +86,27 @@ const Cards = () => {
                         <Tile
                         onPress={() => navigation.navigate(item.navigationRoute)}
                         imageSrc={{ uri: `http://192.168.1.164:3000/api/${img}` }}
-                        title={<Text title style={{color: '#FFF', fontFamily: 'MontserratBold'}}>{item.nimi}</Text>} featured
+                        title=
+                        {
+                        <Text title style={{color: '#FFF', fontFamily: 'MontserratBold'}}>
+                        {item.nimi}
+                        </Text>
+                        } featured
                         caption=
                         {
                         <View style={{ flexDirection: 'row'}}>
-                        { <Ionicons name="ios-timer-sharp" size={28} color={'#FFF'} /> }
-                        <Text medium style={{color: '#FFF', fontFamily: 'MontserratSemiBold'}} >{item.treeninkesto}
+                        { 
+                            <Ionicons name="ios-timer-sharp" size={28} color={'#FFF'} /> 
+                        }
+                        <Text medium style={{color: '#FFF', fontFamily: 
+                        'MontserratSemiBold'}}>
+                        {item.treeninkesto}
                         </Text>
                         </View>
                         }
-                        containerStyle={{ marginBottom: 5, marginLeft: 8.5}}  
+                        containerStyle={{ marginBottom: 5}}  
                         height={150}  
-                        width={'98%'}   
-                        imageContainerStyle={{opacity: 0.9, borderRadius: 10}}
+                        imageContainerStyle={{opacity: 0.9, width: '98%', borderRadius: 15}}
                                                 
                         />
                        
@@ -92,6 +115,8 @@ const Cards = () => {
                 })
             }
             </ScrollView>
+                </ContentLoaderView>
+                
             )
         }
             

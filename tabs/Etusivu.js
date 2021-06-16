@@ -11,6 +11,8 @@ import moment from 'moment';
 import 'moment/locale/fi'
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import TervetuloaText from '../components/TervetuloaText';
+import axios from 'axios';
+
 
 
 const Etusivu = (
@@ -23,67 +25,84 @@ const Etusivu = (
     const [temp, setTemp] = useState(null);
     const [city, setCity] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-    const [location, setLocation] = useState(null);
     const [currentDate, setCurrentDate] = useState('');
     const [text, setText] = useState('');
 
        
-    const getLocation = async () => {
+    async function getLocation() {
         let {
             status
         } = await Location.requestPermissionsAsync();
-        if (status !== 'granted') {
-            setErrorMsg('Permission to access location was denied');
-            return;
-        }
+        if (status !== 'granted') return;
 
         let location = await Location.getCurrentPositionAsync({
+            maxAge: 36000000,
             accuracy: Location.Accuracy.Highest
-        });
-        setLocation(location);
-        setLatitude(location.coords.latitude);
-        setLongitude(location.coords.longitude);
+        })
+
+        let { coords } = location;
+        console.log(coords);
+
+        setLatitude(coords.latitude);
+        setLongitude(coords.longitude);
+
         //console.log(location)
     }
 
-    useEffect(() => {
-        const getWeatherData = async () => {
-            let API = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=4faa658e0a47cd7c7693d03bf30bf56a`
-            try {
-                let response = await fetch(API);
-                const data = await response.json();
-    
-                setCity(data?.name);
-                setTemp(data?.main.temp.toFixed(0));
-                setIsLoading(false);
-                //console.log(data)
-                return data;
-    
-            } catch (error) {
-                console.error(error);
-            }
-    
+    async function getWeatherData() {
+        let API = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=4faa658e0a47cd7c7693d03bf30bf56a`
+        try {
+            await fetch(API)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+                /* .then((response) => {
+                    console.log(response);
+                    setCity(response.data?.name);
+                    setTemp(response.data?.main.temp.toFixed(0));
+                    setIsLoading(false);
+                }) */
+
+        } catch (error) {
+            console.error(error);
         }
-        getWeatherData();
-    }, [])
-    
+
+    }
+
 
     const getCurrentDate = () => {
         const date = moment().locale('fi')
-        .format('LL')
+            .format('LL')
         setCurrentDate(date);
         //console.log(currentDate)
     }
 
     useEffect(() => {
-        getLocation();
-        getCurrentDate();
-       // getUserInfo();
+        try {
+            getCurrentDate();
+            getLocation()
+                .then(() => {
+                    if (latitude !== undefined && longitude !== undefined)
+                    getWeatherData();
+
+                    console.error('Couldn"t fetch weather data')
+
+                })
+                .then(() => {
+                    //getUserInfo();
+                })
+
+        } catch (error) {
+            console.error(error);
+        }
+
     }, []);
 
-        /* let currentUser = firebase.auth().currentUser
+    
+     const getUserInfo = async () => {
+              let currentUser = firebase.auth().currentUser;
 
-          const getUserInfo = async () => {
               try {
                   let doc = await firebase
                       .firestore()
@@ -100,7 +119,7 @@ const Etusivu = (
               } catch (err) {
                   Alert.alert('There is an error.', err.message)
               }
-          }  */
+          }  
           
      
 
