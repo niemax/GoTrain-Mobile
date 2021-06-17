@@ -7,31 +7,15 @@ import axios from 'axios';
 import { ContentLoaderView } from '../utils/Styling';
 import { useNavigation } from '@react-navigation/native'; 
 import { LottieLoading } from '../components/Lottie';
-import SkeletonPlaceholder from "react-native-skeleton-placeholder";
+import { Skeleton } from '../components/Skeleton';
+import { createGlobalStyle } from 'styled-components';
 
-const Skeleton = ( { width, height, borderRadius, marginBottom }) => {
 
-    width = '99%',
-    height = 150,
-    borderRadius = 15,
-    marginBottom = 5;
 
-        return (
-            <SkeletonPlaceholder backgroundColor={'#E0E0E0'}>
-            
-              <SkeletonPlaceholder.Item width={width} height={height} borderRadius={borderRadius} marginBottom={marginBottom} />
-              <SkeletonPlaceholder.Item width={width} height={height} borderRadius={borderRadius} marginBottom={marginBottom} />
-              <SkeletonPlaceholder.Item width={width} height={height} borderRadius={borderRadius} marginBottom={marginBottom} />
-              <SkeletonPlaceholder.Item width={width} height={height} borderRadius={borderRadius} marginBottom={marginBottom} />
-              <SkeletonPlaceholder.Item width={width} height={height} borderRadius={borderRadius} marginBottom={marginBottom} />
-            </SkeletonPlaceholder>
-            
-        );
-}
-
-const Cards = () => {
+const Cards = ({ route }) => {
     const [cardData, setCardData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [treeninNimi, setTreeninNimi] = useState('');
 
     const navigation = useNavigation();
    
@@ -84,7 +68,10 @@ const Cards = () => {
                     return(
                         <TouchableOpacity key={index}>
                         <Tile
-                        onPress={() => navigation.navigate(item.navigationRoute)}
+                        onPress={() => navigation.navigate(item.navigationRoute, {
+                            treeninNimi: item.nimi,
+                            image: item.image
+                        })}
                         imageSrc={{ uri: `http://192.168.1.164:3000/api/${img}` }}
                         title=
                         {
