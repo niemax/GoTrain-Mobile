@@ -17,7 +17,7 @@ const HeaderComponent = (props) => {
 
     const handleLogOut = () => {
         loggingOut();
-        navigation.navigate('Signup');
+        navigation.navigate('Login');
         console.log('Logged out!');
     }
 
@@ -31,6 +31,7 @@ const HeaderComponent = (props) => {
         rightComponent={
             <ProfileIcon onPress={handleLogOut}>{icon}</ProfileIcon>
             }
+        
             
         {...props}
         />
