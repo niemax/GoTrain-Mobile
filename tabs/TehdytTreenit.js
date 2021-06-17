@@ -92,7 +92,7 @@ import 'moment/locale/fi'
            </TextContainer>
        
 
-            <Text marginTop="30px" large>Suoritukset </Text>
+            <Text marginTop="5px" large>Suoritukset </Text>
             {! refreshed && <LottieAnimationMain />}
                 {loading ? ( <Loading size="large" /> 
                 ) : (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert  } from 'react-native';
+import { Alert, Image, View } from 'react-native';
 import * as firebase from 'firebase';
 import Text from '../components/Text';
 import HeaderComponent from '../components/HeaderComponent';
@@ -17,8 +17,6 @@ import TervetuloaText from '../components/TervetuloaText';
 const Etusivu = (
 ) => {
 
-    Appearance.getColorScheme();
-    const colorScheme = useColorScheme();
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
     const [temp, setTemp] = useState(null);
@@ -26,8 +24,12 @@ const Etusivu = (
     const [isLoading, setIsLoading] = useState(true);
     const [currentDate, setCurrentDate] = useState('');
     const [text, setText] = useState('');
+    const [weatherData, setWeatherData] = useState([]);
+    const [weatherIcon, setWeatherIcon] = useState('');
+    
+    Appearance.getColorScheme();
+    const colorScheme = useColorScheme();
 
-       
     async function getLocation() {
         let {
             status
@@ -35,12 +37,12 @@ const Etusivu = (
         if (status !== 'granted') return;
 
         let location = await Location.getCurrentPositionAsync({
-            maxAge: 36000000,
+            //maxAge: 36000000,
             accuracy: Location.Accuracy.Highest
         })
 
         let { coords } = location;
-        console.log(coords);
+        //console.log(coords);
 
         setLatitude(coords.latitude);
         setLongitude(coords.longitude);
@@ -48,20 +50,28 @@ const Etusivu = (
         //console.log(location)
     }
 
-    async function getWeatherData() {
-        let API = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=4faa658e0a47cd7c7693d03bf30bf56a`
+    async function getWeatherData(lati, longi) {
+        let API = `https://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${longi}&units=metric&appid=d85cb8591b3bf1b13021c27b116b86cd`;
         try {
             await fetch(API)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-                /* .then((response) => {
-                    console.log(response);
-                    setCity(response.data?.name);
-                    setTemp(response.data?.main.temp.toFixed(0));
+                .then(response => {
+                    if (response.ok) return response.json();
+                })
+                .then(data => {
+                    console.log(data.weather[0].icon);
+
+                    const { name } = data;
+                    const { temp } = data.main;
+
+
+                    setCity(name);
+                    setTemp(temp.toFixed(0));
+                    setWeatherIcon(data.weather[0].icon);
                     setIsLoading(false);
-                }) */
+                })
+
+
+
 
         } catch (error) {
             console.error(error);
@@ -72,29 +82,28 @@ const Etusivu = (
 
     const getCurrentDate = () => {
         const date = moment().locale('fi')
-            .format('LL')
+            .format('LL');
         setCurrentDate(date);
         //console.log(currentDate)
     }
 
     useEffect(() => {
-        try {
-            getCurrentDate();
-            getLocation()
-                .then(() => {
-                    if (latitude !== undefined && longitude !== undefined)
-                    getWeatherData();
+        getCurrentDate();
+        getLocation()
+           /*  .then(() => {
+                try {
+                    getWeatherData(latitude, longitude);
 
-                    console.error('Couldn"t fetch weather data')
+                } catch (err) {
+                    console.error(err);
+                }
 
-                })
-                .then(() => {
-                    //getUserInfo();
-                })
+            }) */
+            .then(() => {
+                //getUserInfo();
+            })
 
-        } catch (error) {
-            console.error(error);
-        }
+
 
     }, []);
 
@@ -127,9 +136,23 @@ const Etusivu = (
             <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
             
         <HeaderContainer>
+        
         <HeaderComponent 
-        centerComponent={ !isLoading ? (<Text marginTop="10px" medium center>{city},  {temp}{'\u00b0'}</Text>) 
-        : (<Text medium>Loading...</Text>)}
+        centerComponent={ !isLoading ? (
+            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+            <Text medium center> {temp}{'\u00b0'}
+            </Text>
+            <Image 
+            source={{ uri: `https://openweathermap.org/img/wn/${weatherIcon}@2x.png` }} 
+            style={{height: 55, width: 55}}
+
+            />
+            </View>
+        ) 
+        : 
+        (
+        <Text medium>Loading...</Text>
+        )}
         leftComponent={{text:<Text medium>KOTI</Text>}}
         
         />

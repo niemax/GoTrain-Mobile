@@ -8,6 +8,7 @@ import TehdytTreenit from '../tabs/TehdytTreenit'
 import LoadingScreen from '../screens/Loading';
 import Etusivu from '../tabs/Etusivu'
 import RintaTreeni from '../screens/TreeniScreens/Rinta'
+import TreeninEsittely from '../components/TreeninEsittely';
 import SelkaTreeni from '../screens/TreeniScreens/Selka'
 import JalkaTreeni from '../screens/TreeniScreens/Jalka'
 import KasiTreeni from '../screens/TreeniScreens/Kasi';
@@ -38,6 +39,7 @@ const KotiScreens = () => {
      initialRouteName="KotiTab"
      >
       <Stack.Screen name="KotiTab" options={{ headerShown: false}}  component={KotiMainTab} />
+      <Stack.Screen name="TreeninEsittely" options={{ headerShown: false}}  component={TreeninEsittely} />
       <Stack.Screen name="RintaTreeni" options={{ headerShown: false, gestureEnabled: false}} component={RintaTreeni} />
       <Stack.Screen name="SelkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={SelkaTreeni} />
       <Stack.Screen name="JalkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={JalkaTreeni} />
@@ -78,7 +80,7 @@ const KotiMainTab = () => {
         name="TehdytTreenit"
         component={TehdytTreenit}
         options={{
-          tabBarLabel: 'Edistymiseni',
+          tabBarLabel: 'Minä',
           tabBarColor: themeColor,
           tabBarIcon: ({ color }) => (
             <Ionicons name="md-checkmark-done-circle-outline" size={24} color={activeColor} />
