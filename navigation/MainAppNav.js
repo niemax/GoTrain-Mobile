@@ -9,6 +9,7 @@ import LoadingScreen from '../screens/Loading';
 import Etusivu from '../tabs/Etusivu'
 import RintaTreeni from '../screens/TreeniScreens/Rinta'
 import TreeninEsittely from '../components/TreeninEsittely';
+import TreeninAloitus from '../screens/TreeniScreens/TreeninAloitus';
 import SelkaTreeni from '../screens/TreeniScreens/Selka'
 import JalkaTreeni from '../screens/TreeniScreens/Jalka'
 import KasiTreeni from '../screens/TreeniScreens/Kasi';
@@ -21,7 +22,7 @@ const MainAppStack = () => {
     return(
       
       <Stack.Navigator
-       initialRouteName="Kotisivu" // VAIHDA TÄMÄ TAKAISIN SIGNUP
+       initialRouteName="Signup" // VAIHDA TÄMÄ TAKAISIN SIGNUP
        >
        
         <Stack.Screen name="Loading" options={{ headerShown: false, gestureEnabled: false}}  component={LoadingScreen} />
@@ -39,11 +40,9 @@ const KotiScreens = () => {
      initialRouteName="KotiTab"
      >
       <Stack.Screen name="KotiTab" options={{ headerShown: false}}  component={KotiMainTab} />
-      <Stack.Screen name="TreeninEsittely" options={{ headerShown: false}}  component={TreeninEsittely} />
-      <Stack.Screen name="RintaTreeni" options={{ headerShown: false, gestureEnabled: false}} component={RintaTreeni} />
-      <Stack.Screen name="SelkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={SelkaTreeni} />
-      <Stack.Screen name="JalkaTreeni" options={{ headerShown: false, gestureEnabled: false }} component={JalkaTreeni} />
-      <Stack.Screen name="KasiTreeni" options={{ headerShown: false, gestureEnabled: false }} component={KasiTreeni} />
+      <Stack.Screen name="TreeninEsittely" options={{ headerShown: false, gestureEnabled: false}}  component={TreeninEsittely} />
+      <Stack.Screen name="TreeninAloitus" options={{ headerShown: false, gestureEnabled: false}}  component={TreeninAloitus} />
+      
      
     </Stack.Navigator>
   );

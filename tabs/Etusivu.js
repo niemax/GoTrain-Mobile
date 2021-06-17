@@ -89,21 +89,17 @@ const Etusivu = (
 
     useEffect(() => {
         getCurrentDate();
+        getUserInfo();
         getLocation()
-           /*  .then(() => {
+        
+             .then(() => {
                 try {
                     getWeatherData(latitude, longitude);
-
                 } catch (err) {
                     console.error(err);
                 }
 
-            }) */
-            .then(() => {
-                //getUserInfo();
-            })
-
-
+            }) 
 
     }, []);
 
@@ -133,7 +129,7 @@ const Etusivu = (
 
     return (
         
-            <Container style={{backgroundColor: colorScheme === 'dark' ? ('#141314') : ('#F9F8F5')}}>
+            <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}}>
             
         <HeaderContainer>
         
@@ -144,7 +140,7 @@ const Etusivu = (
             </Text>
             <Image 
             source={{ uri: `https://openweathermap.org/img/wn/${weatherIcon}@2x.png` }} 
-            style={{height: 55, width: 55}}
+            style={{height: 50, width: 50}}
 
             />
             </View>

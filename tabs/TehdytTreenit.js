@@ -36,7 +36,8 @@ import 'moment/locale/fi'
             let treeniArray = [];
 
 
-            db.collection("users").doc(currentUser.uid)
+            db.collection("users")
+            .doc(currentUser.uid)
             .collection('treenidata')
             .orderBy('pvm', 'asc')
             .get()
@@ -59,8 +60,7 @@ import 'moment/locale/fi'
             setLoading(true)
             setRefreshing(true);
             getData();
-            wait(2000).then(() => setRefreshing(false));
-            wait(2000).then(() => setLoading(false));
+            wait(2000).then(() => setRefreshing(false)).then(() => setLoading(false));
             setRefreshed(true);
         })
 

@@ -12,6 +12,7 @@ import LopetaTreeni from './TreeninLopetus';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import { LottieLoading } from '../../components/Lottie';
+import axios from 'axios';
 
 
 import { VideoContainer,
@@ -34,7 +35,7 @@ import { VideoContainer,
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
-const AloitaTreeni = (props) => {
+const AloitaTreeni = ({ route }) => {
     const [treeniData, setTreeniData] = useState([]);
     const [tehdytTreenit, setTehdytTreenit] = useState({});
     const [pbProgress, setPbProgress] = useState(0);
@@ -49,28 +50,31 @@ const AloitaTreeni = (props) => {
 
     const carousel = useRef(null);
 
+    const { treeni } = route.params;
+    const navigation = useNavigation();
+
     Appearance.getColorScheme();
     const colorScheme = useColorScheme();
 
-    const { treeni } = props;
     //console.log(treeni)
-    const navigation = useNavigation();
 
     const getData = async () => {
         try {
-            let response = await fetch(`https://mun-treeni-api.herokuapp.com/${treeni}`);
-            const data = await response.json();
 
-            if (response.status === 200) {
-                setTreeniData(data?.liikkeet);
-
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 1500)
-                
-            }
-
-            return data;
+            axios.get(`http://192.168.1.164:3000/api/treenit/${treeni}`)
+                .then(response => {
+                    console.log(response.data);
+                    setTreeniData(response.data[0].liikkeet);
+                    //   console.log(response.data.data);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        setIsLoading(false);
+                    }, 1000)
+                })
 
         } catch (error) {
             console.error(error);

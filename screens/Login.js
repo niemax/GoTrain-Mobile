@@ -36,6 +36,7 @@ import {
                                 navigation.navigate('Kotisivu'); 
                             }, 1000)
                         }
+                        return;
                     } catch (err) {
                         console.log(err);
                     }

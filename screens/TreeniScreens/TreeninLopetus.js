@@ -17,11 +17,8 @@ import { LottieAnimationCongratulations } from '../../components/Lottie';
 import { LopetaButton, PalauteButtonContainer, Container } from '../../utils/Styling';
 
 
-const LopetaTreeni = (props) => {
-        const {
-            data,
-            treeni
-        } = props;
+const LopetaTreeni = ({ data, treeni }) => {
+       
 
         const [shoot, setShoot] = useState(false);
 
@@ -35,12 +32,14 @@ const LopetaTreeni = (props) => {
             const db = firebase.firestore();
 
             const currentUser = firebase.auth().currentUser;
-
-            const ref = db.collection('users').doc(currentUser.uid)
-                .collection('treenidata');
-
+            
             const date = moment().locale('fi')
                 .format('LL')
+                
+            const ref = db.collection('users')
+            .doc(currentUser.uid)
+            .collection('treenidata');
+
 
             try {
                 await ref.add({
@@ -61,7 +60,6 @@ const LopetaTreeni = (props) => {
               });
 
              setTimeout(() => {
-                    navigation.pop();
                     navigation.pop();
 
             }, 500);

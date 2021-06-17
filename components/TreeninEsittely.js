@@ -92,7 +92,6 @@ export default function TreeninEsittely({ route, navigation }) {
             <ScrollView style={{marginTop: 10}}>
 
 
-
         <TreeninKuvausData
         treeninKesto={treeninKesto}
         kohderyhma={kohderyhma}
@@ -143,7 +142,9 @@ export default function TreeninEsittely({ route, navigation }) {
          ( <LottieLoading />)}
          
          {! isLoading && <ButtonContainer>
-                <AloitaButton onPress={() => navigation.navigate(aloitaRoute)}>
+                <AloitaButton onPress={() => navigation.navigate('TreeninAloitus', {
+                    treeni: treeninNimi
+                })}>
                 <Text large >Aloita treeni</Text>
                 </AloitaButton>
                 </ButtonContainer> 
