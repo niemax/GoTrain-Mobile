@@ -45,6 +45,7 @@ const LopetaTreeni = ({ data, treeni }) => {
                 await ref.add({
                     treeni: treeni,
                     pvm: date,
+                    timestamp: Date.now(),
                     treeniData: data
                 });
 
@@ -60,7 +61,7 @@ const LopetaTreeni = ({ data, treeni }) => {
               });
 
              setTimeout(() => {
-                    navigation.pop();
+                navigation.pop(2);
 
             }, 500);
 

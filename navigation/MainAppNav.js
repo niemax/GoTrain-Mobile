@@ -1,18 +1,15 @@
-import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import Login from '../screens/Login'
-import Signup from '../screens/Signup'
-import TehdytTreenit from '../tabs/TehdytTreenit'
+import Login from '../screens/Login';
+import Signup from '../screens/Signup';
+import TehdytTreenit from '../tabs/TehdytTreenit';
 import LoadingScreen from '../screens/Loading';
-import Etusivu from '../tabs/Etusivu'
-import RintaTreeni from '../screens/TreeniScreens/Rinta'
+import Etusivu from '../tabs/Etusivu';
 import TreeninEsittely from '../components/TreeninEsittely';
+import TreeninEsikatselu from '../components/TreeninEsikatselu';
 import TreeninAloitus from '../screens/TreeniScreens/TreeninAloitus';
-import SelkaTreeni from '../screens/TreeniScreens/Selka'
-import JalkaTreeni from '../screens/TreeniScreens/Jalka'
-import KasiTreeni from '../screens/TreeniScreens/Kasi';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 
 
@@ -41,6 +38,7 @@ const KotiScreens = () => {
      >
       <Stack.Screen name="KotiTab" options={{ headerShown: false}}  component={KotiMainTab} />
       <Stack.Screen name="TreeninEsittely" options={{ headerShown: false, gestureEnabled: false}}  component={TreeninEsittely} />
+      <Stack.Screen name="TreeninEsikatselu" options={{ headerShown: false, gestureEnabled: false}}  component={TreeninEsikatselu} />
       <Stack.Screen name="TreeninAloitus" options={{ headerShown: false, gestureEnabled: false}}  component={TreeninAloitus} />
       
      

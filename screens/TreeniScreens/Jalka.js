@@ -1,5 +1,4 @@
 import React from 'react'
-import TreeniEsittelyData from '../../components/TreeniEsittely';
 import { createStackNavigator } from '@react-navigation/stack'
 import AloitaTreeni from './TreeninAloitus';
 import Esikatselu from '../../components/TreeninEsikatselu';
@@ -73,15 +72,6 @@ import Esikatselu from '../../components/TreeninEsikatselu';
 }
 
 
-    const Jalka = () => {
-    return(
-        // MITÄ NÄISTÄ APISTA? TREENITEXT, TREENINKESTO, KOHDERYHMÄ, ALOITAROUTE -> poistas rintatreenidata
-        <TreeniEsittelyData 
-        backgroundImage={require('../../assets/jalatToinen.jpg')}
-        treeni={'jalkatreeni'} 
-        />
-    );
-}
 
     const Stack = createStackNavigator();
 

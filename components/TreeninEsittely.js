@@ -30,7 +30,7 @@ export default function TreeninEsittely({ route, navigation }) {
         try {
 
 
-            axios.get(`http://192.168.1.164:3000/api/treenit/${treeninNimi}`)
+            axios.get(`http://192.168.1.165:5000/api/treenit/${treeninNimi}`)
                 .then(response => {
                     console.log(response.data);
                     setTreeniData(response.data[0].liikkeet);
@@ -75,13 +75,13 @@ export default function TreeninEsittely({ route, navigation }) {
         
         <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',}}>
         
-        <Image style={styles.image} source={{ uri: `http://192.168.1.164:3000/api/${image}`} }></Image>
+        <Image style={styles.image} source={{ uri: `http://192.168.1.165:5000/api/${image}`} }></Image>
         <View style={{flexDirection: 'row', position: 'absolute', top: 35}}>
         <IconTouchable onPress={() => navigation.goBack()}>
         <Ionicons name="chevron-back-circle-outline" size={38} color="white" />
         </IconTouchable>
         <IconTouchable onPress={() => showToast()}>
-        <Text right marginLeft="290px"><Ionicons name="ios-heart-outline" size={38} color="white" /></Text>
+        <Ionicons name="ios-heart-outline" size={38} color="white" style={{marginLeft: 300}}/>
         </IconTouchable>
         
         </View>
@@ -100,10 +100,13 @@ export default function TreeninEsittely({ route, navigation }) {
         />
 
     { 
-    treeniData.map((item, index) => {
+    treeniData.map((item, index) => (
 
-    return(
-        <TouchableOpacity key={index} onPress={() => navigation.navigate(item.navigationRoute)}>
+        <TouchableOpacity key={index} onPress={() => navigation.navigate('TreeninEsikatselu', {
+            nimi: item.nimi, 
+            videoID: item.videoId,
+            ohjeet: item.ohjeet,
+        })}>
         <ListItem 
         containerStyle={{ height: 90,
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}} bottomDivider >
@@ -128,8 +131,7 @@ export default function TreeninEsittely({ route, navigation }) {
     </ListItem>
          </TouchableOpacity>
 
-      );
-    })
+        ))
     }  
 
 

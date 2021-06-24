@@ -10,7 +10,7 @@ import { List } from 'react-native-paper';
 import { LottieAnimationMain } from '../components/Lottie';
 import { Loading } from '../utils/Styling';
 import moment from 'moment';
-import 'moment/locale/fi'
+import 'moment/locale/fi';
 
     const wait = (timeout) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
@@ -39,7 +39,7 @@ import 'moment/locale/fi'
             db.collection("users")
             .doc(currentUser.uid)
             .collection('treenidata')
-            .orderBy('pvm', 'asc')
+            .orderBy('timestamp', 'desc')
             .get()
             .then(snapshot => {
                 snapshot.docs.forEach(treeni => {
@@ -81,7 +81,7 @@ import 'moment/locale/fi'
            
             <HeaderContainer>
             <HeaderComponent 
-        leftComponent={{text:<Text medium>MINÄ</Text>}}
+            leftComponent={{text:<Text medium>MINÄ</Text>}}
 
             />
             </HeaderContainer>
@@ -109,20 +109,18 @@ import 'moment/locale/fi'
                     <List.Section 
                     title={<Text left>Vedä alas päivittääksesi<Ionicons name="arrow-down" size={24} color={themeColor} /> </Text> } > 
                    {
-                       treenit.map((item, index) => {
+                       treenit.map((item, index) => (
                         
-                           return(
                             
                         <List.Accordion 
                         key={index}
                         title={<Text small left>{item.pvm} - {item.treeni}</Text>}
                         left={props => <List.Icon {...props} icon="calendar" color={themeColor} />}
-
                         >
                      {
                            Object.values(item.treeniData).map(treeni => {
-                               let desc = 
-                               `Sarjat: ${treeni.sarjat}\nToistot: ${Object.values(treeni.toistot)}\nPainot: ${Object.values(treeni.painot)}`;
+                               //let desc = 
+                               //`Sarjat: ${treeni.sarjat}\nToistot: ${Object.values(treeni.toistot)}\nPainot: ${Object.values(treeni.painot)}`;
 
                                return(
                                 <List.Item 
@@ -130,7 +128,8 @@ import 'moment/locale/fi'
                                 descriptionStyle={{fontFamily: 'MontserratRegular', color: themeColor}}
                                 titleStyle={{fontFamily: 'MontserratSemiBold', color: themeColor}}
                                 key={treeni.nimi} title={treeni.nimi} 
-                                description={desc} />
+                                //description={desc} 
+                                />
                                )
                                
                            })
@@ -138,8 +137,7 @@ import 'moment/locale/fi'
                      
                     </List.Accordion>
                               
-                           );
-                       })
+                ))
                    }
                    </List.Section>
                     </ScrollView>

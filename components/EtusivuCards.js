@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { LottieLoading } from '../components/Lottie';
 import { Skeleton } from '../components/Skeleton';
 import { createGlobalStyle } from 'styled-components';
-
+import HOME_CONFIG from '../'
 
 
 const Cards = ({ route }) => {
@@ -22,8 +22,9 @@ const Cards = ({ route }) => {
 
     async function _getCardData() {
         try {
-
-            await axios.get('http://192.168.1.164:3000/api/cards/etusivucards')
+            // 172.20.10.3
+            // 192.168.1.165
+            await axios.get('http://192.168.1.165:5000/api/cards/etusivucards')
                 .then(response => {
                     console.log(response.data);
                     setCardData(response.data);
@@ -72,7 +73,7 @@ const Cards = ({ route }) => {
                             treeninNimi: item.nimi,
                             image: item.image
                         })}
-                        imageSrc={{ uri: `http://192.168.1.164:3000/api/${img}` }}
+                        imageSrc={{ uri: `http://192.168.1.165:5000/api/${img}` }}
                         title=
                         {
                         <Text title style={{color: '#FFF', fontFamily: 'MontserratBold'}}>

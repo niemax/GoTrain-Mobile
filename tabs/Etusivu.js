@@ -58,17 +58,20 @@ const Etusivu = (
                     if (response.ok) return response.json();
                 })
                 .then(data => {
-                    console.log(data.weather[0].icon);
+                    //console.log(data.weather[0].icon);
+                    if (data != undefined) {
+                        console.log(data);
+                        const { name } = data;
+                        const { temp } = data?.main;
+                        setCity(name);
+                        setTemp(temp?.toFixed(0));
+                        setWeatherIcon(data?.weather[0].icon);
 
-                    const { name } = data;
-                    const { temp } = data.main;
-
-
-                    setCity(name);
-                    setTemp(temp.toFixed(0));
-                    setWeatherIcon(data.weather[0].icon);
-                    setIsLoading(false);
+                    } else return;
                 })
+                .finally(() => {
+                    setIsLoading(false);
+                });
 
 
 

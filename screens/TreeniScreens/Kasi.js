@@ -1,5 +1,4 @@
 import React from 'react'
-import TreeniData from '../../components/TreeniEsittely';
 import AloitaTreeni from './TreeninAloitus';
 import Esikatselu from '../../components/TreeninEsikatselu';
 import { createStackNavigator } from '@react-navigation/stack'
@@ -89,15 +88,7 @@ export const Vasarakaanto = () => {
     )
 }
    
-const Kasi = () => {
-   
-    return(
-        <TreeniData 
-        backgroundImage={require('../../assets/kadetToinen.jpg')}
-        treeni={'kasitreeni'} 
-        />
-    );
-}
+
 
 const Stack = createStackNavigator();
 

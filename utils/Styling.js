@@ -61,7 +61,8 @@ export const SignupButtonContainer = styled.View `
 
 `;
 //#947AFF
-export const IconTouchable = styled.TouchableOpacity `
+export const IconTouchable = styled.TouchableOpacity`
+    flex-direction: row;
 `;
 
 export const PalauteIcon = styled.TouchableOpacity `
@@ -78,7 +79,6 @@ export const LottieContainer = styled.View `
 
 
 export const VideoContainer = styled.View `
-    margin-top: 20px;
    `;
 
 export const UtilsContainer = styled.View `
@@ -158,7 +158,11 @@ export const PainotContainer = styled.View `
 `;
 
 export const AdditionalContainer = styled.View `
-    margin-top: 35px;
+    margin-top: 85px;
+    margin-right: 25px;
+    justify-content: center;
+    align-items: center;
+     
 `;
 
 export const BackgroundContainer = styled.View `
@@ -244,3 +248,4 @@ margin-bottom: 30px;
     shadow-opacity: 0.5;
     background-color: ${props => props.color ?? '#fff'};
 `;
+

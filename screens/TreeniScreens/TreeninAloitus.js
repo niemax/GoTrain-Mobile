@@ -13,7 +13,8 @@ import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import { LottieLoading } from '../../components/Lottie';
 import axios from 'axios';
-
+import ActionButton from 'react-native-action-button';
+import SarjaModal from '../../components/Modal';
 
 import { VideoContainer,
     UtilsContainer, 
@@ -41,12 +42,8 @@ const AloitaTreeni = ({ route }) => {
     const [pbProgress, setPbProgress] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [toisto1, setToisto1] = useState('');
-    const [toisto2, setToisto2] = useState('');
-    const [toisto3, setToisto3] = useState('');
-    const [paino1, setPaino1] = useState('');
-    const [paino2, setPaino2] = useState('');
-    const [paino3, setPaino3] = useState('');
+    const [toistot, setToistot] = useState([]);
+    const [painot, setPainot] = useState([]);
 
     const carousel = useRef(null);
 
@@ -58,10 +55,10 @@ const AloitaTreeni = ({ route }) => {
 
     //console.log(treeni)
 
-    const getData = async () => {
+    async function getData() {
         try {
-
-            axios.get(`http://192.168.1.164:3000/api/treenit/${treeni}`)
+            
+            axios.get(`http://192.168.1.165:5000/api/treenit/${treeni}`)
                 .then(response => {
                     console.log(response.data);
                     setTreeniData(response.data[0].liikkeet);
@@ -89,13 +86,13 @@ const AloitaTreeni = ({ route }) => {
      //console.log console.log("setProgress", item, index);
 
         const treenit = { ...tehdytTreenit };
-        const painot = `${paino1} - ${paino2} - ${paino3}`;
-        const toistot = `${toisto1} - ${toisto2} - ${toisto3}`;
+        //const painot = `${paino1} - ${paino2} - ${paino3}`;
+        //const toistot = `${toisto1} - ${toisto2} - ${toisto3}`;
 
         if (!(item.nimi in treenit)) {
             treenit[item.nimi] = { nimi: item.nimi, sarjat: item.sarjat, 
-            toistot: { toistot },
-            painot: { painot }  
+            // toistot: { toistot },
+            // painot: { painot }  
         
         };
             setCurrentSlide(currentSlide + 1);
@@ -119,10 +116,23 @@ const AloitaTreeni = ({ route }) => {
 
         setTehdytTreenit(treenit);
         setPbProgress(Object.keys(treenit).length / treeniData.length);
-        setToisto1(''), setToisto2(''), setToisto3(''), setPaino1(''),setPaino2(''), setPaino3('')
+        // setToisto1(''), setToisto2(''), setToisto3(''), setPaino1(''),setPaino2(''), setPaino3('')
         console.log("treenit", treenit, Object.keys(treenit).length);
        
     }
+
+    function handleToisto(value) {
+
+        const newValue = value;
+
+        // setToisto([...toisto], newValue);
+    }
+
+    function openModal() {
+        return <SarjaModal />
+    }
+
+   
 
 
     const _renderItem = ({ item, index }) => {
@@ -154,9 +164,9 @@ const AloitaTreeni = ({ route }) => {
                      </ProgressBarContainer>
      
                      <UtilsContainer>
-                        <Text large >{item.nimi.toUpperCase()}</Text>
+                        <Text title >{item.nimi.toUpperCase()}</Text>
      
-                         <Text marginTop="15px" color="#000" vinkkiTitle >{item.sarjat} sarjaa </Text>
+                         <Text marginTop="15px" vinkkiTitle >{item.sarjat} sarjaa </Text>
      
                          <AloitusButtonContainer>
                          
@@ -165,9 +175,9 @@ const AloitaTreeni = ({ route }) => {
                              </PreviousButton>}
      
                              <DoneButton onPress={() => setProgress(item, index)}>
-                                 <Ionicons name="checkmark-circle-outline" size={82} 
-                                 color={btnColor}
-                                 />
+                                <Ionicons name="checkmark-circle-outline" size={82} 
+                                color={btnColor}
+                                />
                              </DoneButton>
      
                              {index < treenitLength -1 &&  <NextButton onPress={() => { carousel.current.snapToNext() }}>
@@ -176,61 +186,50 @@ const AloitaTreeni = ({ route }) => {
                              }
      
                          </AloitusButtonContainer>
-                         <AdditionalContainer>
-                         <Text vinkkiTitle>Toistot
-                         
-                        </Text>
-                         <ToistotContainer >
+                        <AdditionalContainer>
+                         <ActionButton buttonColor="#054dd9" size={82}
+                         onPress={() => openModal()}/>
 
-                         <InputField
-                         style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
-                        onChangeText={(toisto1) => setToisto1(toisto1)}
-                        value={toisto1}
-                        placeholder="Sarja 1"
-                        keyboardType='numeric'
-                        />
-                         <InputField
-                         style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
-                        onChangeText={(toisto2) => setToisto2(toisto2)}
-                        value={toisto2}
-                        placeholder="Sarja 2"
-                        keyboardType='numeric'
-                        />
-                         <InputField
-                         style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
-                        onChangeText={(toisto3) => setToisto3(toisto3)}
-                        value={toisto3}
-                        placeholder="Sarja 3"
-                        keyboardType='numeric'
-                        />
-                        </ToistotContainer>
-                        <Text vinkkiTitle>Painot(kg)
+
                         
-                        </Text>
-                         <PainotContainer>
-                         <InputField
-                         style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
-                        onChangeText={(paino1) => setPaino1(paino1)}
-                        value={paino1}
-                        placeholder="Sarja 1"
+
+                        </AdditionalContainer>                         
+                         {/* <AdditionalContainer>
+                         <Text vinkkiTitle>Toistot</Text>
+                         <ToistotContainer >
+                        {
+                        [1,2,3].map((_, index) => (
+
+                        <InputField key={index}
+                        style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
+                        onChangeText={() => handleToisto()}
+                        value={toistot}
+                        placeholder={`Sarja ${index + 1}`}
                         keyboardType='numeric'
                         />
-                         <InputField
-                         style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
-                        onChangeText={(paino2) => setPaino2(paino2)}
-                        value={paino2}
-                        placeholder="Sarja 2"
+                        ))
+                        
+                        }
+
+                        </ToistotContainer>
+                        <Text vinkkiTitle>Painot</Text>
+                        <PainotContainer>
+                        {
+                        [1,2,3].map((_, index) => (
+
+                        <InputField key={index}
+                        style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
+                        onChangeText={() => definePaino()}
+                        value={painot}
+                        placeholder={`Sarja ${index + 1}`}
                         keyboardType='numeric'
                         />
-                         <InputField
-                         style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
-                        onChangeText={(paino3) => setPaino3(paino3)}
-                        value={paino3}
-                        placeholder="Sarja 3"
-                        keyboardType='numeric'
-                        />
+                        
+                        
+                        ))
+                        }
                         </PainotContainer>
-                         </AdditionalContainer>
+                         </AdditionalContainer> */}
                         
                      </UtilsContainer>
                 </ScrollView>
