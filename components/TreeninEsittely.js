@@ -9,6 +9,8 @@ import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import { LottieLoading } from '../components/Lottie';
 import TreeninKuvausData from '../components/TreeninKuvausData';
+import { HOMEDATA, MOBILEDATA } from '@env';
+import { GradientButtonLib } from '../components/GradientButton';
 import axios from 'axios';
 
 export default function TreeninEsittely({ route, navigation }) {
@@ -30,7 +32,7 @@ export default function TreeninEsittely({ route, navigation }) {
         try {
 
 
-            axios.get(`http://192.168.1.165:5000/api/treenit/${treeninNimi}`)
+            axios.get(`http://${HOMEDATA}/api/treenit/${treeninNimi}`)
                 .then(response => {
                     console.log(response.data);
                     setTreeniData(response.data[0].liikkeet);
@@ -75,7 +77,7 @@ export default function TreeninEsittely({ route, navigation }) {
         
         <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',}}>
         
-        <Image style={styles.image} source={{ uri: `http://192.168.1.165:5000/api/${image}`} }></Image>
+        <Image style={styles.image} source={{ uri: `http://${HOMEDATA}/api/${image}`} }></Image>
         <View style={{flexDirection: 'row', position: 'absolute', top: 35}}>
         <IconTouchable onPress={() => navigation.goBack()}>
         <Ionicons name="chevron-back-circle-outline" size={38} color="white" />
@@ -92,12 +94,12 @@ export default function TreeninEsittely({ route, navigation }) {
             <ScrollView style={{marginTop: 10}}>
 
 
-        <TreeninKuvausData
-        treeninKesto={treeninKesto}
-        kohderyhma={kohderyhma}
-        treeniText={treeniText}
-        treeniData={treeniData}
-        />
+            <TreeninKuvausData
+            treeninKesto={treeninKesto}
+            kohderyhma={kohderyhma}
+            treeniText={treeniText}
+            treeniData={treeniData}
+            />
 
     { 
     treeniData.map((item, index) => (
@@ -108,26 +110,25 @@ export default function TreeninEsittely({ route, navigation }) {
             ohjeet: item.ohjeet,
         })}>
         <ListItem 
-        containerStyle={{ height: 90,
-        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}} bottomDivider >
+        containerStyle={{ height: 100, backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',}} bottomDivider >
    
     <ListItem.Content>
   
     <TextContainer>
-    <Text marginLeft="3px" medium>{item.nimi}</Text>
+    <Text medium>{item.nimi}</Text>
     <Text 
     style=
     {{
-        fontFamily: 'MontserratSemiBold', 
-        position: 'absolute', left: 247, 
+        fontFamily: 'MontserratRegular', 
+        position: 'absolute', left: 255, 
         color: colorScheme === 'dark' ? '#fff' : '#000' 
-        }} medium>{item.sarjat} sarjaa
+        }} medium opacity={0.7}>{item.sarjat} sarjaa
         </Text>
     </TextContainer>
        
     </ListItem.Content>
-    <Ionicons name="ios-chevron-forward-sharp" size={24} color={themeColor} />
        
+    <Ionicons name="ios-chevron-forward-sharp" size={24} color={themeColor} style={{opacity: 0.4}} />
     </ListItem>
          </TouchableOpacity>
 
@@ -144,11 +145,13 @@ export default function TreeninEsittely({ route, navigation }) {
          ( <LottieLoading />)}
          
          {! isLoading && <ButtonContainer>
-                <AloitaButton onPress={() => navigation.navigate('TreeninAloitus', {
-                    treeni: treeninNimi
-                })}>
-                <Text large >Aloita treeni</Text>
-                </AloitaButton>
+            <GradientButtonLib
+            teksti="Aloita Treeni"
+            onPressAction={() => navigation.navigate('TreeninAloitus', { 
+                treeni: treeninNimi
+            })}
+            />
+        
                 </ButtonContainer> 
                 }
         
@@ -160,16 +163,11 @@ export default function TreeninEsittely({ route, navigation }) {
 
 const styles = StyleSheet.create({
     image: {
-        width: '100%',
         height: '30%',
         
     }, 
    
-    iconImage: {
-        height: 40, width: 40,
-        marginTop: 15,
-    },
-     
+        
     });
 
 

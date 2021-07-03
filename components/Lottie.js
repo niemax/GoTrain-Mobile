@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import LottieView from 'lottie-react-native';
-import { LottieContainer } from '../utils/Styling'
+import { LottieContainer } from '../utils/Styling';
 
   export const LottieAnimationCongratulations = () => {
 
@@ -117,6 +117,24 @@ export const LottieAlternateLoading = () => {
         source={require('../assets/json/60820-bicycle-riding.json')}
       />
       </LottieContainer>
+      
+    );
+}
+
+export const TreeninAloitusAnimation = () => {
+
+  const animation = useRef(null);
+
+  useEffect(() => {
+    animation.current.play();
+  })
+ 
+
+    return (
+        <LottieView
+        ref={animation}
+        source={require('../assets/json/3153-dummbells.json')}
+      />
       
     );
 }

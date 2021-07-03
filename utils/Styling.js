@@ -5,8 +5,22 @@ export const Container = styled.View `
     
 `;
 
+
+
 export const SignupContainer = styled.View `
     flex: 1;
+`;
+
+export const FAB = styled.TouchableOpacity`
+    width: 27%;
+    height: 100px;
+    border-radius: 60px;
+    shadow-color: '#000';
+    shadow-offset: {width: 1, height: 3};
+    shadow-opacity: 0.2;
+    align-items: center;
+    justify-content: center;
+    background-color: ${props => props.color ?? '#054dd9'};
 `;
 
 export const Footer = styled.View `
@@ -52,18 +66,21 @@ export const AloitaButton = styled.TouchableOpacity `
 
 export const ButtonContainer = styled.View `
     justify-content: center;
+    align-items: center;
     height: 12%;
-    padding: 15px;
+    padding: 0px;
 `;
 
 export const SignupButtonContainer = styled.View `
     margin-top: 30px;
+    
 
 `;
 //#947AFF
 export const IconTouchable = styled.TouchableOpacity`
     flex-direction: row;
 `;
+
 
 export const PalauteIcon = styled.TouchableOpacity `
     
@@ -79,6 +96,7 @@ export const LottieContainer = styled.View `
 
 
 export const VideoContainer = styled.View `
+    margin-top: 20px;
    `;
 
 export const UtilsContainer = styled.View `
@@ -92,6 +110,7 @@ export const AloitusRenderContainer = styled.View `
     background-color: #141314;
 `;
 
+
 export const MainDataContainer = styled.View`
     flex: 2;
 `;
@@ -103,7 +122,7 @@ export const AloitusButtonContainer = styled.View `
 
 export const ExtraContainer = styled.View `
     flex-direction: row;
-    margin-top: 60px;
+    margin-top: 50px;
 `;
 
 export const PreviousButton = styled.TouchableOpacity `
@@ -158,11 +177,6 @@ export const PainotContainer = styled.View `
 `;
 
 export const AdditionalContainer = styled.View `
-    margin-top: 85px;
-    margin-right: 25px;
-    justify-content: center;
-    align-items: center;
-     
 `;
 
 export const BackgroundContainer = styled.View `
@@ -175,7 +189,7 @@ export const BackgroundContainer = styled.View `
 
 
 export const LopetaButton = styled.TouchableOpacity `
-     margin-bottom: 30px;
+    margin-bottom: 30px;
     margin-left: 35px;
     width: 80%;
     height: 48px;

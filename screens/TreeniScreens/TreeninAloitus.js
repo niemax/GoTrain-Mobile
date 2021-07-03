@@ -5,17 +5,17 @@ import Text from '../../components/Text';
 import styled from 'styled-components/native';
 import Carousel from 'react-native-snap-carousel';
 import YoutubePlayer from "react-native-youtube-iframe";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Feather } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress';
 import { useNavigation  } from '@react-navigation/native'; 
 import LopetaTreeni from './TreeninLopetus';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
-import { LottieLoading } from '../../components/Lottie';
+import { LottieLoading, TreeninAloitusAnimation } from '../../components/Lottie';
 import axios from 'axios';
-import ActionButton from 'react-native-action-button';
-import SarjaModal from '../../components/Modal';
-
+import { HOMEDATA, MOBILEDATA } from '@env';
+import { SpeedDial } from 'react-native-elements';
+import Dialog from "react-native-dialog";
 import { VideoContainer,
     UtilsContainer, 
     AloitusRenderContainer, 
@@ -26,39 +26,40 @@ import { VideoContainer,
     DoneButton,
     LoadingView,
     ProgressBarContainer,
-    InputField,
-    ToistotContainer,
-    PainotContainer,
-    AdditionalContainer
     } from '../../utils/Styling'
 
 
 
-const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
+const { width: viewportWidth } = Dimensions.get('window');
 
 const AloitaTreeni = ({ route }) => {
     const [treeniData, setTreeniData] = useState([]);
     const [tehdytTreenit, setTehdytTreenit] = useState({});
     const [pbProgress, setPbProgress] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+    const [visible, setVisible] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [toistot, setToistot] = useState([]);
-    const [painot, setPainot] = useState([]);
+    const [toisto, setToisto] = useState('');
+    const [paino, setPaino] = useState('');
+    const [toistotPainotData, setToistotPainotData] = useState([]);
+    const [open, setOpen] = useState(false);
 
     const carousel = useRef(null);
-
     const { treeni } = route.params;
-    const navigation = useNavigation();
 
+    const navigation = useNavigation();
+    
     Appearance.getColorScheme();
     const colorScheme = useColorScheme();
 
-    //console.log(treeni)
-
+    const lisaaIcon = <Feather name="plus" size={24} color="white" />
+    
+    
     async function getData() {
+
         try {
             
-            axios.get(`http://192.168.1.165:5000/api/treenit/${treeni}`)
+            axios.get(`http://${HOMEDATA}/api/treenit/${treeni}`)
                 .then(response => {
                     console.log(response.data);
                     setTreeniData(response.data[0].liikkeet);
@@ -83,37 +84,35 @@ const AloitaTreeni = ({ route }) => {
     }, []);
 
     const setProgress = (item, index) => {
-     //console.log console.log("setProgress", item, index);
 
         const treenit = { ...tehdytTreenit };
         //const painot = `${paino1} - ${paino2} - ${paino3}`;
         //const toistot = `${toisto1} - ${toisto2} - ${toisto3}`;
 
         if (!(item.nimi in treenit)) {
-            treenit[item.nimi] = { nimi: item.nimi, sarjat: item.sarjat, 
-            // toistot: { toistot },
-            // painot: { painot }  
-        
+            treenit[item.nimi] = { nimi: item.nimi, sarjat: item.sarjat, id: index, 
+                suoritusStats: toistotPainotData
         };
-            setCurrentSlide(currentSlide + 1);
-            Toast.show({
-                text2: `${item.nimi} tehty!`,
-                type: 'success',
-                visibilityTime: 1000
-    
-              });
-        } else {
-            delete treenit[item.nimi];
-            setCurrentSlide(currentSlide - 1);
-            Toast.show({
-                text2: `${item.nimi} poistettu!`,
-                type: 'error',
-                visibilityTime: 1500
-    
-              });
+        
+        setCurrentSlide(currentSlide + 1);
+        Toast.show({
+            text2: `${item.nimi} tehty!`,
+            type: 'success',
+            visibilityTime: 1000
             
-        }
-
+        });
+    } else {
+        delete treenit[item.nimi];
+        setCurrentSlide(currentSlide - 1);
+        Toast.show({
+            text2: `${item.nimi} poistettu!`,
+            type: 'error',
+            visibilityTime: 1500
+            
+        });
+        
+    }
+        setToistotPainotData('')
         setTehdytTreenit(treenit);
         setPbProgress(Object.keys(treenit).length / treeniData.length);
         // setToisto1(''), setToisto2(''), setToisto3(''), setPaino1(''),setPaino2(''), setPaino3('')
@@ -121,18 +120,28 @@ const AloitaTreeni = ({ route }) => {
        
     }
 
-    function handleToisto(value) {
+    /* function filterData() {
+        let toistot, painot;
+        toistotPainotData.filter((word) => word === 'Toistot').map(item =>) 
+            
+    } */
 
-        const newValue = value;
+    const handleToistotPainotData = () => {
+        const newArr = [ ...toistotPainotData ];
 
-        // setToisto([...toisto], newValue);
+        newArr.push({ toistot: toisto, painot: paino });
+
+        
+        setToistotPainotData(newArr);
+        console.log(toistotPainotData);
+
+        setVisible(false);
+
+       
     }
 
-    function openModal() {
-        return <SarjaModal />
-    }
-
-   
+    
+    
 
 
     const _renderItem = ({ item, index }) => {
@@ -146,12 +155,12 @@ const AloitaTreeni = ({ route }) => {
                 <AloitusRenderContainer key={index} style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}}>
                 <ScrollView>
                 <ExtraContainer>
+                <TreeninAloitusAnimation />
                 <IconTouchable onPress={() => navigation.goBack()} left marginLeft="15px">
                 <Ionicons name="ios-chevron-back" size={24} color={colorIcon} />
                 </IconTouchable> 
                 <Text medium marginTop="3px" marginLeft="240px" ><Text small>TEHTY</Text> {currentSlide} / {treeniData.length}</Text>
                 </ExtraContainer>
-
                      <VideoContainer>
                          <YoutubePlayer
                              height={220}
@@ -186,54 +195,56 @@ const AloitaTreeni = ({ route }) => {
                              }
      
                          </AloitusButtonContainer>
-                        <AdditionalContainer>
-                         <ActionButton buttonColor="#054dd9" size={82}
-                         onPress={() => openModal()}/>
-
-
-                        
-
-                        </AdditionalContainer>                         
-                         {/* <AdditionalContainer>
-                         <Text vinkkiTitle>Toistot</Text>
-                         <ToistotContainer >
-                        {
-                        [1,2,3].map((_, index) => (
-
-                        <InputField key={index}
-                        style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
-                        onChangeText={() => handleToisto()}
-                        value={toistot}
-                        placeholder={`Sarja ${index + 1}`}
-                        keyboardType='numeric'
-                        />
-                        ))
-                        
-                        }
-
-                        </ToistotContainer>
-                        <Text vinkkiTitle>Painot</Text>
-                        <PainotContainer>
-                        {
-                        [1,2,3].map((_, index) => (
-
-                        <InputField key={index}
-                        style={{color: colorIcon, fontFamily: 'MontserratSemiBold', fontSize: 18}}
-                        onChangeText={() => definePaino()}
-                        value={painot}
-                        placeholder={`Sarja ${index + 1}`}
-                        keyboardType='numeric'
-                        />
-                        
-                        
-                        ))
-                        }
-                        </PainotContainer>
-                         </AdditionalContainer> */}
+                         
                         
                      </UtilsContainer>
                 </ScrollView>
-                
+                <SpeedDial
+                color="#054dd9"
+                overlayColor="transparent"
+                transitionDuration={100}
+                isOpen={open}
+                icon={lisaaIcon}
+                openIcon={{ name: 'close', color: '#fff' }}
+                onOpen={() => setOpen(!open)}
+                onClose={() => setOpen(!open)}
+                >
+                {
+                    [1, 2, 3].map((_, index) => (
+                        <SpeedDial.Action key={index}
+                        color="#054dd9"
+                        icon={lisaaIcon}
+                        title={`Lisää sarjan ${index +1 } tiedot`}
+                        onPress={() => setVisible(true)}
+                        />
+                        
+                ))
+                }
+
+                        <Dialog.Container visible={visible} key={index}>
+                        <Dialog.Title>Lisää sarjan tiedot</Dialog.Title>
+                        <Dialog.Description>
+                        Lisää toistot ja painot
+                        </Dialog.Description>
+                        <Dialog.Input
+                        label="Toistot"
+                        onChangeText={(text) => setToisto(text)}
+                        >
+                        </Dialog.Input>
+                       
+                        <Dialog.Input
+                        label="Kilot(kg)"
+                        onChangeText={(text) => setPaino(text)}
+                        >
+                        </Dialog.Input>
+
+                        <Dialog.Button label="Lisää" onPress={handleToistotPainotData} />
+                        <Dialog.Button label="Peruuta" onPress={() => setVisible(false)} />
+                        </Dialog.Container>
+
+                        
+                        </SpeedDial>
+                    
                     
                  </AloitusRenderContainer>
              );

@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import { Ionicons } from '@expo/vector-icons'; 
 import Text from '../components/Text'
 import YoutubePlayer from "react-native-youtube-iframe";
-import { useNavigation } from '@react-navigation/native'; 
+import { GradientButtonLib } from '../components/GradientButton';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 
 
@@ -41,9 +41,11 @@ const TreeninEsikatselu = ({ route, navigation }) => {
         </ScrollView>
 
     <SuljeContainer>
-    <SuljeButton onPress={() => navigation.goBack()}>
-              <Text color="white" center large>Sulje</Text>
-         </SuljeButton>
+    <GradientButtonLib
+        teksti="Sulje"
+        onPressAction={() => navigation.goBack()}
+        >
+        </GradientButtonLib>
     </SuljeContainer>
 
        
@@ -77,21 +79,10 @@ const WarningContainer = styled.View`
 `;
 
 
-const SuljeButton = styled.TouchableOpacity`
-margin-bottom: 30px;
-    margin-left: 35px;
-    width: 80%;
-    height: 48px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 30px;
-    shadow-color: 'rgba(0,0,0, .4)';
-    shadow-opacity: 0.5;
-    background-color: #054dd9;
-`;
 
 const SuljeContainer = styled.View`
     justify-content: center;
+    align-items: center;
     height: 12%;
     padding: 15px;
 `;

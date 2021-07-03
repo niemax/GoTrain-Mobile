@@ -6,25 +6,20 @@ import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 import { ContentLoaderView } from '../utils/Styling';
 import { useNavigation } from '@react-navigation/native'; 
-import { LottieLoading } from '../components/Lottie';
 import { Skeleton } from '../components/Skeleton';
-import { createGlobalStyle } from 'styled-components';
-import HOME_CONFIG from '../'
+import { HOMEDATA, MOBILEDATA } from '@env';
 
 
 const Cards = ({ route }) => {
     const [cardData, setCardData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [treeninNimi, setTreeninNimi] = useState('');
 
     const navigation = useNavigation();
    
 
     async function _getCardData() {
         try {
-            // 172.20.10.3
-            // 192.168.1.165
-            await axios.get('http://192.168.1.165:5000/api/cards/etusivucards')
+            await axios.get(`http://${HOMEDATA}/api/cards/etusivucards`)
                 .then(response => {
                     console.log(response.data);
                     setCardData(response.data);
@@ -73,7 +68,7 @@ const Cards = ({ route }) => {
                             treeninNimi: item.nimi,
                             image: item.image
                         })}
-                        imageSrc={{ uri: `http://192.168.1.165:5000/api/${img}` }}
+                        imageSrc={{ uri: `http://${HOMEDATA}/api/${img}` }}
                         title=
                         {
                         <Text title style={{color: '#FFF', fontFamily: 'MontserratBold'}}>

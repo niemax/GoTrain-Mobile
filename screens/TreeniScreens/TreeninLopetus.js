@@ -1,5 +1,3 @@
-import styled from 'styled-components/native';
-import { Image, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from "react";
 import Text from '../../components/Text';
 import ConfettiCannon from 'react-native-confetti-cannon';
@@ -13,13 +11,10 @@ import 'moment/locale/fi'
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import { LottieAnimationCongratulations } from '../../components/Lottie';
-
-import { LopetaButton, PalauteButtonContainer, Container } from '../../utils/Styling';
-
+import { PalauteButtonContainer, Container } from '../../utils/Styling';
+import { GradientButtonLib } from '../../components/GradientButton';
 
 const LopetaTreeni = ({ data, treeni }) => {
-       
-
         const [shoot, setShoot] = useState(false);
 
         Appearance.getColorScheme();
@@ -46,7 +41,7 @@ const LopetaTreeni = ({ data, treeni }) => {
                     treeni: treeni,
                     pvm: date,
                     timestamp: Date.now(),
-                    treeniData: data
+                    treeniData: data,
                 });
 
             } catch (err) {
@@ -134,10 +129,11 @@ const LopetaTreeni = ({ data, treeni }) => {
          
       
       <ButtonContainer>
-        <LopetaButton onPress={() => saveToDatabase()}>
-        <Ionicons name="ios-checkmark-outline" size={24} color="white" />
-        <Text medium>Lopeta</Text>
-        </LopetaButton>
+      <GradientButtonLib
+        teksti="Lopeta treeni"
+        onPressAction={() => saveToDatabase()}
+        >
+        </GradientButtonLib>
             </ButtonContainer>
         </Container>
          

@@ -44,8 +44,6 @@ import 'moment/locale/fi';
             .then(snapshot => {
                 snapshot.docs.forEach(treeni => {
                     treeniArray.push(treeni.data());
-                    setLiikkeet(treeni.data().treeniData);
-                 //   console.log(treeni.data().treeniData)
                     
                 })
             })
@@ -62,6 +60,7 @@ import 'moment/locale/fi';
             getData();
             wait(2000).then(() => setRefreshing(false)).then(() => setLoading(false));
             setRefreshed(true);
+
         })
 
         const getCurrentDate = () => {
@@ -73,6 +72,7 @@ import 'moment/locale/fi';
 
         useEffect(() => {
             getCurrentDate();
+            
         }, []);
 
 
@@ -106,8 +106,7 @@ import 'moment/locale/fi';
                     }>
                     
                     
-                    <List.Section 
-                    title={<Text left>Vedä alas päivittääksesi<Ionicons name="arrow-down" size={24} color={themeColor} /> </Text> } > 
+                     <List.Section> 
                    {
                        treenit.map((item, index) => (
                         
@@ -119,8 +118,15 @@ import 'moment/locale/fi';
                         >
                      {
                            Object.values(item.treeniData).map(treeni => {
-                               //let desc = 
-                               //`Sarjat: ${treeni.sarjat}\nToistot: ${Object.values(treeni.toistot)}\nPainot: ${Object.values(treeni.painot)}`;
+                            let descSarjat = `Sarjat: ${treeni.sarjat}`;
+                            let descToistot =`Toistot: `;
+                            let descPainot= `Painot: `;
+
+                                Object.values(treeni.suoritusStats).forEach((item, i) => {
+                                    descToistot += `${i === 0 ? "": " - "}${item.toistot}`;
+                                    descPainot += `${i === 0 ? "" : " - "}${item.painot}`;
+                                })
+
 
                                return(
                                 <List.Item 
@@ -128,9 +134,9 @@ import 'moment/locale/fi';
                                 descriptionStyle={{fontFamily: 'MontserratRegular', color: themeColor}}
                                 titleStyle={{fontFamily: 'MontserratSemiBold', color: themeColor}}
                                 key={treeni.nimi} title={treeni.nimi} 
-                                //description={desc} 
+                                description={`${descSarjat}\n${descToistot}\n${descPainot}`} 
                                 />
-                               )
+                               ) 
                                
                            })
                        }

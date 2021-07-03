@@ -15,9 +15,10 @@ const TextStyle = ({...props}) => {
 const Text = styled.Text`
 margin: ${props => props.margin ?? 0};
 padding: ${props => props.padding ?? 0};
-marginLeft: ${props => props.marginLeft ?? 0}
+marginLeft: ${props => props.marginLeft ?? 0};
 marginRight: ${props => props.marginRight ?? 0};
 marginTop: ${props => props.marginTop ?? 0};
+opacity: ${props => props.opacity ?? 1};
 marginBottom: ${props => props.marginBottom ?? 0};
 
 ${({ title, vinkit, vinkkiTitle, large, medium, small, treeninNimi, sarjat }) => {
