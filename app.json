@@ -2,7 +2,8 @@
   "expo": {
     "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.niemax.gotrainapp"
     },
     "name": "gotrain-app",
     "slug": "gotrain-app",
@@ -24,7 +25,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.niemax.gotrainapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
