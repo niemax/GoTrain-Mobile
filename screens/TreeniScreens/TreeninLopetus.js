@@ -27,13 +27,13 @@ const LopetaTreeni = ({ data, treeni }) => {
             const db = firebase.firestore();
 
             const currentUser = firebase.auth().currentUser;
-            
+
             const date = moment().locale('fi')
                 .format('LL')
-                
+
             const ref = db.collection('users')
-            .doc(currentUser.uid)
-            .collection('treenidata');
+                .doc(currentUser.uid)
+                .collection('treenidata');
 
 
             try {
@@ -47,24 +47,24 @@ const LopetaTreeni = ({ data, treeni }) => {
             } catch (err) {
                 console.error(err)
             }
-            
+
             Toast.show({
                 text2: 'Treeni lisätty tehtyihin treeneihin',
                 type: 'success',
                 visibilityTime: 2500,
-    
-              });
 
-             setTimeout(() => {
+            });
+
+            setTimeout(() => {
                 navigation.pop(2);
 
             }, 500);
 
         }
-        
-    useEffect(() => {
-        setShoot(true);
-    }, []);
+
+        useEffect(() => {
+            setShoot(true);
+        }, []);
    // console.log("tehdyt treenit data", data);
 
     return (
@@ -130,7 +130,7 @@ const LopetaTreeni = ({ data, treeni }) => {
       
       <ButtonContainer>
       <GradientButtonLib
-        teksti="Lopeta treeni"
+        teksti="Valmis"
         onPressAction={() => saveToDatabase()}
         >
         </GradientButtonLib>

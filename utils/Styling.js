@@ -11,17 +11,6 @@ export const SignupContainer = styled.View `
     flex: 1;
 `;
 
-export const FAB = styled.TouchableOpacity`
-    width: 27%;
-    height: 100px;
-    border-radius: 60px;
-    shadow-color: '#000';
-    shadow-offset: {width: 1, height: 3};
-    shadow-opacity: 0.2;
-    align-items: center;
-    justify-content: center;
-    background-color: ${props => props.color ?? '#054dd9'};
-`;
 
 export const Footer = styled.View `
     flex: 2;
@@ -98,8 +87,8 @@ export const LottieContainer = styled.View `
 export const VideoContainer = styled.View `
     margin-top: 20px;
    `;
-
-export const UtilsContainer = styled.View `
+   
+   export const UtilsContainer = styled.View `
     margin-top: 15px;
     align-items: center;
     justify-content: center;
@@ -110,6 +99,10 @@ export const AloitusRenderContainer = styled.View `
     background-color: #141314;
 `;
 
+export const DialogContainer = styled.View `
+    flex: 1;
+    
+`;
 
 export const MainDataContainer = styled.View`
     flex: 2;

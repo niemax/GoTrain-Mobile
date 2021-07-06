@@ -21,6 +21,7 @@ const Cards = ({ route }) => {
         try {
             await axios.get(`http://${HOMEDATA}/api/cards/etusivucards`)
                 .then(response => {
+                    
                     console.log(response.data);
                     setCardData(response.data);
 
@@ -68,7 +69,7 @@ const Cards = ({ route }) => {
                             treeninNimi: item.nimi,
                             image: item.image
                         })}
-                        imageSrc={{ uri: `http://${HOMEDATA}/api/${img}` }}
+                        imageSrc={{ uri: `http://${HOMEDATA}/api/${img}`, cache: 'default', }}
                         title=
                         {
                         <Text title style={{color: '#FFF', fontFamily: 'MontserratBold'}}>

@@ -22,8 +22,8 @@ export default function TreeninEsittely({ route, navigation }) {
     const [isLoading, setIsLoading] = useState(true);
 
 
-    Appearance.getColorScheme();
     const colorScheme = useColorScheme();
+    Appearance.getColorScheme();
     const themeColor = colorScheme === 'dark' ? 'white' : 'black';
     
     const { treeninNimi, image } = route.params;
@@ -77,7 +77,7 @@ export default function TreeninEsittely({ route, navigation }) {
         
         <Container style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',}}>
         
-        <Image style={styles.image} source={{ uri: `http://${HOMEDATA}/api/${image}`} }></Image>
+        <Image style={styles.image} source={{ uri: `http://${HOMEDATA}/api/${image}`, cache: 'default'} }></Image>
         <View style={{flexDirection: 'row', position: 'absolute', top: 35}}>
         <IconTouchable onPress={() => navigation.goBack()}>
         <Ionicons name="chevron-back-circle-outline" size={38} color="white" />
@@ -146,7 +146,7 @@ export default function TreeninEsittely({ route, navigation }) {
          
          {! isLoading && <ButtonContainer>
             <GradientButtonLib
-            teksti="Aloita Treeni"
+            teksti="Aloita"
             onPressAction={() => navigation.navigate('TreeninAloitus', { 
                 treeni: treeninNimi
             })}

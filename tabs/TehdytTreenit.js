@@ -92,7 +92,7 @@ import 'moment/locale/fi';
            </TextContainer>
        
 
-            <Text marginTop="5px" large>Suoritukset </Text>
+            <Text large>Suoritukset </Text>
             {! refreshed && <LottieAnimationMain />}
                 {loading ? ( <Loading size="large" /> 
                 ) : (
@@ -120,21 +120,24 @@ import 'moment/locale/fi';
                            Object.values(item.treeniData).map(treeni => {
                             let descSarjat = `Sarjat: ${treeni.sarjat}`;
                             let descToistot =`Toistot: `;
-                            let descPainot= `Painot: `;
+                            let descPainot = `Painot: `;
+                            let descLisatiedot = `Lisätiedot: `;
+
 
                                 Object.values(treeni.suoritusStats).forEach((item, i) => {
                                     descToistot += `${i === 0 ? "": " - "}${item.toistot}`;
                                     descPainot += `${i === 0 ? "" : " - "}${item.painot}`;
+                                    descLisatiedot += `${i === 0 ? "" : " - "}${item.lisatiedot}`
                                 })
 
 
                                return(
                                 <List.Item 
-                                descriptionNumberOfLines={3}
+                                descriptionNumberOfLines={10}
                                 descriptionStyle={{fontFamily: 'MontserratRegular', color: themeColor}}
                                 titleStyle={{fontFamily: 'MontserratSemiBold', color: themeColor}}
                                 key={treeni.nimi} title={treeni.nimi} 
-                                description={`${descSarjat}\n${descToistot}\n${descPainot}`} 
+                                description={`${descSarjat}\n${descToistot}\n${descPainot}\n${descLisatiedot}`} 
                                 />
                                ) 
                                

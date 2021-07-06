@@ -1,6 +1,6 @@
   
 import React, { useState, useEffect, useRef } from 'react'
-import { Dimensions, ScrollView } from 'react-native';
+import { Dimensions, ScrollView, Alert, } from 'react-native';
 import Text from '../../components/Text';
 import styled from 'styled-components/native';
 import Carousel from 'react-native-snap-carousel';
@@ -26,6 +26,8 @@ import { VideoContainer,
     DoneButton,
     LoadingView,
     ProgressBarContainer,
+    DialogContainer,
+    Dial
     } from '../../utils/Styling'
 
 
@@ -41,6 +43,7 @@ const AloitaTreeni = ({ route }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [toisto, setToisto] = useState('');
     const [paino, setPaino] = useState('');
+    const [lisatieto, setLisatieto] = useState('');
     const [toistotPainotData, setToistotPainotData] = useState([]);
     const [open, setOpen] = useState(false);
 
@@ -58,10 +61,10 @@ const AloitaTreeni = ({ route }) => {
     async function getData() {
 
         try {
-            
+
             axios.get(`http://${HOMEDATA}/api/treenit/${treeni}`)
                 .then(response => {
-                    console.log(response.data);
+                    //console.log(response.data);
                     setTreeniData(response.data[0].liikkeet);
                     //   console.log(response.data.data);
                 })
@@ -81,81 +84,170 @@ const AloitaTreeni = ({ route }) => {
 
     useEffect(() => {
         getData();
+       
     }, []);
 
     const setProgress = (item, index) => {
 
         const treenit = { ...tehdytTreenit };
-        //const painot = `${paino1} - ${paino2} - ${paino3}`;
-        //const toistot = `${toisto1} - ${toisto2} - ${toisto3}`;
 
         if (!(item.nimi in treenit)) {
-            treenit[item.nimi] = { nimi: item.nimi, sarjat: item.sarjat, id: index, 
+            treenit[item.nimi] = {
+                nimi: item.nimi,
+                sarjat: item.sarjat,
+                id: index,
                 suoritusStats: toistotPainotData
-        };
-        
-        setCurrentSlide(currentSlide + 1);
-        Toast.show({
-            text2: `${item.nimi} tehty!`,
-            type: 'success',
-            visibilityTime: 1000
-            
-        });
-    } else {
-        delete treenit[item.nimi];
-        setCurrentSlide(currentSlide - 1);
-        Toast.show({
-            text2: `${item.nimi} poistettu!`,
-            type: 'error',
-            visibilityTime: 1500
-            
-        });
-        
-    }
-        setToistotPainotData('')
+            };
+
+            setCurrentSlide(currentSlide + 1);
+            Toast.show({
+                text2: `${item.nimi} tehty!`,
+                type: 'success',
+                visibilityTime: 1000
+
+            });
+        } else {
+            delete treenit[item.nimi];
+            setCurrentSlide(currentSlide - 1);
+            Toast.show({
+                text2: `${item.nimi} poistettu!`,
+                type: 'error',
+                visibilityTime: 1500
+
+            });
+
+        }
+        setToistotPainotData('');
         setTehdytTreenit(treenit);
         setPbProgress(Object.keys(treenit).length / treeniData.length);
-        // setToisto1(''), setToisto2(''), setToisto3(''), setPaino1(''),setPaino2(''), setPaino3('')
         console.log("treenit", treenit, Object.keys(treenit).length);
-       
+
     }
 
-    /* function filterData() {
-        let toistot, painot;
-        toistotPainotData.filter((word) => word === 'Toistot').map(item =>) 
-            
-    } */
 
     const handleToistotPainotData = () => {
-        const newArr = [ ...toistotPainotData ];
+        const newArr = [...toistotPainotData];
 
-        newArr.push({ toistot: toisto, painot: paino });
+        try {
+            if (toisto == '' && paino == '' || toisto == '' || paino == '') {
+                Alert.alert('Syötä molemmat tiedot!');
+                return;
 
-        
+            } else {
+                newArr.push({
+                    toistot: toisto,
+                    painot: paino,
+                    lisatiedot: lisatieto.trim()
+                });
+            }
+        } catch (e) {
+            console.error(e);
+        }
+
+
         setToistotPainotData(newArr);
-        console.log(toistotPainotData);
+        setToisto(''), setPaino('')
 
         setVisible(false);
 
-       
+
     }
 
-    
-    
+    function showNext(index) {
+        //console.log(index);
+        /* Object.values(treeniData.liikkeet).map((itm) => {
+            return itm.map((i) => {
+                console.log(i);
+            })
+        }) */
+    }
 
 
+    const renderDialogs = () => {
+        return (
+            <DialogContainer>
+            <SpeedDial
+                style={{shadowColor: 'black',
+                shadowOpacity: 0.8,
+                elevation: 6,
+                shadowRadius: 8,
+                shadowOffset : { width: 0, height: 3},}}
+                color={'#054dd9'}
+                isOpen={open}
+                overlayColor={'transparent'}
+                icon={lisaaIcon}
+                openIcon={{ name: 'close', color: '#fff' }}
+                onOpen={() => setOpen(!open)}
+                onClose={() => setOpen(!open)}
+                >
+                        <SpeedDial.Action 
+                        color="#054dd9"
+                        icon={lisaaIcon}
+                        title={`Lisää sarjan 1 tiedot`}
+                        onPress={() => setVisible(true)}
+                        />
+                        <SpeedDial.Action
+                        color="#054dd9"
+                        icon={lisaaIcon}
+                        title={`Lisää sarjan 2 tiedot`}
+                        onPress={() => setVisible(true)}
+                        />
+                        <SpeedDial.Action 
+                        color="#054dd9"
+                        icon={lisaaIcon}
+                        title={`Lisää sarjan 3 tiedot`}
+                        onPress={() => setVisible(true)}
+                        />
+                        
+                        </SpeedDial>
+                    
+                        <Dialog.Container visible={visible} >
+                        <Dialog.Title>Lisää sarjan tiedot</Dialog.Title>
+                        <Dialog.Description>
+                        Lisää toistot ja painot
+                        </Dialog.Description>
+                        <Text medium center marginBottom="10px">Toistot</Text>
+                        <Dialog.Input
+                        keyboardType='numeric'
+                        onChangeText={(text) => setToisto(text)}
+                        >
+                        </Dialog.Input>
+                        <Text medium center marginBottom="10px">Painot(kg)</Text>
+                        <Dialog.Input
+                        keyboardType='numeric'
+                        onChangeText={(text) =>  setPaino(text)}
+                        >
+                        </Dialog.Input>
+                        <Text medium center marginBottom="10px">Lisätiedot</Text>
+                        <Dialog.Input
+                        multiline={true}
+                        numberOfLines={5}
+                        onChangeText={(text) =>  setLisatieto(text)}
+                        >
+                        </Dialog.Input>
+                        
+
+                        <Dialog.Button label="Lisää" onPress={handleToistotPainotData} />
+                        <Dialog.Button label="Peruuta" onPress={() => setVisible(false)} />
+                        </Dialog.Container> 
+            </DialogContainer>
+            
+
+        )
+    }
+    
+    
     const _renderItem = ({ item, index }) => {
         const btnColor = tehdytTreenit.hasOwnProperty(item.nimi) ? "#054dd9" : colorScheme === 'dark' ? 'white' : 'black'
         const treenitLength = Object.keys(treeniData).length;
         const colorIcon = colorScheme === 'dark' ? 'white' : 'black';
+        const nextIndex = index + 1;
         
         if (! isLoading) {
             return (
                 
                 <AloitusRenderContainer key={index} style={{backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5'}}>
-                <ScrollView>
                 <ExtraContainer>
-                <TreeninAloitusAnimation />
                 <IconTouchable onPress={() => navigation.goBack()} left marginLeft="15px">
                 <Ionicons name="ios-chevron-back" size={24} color={colorIcon} />
                 </IconTouchable> 
@@ -198,52 +290,8 @@ const AloitaTreeni = ({ route }) => {
                          
                         
                      </UtilsContainer>
-                </ScrollView>
-                <SpeedDial
-                color="#054dd9"
-                overlayColor="transparent"
-                transitionDuration={100}
-                isOpen={open}
-                icon={lisaaIcon}
-                openIcon={{ name: 'close', color: '#fff' }}
-                onOpen={() => setOpen(!open)}
-                onClose={() => setOpen(!open)}
-                >
-                {
-                    [1, 2, 3].map((_, index) => (
-                        <SpeedDial.Action key={index}
-                        color="#054dd9"
-                        icon={lisaaIcon}
-                        title={`Lisää sarjan ${index +1 } tiedot`}
-                        onPress={() => setVisible(true)}
-                        />
-                        
-                ))
-                }
-
-                        <Dialog.Container visible={visible} key={index}>
-                        <Dialog.Title>Lisää sarjan tiedot</Dialog.Title>
-                        <Dialog.Description>
-                        Lisää toistot ja painot
-                        </Dialog.Description>
-                        <Dialog.Input
-                        label="Toistot"
-                        onChangeText={(text) => setToisto(text)}
-                        >
-                        </Dialog.Input>
-                       
-                        <Dialog.Input
-                        label="Kilot(kg)"
-                        onChangeText={(text) => setPaino(text)}
-                        >
-                        </Dialog.Input>
-
-                        <Dialog.Button label="Lisää" onPress={handleToistotPainotData} />
-                        <Dialog.Button label="Peruuta" onPress={() => setVisible(false)} />
-                        </Dialog.Container>
-
-                        
-                        </SpeedDial>
+                     {showNext(index)}
+                {renderDialogs()}        
                     
                     
                  </AloitusRenderContainer>
