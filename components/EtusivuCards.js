@@ -18,12 +18,14 @@ const Cards = ({ route }) => {
    
 
     async function _getCardData() {
+
         try {
             await axios.get(`http://${HOMEDATA}/api/cards/etusivucards`)
                 .then(response => {
                     
-                    console.log(response.data);
-                    setCardData(response.data);
+                    const { data } = response;
+
+                    setCardData(data);
 
 
                 })
@@ -57,23 +59,23 @@ const Cards = ({ route }) => {
      } else {
             return (
                 <ContentLoaderView>
-                    <ScrollView >
+                    <ScrollView>
+
             {
-                cardData.map((item, index) => {
-                    const img = item.image;
+                cardData.map(({ nimi, image, treeninkesto, navigationRoute }, index) => {
 
                     return(
                         <TouchableOpacity key={index}>
                         <Tile
-                        onPress={() => navigation.navigate(item.navigationRoute, {
-                            treeninNimi: item.nimi,
-                            image: item.image
+                        onPress={() => navigation.navigate(navigationRoute, {
+                            treeninNimi: nimi,
+                            image: image
                         })}
-                        imageSrc={{ uri: `http://${HOMEDATA}/api/${img}`, cache: 'default', }}
+                        imageSrc={{ uri: `http://${HOMEDATA}/api/${image}`, cache: 'default', }}
                         title=
                         {
                         <Text title style={{color: '#FFF', fontFamily: 'MontserratBold'}}>
-                        {item.nimi}
+                        {nimi}
                         </Text>
                         } featured
                         caption=
@@ -84,7 +86,7 @@ const Cards = ({ route }) => {
                         }
                         <Text medium style={{color: '#FFF', fontFamily: 
                         'MontserratSemiBold'}}>
-                        {item.treeninkesto}
+                        {treeninkesto}
                         </Text>
                         </View>
                         }

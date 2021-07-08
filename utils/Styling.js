@@ -89,7 +89,7 @@ export const VideoContainer = styled.View `
    `;
    
    export const UtilsContainer = styled.View `
-    margin-top: 15px;
+    margin-top: 10px;
     align-items: center;
     justify-content: center;
 `;
@@ -108,9 +108,13 @@ export const MainDataContainer = styled.View`
     flex: 2;
 `;
 
+export const SeuraavaksiContainer = styled.View`
+    margin-top: 80px;
+`;
+
 export const AloitusButtonContainer = styled.View `
     flex-direction: row;
-    margin-top: 25px;
+    margin-top: 80px;
 `;
 
 export const ExtraContainer = styled.View `

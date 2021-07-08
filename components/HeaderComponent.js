@@ -50,7 +50,7 @@ const HeaderComponent = (props) => {
                 })
                 .then(data => {
                     //console.log(data.weather[0].icon);
-                        console.log(data);
+                        //console.log(data);
                         const { name } = data;
                         const { temp } = data.main;
 

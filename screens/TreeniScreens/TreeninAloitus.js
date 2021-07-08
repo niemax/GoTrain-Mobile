@@ -27,8 +27,9 @@ import { VideoContainer,
     LoadingView,
     ProgressBarContainer,
     DialogContainer,
-    Dial
+    SeuraavaksiContainer
     } from '../../utils/Styling'
+import { color } from 'react-native-elements/dist/helpers';
 
 
 
@@ -64,9 +65,8 @@ const AloitaTreeni = ({ route }) => {
 
             axios.get(`http://${HOMEDATA}/api/treenit/${treeni}`)
                 .then(response => {
-                    //console.log(response.data);
                     setTreeniData(response.data[0].liikkeet);
-                    //   console.log(response.data.data);
+
                 })
                 .catch(err => {
                     console.log(err);
@@ -129,7 +129,7 @@ const AloitaTreeni = ({ route }) => {
         const newArr = [...toistotPainotData];
 
         try {
-            if (toisto == '' && paino == '' || toisto == '' || paino == '') {
+            if (toisto == '' || paino == '') {
                 Alert.alert('Syötä molemmat tiedot!');
                 return;
 
@@ -153,25 +153,17 @@ const AloitaTreeni = ({ route }) => {
 
     }
 
-    function showNext(index) {
-        //console.log(index);
-        /* Object.values(treeniData.liikkeet).map((itm) => {
-            return itm.map((i) => {
-                console.log(i);
-            })
-        }) */
-    }
-
 
     const renderDialogs = () => {
         return (
-            <DialogContainer>
+            <>
             <SpeedDial
                 style={{shadowColor: 'black',
                 shadowOpacity: 0.8,
                 elevation: 6,
-                shadowRadius: 8,
-                shadowOffset : { width: 0, height: 3},}}
+                shadowRadius: 3,
+                shadowOffset : { width: 0, height: 3},
+                }}
                 color={'#054dd9'}
                 isOpen={open}
                 overlayColor={'transparent'}
@@ -230,7 +222,7 @@ const AloitaTreeni = ({ route }) => {
                         <Dialog.Button label="Lisää" onPress={handleToistotPainotData} />
                         <Dialog.Button label="Peruuta" onPress={() => setVisible(false)} />
                         </Dialog.Container> 
-            </DialogContainer>
+            </>
             
 
         )
@@ -241,8 +233,8 @@ const AloitaTreeni = ({ route }) => {
         const btnColor = tehdytTreenit.hasOwnProperty(item.nimi) ? "#054dd9" : colorScheme === 'dark' ? 'white' : 'black'
         const treenitLength = Object.keys(treeniData).length;
         const colorIcon = colorScheme === 'dark' ? 'white' : 'black';
-        const nextIndex = index + 1;
-        
+        const nextValue = treeniData[( index + 1 ) % treeniData.length].nimi;
+
         if (! isLoading) {
             return (
                 
@@ -255,7 +247,7 @@ const AloitaTreeni = ({ route }) => {
                 </ExtraContainer>
                      <VideoContainer>
                          <YoutubePlayer
-                             height={220}
+                             height={240}
                              videoId={item.videoId}
                          />
                      </VideoContainer>
@@ -267,33 +259,46 @@ const AloitaTreeni = ({ route }) => {
                      <UtilsContainer>
                         <Text title >{item.nimi.toUpperCase()}</Text>
      
-                         <Text marginTop="15px" vinkkiTitle >{item.sarjat} sarjaa </Text>
+                         <Text marginTop="15px" large >{item.sarjat} sarjaa </Text>
      
                          <AloitusButtonContainer>
                          
                          {index > 0 && <PreviousButton onPress={() => { carousel.current.snapToPrev() }}>
-                                 <Ionicons name="ios-chevron-back-outline" size={48} color={colorIcon} />
+                                 <Ionicons name="ios-chevron-back-outline" size={58} color={colorIcon} />
                              </PreviousButton>}
      
                              <DoneButton onPress={() => setProgress(item, index)}>
-                                <Ionicons name="checkmark-circle-outline" size={82} 
+                                <Ionicons name="checkmark-circle-outline" size={90} 
                                 color={btnColor}
                                 />
                              </DoneButton>
      
                              {index < treenitLength -1 &&  <NextButton onPress={() => { carousel.current.snapToNext() }}>
-                                 <Ionicons name="ios-chevron-forward-outline" size={48} color={colorIcon} />
+                                 <Ionicons name="ios-chevron-forward-outline" size={58} color={colorIcon} />
                              </NextButton>
                              }
      
                          </AloitusButtonContainer>
                          
+                           
                         
                      </UtilsContainer>
-                     {showNext(index)}
-                {renderDialogs()}        
-                    
-                    
+                     <SeuraavaksiContainer>
+                     
+                    {index < treenitLength - 1 && 
+                    <Text vinkki>
+                    SEURAAVAKSI
+                    </Text>
+                    }
+                    {index < treenitLength - 1 && 
+                    <Text style={{fontFamily: 'MontserratBold', color: colorScheme === 'dark' ? '#fff' : '#000'}} vinkkiTitle>
+                    {nextValue.toUpperCase()}
+                    </Text>}
+                     
+                     </SeuraavaksiContainer>
+                     
+                   {renderDialogs()}
+                     
                  </AloitusRenderContainer>
              );
 
