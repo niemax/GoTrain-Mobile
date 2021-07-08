@@ -3,7 +3,7 @@ import { Image, StyleSheet, TouchableOpacity, ScrollView, View } from 'react-nat
 import styled from 'styled-components/native';
 import Text from '../components/Text';
 import { Ionicons } from '@expo/vector-icons'; 
-import { Container, AloitaButton, ButtonContainer, IconTouchable, } from '../utils/Styling';
+import { Container, ButtonContainer, IconTouchable, } from '../utils/Styling';
 import { ListItem } from 'react-native-elements'
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
@@ -115,11 +115,10 @@ export default function TreeninEsittely({ route, navigation }) {
     <ListItem.Content>
   
     <TextContainer>
-    <Text medium>{item.nimi}</Text>
-    <Text 
+    <Text fontFamily="MontserratRegular" medium>{item.nimi}</Text>
+    <Text fontFamily="MontserratRegular"
     style=
     {{
-        fontFamily: 'MontserratRegular', 
         position: 'absolute', left: 255, 
         color: colorScheme === 'dark' ? '#fff' : '#000' 
         }} medium opacity={0.7}>{item.sarjat} sarjaa

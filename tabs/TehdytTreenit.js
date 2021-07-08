@@ -1,90 +1,88 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { RefreshControl, ScrollView, View , TouchableOpacity} from 'react-native';
+import React, { useState, useEffect } from "react";
+import { RefreshControl, ScrollView, View } from 'react-native';
 import styled from 'styled-components/native'; 
 import Text from '../components/Text';
 import HeaderComponent from '../components/HeaderComponent';
 import * as firebase from 'firebase';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import { List } from 'react-native-paper';
-import { LottieAnimationMain } from '../components/Lottie';
-import { Loading } from '../utils/Styling';
-import moment from 'moment';
 import 'moment/locale/fi';
-import {Agenda} from 'react-native-calendars';
-import { format, addDays } from 'date-fns';
-import { Alert } from "react-native";
+import { Agenda, LocaleConfig } from 'react-native-calendars';
+import { format } from 'date-fns';
+import { Card } from 'react-native-elements';
+import { Container } from '../utils/Styling';
+import { TextContainer } from '../utils/Styling';
 
+
+LocaleConfig.locales['fi'] = {
+    monthNames: ['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu'],
+    monthNamesShort: ['Tammi.','Helmu.','Maalis.','Huhti.','Touko.','Kesä','Heinä.', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu'],
+    dayNames: ['Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Sunnuntai'],
+    dayNamesShort: ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'],
+    today: 'Tänään'
+  };
+  LocaleConfig.defaultLocale = 'fi';
 
     const wait = (timeout) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
       }
 
     const TehdytTreenit = () => {
-        const [treenit, setTreenit] = useState([]);
         const [refreshing, setRefreshing] = useState(false);
         const [loading, setLoading] = useState(false);
         const [refreshed, setRefreshed] = useState(false);
-        const [calendarItems, setCalendarItems] = useState({})
+        const [calendarItems, setCalendarItems] = useState({});
+        
 
         Appearance.getColorScheme();
         const colorScheme = useColorScheme();
-        const themeColor = colorScheme === 'dark' ? 'white' : 'black';
+        const themeColor = colorScheme === 'dark' ? 'white' : 'black'
 
 
         useEffect(() => {
-            let treeniArray = [];
-            
             const getData = () => {
                 const db = firebase.firestore();
                 const currentUser = firebase.auth().currentUser;
-    
+
                 db.collection("users")
-                .doc(currentUser.uid)
-                .collection('treenidata')
-                .orderBy('timestamp', 'desc')
-                .get()
+                    .doc(currentUser.uid)
+                    .collection('treenidata')
+                    .orderBy('timestamp', 'desc')
+                    .get()
 
-                .then(snapshot => {
-                    snapshot.docs.forEach(treeni => {
-                        treeniArray.push(treeni.data());
-                        
-                        
+                    .then(snapshot => {
+                        const mappedData = snapshot.docs.map(treeni => {
+
+                            const data = treeni.data();
+                            const { timestamp } = data;
+
+
+                            return {
+                                ...data,
+                                date: format(timestamp, 'yyyy-MM-dd')
+
+                            }
+
+                        })
+
+                        const reduced = mappedData.reduce((acc, currentItem) => {
+                            const {
+                                date,
+                                ...rest
+                            } = currentItem;
+
+                            acc[date] = [rest];
+
+                            return acc;
+
+                        }, {});
+
+
+                        setCalendarItems(reduced);
                     })
-                    //console.log(treeniArray);
-                    return treeniArray;
-                })
-
-
-                const mappedData = treeniArray.map((item, index) => {
-                    const date = addDays(new Date, index);
-
-    
-                    return {
-                        ...item, 
-                        date: format(date, 'yyyy-MM-dd')
-                    
-                    }
-                    
-                });
-    
-    
-                const reduced = mappedData.reduce((acc, currentItem) => {
-                    const { date, ...rest } = currentItem;
-    
-                    acc[date] = [rest];
-    
-                    return acc;
-    
-                }, {});
-    
-                console.log(reduced);
-                setCalendarItems(reduced);
-                
-                
             };
-            
+
             getData();
-            
+
 
         }, []);
         
@@ -98,13 +96,6 @@ import { Alert } from "react-native";
             setRefreshed(true);
 
         }) */
-
-        const getCurrentDate = () => {
-            const date = moment().locale('fi')
-            .format('LL')
-            setCurrentDate(date);
-            //console.log(currentDate)
-        }
 
          /* return (
                 treenit.map((item, index) => (
@@ -149,11 +140,40 @@ import { Alert } from "react-native";
 
         
 
-        const renderItem = item => {
+        const renderItem = (item, index) => {
+
             return (
-                <View>
-                    <Text>{item.treeni}</Text>
+                <View key={index}>
+                    <Text fontFamily="MontserratRegular" style={{color: colorScheme === 'dark' ? 'white' : 'black'}} left marginTop="35px" marginBottom="15px" large>{item.treeni}</Text>
+
+                    {Object.values(item.treeniData).map((treeni) => {
+                        let descSarjat = `Sarjat: ${treeni.sarjat}`;
+                        let descToistot =`Toistot: `;
+                        let descPainot = `Painot: `;
+                        let descLisatiedot = `Lisätiedot: `;
+                        
+                        Object.values(treeni.suoritusStats).forEach((item, i) => {
+                            descToistot += `${i === 0 ? "": " -- "}${item.toistot}`;
+                            descPainot += `${i === 0 ? "" : " -- "}${item.painot}`;
+                            descLisatiedot += `${i === 0 ? "" : " -- "}${item.lisatiedot}`
+
+
+                            })
+
+                            return(
+                                <>
+                                {<Text marginBottom="5px" marginTop="25px"  left vinkkiTitle>{treeni.nimi}</Text>}
+                                {<Text vinkit fontFamily="MontserratRegular" left >{descSarjat}</Text>}
+                                {<Text vinkit fontFamily="MontserratRegular" left>{descToistot}</Text>}
+                                {<Text vinkit fontFamily="MontserratRegular" left>{descPainot}</Text>}
+                                {<Text vinkit fontFamily="MontserratRegular" left>{descLisatiedot}</Text>}
+
+                                
+                                </>
+                            )
+                    })}
                 </View>
+                        
             )
         }
         
@@ -170,15 +190,28 @@ import { Alert } from "react-native";
            
            
        
-            <TouchableOpacity onPress={() => setClick(click + 1)}>
-            <Text marginBottom="25px" large>Suoritukset </Text>
-            </TouchableOpacity>
+            <Text marginBottom="40px" marginTop="40px" large>Suoritukset </Text>
             
            {/*  {! refreshed && <LottieAnimationMain />}
                 {loading ? ( <Loading size="large" /> 
                 ) : ( */}
                     
                     <Agenda 
+                    theme={{
+                    calendarBackground: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+                    backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+                    agendaDayTextColor: '#054dd9',
+                    agendaDayNumColor: '#054dd9',
+                    agendaTodayColor: '#054dd9',
+                    agendaKnobColor: '#054dd9',
+                    textSectionTitleColor: themeColor,
+                    dayTextColor: themeColor,
+                    monthTextColor: themeColor,
+                    textDayFontFamily: 'MontserratRegular',
+                    textMonthFontFamily: 'MontserratRegular',
+                    textDayHeaderFontFamily: 'MontserratRegular',
+                    }}
+
                     items={calendarItems} 
                     renderItem={renderItem} 
                     />
@@ -190,18 +223,10 @@ import { Alert } from "react-native";
     }
 
 
-    const Container = styled.View`
-        flex: 1;
-
-    `;
-    
 
     const HeaderContainer = styled.View`
     `;
 
-    const TextContainer = styled.View`
-    margin-top: 20px;
-`;
   
     
     export default TehdytTreenit;

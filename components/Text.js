@@ -9,7 +9,7 @@ Appearance.getColorScheme();
 const TextStyle = ({...props}) => {
     const colorScheme = useColorScheme();
 
-    return <Text style={{fontFamily: 'MontserratSemiBold', color: colorScheme === 'dark' ? '#fff' : '#000'}} {...props}>{props.children}</Text>
+    return <Text style={{color: colorScheme === 'dark' ? '#fff' : '#000'}} {...props}>{props.children}</Text>
 }
 
 const Text = styled.Text`
@@ -20,6 +20,7 @@ marginRight: ${props => props.marginRight ?? 0};
 marginTop: ${props => props.marginTop ?? 0};
 opacity: ${props => props.opacity ?? 1};
 marginBottom: ${props => props.marginBottom ?? 0};
+fontFamily: ${props => props.fontFamily ?? 'MontserratSemiBold'}
 
 ${({ title, vinkit, vinkkiTitle, large, medium, small, treeninNimi, sarjat }) => {
     switch (true) {
@@ -40,7 +41,6 @@ ${({ title, vinkit, vinkkiTitle, large, medium, small, treeninNimi, sarjat }) =>
 
             case small:
                 return `font-size: 14px`
-
             
             case treeninNimi:
                 return `font-size: 18px`

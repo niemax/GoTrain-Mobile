@@ -35,6 +35,7 @@ const Etusivu = (
 
         getCurrentDate();
         getUserInfo();
+        
     }, [currentDate]);
 
     

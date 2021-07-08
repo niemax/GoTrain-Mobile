@@ -10,7 +10,7 @@ import { Skeleton } from '../components/Skeleton';
 import { HOMEDATA, MOBILEDATA } from '@env';
 
 
-const Cards = ({ route }) => {
+export default Cards = ({ route }) => {
     const [cardData, setCardData] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -22,8 +22,10 @@ const Cards = ({ route }) => {
         try {
             await axios.get(`http://${HOMEDATA}/api/cards/etusivucards`)
                 .then(response => {
-                    
-                    const { data } = response;
+
+                    const {
+                        data
+                    } = response;
 
                     setCardData(data);
 
@@ -50,16 +52,13 @@ const Cards = ({ route }) => {
     
     if (loading) {
         return (
-            <ContentLoaderView>
-
-            <Skeleton />
-            </ContentLoaderView>
+            <ContentLoaderView><Skeleton /></ContentLoaderView>
         )
             
      } else {
             return (
                 <ContentLoaderView>
-                    <ScrollView>
+                <ScrollView>
 
             {
                 cardData.map(({ nimi, image, treeninkesto, navigationRoute }, index) => {
@@ -101,7 +100,7 @@ const Cards = ({ route }) => {
                 })
             }
             </ScrollView>
-                </ContentLoaderView>
+            </ContentLoaderView>
                 
             )
         }
@@ -109,8 +108,6 @@ const Cards = ({ route }) => {
 }
 
 
-
-export default Cards;
 
 
 

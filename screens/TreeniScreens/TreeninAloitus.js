@@ -11,7 +11,7 @@ import { useNavigation  } from '@react-navigation/native';
 import LopetaTreeni from './TreeninLopetus';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
-import { LottieLoading, TreeninAloitusAnimation } from '../../components/Lottie';
+import { LottieLoading,  } from '../../components/Lottie';
 import axios from 'axios';
 import { HOMEDATA, MOBILEDATA } from '@env';
 import { SpeedDial } from 'react-native-elements';
@@ -26,11 +26,8 @@ import { VideoContainer,
     DoneButton,
     LoadingView,
     ProgressBarContainer,
-    DialogContainer,
     SeuraavaksiContainer
     } from '../../utils/Styling'
-import { color } from 'react-native-elements/dist/helpers';
-
 
 
 const { width: viewportWidth } = Dimensions.get('window');
@@ -48,21 +45,21 @@ const AloitaTreeni = ({ route }) => {
     const [toistotPainotData, setToistotPainotData] = useState([]);
     const [open, setOpen] = useState(false);
 
-    const carousel = useRef(null);
+    const carousel = useRef();
+    const dial = useRef();
     const { treeni } = route.params;
 
     const navigation = useNavigation();
     
     Appearance.getColorScheme();
     const colorScheme = useColorScheme();
-
     const lisaaIcon = <Feather name="plus" size={24} color="white" />
     
-    
     async function getData() {
-
+        
         try {
-
+            
+            
             axios.get(`http://${HOMEDATA}/api/treenit/${treeni}`)
                 .then(response => {
                     setTreeniData(response.data[0].liikkeet);
@@ -146,11 +143,11 @@ const AloitaTreeni = ({ route }) => {
 
 
         setToistotPainotData(newArr);
-        setToisto(''), setPaino('')
-
+        setToisto(''), setPaino(''),
         setVisible(false);
 
 
+       
     }
 
 
@@ -158,11 +155,12 @@ const AloitaTreeni = ({ route }) => {
         return (
             <>
             <SpeedDial
-                style={{shadowColor: 'black',
+                style={{
+                shadowColor: 'black',
                 shadowOpacity: 0.8,
                 elevation: 6,
                 shadowRadius: 3,
-                shadowOffset : { width: 0, height: 3},
+                shadowOffset : { width: 0, height: 3 },
                 }}
                 color={'#054dd9'}
                 isOpen={open}
@@ -173,19 +171,22 @@ const AloitaTreeni = ({ route }) => {
                 onClose={() => setOpen(!open)}
                 >
                         <SpeedDial.Action 
-                        color="#054dd9"
+                        color={'#054dd9'}
+                        ref={dial}
                         icon={lisaaIcon}
                         title={`Lisää sarjan 1 tiedot`}
                         onPress={() => setVisible(true)}
                         />
                         <SpeedDial.Action
-                        color="#054dd9"
+                        color={'#054dd9'}
+                        ref={dial}
                         icon={lisaaIcon}
                         title={`Lisää sarjan 2 tiedot`}
                         onPress={() => setVisible(true)}
                         />
                         <SpeedDial.Action 
-                        color="#054dd9"
+                        color={'#054dd9'}
+                        ref={dial}
                         icon={lisaaIcon}
                         title={`Lisää sarjan 3 tiedot`}
                         onPress={() => setVisible(true)}
@@ -286,12 +287,12 @@ const AloitaTreeni = ({ route }) => {
                      <SeuraavaksiContainer>
                      
                     {index < treenitLength - 1 && 
-                    <Text vinkki>
+                    <Text >
                     SEURAAVAKSI
                     </Text>
                     }
                     {index < treenitLength - 1 && 
-                    <Text style={{fontFamily: 'MontserratBold', color: colorScheme === 'dark' ? '#fff' : '#000'}} vinkkiTitle>
+                    <Text style={{fontFamily: 'MontserratBold', color: colorScheme === 'dark' ? '#fff' : '#000'}} treeninNimi>
                     {nextValue.toUpperCase()}
                     </Text>}
                      
