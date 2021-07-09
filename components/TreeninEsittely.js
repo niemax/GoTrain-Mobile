@@ -3,7 +3,7 @@ import { Image, StyleSheet, TouchableOpacity, ScrollView, View } from 'react-nat
 import styled from 'styled-components/native';
 import Text from '../components/Text';
 import { Ionicons } from '@expo/vector-icons'; 
-import { Container, ButtonContainer, IconTouchable, } from '../utils/Styling';
+import { Container, ButtonContainer, IconTouchable, AloitaButton } from '../utils/Styling';
 import { ListItem } from 'react-native-elements'
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';

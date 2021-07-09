@@ -6,7 +6,6 @@ export const Container = styled.View `
 `;
 
 
-
 export const SignupContainer = styled.View `
     flex: 1;
 `;
@@ -83,6 +82,15 @@ export const LottieContainer = styled.View `
     margin-top: 20px;
 `;
 
+export const SplashScreenContainer = styled.View`
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    background-color: #054dd9;
+`;
+
+export const SplashAdditionalContainer = styled.View`
+`;
 
 export const VideoContainer = styled.View `
     margin-top: 20px;

@@ -5,28 +5,32 @@ import { Ionicons } from '@expo/vector-icons';
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';
 import TehdytTreenit from '../tabs/TehdytTreenit';
-import LoadingScreen from '../screens/Loading';
 import Etusivu from '../tabs/Etusivu';
 import TreeninEsittely from '../components/TreeninEsittely';
 import TreeninEsikatselu from '../components/TreeninEsikatselu';
 import TreeninAloitus from '../screens/TreeniScreens/TreeninAloitus';
+import SplashScreen from '../screens/SplashScreen';
 import { Appearance, useColorScheme } from 'react-native-appearance';
+import * as firebase from "firebase";
 
 
 const Stack = createStackNavigator();
 
 const MainAppStack = () => {
-    return(
-      
-      <Stack.Navigator
-       initialRouteName="Signup" // VAIHDA TÄMÄ TAKAISIN SIGNUP
-       >
-       
-        <Stack.Screen name="Loading" options={{ headerShown: false, gestureEnabled: false}}  component={LoadingScreen} />
-        <Stack.Screen name="Signup" options={{ headerShown: false, gestureEnabled: false}} component={Signup} />
-        <Stack.Screen name="Login" options={{ headerShown: false, gestureEnabled: false}} component={Login} />
-        <Stack.Screen name="Kotisivu" options={{ headerShown: false, gestureEnabled: false}} component={KotiScreens} />
-      </Stack.Navigator>
+
+
+  return(
+    
+<Stack.Navigator
+  initialRouteName="SplashScreen" // VAIHDA TÄMÄ TAKAISIN SIGNUP
+  >
+  
+  
+  <Stack.Screen name="Signup" options={{ headerShown: false, gestureEnabled: false}} component={Signup} />
+  <Stack.Screen name="Login" options={{ headerShown: false, gestureEnabled: false}} component={Login} />
+  <Stack.Screen name="Kotisivu" options={{ headerShown: false, gestureEnabled: false}} component={KotiScreens} />
+  <Stack.Screen name="SplashScreen" options={{ headerShown: false, gestureEnabled: false}} component={SplashScreen} />
+</Stack.Navigator>
     );
 }
 

@@ -146,12 +146,11 @@ const AloitaTreeni = ({ route }) => {
         setToisto(''), setPaino(''),
         setVisible(false);
 
-
-       
+        //dial.current.color = 'color: red';
     }
 
+    const renderDialogs = (item, index) => {
 
-    const renderDialogs = () => {
         return (
             <>
             <SpeedDial
@@ -298,7 +297,7 @@ const AloitaTreeni = ({ route }) => {
                      
                      </SeuraavaksiContainer>
                      
-                   {renderDialogs()}
+                   {renderDialogs(item, index)}
                      
                  </AloitusRenderContainer>
              );

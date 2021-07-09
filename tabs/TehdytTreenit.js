@@ -16,8 +16,8 @@ import { TextContainer } from '../utils/Styling';
 LocaleConfig.locales['fi'] = {
     monthNames: ['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu'],
     monthNamesShort: ['Tammi.','Helmu.','Maalis.','Huhti.','Touko.','Kesä','Heinä.', 'Elo', 'Syys', 'Loka', 'Marras', 'Joulu'],
-    dayNames: ['Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Sunnuntai'],
-    dayNamesShort: ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'],
+    dayNames: ['Sunnuntai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Maanantai'],
+    dayNamesShort: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
     today: 'Tänään'
   };
   LocaleConfig.defaultLocale = 'fi';
@@ -97,49 +97,6 @@ LocaleConfig.locales['fi'] = {
 
         }) */
 
-         /* return (
-                treenit.map((item, index) => (
-                        
-                    <List.Accordion 
-                    key={index}
-                    title={<Text small left>{item.pvm} - {item.treeni}</Text>}
-                    left={props => <List.Icon {...props} icon="calendar" color={themeColor} />}
-                    >
-                 {
-                       Object.values(item.treeniData).map(treeni => {
-                        let descSarjat = `Sarjat: ${treeni.sarjat}`;
-                        let descToistot =`Toistot: `;
-                        let descPainot = `Painot: `;
-                        let descLisatiedot = `Lisätiedot: `;
-
-
-                            Object.values(treeni.suoritusStats).forEach((item, i) => {
-                                descToistot += `${i === 0 ? "": " - "}${item.toistot}`;
-                                descPainot += `${i === 0 ? "" : " - "}${item.painot}`;
-                                descLisatiedot += `${i === 0 ? "" : " - "}${item.lisatiedot}`
-                            })
-
-
-                           return(
-                            <List.Item 
-                            descriptionNumberOfLines={10}
-                            descriptionStyle={{fontFamily: 'MontserratRegular', color: themeColor}}
-                            titleStyle={{fontFamily: 'MontserratSemiBold', color: themeColor}}
-                            key={treeni.nimi} title={treeni.nimi} 
-                            description={`${descSarjat}\n${descToistot}\n${descPainot}\n${descLisatiedot}`} 
-                            />
-                           ) 
-                           
-                       })
-                   }
-                 
-                </List.Accordion>
-                          
-            ))
-            ) */
-
-        
-
         const renderItem = (item, index) => {
 
             return (
@@ -167,8 +124,6 @@ LocaleConfig.locales['fi'] = {
                                 {<Text vinkit fontFamily="MontserratRegular" left>{descToistot}</Text>}
                                 {<Text vinkit fontFamily="MontserratRegular" left>{descPainot}</Text>}
                                 {<Text vinkit fontFamily="MontserratRegular" left>{descLisatiedot}</Text>}
-
-                                
                                 </>
                             )
                     })}

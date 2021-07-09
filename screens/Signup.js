@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Alert, ScrollView, KeyboardAvoidingView } from 'react-native';
 import Text from '../components/Text';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { registration } from '../API/FirebaseMethods'
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import { LottieSignup } from '../components/Lottie';
+import * as firebase from "firebase";
+
 import { 
     SignupContainer, 
     SignupButtonContainer,
@@ -15,6 +17,12 @@ import {
     AuthField } from '../utils/Styling';
 
 
+    const emptyState = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+    }
+
 const Signup = ({ navigation }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -22,12 +30,6 @@ const Signup = ({ navigation }) => {
 
     Appearance.getColorScheme();
     const colorScheme = useColorScheme();
-
-    const emptyState = () => {
-        setName('');
-        setEmail('');
-        setPassword('');
-    }
 
     const handleSignUp = () => {
         if (!name) {
@@ -37,14 +39,15 @@ const Signup = ({ navigation }) => {
         } else if (!password) {
             Alert.alert('Salasana vaaditaan.');
         } else if (password.length < 6) {
-            Alert.alert('Salasanan tulee olla enemmän kuin 6 merkkiä')
+            Alert.alert('Salasanan tulee olla pidempi kuin 6 merkkiä')
         } else {
             registration(
                 name,
                 email,
                 password
             );
-            navigation.navigate('Loading');
+
+            
             emptyState();
         }
     };
