@@ -11,7 +11,6 @@ import TreeninEsikatselu from '../components/TreeninEsikatselu';
 import TreeninAloitus from '../screens/TreeniScreens/TreeninAloitus';
 import SplashScreen from '../screens/SplashScreen';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import * as firebase from "firebase";
 
 
 const Stack = createStackNavigator();
