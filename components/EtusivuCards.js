@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react"
-import { ScrollView, TouchableOpacity, View, Image } from "react-native"
-import { Tile } from "react-native-elements"
-import { Ionicons } from "@expo/vector-icons";
-import axios from "axios"
-import { useNavigation } from "@react-navigation/native"
-import { HOMEDATA, MOBILEDATA } from "@env"
-import { ContentLoaderView } from "../utils/Styling"
-import { Skeleton } from "./Skeleton"
-import Text from "./Text"
+import React, { useState, useEffect } from 'react';
+import { ScrollView, TouchableOpacity, View, Image } from 'react-native';
+import { Tile } from 'react-native-elements';
+import { Ionicons } from '@expo/vector-icons';
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
+import { HOMEDATA, MOBILEDATA } from '../@env';
+import { ContentLoaderView } from '../utils/Styling';
+import { Skeleton } from './Skeleton';
+import Text from './Text';
 
 export default Cards = ({ route }) => {
   const [cardData, setCardData] = useState([]);
@@ -15,7 +15,7 @@ export default Cards = ({ route }) => {
 
   const navigation = useNavigation();
 
-  async function _getCardData() {
+  async function getCardData() {
     try {
       await axios
         .get(`http://${HOMEDATA}/api/cards/etusivucards`)
@@ -38,7 +38,7 @@ export default Cards = ({ route }) => {
   }
 
   useEffect(() => {
-    _getCardData();
+    getCardData();
   }, []);
 
   if (loading) {
@@ -51,54 +51,49 @@ export default Cards = ({ route }) => {
   return (
     <ContentLoaderView>
       <ScrollView>
-        {cardData.map(
-          ({ nimi, image, treeninkesto, navigationRoute }, index) => (
-            <TouchableOpacity key={index}>
-              <Tile
-                onPress={() =>
-                  navigation.navigate(navigationRoute, {
-                    treeninNimi: nimi,
-                    image: image,
-                  })
-                }
-                imageSrc={{
-                  uri: `http://${HOMEDATA}/api/${image}`,
-                  cache: "default",
-                }}
-                title={
+        {cardData.map(({ nimi, image, treeninkesto, navigationRoute }) => (
+          <TouchableOpacity key={nimi}>
+            <Tile
+              onPress={() =>
+                navigation.navigate(navigationRoute, {
+                  treeninNimi: nimi,
+                  image: image,
+                })
+              }
+              imageSrc={{
+                uri: `http://${HOMEDATA}/api/${image}`,
+                cache: 'default',
+              }}
+              title={
+                <Text title style={{ color: '#FFF', fontFamily: 'MontserratBold' }}>
+                  {nimi}
+                </Text>
+              }
+              featured
+              caption={
+                <View style={{ flexDirection: 'row' }}>
+                  <Ionicons name="ios-timer-sharp" size={28} color="#FFF" />
                   <Text
-                    title
-                    style={{ color: "#FFF", fontFamily: "MontserratBold" }}
+                    medium
+                    style={{
+                      color: '#FFF',
+                      fontFamily: 'MontserratSemiBold',
+                    }}
                   >
-                    {nimi}
+                    {treeninkesto}
                   </Text>
-                }
-                featured
-                caption={
-                  <View style={{ flexDirection: "row" }}>
-                    <Ionicons name="ios-timer-sharp" size={28} color="#FFF" />
-                    <Text
-                      medium
-                      style={{
-                        color: "#FFF",
-                        fontFamily: "MontserratSemiBold",
-                      }}
-                    >
-                      {treeninkesto}
-                    </Text>
-                  </View>
-                }
-                containerStyle={{ marginBottom: 5 }}
-                height={150}
-                imageContainerStyle={{
-                  opacity: 0.9,
-                  width: "98%",
-                  borderRadius: 15,
-                }}
-              />
-            </TouchableOpacity>
-          )
-        )}
+                </View>
+              }
+              containerStyle={{ marginBottom: 5 }}
+              height={150}
+              imageContainerStyle={{
+                opacity: 0.9,
+                width: '98%',
+                borderRadius: 15,
+              }}
+            />
+          </TouchableOpacity>
+        ))}
       </ScrollView>
     </ContentLoaderView>
   );

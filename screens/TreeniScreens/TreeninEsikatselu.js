@@ -1,11 +1,11 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { ScrollView } from "react-native";
-import styled from "styled-components/native";
-import { Ionicons } from "@expo/vector-icons";
-import YoutubePlayer from "react-native-youtube-iframe";
-import { Appearance, useColorScheme } from "react-native-appearance";
-import Text from "./Text";
-import { GradientButtonLib } from "./GradientButton";
+import React, { useState, useCallback, useEffect } from 'react';
+import { ScrollView } from 'react-native';
+import styled from 'styled-components/native';
+import { Ionicons } from '@expo/vector-icons';
+import YoutubePlayer from 'react-native-youtube-iframe';
+import { Appearance, useColorScheme } from 'react-native-appearance';
+import Text from '../../components/Text';
+import { GradientButtonLib } from '../../components/GradientButton';
 
 const TreeninEsikatselu = ({ route, navigation }) => {
   Appearance.getColorScheme();
@@ -17,14 +17,14 @@ const TreeninEsikatselu = ({ route, navigation }) => {
     <Ionicons
       name="ios-alert-circle-outline"
       size={24}
-      color={colorScheme === "dark" ? "white" : "black"}
+      color={colorScheme === 'dark' ? 'white' : 'black'}
     />
   );
 
   return (
     <Container
       style={{
-        backgroundColor: colorScheme === "dark" ? "#141314" : "#F9F8F5",
+        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
       }}
     >
       <VideoContainer>
@@ -32,14 +32,13 @@ const TreeninEsikatselu = ({ route, navigation }) => {
       </VideoContainer>
       <ScrollView>
         <Text large left>
-          {" "}
-          {nimi}{" "}
+          {' '}
+          {nimi}{' '}
         </Text>
         <WarningContainer>
           {icon}
           <Text vinkit left>
-            Muista aina ennen liikettä lämmitellä välttyäksesi
-            loukkaantumisilta.
+            Muista aina ennen liikettä lämmitellä välttyäksesi loukkaantumisilta.
           </Text>
         </WarningContainer>
         <TextContainer>
@@ -50,10 +49,7 @@ const TreeninEsikatselu = ({ route, navigation }) => {
       </ScrollView>
 
       <SuljeContainer>
-        <GradientButtonLib
-          teksti="Sulje"
-          onPressAction={() => navigation.goBack()}
-        />
+        <GradientButtonLib teksti="Sulje" onPressAction={() => navigation.goBack()} />
       </SuljeContainer>
     </Container>
   );

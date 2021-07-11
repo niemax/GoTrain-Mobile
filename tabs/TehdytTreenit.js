@@ -1,61 +1,59 @@
-import React, { useState, useEffect } from "react";
-import { RefreshControl, ScrollView, View } from "react-native";
-import styled from "styled-components/native";
-import HeaderComponent from "../components/HeaderComponent";
-import * as firebase from "firebase";
-import { Appearance, useColorScheme } from "react-native-appearance";
-import "moment/locale/fi";
-import { Agenda, LocaleConfig } from "react-native-calendars";
-import { format } from "date-fns";
-import { Card } from "react-native-elements";
-import Text from "../components/Text";
-import { Container, TextContainer } from "../utils/Styling";
+import React, { useState, useEffect } from 'react';
+import { RefreshControl, ScrollView, View } from 'react-native';
+import styled from 'styled-components/native';
+import HeaderComponent from '../components/HeaderComponent';
+import * as firebase from 'firebase';
+import { Appearance, useColorScheme } from 'react-native-appearance';
+import 'moment/locale/fi';
+import { Agenda, LocaleConfig } from 'react-native-calendars';
+import { format } from 'date-fns';
+import Text from '../components/Text';
+import { Container, TextContainer } from '../utils/Styling';
 
 LocaleConfig.locales.fi = {
   monthNames: [
-    "Tammikuu",
-    "Helmikuu",
-    "Maaliskuu",
-    "Huhtikuu",
-    "Toukokuu",
-    "Kesäkuu",
-    "Heinäkuu",
-    "Elokuu",
-    "Syyskuu",
-    "Lokakuu",
-    "Marraskuu",
-    "Joulukuu",
+    'Tammikuu',
+    'Helmikuu',
+    'Maaliskuu',
+    'Huhtikuu',
+    'Toukokuu',
+    'Kesäkuu',
+    'Heinäkuu',
+    'Elokuu',
+    'Syyskuu',
+    'Lokakuu',
+    'Marraskuu',
+    'Joulukuu',
   ],
   monthNamesShort: [
-    "Tammi.",
-    "Helmu.",
-    "Maalis.",
-    "Huhti.",
-    "Touko.",
-    "Kesä",
-    "Heinä.",
-    "Elo",
-    "Syys",
-    "Loka",
-    "Marras",
-    "Joulu",
+    'Tammi.',
+    'Helmu.',
+    'Maalis.',
+    'Huhti.',
+    'Touko.',
+    'Kesä',
+    'Heinä.',
+    'Elo',
+    'Syys',
+    'Loka',
+    'Marras',
+    'Joulu',
   ],
   dayNames: [
-    "Sunnuntai",
-    "Tiistai",
-    "Keskiviikko",
-    "Torstai",
-    "Perjantai",
-    "Lauantai",
-    "Maanantai",
+    'Sunnuntai',
+    'Tiistai',
+    'Keskiviikko',
+    'Torstai',
+    'Perjantai',
+    'Lauantai',
+    'Maanantai',
   ],
-  dayNamesShort: ["Su", "Ma", "Ti", "Ke", "To", "Pe", "La"],
-  today: "Tänään",
+  dayNamesShort: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
+  today: 'Tänään',
 };
-LocaleConfig.defaultLocale = "fi";
+LocaleConfig.defaultLocale = 'fi';
 
-const wait = (timeout) =>
-  new Promise((resolve) => setTimeout(resolve, timeout));
+const wait = (timeout) => new Promise((resolve) => setTimeout(resolve, timeout));
 
 const TehdytTreenit = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -65,17 +63,17 @@ const TehdytTreenit = () => {
 
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
-  const themeColor = colorScheme === "dark" ? "white" : "black";
+  const themeColor = colorScheme === 'dark' ? 'white' : 'black';
 
   useEffect(() => {
     const getData = () => {
       const db = firebase.firestore();
       const { currentUser } = firebase.auth();
 
-      db.collection("users")
+      db.collection('users')
         .doc(currentUser.uid)
-        .collection("treenidata")
-        .orderBy("timestamp", "desc")
+        .collection('treenidata')
+        .orderBy('timestamp', 'desc')
         .get()
 
         .then((snapshot) => {
@@ -85,7 +83,7 @@ const TehdytTreenit = () => {
 
             return {
               ...data,
-              date: format(timestamp, "yyyy-MM-dd"),
+              date: format(timestamp, 'yyyy-MM-dd'),
             };
           });
 
@@ -118,7 +116,7 @@ const TehdytTreenit = () => {
     <View key={index}>
       <Text
         fontFamily="MontserratRegular"
-        style={{ color: colorScheme === "dark" ? "white" : "black" }}
+        style={{ color: colorScheme === 'dark' ? 'white' : 'black' }}
         left
         marginTop="35px"
         marginBottom="15px"
@@ -134,9 +132,9 @@ const TehdytTreenit = () => {
         let descLisatiedot = `Lisätiedot: `;
 
         Object.values(treeni.suoritusStats).forEach((item, i) => {
-          descToistot += `${i === 0 ? "" : " -- "}${item.toistot}`;
-          descPainot += `${i === 0 ? "" : " -- "}${item.painot}`;
-          descLisatiedot += `${i === 0 ? "" : " -- "}${item.lisatiedot}`;
+          descToistot += `${i === 0 ? '' : ' -- '}${item.toistot}`;
+          descPainot += `${i === 0 ? '' : ' -- '}${item.painot}`;
+          descLisatiedot += `${i === 0 ? '' : ' -- '}${item.lisatiedot}`;
         });
 
         return (
@@ -165,7 +163,7 @@ const TehdytTreenit = () => {
   return (
     <Container
       style={{
-        backgroundColor: colorScheme === "dark" ? "#141314" : "#F9F8F5",
+        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
       }}
     >
       <HeaderContainer>
@@ -173,7 +171,7 @@ const TehdytTreenit = () => {
       </HeaderContainer>
 
       <Text marginBottom="40px" marginTop="40px" large>
-        Suoritukset{" "}
+        Suoritukset{' '}
       </Text>
 
       {/*  {! refreshed && <LottieAnimationMain />}
@@ -182,18 +180,18 @@ const TehdytTreenit = () => {
 
       <Agenda
         theme={{
-          calendarBackground: colorScheme === "dark" ? "#141314" : "#F9F8F5",
-          backgroundColor: colorScheme === "dark" ? "#141314" : "#F9F8F5",
-          agendaDayTextColor: "#054dd9",
-          agendaDayNumColor: "#054dd9",
-          agendaTodayColor: "#054dd9",
-          agendaKnobColor: "#054dd9",
+          calendarBackground: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+          backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+          agendaDayTextColor: '#054dd9',
+          agendaDayNumColor: '#054dd9',
+          agendaTodayColor: '#054dd9',
+          agendaKnobColor: '#054dd9',
           textSectionTitleColor: themeColor,
           dayTextColor: themeColor,
           monthTextColor: themeColor,
-          textDayFontFamily: "MontserratRegular",
-          textMonthFontFamily: "MontserratRegular",
-          textDayHeaderFontFamily: "MontserratRegular",
+          textDayFontFamily: 'MontserratRegular',
+          textMonthFontFamily: 'MontserratRegular',
+          textDayHeaderFontFamily: 'MontserratRegular',
         }}
         items={calendarItems}
         renderItem={renderItem}

@@ -13,16 +13,16 @@ import { Appearance, useColorScheme } from "react-native-appearance";
 import Toast from "react-native-toast-message";
 import { HOMEDATA, MOBILEDATA } from "@env";
 import axios from "axios";
-import { LottieLoading } from "./Lottie";
-import TreeninKuvausData from "./TreeninKuvausData";
-import { GradientButtonLib } from "./GradientButton";
+import { LottieLoading } from "../../components/Lottie";
+import TreeninKuvausData from "../../components/TreeninKuvausData";
+import { GradientButtonLib } from "../../components/GradientButton";
 import {
   Container,
   ButtonContainer,
   IconTouchable,
   AloitaButton,
-} from "../utils/Styling";
-import Text from "./Text";
+} from "../../utils/Styling";
+import Text from "../../components/Text";
 
 export default function TreeninEsittely({ route, navigation }) {
   const [treeniData, setTreeniData] = useState([]);
