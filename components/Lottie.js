@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
-import LottieView from "lottie-react-native";
-import { LottieContainer } from "../utils/Styling";
+import React, { useEffect, useRef } from 'react';
+import LottieView from 'lottie-react-native';
+import { LottieContainer } from '../utils/Styling';
 
 export const LottieAnimationCongratulations = () => {
   const animation = useRef(null);
@@ -13,7 +13,7 @@ export const LottieAnimationCongratulations = () => {
     <LottieContainer>
       <LottieView
         ref={animation}
-        source={require("../assets/json/16729-congratulation-icon.json")}
+        source={require('../assets/json/16729-congratulation-icon.json')}
       />
     </LottieContainer>
   );
@@ -26,12 +26,7 @@ export const LottieAnimationTehdytTreenit = () => {
     animation.current.play();
   });
 
-  return (
-    <LottieView
-      ref={animation}
-      source={require("../assets/json/57980-progress.json")}
-    />
-  );
+  return <LottieView ref={animation} source={require('../assets/json/57980-progress.json')} />;
 };
 
 export const LottieAnimationMain = () => {
@@ -42,10 +37,7 @@ export const LottieAnimationMain = () => {
   });
 
   return (
-    <LottieView
-      ref={animation}
-      source={require("../assets/json/60820-bicycle-riding.json")}
-    />
+    <LottieView ref={animation} source={require('../assets/json/60820-bicycle-riding.json')} />
   );
 };
 
@@ -57,10 +49,7 @@ export const LottieLoading = () => {
   });
 
   return (
-    <LottieView
-      ref={animation}
-      source={require("../assets/json/16404-loading-dialogue.json")}
-    />
+    <LottieView ref={animation} source={require('../assets/json/16404-loading-dialogue.json')} />
   );
 };
 
@@ -73,10 +62,7 @@ export const LottieSignup = () => {
 
   return (
     <LottieContainer>
-      <LottieView
-        ref={animation}
-        source={require("../assets/json/60820-bicycle-riding.json")}
-      />
+      <LottieView ref={animation} source={require('../assets/json/60820-bicycle-riding.json')} />
     </LottieContainer>
   );
 };
@@ -90,10 +76,7 @@ export const LottieAlternateLoading = () => {
 
   return (
     <LottieContainer>
-      <LottieView
-        ref={animation}
-        source={require("../assets/json/60820-bicycle-riding.json")}
-      />
+      <LottieView ref={animation} source={require('../assets/json/60820-bicycle-riding.json')} />
     </LottieContainer>
   );
 };
@@ -105,10 +88,5 @@ export const TreeninAloitusAnimation = () => {
     animation.current.play();
   });
 
-  return (
-    <LottieView
-      ref={animation}
-      source={require("../assets/json/3153-dummbells.json")}
-    />
-  );
+  return <LottieView ref={animation} source={require('../assets/json/3153-dummbells.json')} />;
 };

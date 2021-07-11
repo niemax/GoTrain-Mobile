@@ -67,7 +67,6 @@ const AloitaTreeni = ({ route }) => {
             setIsLoading(false);
           }, 1000);
         });
-
     } catch (error) {
       console.error(error);
     }
@@ -113,7 +112,7 @@ const AloitaTreeni = ({ route }) => {
     const newArr = [...toistotPainotData];
 
     try {
-      if (toisto == '' || paino == '') {
+      if (toisto === '' || paino === '') {
         Alert.alert('Syötä molemmat tiedot!');
         return;
       }

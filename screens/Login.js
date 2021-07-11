@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { ScrollView, KeyboardAvoidingView } from "react-native";
-import * as firebase from "firebase";
+import React, { useState } from 'react';
+import { ScrollView, KeyboardAvoidingView } from 'react-native';
+import * as firebase from 'firebase';
 
-import { Ionicons } from "@expo/vector-icons";
-import { Appearance, useColorScheme } from "react-native-appearance";
-import Text from "../components/Text";
-import { signIn } from "../API/FirebaseMethods";
-import { LottieSignup } from "../components/Lottie";
+import { Ionicons } from '@expo/vector-icons';
+import { Appearance, useColorScheme } from 'react-native-appearance';
+import Text from '../components/Text';
+import { signIn } from '../API/FirebaseMethods';
+import { LottieSignup } from '../components/Lottie';
 import {
   SignupContainer,
   SignupButtonContainer,
@@ -15,11 +15,11 @@ import {
   Actions,
   Footer,
   AuthField,
-} from "../utils/Styling";
+} from '../utils/Styling';
 
 const Login = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   Appearance.getColorScheme();
@@ -32,7 +32,7 @@ const Login = ({ navigation }) => {
         if (user) {
           setIsLoading(true);
           setTimeout(() => {
-            navigation.navigate("Kotisivu");
+            navigation.navigate('Kotisivu');
           }, 1000);
         }
         return;
@@ -40,15 +40,15 @@ const Login = ({ navigation }) => {
         console.log(err);
       }
     });
-    setEmail("");
-    setPassword("");
+    setEmail('');
+    setPassword('');
   };
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={{
-        backgroundColor: colorScheme === "dark" ? "#141314" : "#F9F8F5",
+        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
         flex: 1,
       }}
     >
@@ -60,7 +60,7 @@ const Login = ({ navigation }) => {
         <ScrollView>
           <Text
             sarjat
-            style={{ color: "#fff", fontFamily: "MontserratSemiBold" }}
+            style={{ color: '#fff', fontFamily: 'MontserratSemiBold' }}
             marginTop="35px"
             large
           >
@@ -71,7 +71,7 @@ const Login = ({ navigation }) => {
               left
               marginBottom="15px"
               marginTop="35px"
-              style={{ color: "#fff", fontFamily: "MontserratSemiBold" }}
+              style={{ color: '#fff', fontFamily: 'MontserratSemiBold' }}
             >
               SÄHKÖPOSTI *
             </Text>
@@ -88,7 +88,7 @@ const Login = ({ navigation }) => {
               left
               marginBottom="15px"
               marginTop="35px"
-              style={{ color: "#fff", fontFamily: "MontserratSemiBold" }}
+              style={{ color: '#fff', fontFamily: 'MontserratSemiBold' }}
             >
               SALASANA *
             </Text>
@@ -104,18 +104,12 @@ const Login = ({ navigation }) => {
           </Actions>
           <SignupButtonContainer>
             <SignIn onPress={handleLogin}>
-              <Text
-                medium
-                style={{ color: "#000", fontFamily: "MontserratSemiBold" }}
-              >
+              <Text medium style={{ color: '#000', fontFamily: 'MontserratSemiBold' }}>
                 Kirjaudu sisään
               </Text>
             </SignIn>
-            <SignUp onPress={() => navigation.navigate("Signup")}>
-              <Text
-                medium
-                style={{ color: "#000", fontFamily: "MontserratSemiBold" }}
-              >
+            <SignUp onPress={() => navigation.navigate('Signup')}>
+              <Text medium style={{ color: '#000', fontFamily: 'MontserratSemiBold' }}>
                 Rekisteröidy
               </Text>
             </SignUp>
