@@ -30,7 +30,7 @@ export default function TreeninEsittely({ route, navigation }) {
   async function getData() {
     try {
       axios
-        .get(`http://${HOMEDATA}/api/treenit/${treeninNimi}`)
+        .get(`http://${MOBILEDATA}/api/treenit/${treeninNimi}`)
         .then((response) => {
           console.log(response.data);
           setTreeniData(response.data[0].liikkeet);
@@ -72,7 +72,7 @@ export default function TreeninEsittely({ route, navigation }) {
     >
       <Image
         style={styles.image}
-        source={{ uri: `http://${HOMEDATA}/api/${image}`, cache: 'default' }}
+        source={{ uri: `http://${MOBILEDATA}/api/${image}`, cache: 'default' }}
       />
       <View style={{ flexDirection: 'row', position: 'absolute', top: 35 }}>
         <IconTouchable onPress={() => navigation.goBack()}>

@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { Alert, ScrollView, KeyboardAvoidingView } from 'react-native';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Alert, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import * as firebase from 'firebase';
 import Text from '../components/Text';
 import { registration } from '../API/FirebaseMethods';
 import { LottieSignup } from '../components/Lottie';

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, TouchableOpacity, View, Image } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { Tile } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-import { HOMEDATA, MOBILEDATA } from '../@env';
+import { HOMEDATA, MOBILEDATA } from '@env';
 import { ContentLoaderView } from '../utils/Styling';
 import { Skeleton } from './Skeleton';
 import Text from './Text';
@@ -18,7 +18,7 @@ export default Cards = ({ route }) => {
   async function getCardData() {
     try {
       await axios
-        .get(`http://${HOMEDATA}/api/cards/etusivucards`)
+        .get(`http://${MOBILEDATA}/api/cards/etusivucards`)
         .then((response) => {
           const { data } = response;
 
@@ -33,7 +33,7 @@ export default Cards = ({ route }) => {
           }, 1500);
         });
     } catch (err) {
-      console.error(error);
+      console.error(err);
     }
   }
 
@@ -61,7 +61,7 @@ export default Cards = ({ route }) => {
                 })
               }
               imageSrc={{
-                uri: `http://${HOMEDATA}/api/${image}`,
+                uri: `http://${MOBILEDATA}/api/${image}`,
                 cache: 'default',
               }}
               title={

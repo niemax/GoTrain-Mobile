@@ -117,24 +117,24 @@ const TehdytTreenit = () => {
       <Text
         fontFamily="MontserratRegular"
         style={{ color: colorScheme === 'dark' ? 'white' : 'black' }}
+        large
         left
         marginTop="35px"
         marginBottom="15px"
-        large
       >
         {item.treeni}
       </Text>
 
       {Object.values(item.treeniData).map((treeni) => {
-        const descSarjat = `Sarjat: ${treeni.sarjat}`;
-        let descToistot = `Toistot: `;
-        let descPainot = `Painot: `;
-        let descLisatiedot = `Lisätiedot: `;
+        const descSarjat = `Sarjat: ${treeni.sarjat}\n`;
+        let descToistot = `Toistot: \n `;
+        let descPainot = `Painot: \n `;
+        let descLisatiedot = `Lisätiedot: \n`;
 
-        Object.values(treeni.suoritusStats).forEach((item, i) => {
-          descToistot += `${i === 0 ? '' : ' -- '}${item.toistot}`;
-          descPainot += `${i === 0 ? '' : ' -- '}${item.painot}`;
-          descLisatiedot += `${i === 0 ? '' : ' -- '}${item.lisatiedot}`;
+        Object.values(treeni.suoritusStats).forEach((itm, i) => {
+          descToistot += `\nSarja ${i + 1}: ${itm.toistot}\n`;
+          descPainot += `\nSarja ${i + 1}: ${itm.painot}\n`;
+          descLisatiedot += `\nSarja ${i + 1}: ${itm.lisatiedot} \n`;
         });
 
         return (

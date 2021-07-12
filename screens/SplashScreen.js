@@ -15,7 +15,7 @@ export default function SplashScreen({ navigation }) {
         }
       });
     }, 2000);
-  }, [navigation]);
+  }, []);
 
   return (
     <SplashScreenContainer>

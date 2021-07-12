@@ -29,6 +29,12 @@ import {
   SeuraavaksiContainer,
 } from '../../utils/Styling';
 
+const initialState = () => {
+  setToisto('');
+  setPaino('');
+  setVisible(false);
+};
+
 const { width: viewportWidth } = Dimensions.get('window');
 
 const AloitaTreeni = ({ route }) => {
@@ -45,7 +51,6 @@ const AloitaTreeni = ({ route }) => {
   const [open, setOpen] = useState(false);
 
   const carousel = useRef();
-  const dial = useRef();
   const { treeni } = route.params;
 
   const navigation = useNavigation();
@@ -54,10 +59,10 @@ const AloitaTreeni = ({ route }) => {
   const colorScheme = useColorScheme();
   const lisaaIcon = <Feather name="plus" size={24} color="white" />;
 
-  async function getData() {
+  useEffect(() => {
     try {
       axios
-        .get(`http://${HOMEDATA}/api/treenit/${treeni}`)
+        .get(`http://${MOBILEDATA}/api/treenit/${treeni}`)
         .then((response) => setTreeniData(response.data[0].liikkeet))
         .catch((err) => {
           console.log(err);
@@ -70,10 +75,6 @@ const AloitaTreeni = ({ route }) => {
     } catch (error) {
       console.error(error);
     }
-  }
-
-  useEffect(() => {
-    getData();
   }, []);
 
   const setProgress = (item, index) => {
@@ -87,7 +88,7 @@ const AloitaTreeni = ({ route }) => {
         suoritusStats: toistotPainotData,
       };
 
-      setCurrentSlide(currentSlide + 1);
+      setCurrentSlide((slide) => slide + 1);
       Toast.show({
         text2: `${item.nimi} tehty!`,
         type: 'success',
@@ -95,7 +96,7 @@ const AloitaTreeni = ({ route }) => {
       });
     } else {
       delete treenit[item.nimi];
-      setCurrentSlide(currentSlide - 1);
+      setCurrentSlide((slide) => slide - 1);
       Toast.show({
         text2: `${item.nimi} poistettu!`,
         type: 'error',
@@ -151,21 +152,18 @@ const AloitaTreeni = ({ route }) => {
       >
         <SpeedDial.Action
           color="#054dd9"
-          ref={dial}
           icon={lisaaIcon}
           title="Lisää sarjan 1 tiedot"
           onPress={() => setVisible(true)}
         />
         <SpeedDial.Action
           color="#054dd9"
-          ref={dial}
           icon={lisaaIcon}
           title="Lisää sarjan 2 tiedot"
           onPress={() => setVisible(true)}
         />
         <SpeedDial.Action
           color="#054dd9"
-          ref={dial}
           icon={lisaaIcon}
           title="Lisää sarjan 3 tiedot"
           onPress={() => setVisible(true)}
@@ -194,7 +192,7 @@ const AloitaTreeni = ({ route }) => {
     </>
   );
 
-  const _renderItem = ({ item, index }) => {
+  const renderItem = ({ item, index }) => {
     const btnColor = tehdytTreenit.hasOwnProperty(item.nimi)
       ? '#054dd9'
       : colorScheme === 'dark'
@@ -302,7 +300,7 @@ const AloitaTreeni = ({ route }) => {
       data={treeniData}
       itemWidth={viewportWidth}
       sliderWidth={viewportWidth}
-      renderItem={_renderItem}
+      renderItem={renderItem}
       slideStyle={{ width: viewportWidth }}
       scrollEnabled={false}
       inactiveSlideScale={1}
