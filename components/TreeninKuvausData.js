@@ -16,7 +16,7 @@ export default function TreeninKuvausData({ treeninKesto, kohderyhma, treeniText
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
       }}
     >
-      <Text treeninNimi left marginLeft="15px">
+      <Text vinkkiTitle left marginLeft="15px">
         {treeniText.toUpperCase()}{' '}
       </Text>
       <View
@@ -35,7 +35,7 @@ export default function TreeninKuvausData({ treeninKesto, kohderyhma, treeniText
           {kohderyhma}
         </Text>
       </View>
-      <Text left marginLeft="10px" marginTop="15px" medium>
+      <Text fontFamily="MontserratRegular" left marginLeft="10px" marginTop="15px" medium>
         {' '}
         LIIKKEET ({treeniData.length})
       </Text>

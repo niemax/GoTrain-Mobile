@@ -1,8 +1,8 @@
-import React from "react";
-import SkeletonPlaceholder from "react-native-skeleton-placeholder";
+import React from 'react';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
-export function Skeleton({ width, height, borderRadius, marginBottom }) {
-  (width = "99%"), (height = 150), (borderRadius = 15), (marginBottom = 5);
+export default function Skeleton({ width, height, borderRadius, marginBottom }) {
+  (width = '99%'), (height = 150), (borderRadius = 15), (marginBottom = 5);
 
   return (
     <SkeletonPlaceholder backgroundColor="#E0E0E0">

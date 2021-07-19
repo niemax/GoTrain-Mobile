@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { RefreshControl, ScrollView, View } from 'react-native';
 import styled from 'styled-components/native';
-import HeaderComponent from '../components/HeaderComponent';
 import * as firebase from 'firebase';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import 'moment/locale/fi';
 import { Agenda, LocaleConfig } from 'react-native-calendars';
 import { format } from 'date-fns';
+import HeaderComponent from '../components/HeaderComponent';
 import Text from '../components/Text';
-import { Container, TextContainer } from '../utils/Styling';
+import { Container } from '../utils/Styling';
 
 LocaleConfig.locales.fi = {
   monthNames: [
@@ -170,7 +170,7 @@ const TehdytTreenit = () => {
         <HeaderComponent leftComponent={{ text: <Text medium>MINÄ</Text> }} />
       </HeaderContainer>
 
-      <Text marginBottom="40px" marginTop="40px" large>
+      <Text fontFamily="MontserratRegular" marginBottom="40px" marginTop="40px" large>
         Suoritukset{' '}
       </Text>
 

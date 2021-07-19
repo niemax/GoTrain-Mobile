@@ -43,7 +43,7 @@ const AloitaTreeni = ({ route }) => {
   const [pbProgress, setPbProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [visible, setVisible] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [doneCount, setDoneCount] = useState(0);
   const [toisto, setToisto] = useState('');
   const [paino, setPaino] = useState('');
   const [lisatieto, setLisatieto] = useState('');
@@ -88,7 +88,7 @@ const AloitaTreeni = ({ route }) => {
         suoritusStats: toistotPainotData,
       };
 
-      setCurrentSlide((slide) => slide + 1);
+      setDoneCount((count) => count + 1);
       Toast.show({
         text2: `${item.nimi} tehty!`,
         type: 'success',
@@ -96,7 +96,7 @@ const AloitaTreeni = ({ route }) => {
       });
     } else {
       delete treenit[item.nimi];
-      setCurrentSlide((slide) => slide - 1);
+      setDoneCount((count) => count - 1);
       Toast.show({
         text2: `${item.nimi} poistettu!`,
         type: 'error',
@@ -132,7 +132,7 @@ const AloitaTreeni = ({ route }) => {
     // dial.current.color = 'color: red';
   };
 
-  const renderDialogs = (item, index) => (
+  const renderDialogs = () => (
     <>
       <SpeedDial
         style={{
@@ -215,7 +215,7 @@ const AloitaTreeni = ({ route }) => {
               <Ionicons name="ios-chevron-back" size={24} color={colorIcon} />
             </IconTouchable>
             <Text medium marginTop="3px" marginLeft="240px">
-              <Text small>TEHTY</Text> {currentSlide} / {treeniData.length}
+              <Text small>TEHTY</Text> {doneCount} / {treeniData.length}
             </Text>
           </ExtraContainer>
           <VideoContainer>
@@ -280,7 +280,7 @@ const AloitaTreeni = ({ route }) => {
             )}
           </SeuraavaksiContainer>
 
-          {renderDialogs(item, index)}
+          {renderDialogs()}
         </AloitusRenderContainer>
       );
     }

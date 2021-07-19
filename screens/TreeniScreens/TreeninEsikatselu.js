@@ -37,7 +37,7 @@ const TreeninEsikatselu = ({ route, navigation }) => {
         </Text>
         <WarningContainer>
           {icon}
-          <Text vinkit left>
+          <Text medium left>
             Muista aina ennen liikettä lämmitellä välttyäksesi loukkaantumisilta.
           </Text>
         </WarningContainer>

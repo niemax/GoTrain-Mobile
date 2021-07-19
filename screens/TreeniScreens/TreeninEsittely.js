@@ -13,6 +13,14 @@ import { GradientButtonLib } from '../../components/GradientButton';
 import { Container, ButtonContainer, IconTouchable, AloitaButton } from '../../utils/Styling';
 import Text from '../../components/Text';
 
+const showToast = () => {
+  Toast.show({
+    text2: 'Implemented soon!',
+    type: 'info',
+    visibilityTime: 2500,
+  });
+};
+
 export default function TreeninEsittely({ route, navigation }) {
   const [treeniData, setTreeniData] = useState([]);
   const [treeninKesto, setTreeninKesto] = useState('');
@@ -27,7 +35,7 @@ export default function TreeninEsittely({ route, navigation }) {
 
   const { treeninNimi, image } = route.params;
 
-  async function getData() {
+  useEffect(() => {
     try {
       axios
         .get(`http://${MOBILEDATA}/api/treenit/${treeninNimi}`)
@@ -49,19 +57,6 @@ export default function TreeninEsittely({ route, navigation }) {
     } catch (error) {
       console.error(error);
     }
-  }
-
-  const showToast = () => {
-    Toast.show({
-      text2: 'Implemented soon!',
-      type: 'info',
-      visibilityTime: 2500,
-    });
-  };
-
-  useEffect(() => {
-    getData();
-    console.log(treeninNimi);
   }, []);
 
   return (
@@ -93,14 +88,14 @@ export default function TreeninEsittely({ route, navigation }) {
               treeniData={treeniData}
             />
 
-            {treeniData.map((item, index) => (
+            {treeniData.map(({ nimi, videoId, ohjeet, sarjat }) => (
               <TouchableOpacity
-                key={index}
+                key={nimi}
                 onPress={() =>
                   navigation.navigate('TreeninEsikatselu', {
-                    nimi: item.nimi,
-                    videoID: item.videoId,
-                    ohjeet: item.ohjeet,
+                    nimi: nimi,
+                    videoID: videoId,
+                    ohjeet: ohjeet,
                   })
                 }
               >
@@ -114,7 +109,7 @@ export default function TreeninEsittely({ route, navigation }) {
                   <ListItem.Content>
                     <TextContainer>
                       <Text fontFamily="MontserratRegular" medium>
-                        {item.nimi}
+                        {nimi}
                       </Text>
                       <Text
                         fontFamily="MontserratRegular"
@@ -126,7 +121,7 @@ export default function TreeninEsittely({ route, navigation }) {
                         medium
                         opacity={0.7}
                       >
-                        {item.sarjat} sarjaa
+                        {sarjat} sarjaa
                       </Text>
                     </TextContainer>
                   </ListItem.Content>

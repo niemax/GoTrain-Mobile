@@ -56,7 +56,7 @@ const Etusivu = () => {
         <HeaderComponent leftComponent={{ text: <Text medium>KOTI</Text> }} />
       </HeaderContainer>
       <TextContainer>
-        <Text marginLeft="25px" marginBottom="25px" medium left>
+        <Text fontFamily="MontserratRegular" marginLeft="25px" marginBottom="25px" medium left>
           {currentDate.toUpperCase()}
         </Text>
         <TervetuloaText teksti={text} />

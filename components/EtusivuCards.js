@@ -6,18 +6,18 @@ import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { HOMEDATA, MOBILEDATA } from '@env';
 import { ContentLoaderView } from '../utils/Styling';
-import { Skeleton } from './Skeleton';
+import Skeleton from './Skeleton';
 import Text from './Text';
 
-export default Cards = ({ route }) => {
+export default Cards = () => {
   const [cardData, setCardData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const navigation = useNavigation();
 
-  async function getCardData() {
+  useEffect(() => {
     try {
-      await axios
+      axios
         .get(`http://${MOBILEDATA}/api/cards/etusivucards`)
         .then((response) => {
           const { data } = response;
@@ -35,10 +35,6 @@ export default Cards = ({ route }) => {
     } catch (err) {
       console.error(err);
     }
-  }
-
-  useEffect(() => {
-    getCardData();
   }, []);
 
   if (loading) {

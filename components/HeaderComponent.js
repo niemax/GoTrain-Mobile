@@ -24,19 +24,6 @@ const HeaderComponent = (props) => {
     <Ionicons name="log-out-outline" size={32} color={colorScheme === 'dark' ? 'white' : 'black'} />
   );
 
-  async function getLocation() {
-    const { status } = await Location.requestPermissionsAsync();
-    if (status !== 'granted') return;
-
-    const location = await Location.getCurrentPositionAsync({
-      accuracy: Location.Accuracy.Highest,
-    });
-
-    const { coords } = location;
-
-    getWeatherData(coords.latitude, coords.longitude);
-  }
-
   async function getWeatherData(lati, longi) {
     const API = `https://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${longi}&units=metric&appid=909c3e2e0f9c07b670efd67b1b90752f`;
 
@@ -46,8 +33,6 @@ const HeaderComponent = (props) => {
           if (response.ok) return response.json();
         })
         .then((data) => {
-          // console.log(data.weather[0].icon);
-          // console.log(data);
           const { name } = data;
           const { temp } = data.main;
 
@@ -61,6 +46,19 @@ const HeaderComponent = (props) => {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  async function getLocation() {
+    const { status } = await Location.requestPermissionsAsync();
+    if (status !== 'granted') return;
+
+    const location = await Location.getCurrentPositionAsync({
+      accuracy: Location.Accuracy.Highest,
+    });
+
+    const { coords } = location;
+
+    getWeatherData(coords.latitude, coords.longitude);
   }
 
   const handleLogOut = () => {
@@ -79,6 +77,7 @@ const HeaderComponent = (props) => {
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
         borderBottomWidth: 0,
       }}
+      elevated="true"
       rightComponent={<ProfileIcon onPress={handleLogOut}>{icon}</ProfileIcon>}
       centerComponent={
         !weatherLoading ? (
