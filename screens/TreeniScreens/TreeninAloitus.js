@@ -5,7 +5,6 @@ import Carousel from 'react-native-snap-carousel';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { Ionicons, Feather } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress';
-import { useNavigation } from '@react-navigation/native';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
@@ -37,7 +36,7 @@ const initialState = () => {
 
 const { width: viewportWidth } = Dimensions.get('window');
 
-const AloitaTreeni = ({ route }) => {
+const AloitaTreeni = ({ route, navigation }) => {
   const [treeniData, setTreeniData] = useState([]);
   const [tehdytTreenit, setTehdytTreenit] = useState({});
   const [pbProgress, setPbProgress] = useState(0);
@@ -52,8 +51,6 @@ const AloitaTreeni = ({ route }) => {
 
   const carousel = useRef();
   const { treeni } = route.params;
-
-  const navigation = useNavigation();
 
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
@@ -70,12 +67,12 @@ const AloitaTreeni = ({ route }) => {
         .finally(() => {
           setTimeout(() => {
             setIsLoading(false);
-          }, 1000);
+          }, 6000);
         });
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [treeni]);
 
   const setProgress = (item, index) => {
     const treenit = { ...tehdytTreenit };
@@ -212,10 +209,10 @@ const AloitaTreeni = ({ route }) => {
         >
           <ExtraContainer>
             <IconTouchable onPress={() => navigation.goBack()} left marginLeft="15px">
-              <Ionicons name="ios-chevron-back" size={24} color={colorIcon} />
+              <Ionicons name="return-up-back-outline" size={28} color={colorIcon} />
             </IconTouchable>
-            <Text medium marginTop="3px" marginLeft="240px">
-              <Text small>TEHTY</Text> {doneCount} / {treeniData.length}
+            <Text medium marginRight="15px">
+              <Text medium>TEHTY</Text> {doneCount} / {treeniData.length}
             </Text>
           </ExtraContainer>
           <VideoContainer>
@@ -266,11 +263,15 @@ const AloitaTreeni = ({ route }) => {
             </AloitusButtonContainer>
           </UtilsContainer>
           <SeuraavaksiContainer>
-            {index < treenitLength - 1 && <Text>SEURAAVAKSI</Text>}
+            {index < treenitLength - 1 && (
+              <Text fontFamily="MontserratRegular" small>
+                SEURAAVAKSI
+              </Text>
+            )}
             {index < treenitLength - 1 && (
               <Text
+                medium
                 style={{
-                  fontFamily: 'MontserratBold',
                   color: colorScheme === 'dark' ? '#fff' : '#000',
                 }}
                 treeninNimi

@@ -3,7 +3,9 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   flex: 1;
 `;
-
+export const TehdytTreenitContainer = styled.View`
+  flex-direction: column;
+`;
 export const SignupContainer = styled.View`
   flex: 1;
 `;
@@ -34,15 +36,16 @@ export const ParagraphContainer = styled.View`
 `;
 
 export const AloitaButton = styled.TouchableOpacity`
-  margin-bottom: 30px;
-  margin-left: 35px;
+  elevation: 6;
+
   width: 80%;
   height: 48px;
   align-items: center;
   justify-content: center;
-  border-radius: 30px;
+  border-radius: 20px;
+  shadow-radius: 10px;
   shadow-color: 'rgba(0,0,0, .4)';
-  shadow-opacity: 0.5;
+  shadow-opacity: 0.9;
   background-color: ${(props) => props.color ?? '#054dd9'};
 `;
 
@@ -66,8 +69,9 @@ export const PalauteIcon = styled.TouchableOpacity``;
 export const ModalContainer = styled.View``;
 
 export const LottieContainer = styled.View`
+  justify-content: center;
+  align-items: center;
   flex: 1;
-  margin-top: 20px;
 `;
 
 export const SplashScreenContainer = styled.View`
@@ -99,7 +103,7 @@ export const DialogContainer = styled.View`
 `;
 
 export const MainDataContainer = styled.View`
-  flex: 2;
+  flex: 1;
 `;
 
 export const SeuraavaksiContainer = styled.View`
@@ -112,8 +116,9 @@ export const AloitusButtonContainer = styled.View`
 `;
 
 export const ExtraContainer = styled.View`
+  margin-top: 60;
   flex-direction: row;
-  margin-top: 50px;
+  justify-content: space-between;
 `;
 
 export const PreviousButton = styled.TouchableOpacity`
@@ -140,7 +145,6 @@ export const Loading = styled.ActivityIndicator`
 export const ProgressBarContainer = styled.View`
   margin-top: 5px;
 `;
-
 export const InputField = styled.TextInput`
   width: 70px;
   margin: 15px;

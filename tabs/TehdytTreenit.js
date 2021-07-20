@@ -8,7 +8,7 @@ import { Agenda, LocaleConfig } from 'react-native-calendars';
 import { format } from 'date-fns';
 import HeaderComponent from '../components/HeaderComponent';
 import Text from '../components/Text';
-import { Container } from '../utils/Styling';
+import { Container, TehdytTreenitContainer } from '../utils/Styling';
 
 LocaleConfig.locales.fi = {
   monthNames: [
@@ -126,34 +126,53 @@ const TehdytTreenit = () => {
       </Text>
 
       {Object.values(item.treeniData).map((treeni) => {
-        const descSarjat = `Sarjat: ${treeni.sarjat}\n`;
-        let descToistot = `Toistot: \n `;
-        let descPainot = `Painot: \n `;
-        let descLisatiedot = `Lisätiedot: \n`;
+        const descSarjat = (
+          <Text left medium>
+            Sarjat: {treeni.sarjat}
+          </Text>
+        );
+        let descToistot = '';
+        let descPainot = '';
+        let descLisatiedot = '';
 
         Object.values(treeni.suoritusStats).forEach((itm, i) => {
-          descToistot += `\nSarja ${i + 1}: ${itm.toistot}\n`;
-          descPainot += `\nSarja ${i + 1}: ${itm.painot}\n`;
-          descLisatiedot += `\nSarja ${i + 1}: ${itm.lisatiedot} \n`;
+          descToistot += `Sarja ${i + 1}: x${itm.toistot}   `;
+          descPainot += `Sarja ${i + 1}: ${itm.painot}kg   `;
+          descLisatiedot += `Sarja ${i + 1}: ${itm.lisatiedot}   `;
         });
 
         return (
           <>
-            <Text marginBottom="5px" marginTop="25px" left vinkkiTitle>
+            <Text marginBottom="15px" marginTop="25px" left large>
               {treeni.nimi}
             </Text>
-            <Text vinkit fontFamily="MontserratRegular" left>
+            <Text marginTop="10px" medium fontFamily="MontserratRegular" left>
               {descSarjat}
             </Text>
-            <Text vinkit fontFamily="MontserratRegular" left>
-              {descToistot}
+            <Text marginTop="10px" medium left>
+              Toistot
             </Text>
-            <Text vinkit fontFamily="MontserratRegular" left>
-              {descPainot}
-            </Text>
-            <Text vinkit fontFamily="MontserratRegular" left>
-              {descLisatiedot}
-            </Text>
+            <TehdytTreenitContainer>
+              <Text medium fontFamily="MontserratRegular" left>
+                {descToistot}
+              </Text>
+              <Text marginTop="10px" medium left>
+                Painot
+              </Text>
+              <TehdytTreenitContainer>
+                <Text medium fontFamily="MontserratRegular" left>
+                  {descPainot}
+                </Text>
+              </TehdytTreenitContainer>
+              <Text marginTop="10px" medium left>
+                Lisätiedot
+              </Text>
+              <TehdytTreenitContainer>
+                <Text medium fontFamily="MontserratRegular" left>
+                  {descLisatiedot}
+                </Text>
+              </TehdytTreenitContainer>
+            </TehdytTreenitContainer>
           </>
         );
       })}
@@ -179,6 +198,11 @@ const TehdytTreenit = () => {
                 ) : ( */}
 
       <Agenda
+        renderEmptyData={() => (
+          <Text fontFamily="MontserratRegular" large center>
+            No Data
+          </Text>
+        )}
         theme={{
           calendarBackground: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
           backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
@@ -192,6 +216,7 @@ const TehdytTreenit = () => {
           textDayFontFamily: 'MontserratRegular',
           textMonthFontFamily: 'MontserratRegular',
           textDayHeaderFontFamily: 'MontserratRegular',
+          minDate: '2021-05-01',
         }}
         items={calendarItems}
         renderItem={renderItem}

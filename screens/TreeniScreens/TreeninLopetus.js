@@ -14,6 +14,7 @@ import {
   PalauteIcon,
   PalauteButtonContainer,
   Container,
+  AloitaButton,
 } from '../../utils/Styling';
 import { LottieAnimationCongratulations } from '../../components/Lottie';
 
@@ -157,7 +158,11 @@ const LopetaTreeni = ({ data, treeni }) => {
       ) : null}
 
       <ButtonContainer>
-        <GradientButtonLib teksti="Valmis" onPressAction={() => saveToDatabase()} />
+        <AloitaButton onPress={() => navigation.goBack()}>
+          <Text style={{ color: '#fff' }} large>
+            Sulje
+          </Text>
+        </AloitaButton>
       </ButtonContainer>
     </Container>
   );

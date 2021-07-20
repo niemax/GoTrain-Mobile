@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Text from '../../components/Text';
-import { GradientButtonLib } from '../../components/GradientButton';
+import { AloitaButton } from '../../utils/Styling';
 
 const TreeninEsikatselu = ({ route, navigation }) => {
   Appearance.getColorScheme();
@@ -49,7 +49,11 @@ const TreeninEsikatselu = ({ route, navigation }) => {
       </ScrollView>
 
       <SuljeContainer>
-        <GradientButtonLib teksti="Sulje" onPressAction={() => navigation.goBack()} />
+        <AloitaButton onPress={() => navigation.goBack()}>
+          <Text style={{ color: '#fff' }} large>
+            Sulje
+          </Text>
+        </AloitaButton>
       </SuljeContainer>
     </Container>
   );

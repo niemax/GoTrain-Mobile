@@ -57,7 +57,7 @@ export default function TreeninEsittely({ route, navigation }) {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [treeninNimi]);
 
   return (
     <Container
@@ -115,7 +115,7 @@ export default function TreeninEsittely({ route, navigation }) {
                         fontFamily="MontserratRegular"
                         style={{
                           position: 'absolute',
-                          left: 255,
+                          left: 235,
                           color: colorScheme === 'dark' ? '#fff' : '#000',
                         }}
                         medium
@@ -143,14 +143,17 @@ export default function TreeninEsittely({ route, navigation }) {
 
       {!isLoading && (
         <ButtonContainer>
-          <GradientButtonLib
-            teksti="Aloita"
-            onPressAction={() =>
+          <AloitaButton
+            onPress={() =>
               navigation.navigate('TreeninAloitus', {
                 treeni: treeninNimi,
               })
             }
-          />
+          >
+            <Text style={{ color: '#fff' }} large>
+              Aloita
+            </Text>
+          </AloitaButton>
         </ButtonContainer>
       )}
     </Container>
@@ -165,6 +168,9 @@ const styles = StyleSheet.create({
 
 const TextContainer = styled.View`
   flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
 `;
 
 const MainDataContainer = styled.View`
