@@ -136,9 +136,9 @@ const TehdytTreenit = () => {
         let descLisatiedot = '';
 
         Object.values(treeni.suoritusStats).forEach((itm, i) => {
-          descToistot += `Sarja ${i + 1}: x${itm.toistot}   `;
-          descPainot += `Sarja ${i + 1}: ${itm.painot}kg   `;
-          descLisatiedot += `Sarja ${i + 1}: ${itm.lisatiedot}   `;
+          descToistot += `Sarja ${i + 1}: ${itm.toistot}  `;
+          descPainot += `Sarja ${i + 1}: ${itm.painot}  `;
+          descLisatiedot += `Sarja ${i + 1}: ${itm.lisatiedot}  `;
         });
 
         return (

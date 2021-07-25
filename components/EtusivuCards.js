@@ -18,7 +18,7 @@ export default Cards = () => {
   useEffect(() => {
     try {
       axios
-        .get(`http://${MOBILEDATA}/api/cards/etusivucards`)
+        .get(`http://${HOMEDATA}/api/cards/etusivucards`)
         .then((response) => {
           const { data } = response;
 
@@ -57,7 +57,7 @@ export default Cards = () => {
                 })
               }
               imageSrc={{
-                uri: `http://${MOBILEDATA}/api/${image}`,
+                uri: `http://${HOMEDATA}/api/${image}`,
                 cache: 'default',
               }}
               title={
