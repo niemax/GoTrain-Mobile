@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Dimensions, ScrollView, Alert } from 'react-native';
+import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import Carousel from 'react-native-snap-carousel';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { Ionicons, Feather } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
 import { HOMEDATA, MOBILEDATA } from '@env';
-import { SpeedDial } from 'react-native-elements';
-import Dialog from 'react-native-dialog';
+import Dialogs from '../../components/Dialogs';
 import { LottieLoading } from '../../components/Lottie';
 import LopetaTreeni from './TreeninLopetus';
 import Text from '../../components/Text';
@@ -27,12 +26,6 @@ import {
   ProgressBarContainer,
   SeuraavaksiContainer,
 } from '../../utils/Styling';
-
-const initialState = () => {
-  setToisto('');
-  setPaino('');
-  setVisible(false);
-};
 
 const { width: viewportWidth } = Dimensions.get('window');
 
@@ -54,7 +47,6 @@ const AloitaTreeni = ({ route, navigation }) => {
 
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
-  const lisaaIcon = <Feather name="plus" size={24} color="white" />;
 
   useEffect(() => {
     try {
@@ -106,89 +98,6 @@ const AloitaTreeni = ({ route, navigation }) => {
     console.log('treenit', treenit, Object.keys(treenit).length);
   };
 
-  const handleToistotPainotData = () => {
-    const newArr = [...toistotPainotData];
-
-    try {
-      if (toisto === '' || paino === '') {
-        Alert.alert('Syötä molemmat tiedot!');
-        return;
-      }
-      newArr.push({
-        toistot: toisto,
-        painot: paino,
-        lisatiedot: lisatieto.trim(),
-      });
-    } catch (e) {
-      console.error(e);
-    }
-
-    setToistotPainotData(newArr);
-    setToisto(''), setPaino(''), setVisible(false);
-
-    // dial.current.color = 'color: red';
-  };
-
-  const renderDialogs = () => (
-    <>
-      <SpeedDial
-        style={{
-          shadowColor: 'black',
-          shadowOpacity: 0.8,
-          elevation: 6,
-          shadowRadius: 3,
-          shadowOffset: { width: 0, height: 3 },
-        }}
-        color="#054dd9"
-        isOpen={open}
-        overlayColor="transparent"
-        icon={lisaaIcon}
-        openIcon={{ name: 'close', color: '#fff' }}
-        onOpen={() => setOpen(!open)}
-        onClose={() => setOpen(!open)}
-      >
-        <SpeedDial.Action
-          color="#054dd9"
-          icon={lisaaIcon}
-          title="Lisää sarjan 1 tiedot"
-          onPress={() => setVisible(true)}
-        />
-        <SpeedDial.Action
-          color="#054dd9"
-          icon={lisaaIcon}
-          title="Lisää sarjan 2 tiedot"
-          onPress={() => setVisible(true)}
-        />
-        <SpeedDial.Action
-          color="#054dd9"
-          icon={lisaaIcon}
-          title="Lisää sarjan 3 tiedot"
-          onPress={() => setVisible(true)}
-        />
-      </SpeedDial>
-
-      <Dialog.Container visible={visible}>
-        <Dialog.Title>Lisää sarjan tiedot</Dialog.Title>
-        <Dialog.Description>Lisää toistot ja painot</Dialog.Description>
-        <Text medium center marginBottom="10px">
-          Toistot
-        </Text>
-        <Dialog.Input keyboardType="numeric" onChangeText={(text) => setToisto(text)} />
-        <Text medium center marginBottom="10px">
-          Painot(kg)
-        </Text>
-        <Dialog.Input keyboardType="numeric" onChangeText={(text) => setPaino(text)} />
-        <Text medium center marginBottom="10px">
-          Lisätiedot
-        </Text>
-        <Dialog.Input multiline numberOfLines={5} onChangeText={(text) => setLisatieto(text)} />
-
-        <Dialog.Button label="Lisää" onPress={handleToistotPainotData} />
-        <Dialog.Button label="Peruuta" onPress={() => setVisible(false)} />
-      </Dialog.Container>
-    </>
-  );
-
   const renderItem = ({ item, index }) => {
     const btnColor = tehdytTreenit.hasOwnProperty(item.nimi)
       ? '#054dd9'
@@ -219,15 +128,13 @@ const AloitaTreeni = ({ route, navigation }) => {
             <YoutubePlayer height={240} videoId={item.videoId} />
           </VideoContainer>
 
-          <ProgressBarContainer>
-            <Progress.Bar
-              progress={pbProgress}
-              width={null}
-              height={3}
-              borderWidth={null}
-              color="#054dd9"
-            />
-          </ProgressBarContainer>
+          <Progress.Bar
+            progress={pbProgress}
+            width={null}
+            height={3}
+            borderWidth={null}
+            color="#054dd9"
+          />
 
           <UtilsContainer>
             <Text title>{item.nimi.toUpperCase()}</Text>
@@ -280,8 +187,20 @@ const AloitaTreeni = ({ route, navigation }) => {
               </Text>
             )}
           </SeuraavaksiContainer>
-
-          {renderDialogs()}
+          <Dialogs
+            visible={visible}
+            setVisible={setVisible}
+            toisto={toisto}
+            setToisto={setToisto}
+            paino={paino}
+            setPaino={setPaino}
+            lisatieto={lisatieto}
+            setLisatieto={setLisatieto}
+            open={open}
+            setOpen={setOpen}
+            toistotPainotData={toistotPainotData}
+            setToistotPainotData={setToistotPainotData}
+          />
         </AloitusRenderContainer>
       );
     }

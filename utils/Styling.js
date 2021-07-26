@@ -37,16 +37,15 @@ export const ParagraphContainer = styled.View`
 
 export const AloitaButton = styled.TouchableOpacity`
   elevation: 6;
-
   width: 80%;
-  height: 48px;
+  height: 50px;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
   shadow-radius: 10px;
   shadow-color: 'rgba(0,0,0, .4)';
   shadow-opacity: 0.9;
-  background-color: ${(props) => props.color ?? '#054dd9'};
+  background-color: #054dd9;
 `;
 
 export const ButtonContainer = styled.View`
@@ -97,7 +96,11 @@ export const AloitusRenderContainer = styled.View`
   flex: 1;
   background-color: #141314;
 `;
-
+export const TreeninAloitusLoadingContainer = styled.View`
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 export const DialogContainer = styled.View`
   flex: 1;
 `;

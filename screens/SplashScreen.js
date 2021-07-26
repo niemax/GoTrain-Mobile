@@ -21,7 +21,6 @@ export default function SplashScreen({ navigation }) {
     <SplashScreenContainer>
       <SplashAdditionalContainer>
         <Image style={{ height: 300, width: 300 }} source={require('../assets/logo.png')} />
-        <ActivityIndicator size="large" />
       </SplashAdditionalContainer>
     </SplashScreenContainer>
   );

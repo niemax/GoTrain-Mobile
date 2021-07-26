@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import LottieView from 'lottie-react-native';
-import { LottieContainer, Container } from '../utils/Styling';
+import { LottieContainer, TreeninAloitusLoadingContainer } from '../utils/Styling';
 import Text from '../components/Text';
 
 export const LottieAnimationCongratulations = () => {
@@ -18,16 +18,6 @@ export const LottieAnimationCongratulations = () => {
       />
     </LottieContainer>
   );
-};
-
-export const LottieAnimationTehdytTreenit = () => {
-  const animation = useRef(null);
-
-  useEffect(() => {
-    animation.current.play();
-  });
-
-  return <LottieView ref={animation} source={require('../assets/json/57980-progress.json')} />;
 };
 
 export const LottieAnimationMain = () => {
@@ -59,12 +49,12 @@ export const LottieLoading = () => {
   }, []);
 
   return (
-    <>
+    <TreeninAloitusLoadingContainer>
       <Text marginBottom="220px" large style={{ color: '#fff' }}>
-        Treenisi alkaa {count} sekunnin päästä. Tsemmpiä treeniin!
+        Treenisi alkaa {count} sekunin päästä. Tsemppiä treeniin!
       </Text>
       <LottieView ref={animation} source={require('../assets/json/16404-loading-dialogue.json')} />
-    </>
+    </TreeninAloitusLoadingContainer>
   );
 };
 
@@ -80,28 +70,4 @@ export const LottieSignup = () => {
       <LottieView ref={animation} source={require('../assets/json/60820-bicycle-riding.json')} />
     </LottieContainer>
   );
-};
-
-export const LottieAlternateLoading = () => {
-  const animation = useRef(null);
-
-  useEffect(() => {
-    animation.current.play();
-  });
-
-  return (
-    <LottieContainer>
-      <LottieView ref={animation} source={require('../assets/json/60820-bicycle-riding.json')} />
-    </LottieContainer>
-  );
-};
-
-export const TreeninAloitusAnimation = () => {
-  const animation = useRef(null);
-
-  useEffect(() => {
-    animation.current.play();
-  });
-
-  return <LottieView ref={animation} source={require('../assets/json/3153-dummbells.json')} />;
 };
