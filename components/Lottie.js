@@ -51,7 +51,7 @@ export const LottieLoading = () => {
   return (
     <TreeninAloitusLoadingContainer>
       <Text marginBottom="220px" large style={{ color: '#fff' }}>
-        Treenisi alkaa {count} sekunin päästä. Tsemppiä treeniin!
+        Treenisi alkaa {count} sekunnin päästä. Tsemppiä treeniin!
       </Text>
       <LottieView ref={animation} source={require('../assets/json/16404-loading-dialogue.json')} />
     </TreeninAloitusLoadingContainer>

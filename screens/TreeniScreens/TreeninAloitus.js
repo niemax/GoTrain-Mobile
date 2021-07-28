@@ -8,7 +8,7 @@ import * as Progress from 'react-native-progress';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
-import { HOMEDATA, MOBILEDATA } from '@env';
+import { API } from '@env';
 import Dialogs from '../../components/Dialogs';
 import { LottieLoading } from '../../components/Lottie';
 import LopetaTreeni from './TreeninLopetus';
@@ -51,7 +51,7 @@ const AloitaTreeni = ({ route, navigation }) => {
   useEffect(() => {
     try {
       axios
-        .get(`http://${MOBILEDATA}/api/treenit/${treeni}`)
+        .get(`${API}/api/treenit/${treeni}`)
         .then((response) => setTreeniData(response.data[0].liikkeet))
         .catch((err) => {
           console.log(err);

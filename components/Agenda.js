@@ -57,44 +57,42 @@ export default function AgendaComponent() {
   const colorScheme = useColorScheme();
   const themeColor = colorScheme === 'dark' ? 'white' : 'black';
 
-  useEffect(() => {
-    const getData = () => {
-      const db = firebase.firestore();
-      const { currentUser } = firebase.auth();
+  const getData = () => {
+    const db = firebase.firestore();
+    const { currentUser } = firebase.auth();
 
-      db.collection('users')
-        .doc(currentUser.uid)
-        .collection('treenidata')
-        .orderBy('timestamp', 'desc')
-        .get()
+    db.collection('users')
+      .doc(currentUser.uid)
+      .collection('treenidata')
+      .orderBy('timestamp', 'desc')
+      .get()
 
-        .then((snapshot) => {
-          const mappedData = snapshot.docs.map((treeni) => {
-            const data = treeni.data();
-            const { timestamp } = data;
+      .then((snapshot) => {
+        const mappedData = snapshot.docs.map((treeni) => {
+          const data = treeni.data();
+          const { timestamp } = data;
 
-            return {
-              ...data,
-              date: format(timestamp, 'yyyy-MM-dd'),
-            };
-          });
-
-          const reduced = mappedData.reduce((acc, currentItem) => {
-            const { date, ...rest } = currentItem;
-
-            acc[date] = [rest];
-
-            return acc;
-          }, {});
-
-          setCalendarItems(reduced);
+          return {
+            ...data,
+            date: format(timestamp, 'yyyy-MM-dd'),
+          };
         });
-    };
 
+        const reduced = mappedData.reduce((acc, currentItem) => {
+          const { date, ...rest } = currentItem;
+
+          acc[date] = [rest];
+
+          return acc;
+        }, {});
+
+        setCalendarItems(reduced);
+      });
+  };
+
+  useEffect(() => {
     getData();
-  }, []);
-
-  /* const onRefresh = useCallback(() => {
+  }, []); /* const onRefresh = useCallback(() => {
             setLoading(true)
             setRefreshing(true);
             getData();
@@ -178,6 +176,7 @@ export default function AgendaComponent() {
           No Data
         </Text>
       )}
+      onDayPress={getData}
       theme={{
         calendarBackground: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',

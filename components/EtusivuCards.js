@@ -4,7 +4,7 @@ import { Tile } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-import { HOMEDATA, MOBILEDATA } from '@env';
+import { API } from '@env';
 import { ContentLoaderView } from '../utils/Styling';
 import Skeleton from './Skeleton';
 import Text from './Text';
@@ -18,7 +18,7 @@ export default Cards = () => {
   useEffect(() => {
     try {
       axios
-        .get(`http://${MOBILEDATA}/api/cards/etusivucards`)
+        .get(`${API}/api/cards/etusivucards`)
         .then((response) => {
           const { data } = response;
 
@@ -57,7 +57,7 @@ export default Cards = () => {
                 })
               }
               imageSrc={{
-                uri: `http://${MOBILEDATA}/api/${image}`,
+                uri: `${API}/api/${image}`,
                 cache: 'default',
               }}
               title={

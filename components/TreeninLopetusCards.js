@@ -5,7 +5,7 @@ import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import { PalauteButtonContainer, PalauteIcon } from '../utils/Styling';
 
-export default function TreeninLopetusCards({ data, saveToDatabse }) {
+export default function TreeninLopetusCards({ data }) {
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
   const themeColor = colorScheme === 'dark' ? 'white' : 'black';

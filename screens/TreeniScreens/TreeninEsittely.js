@@ -5,11 +5,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
-import { HOMEDATA, MOBILEDATA } from '@env';
+import { API } from '@env';
 import axios from 'axios';
 import { LottieLoading } from '../../components/Lottie';
 import TreeninKuvausData from '../../components/TreeninKuvausData';
-import { GradientButtonLib } from '../../components/GradientButton';
 import { Container, ButtonContainer, IconTouchable, AloitaButton } from '../../utils/Styling';
 import Text from '../../components/Text';
 
@@ -38,7 +37,7 @@ export default function TreeninEsittely({ route, navigation }) {
   useEffect(() => {
     try {
       axios
-        .get(`http://${MOBILEDATA}/api/treenit/${treeninNimi}`)
+        .get(`${API}/api/treenit/${treeninNimi}`)
         .then((response) => {
           console.log(response.data);
           setTreeniData(response.data[0].liikkeet);
@@ -65,10 +64,7 @@ export default function TreeninEsittely({ route, navigation }) {
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
       }}
     >
-      <Image
-        style={styles.image}
-        source={{ uri: `http://${MOBILEDATA}/api/${image}`, cache: 'default' }}
-      />
+      <Image style={styles.image} source={{ uri: `${API}/api/${image}`, cache: 'default' }} />
       <View style={{ flexDirection: 'row', position: 'absolute', top: 35 }}>
         <IconTouchable onPress={() => navigation.goBack()}>
           <Ionicons name="chevron-back-circle-outline" size={38} color="white" />
