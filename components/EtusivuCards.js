@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { Tile } from 'react-native-elements';
-import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { API } from '@env';
@@ -19,11 +19,8 @@ export default Cards = () => {
     try {
       axios
         .get(`${API}/api/cards/etusivucards`)
-        .then((response) => {
-          const { data } = response;
+        .then((response) => setCardData(response.data))
 
-          setCardData(data);
-        })
         .catch((err) => {
           console.log(err);
         })
@@ -40,7 +37,7 @@ export default Cards = () => {
   if (loading) {
     return (
       <ContentLoaderView>
-        <Skeleton />
+        <Skeleton length={cardData.length} />
       </ContentLoaderView>
     );
   }
@@ -68,7 +65,7 @@ export default Cards = () => {
               featured
               caption={
                 <View style={{ flexDirection: 'row' }}>
-                  <Ionicons name="ios-timer-sharp" size={28} color="#FFF" />
+                  <Feather name="clock" size={28} color="white" />
                   <Text
                     medium
                     style={{

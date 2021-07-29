@@ -27,7 +27,7 @@ export default function TreeninKuvausData({ treeninKesto, kohderyhma, treeniText
           marginBottom: 20,
         }}
       >
-        <Ionicons name="ios-timer-sharp" size={26} color={themeColor} />
+        <Feather name="clock" size={26} color={themeColor} />
 
         <Text medium>
           {' '}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Image, StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native';
 import styled from 'styled-components/native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Feather } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
@@ -67,10 +67,10 @@ export default function TreeninEsittely({ route, navigation }) {
       <Image style={styles.image} source={{ uri: `${API}/api/${image}`, cache: 'default' }} />
       <View style={{ flexDirection: 'row', position: 'absolute', top: 35 }}>
         <IconTouchable onPress={() => navigation.goBack()}>
-          <Ionicons name="chevron-back-circle-outline" size={38} color="white" />
+          <Feather name="arrow-left-circle" size={38} color="white" />
         </IconTouchable>
         <IconTouchable onPress={() => showToast()}>
-          <Ionicons name="ios-heart-outline" size={38} color="white" style={{ marginLeft: 300 }} />
+          <Feather name="heart" size={38} color="white" style={{ marginLeft: 300 }} />
         </IconTouchable>
       </View>
 

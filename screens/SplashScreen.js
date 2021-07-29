@@ -20,7 +20,7 @@ export default function SplashScreen({ navigation }) {
   return (
     <SplashScreenContainer>
       <SplashAdditionalContainer>
-        <Image style={{ height: 300, width: 300 }} source={require('../assets/logo.png')} />
+        <Image style={{ height: 200, width: 300 }} source={require('../assets/icons/brand.png')} />
       </SplashAdditionalContainer>
     </SplashScreenContainer>
   );

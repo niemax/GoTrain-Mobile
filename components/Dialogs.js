@@ -1,9 +1,12 @@
-import React from 'react';
-import { Alert } from 'react-native';
+import React, { useRef, useState, useCallback, useMemo } from 'react';
+import { Alert, Button, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { SpeedDial } from 'react-native-elements';
 import Dialog from 'react-native-dialog';
+import { FloatingActionButton } from '../utils/Styling';
+import { Appearance, useColorScheme } from 'react-native-appearance';
 import Text from './Text';
+import { ListItem } from 'react-native-elements';
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 export default function Dialogs({
   visible,
@@ -18,8 +21,28 @@ export default function Dialogs({
   setOpen,
   toistotPainotData,
   setToistotPainotData,
+  sarjatLength,
 }) {
-  const lisaaIcon = <Feather name="plus" size={24} color="white" />;
+  const [done, setDone] = useState(done);
+  const lisaaIcon = <Feather name="edit-2" size={26} style={{ marginLeft: 180 }} />;
+  const fabIcon = <Feather name="edit-2" size={26} color="white" />;
+
+  const notDoneIcon = (
+    <Feather name="x" size={26} color="red" style={{ marginLeft: 45 }} ref={listItemRef} />
+  );
+
+  const doneIcon = (
+    <Feather name="check-circle" size={26} color="green" style={{ marginLeft: 50 }} />
+  );
+  Appearance.getColorScheme();
+  const colorScheme = useColorScheme();
+  const bottomSheetModalRef = useRef(null);
+
+  const snapPoints = useMemo(() => ['25%', '40%'], []);
+  const listItemRef = useRef(0);
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
 
   const handleToistotPainotData = () => {
     const newArr = [...toistotPainotData];
@@ -37,51 +60,87 @@ export default function Dialogs({
     } catch (e) {
       console.error(e);
     }
-
     setToistotPainotData(newArr);
     setToisto(''), setPaino(''), setVisible(false);
+    setDone(!done);
+    refs();
   };
+  const refs = () => {
+    const r = listItemRef.current;
+    console.log(r);
+  };
+
   return (
     <>
-      <SpeedDial
-        style={{
-          shadowColor: 'black',
-          shadowOpacity: 0.8,
-          elevation: 6,
-          shadowRadius: 3,
-          shadowOffset: { width: 0, height: 3 },
-        }}
-        color="#054dd9"
-        isOpen={open}
-        overlayColor="transparent"
-        icon={lisaaIcon}
-        openIcon={{ name: 'close', color: '#fff' }}
-        onOpen={() => setOpen(!open)}
-        onClose={() => setOpen(!open)}
-      >
-        <SpeedDial.Action
-          icon={lisaaIcon}
-          color="#054dd9"
-          title="Lisää sarjan 1 tiedot"
-          onPress={() => setVisible(true)}
-        />
-        <SpeedDial.Action
-          icon={lisaaIcon}
-          color="#054dd9"
-          title="Lisää sarjan 2 tiedot"
-          onPress={() => setVisible(true)}
-        />
-        <SpeedDial.Action
-          icon={lisaaIcon}
-          color="#054dd9"
-          title="Lisää sarjan 3 tiedot"
-          onPress={() => setVisible(true)}
-        />
-      </SpeedDial>
+      <BottomSheetModalProvider>
+        <View style={styles.container}>
+          <FloatingActionButton
+            style={{
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 6,
+              },
+              shadowOpacity: 0.37,
+              shadowRadius: 7.49,
+
+              elevation: 12,
+            }}
+            onPress={handlePresentModalPress}
+          >
+            <Text>{fabIcon}</Text>
+          </FloatingActionButton>
+
+          <BottomSheetModal
+            style={{
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 8,
+              },
+              shadowOpacity: 0.46,
+              shadowRadius: 11.14,
+
+              elevation: 17,
+            }}
+            enableOverDrag={true}
+            ref={bottomSheetModalRef}
+            index={1}
+            snapPoints={snapPoints}
+          >
+            <View style={{ flex: 1 }}>
+              <Text style={{ color: 'black' }} large>
+                Syötä Tiedot
+              </Text>
+            </View>
+            <View style={styles.contentContainer}>
+              {Array.from(Array(parseInt(sarjatLength))).map((i, idx) => (
+                <TouchableOpacity onPress={() => setVisible(true)}>
+                  <ListItem key={i} bottomDivider>
+                    <ListItem.Content>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Text style={{ color: 'black' }} marginTop="25px" medium>
+                          Sarja {idx + 1}
+                        </Text>
+                        {lisaaIcon}
+                        {done ? doneIcon : notDoneIcon}
+                      </View>
+                    </ListItem.Content>
+                  </ListItem>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </BottomSheetModal>
+        </View>
+      </BottomSheetModalProvider>
 
       <Dialog.Container visible={visible}>
         <Dialog.Title>Lisää sarjan tiedot</Dialog.Title>
-        <Dialog.Description>Lisää toistot ja painot</Dialog.Description>
         <Text medium center marginBottom="10px">
           Toistot
         </Text>
@@ -101,3 +160,14 @@ export default function Dialogs({
     </>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 24,
+    alignItems: 'flex-end',
+  },
+  contentContainer: {
+    flex: 8,
+    padding: 10,
+  },
+});

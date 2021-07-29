@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Image } from 'react-native';
 import * as Location from 'expo-location';
 import { Header } from 'react-native-elements';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Feather } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
 import { Appearance, useColorScheme } from 'react-native-appearance';
@@ -21,7 +21,7 @@ const HeaderComponent = (props) => {
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
   const icon = (
-    <Ionicons name="log-out-outline" size={32} color={colorScheme === 'dark' ? 'white' : 'black'} />
+    <Feather name="log-out" size={24} color={colorScheme === 'dark' ? 'white' : 'black'} />
   );
 
   async function getWeatherData(lati, longi) {
@@ -76,6 +76,7 @@ const HeaderComponent = (props) => {
       containerStyle={{
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
         borderBottomWidth: 0,
+        marginBottom: 25,
       }}
       elevated="true"
       rightComponent={<ProfileIcon onPress={handleLogOut}>{icon}</ProfileIcon>}

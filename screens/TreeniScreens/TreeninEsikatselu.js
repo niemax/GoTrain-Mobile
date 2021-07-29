@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Feather } from '@expo/vector-icons';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Text from '../../components/Text';
@@ -13,13 +13,7 @@ const TreeninEsikatselu = ({ route, navigation }) => {
 
   const { nimi, videoID, ohjeet } = route.params;
 
-  const icon = (
-    <Ionicons
-      name="ios-alert-circle-outline"
-      size={24}
-      color={colorScheme === 'dark' ? 'white' : 'black'}
-    />
-  );
+  const icon = <Feather name="info" size={24} color={colorScheme === 'dark' ? 'white' : 'black'} />;
 
   return (
     <Container
@@ -66,7 +60,7 @@ const Container = styled.View`
 `;
 
 const VideoContainer = styled.View`
-  margin-top: 35px;
+  margin-top: 65px;
 `;
 
 const TextContainer = styled.View`
@@ -85,5 +79,4 @@ const SuljeContainer = styled.View`
   justify-content: center;
   align-items: center;
   height: 12%;
-  padding: 15px;
 `;

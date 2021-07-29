@@ -3,14 +3,14 @@ import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import Carousel from 'react-native-snap-carousel';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Feather } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
 import { API } from '@env';
 import Dialogs from '../../components/Dialogs';
-import { LottieLoading } from '../../components/Lottie';
+import { LottieLoadingAloitus } from '../../components/Lottie';
 import LopetaTreeni from './TreeninLopetus';
 import Text from '../../components/Text';
 import {
@@ -23,7 +23,6 @@ import {
   NextButton,
   DoneButton,
   LoadingView,
-  ProgressBarContainer,
   SeuraavaksiContainer,
 } from '../../utils/Styling';
 
@@ -150,12 +149,12 @@ const AloitaTreeni = ({ route, navigation }) => {
                     carousel.current.snapToPrev();
                   }}
                 >
-                  <Ionicons name="ios-chevron-back-outline" size={58} color={colorIcon} />
+                  <Ionicons name="ios-chevron-back-outline" size={58} color="#054dd9" />
                 </PreviousButton>
               )}
 
               <DoneButton onPress={() => setProgress(item, index)}>
-                <Ionicons name="checkmark-circle-outline" size={90} color={btnColor} />
+                <Feather name="check-circle" size={80} color={btnColor} />
               </DoneButton>
 
               {index < treenitLength - 1 && (
@@ -164,7 +163,7 @@ const AloitaTreeni = ({ route, navigation }) => {
                     carousel.current.snapToNext();
                   }}
                 >
-                  <Ionicons name="ios-chevron-forward-outline" size={58} color={colorIcon} />
+                  <Ionicons name="ios-chevron-forward-outline" size={58} color="#054dd9" />
                 </NextButton>
               )}
             </AloitusButtonContainer>
@@ -200,13 +199,14 @@ const AloitaTreeni = ({ route, navigation }) => {
             setOpen={setOpen}
             toistotPainotData={toistotPainotData}
             setToistotPainotData={setToistotPainotData}
+            sarjatLength={item.sarjat}
           />
         </AloitusRenderContainer>
       );
     }
     return (
       <LoadingView>
-        <LottieLoading />
+        <LottieLoadingAloitus />
       </LoadingView>
     );
   };

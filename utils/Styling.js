@@ -42,9 +42,16 @@ export const AloitaButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  shadow-radius: 10px;
-  shadow-color: 'rgba(0,0,0, .4)';
-  shadow-opacity: 0.9;
+  background-color: #054dd9;
+`;
+
+export const FloatingActionButton = styled.TouchableOpacity`
+  elevation: 6;
+  width: 65px;
+  height: 65px;
+  justify-content: center;
+  border-radius: 60px;
+
   background-color: #054dd9;
 `;
 
@@ -59,9 +66,7 @@ export const SignupButtonContainer = styled.View`
   margin-top: 30px;
 `;
 //#947AFF
-export const IconTouchable = styled.TouchableOpacity`
-  flex-direction: row;
-`;
+export const IconTouchable = styled.TouchableOpacity``;
 
 export const PalauteIcon = styled.TouchableOpacity``;
 
@@ -83,7 +88,7 @@ export const SplashScreenContainer = styled.View`
 export const SplashAdditionalContainer = styled.View``;
 
 export const VideoContainer = styled.View`
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 export const UtilsContainer = styled.View`

@@ -38,6 +38,20 @@ export const LottieLoading = () => {
   const [count, setCount] = useState(5);
 
   useEffect(() => {
+    animation.current.play();
+  }, []);
+
+  return (
+    <LottieView ref={animation} source={require('../assets/json/16404-loading-dialogue.json')} />
+  );
+};
+
+export const LottieLoadingAloitus = () => {
+  const animation = useRef(null);
+
+  const [count, setCount] = useState(5);
+
+  useEffect(() => {
     setInterval(() => {
       setCount((c) => c - 1);
     }, 1000);
@@ -57,7 +71,6 @@ export const LottieLoading = () => {
     </TreeninAloitusLoadingContainer>
   );
 };
-
 export const LottieSignup = () => {
   const animation = useRef(null);
 

@@ -6,7 +6,7 @@ import 'moment/locale/fi';
 import AgendaComponent from '../components/Agenda';
 import HeaderComponent from '../components/HeaderComponent';
 import Text from '../components/Text';
-import { Container, TehdytTreenitContainer } from '../utils/Styling';
+import { Container } from '../utils/Styling';
 
 const wait = (timeout) => new Promise((resolve) => setTimeout(resolve, timeout));
 
@@ -28,9 +28,6 @@ const TehdytTreenit = () => {
         <HeaderComponent leftComponent={{ text: <Text medium>MINÄ</Text> }} />
       </HeaderContainer>
 
-      <Text fontFamily="MontserratRegular" marginBottom="40px" marginTop="40px" large>
-        Suoritukset{' '}
-      </Text>
       <AgendaComponent />
       {/*  {! refreshed && <LottieAnimationMain />}
                 {loading ? ( <Loading size="large" /> 

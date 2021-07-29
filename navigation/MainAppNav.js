@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, AntDesign, Feather } from '@expo/vector-icons';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';
@@ -82,9 +82,7 @@ const KotiMainTab = () => {
         options={{
           tabBarLabel: 'Koti',
           tabBarColor: themeColor,
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="ios-home-outline" size={24} color={activeColor} />
-          ),
+          tabBarIcon: ({ color }) => <Feather name="home" size={24} color={activeColor} />,
         }}
       />
       <Tab.Screen
@@ -93,9 +91,7 @@ const KotiMainTab = () => {
         options={{
           tabBarLabel: 'Minä',
           tabBarColor: themeColor,
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="md-checkmark-done-circle-outline" size={24} color={activeColor} />
-          ),
+          tabBarIcon: ({ color }) => <Feather name="check-circle" size={24} color={activeColor} />,
         }}
       />
     </Tab.Navigator>

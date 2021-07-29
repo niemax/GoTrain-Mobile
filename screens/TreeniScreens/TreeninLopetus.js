@@ -68,7 +68,8 @@ const LopetaTreeni = ({ data, treeni }) => {
     >
       <LottieAnimationCongratulations />
       <Text
-        style={{ fontFamily: 'MontserratExtraBold', color: themeColor }}
+        fontFamily="MontserratSemiBold"
+        style={{ color: themeColor }}
         marginTop="20px"
         large
         medium
