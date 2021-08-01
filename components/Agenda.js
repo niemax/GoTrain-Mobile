@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import * as firebase from 'firebase';
 import { Agenda, LocaleConfig } from 'react-native-calendars';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import { TehdytTreenitContainer } from '../utils/Styling';
+import { AgendaContainer } from '../utils/Styling';
 
 LocaleConfig.locales.fi = {
   monthNames: [
@@ -126,9 +126,9 @@ export default function AgendaComponent() {
         let descLisatiedot = '';
 
         Object.values(treeni.suoritusStats).forEach((itm, i) => {
-          descToistot += `Sarja ${i + 1}: ${itm.toistot}  `;
-          descPainot += `Sarja ${i + 1}: ${itm.painot}  `;
-          descLisatiedot += `Sarja ${i + 1}: ${itm.lisatiedot}  `;
+          descToistot += `Sarja ${i + 1}: ${itm.toistot}\n`;
+          descPainot += `Sarja ${i + 1}: ${itm.painot}\n`;
+          descLisatiedot += `Sarja ${i + 1}: ${itm.lisatiedot}\n`;
         });
 
         return (
@@ -142,27 +142,21 @@ export default function AgendaComponent() {
             <Text marginTop="10px" medium left>
               Toistot
             </Text>
-            <TehdytTreenitContainer>
-              <Text medium fontFamily="MontserratRegular" left>
-                {descToistot}
-              </Text>
-              <Text marginTop="10px" medium left>
-                Painot
-              </Text>
-              <TehdytTreenitContainer>
-                <Text medium fontFamily="MontserratRegular" left>
-                  {descPainot}
-                </Text>
-              </TehdytTreenitContainer>
-              <Text marginTop="10px" medium left>
-                Lisätiedot
-              </Text>
-              <TehdytTreenitContainer>
-                <Text medium fontFamily="MontserratRegular" left>
-                  {descLisatiedot}
-                </Text>
-              </TehdytTreenitContainer>
-            </TehdytTreenitContainer>
+            <Text medium fontFamily="MontserratRegular" left>
+              {descToistot}
+            </Text>
+            <Text marginTop="10px" medium left>
+              Painot
+            </Text>
+            <Text medium fontFamily="MontserratRegular" left>
+              {descPainot}
+            </Text>
+            <Text marginTop="10px" medium left>
+              Lisätiedot
+            </Text>
+            <Text medium fontFamily="MontserratRegular" left>
+              {descLisatiedot}
+            </Text>
           </>
         );
       })}
@@ -170,30 +164,36 @@ export default function AgendaComponent() {
   );
 
   return (
-    <Agenda
-      renderEmptyData={() => (
-        <Text fontFamily="MontserratRegular" large center>
-          No Data
-        </Text>
-      )}
-      onDayPress={getData}
-      theme={{
-        calendarBackground: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-        agendaDayTextColor: '#054dd9',
-        agendaDayNumColor: '#054dd9',
-        agendaTodayColor: '#054dd9',
-        agendaKnobColor: '#054dd9',
-        textSectionTitleColor: themeColor,
-        dayTextColor: themeColor,
-        monthTextColor: themeColor,
-        textDayFontFamily: 'MontserratRegular',
-        textMonthFontFamily: 'MontserratRegular',
-        textDayHeaderFontFamily: 'MontserratRegular',
-        minDate: '2021-05-01',
+    <View
+      style={{
+        flex: 1,
       }}
-      items={calendarItems}
-      renderItem={renderItem}
-    />
+    >
+      <Agenda
+        renderEmptyData={() => (
+          <Text fontFamily="MontserratRegular" large center>
+            No Data
+          </Text>
+        )}
+        onDayPress={getData}
+        theme={{
+          calendarBackground: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+          backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+          agendaDayTextColor: '#2301E4',
+          agendaDayNumColor: '#2301E4',
+          agendaTodayColor: '#2301E4',
+          agendaKnobColor: '#2301E4',
+          textSectionTitleColor: themeColor,
+          dayTextColor: themeColor,
+          monthTextColor: themeColor,
+          textDayFontFamily: 'MontserratRegular',
+          textMonthFontFamily: 'MontserratRegular',
+          textDayHeaderFontFamily: 'MontserratRegular',
+          minDate: '2021-05-01',
+        }}
+        items={calendarItems}
+        renderItem={renderItem}
+      />
+    </View>
   );
 }

@@ -6,36 +6,60 @@ import 'moment/locale/fi';
 import AgendaComponent from '../components/Agenda';
 import HeaderComponent from '../components/HeaderComponent';
 import Text from '../components/Text';
-import { Container } from '../utils/Styling';
+import * as firebase from 'firebase';
+import {
+  TehdytMainContainer,
+  TehdytTreenitContainer,
+  TehdytTreenitBoxContainer,
+} from '../utils/Styling';
 
 const wait = (timeout) => new Promise((resolve) => setTimeout(resolve, timeout));
 
 const TehdytTreenit = () => {
-  const [refreshing, setRefreshing] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [refreshed, setRefreshed] = useState(false);
+  const [dataLength, setDataLength] = useState('');
 
+  useEffect(() => {
+    const db = firebase.firestore();
+    const { currentUser } = firebase.auth();
+
+    db.collection('users')
+      .doc(currentUser.uid)
+      .collection('treenidata')
+      .get()
+
+      .then((snapshot) => {
+        setDataLength(snapshot.size);
+      });
+  }, []);
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
 
   return (
-    <Container
-      style={{
-        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-      }}
+    <TehdytMainContainer
+      style={{ backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5' }}
     >
-      <HeaderContainer>
-        <HeaderComponent leftComponent={{ text: <Text medium>MINÄ</Text> }} />
-      </HeaderContainer>
-
+      <HeaderComponent
+        leftComponent={
+          <Text style={{ color: 'white' }} medium>
+            MINÄ
+          </Text>
+        }
+        containerStyle={{ backgroundColor: '#2301E4', borderBottomWidth: 'none' }}
+      />
+      <TehdytTreenitContainer />
+      <TehdytTreenitBoxContainer
+        style={{ backgroundColor: colorScheme === 'dark' ? '#0F0F0F' : '#fff' }}
+      >
+        <Text fontFamily="MontserratRegular" medium center>
+          TREENIT
+        </Text>
+        <Text style={{ color: '#054dd9' }} large>
+          {dataLength}
+        </Text>
+      </TehdytTreenitBoxContainer>
       <AgendaComponent />
-      {/*  {! refreshed && <LottieAnimationMain />}
-                {loading ? ( <Loading size="large" /> 
-                ) : ( */}
-    </Container>
+    </TehdytMainContainer>
   );
 };
-
-const HeaderContainer = styled.View``;
 
 export default TehdytTreenit;

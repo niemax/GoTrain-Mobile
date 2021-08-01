@@ -3,16 +3,32 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   flex: 1;
 `;
-export const TehdytTreenitContainer = styled.View`
-  flex-direction: column;
+export const TehdytMainContainer = styled.View`
+  background-color: grey;
+  flex: 1;
 `;
+export const TehdytTreenitBoxContainer = styled.View`
+  height: 100px;
+  justify-content: center;
+  width: 80%;
+  margin-left: 40px;
+  position: relative;
+  border-radius: 25px;
+  bottom: 25;
+`;
+export const TehdytTreenitContainer = styled.View`
+  background-color: #2301e4;
+  border-bottom-left-radius: 30px;
+  flex: 0.1;
+`;
+export const AgendaContainer = styled.View``;
 export const SignupContainer = styled.View`
   flex: 1;
 `;
 
 export const Footer = styled.View`
   flex: 2;
-  background-color: #054dd9;
+  background-color: #2301e4;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   padding: 10px;
@@ -42,7 +58,7 @@ export const AloitaButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  background-color: #054dd9;
+  background-color: #2301e4;
 `;
 
 export const FloatingActionButton = styled.TouchableOpacity`
@@ -51,8 +67,7 @@ export const FloatingActionButton = styled.TouchableOpacity`
   height: 65px;
   justify-content: center;
   border-radius: 60px;
-
-  background-color: #054dd9;
+  background-color: #2301e4;
 `;
 
 export const ButtonContainer = styled.View`
@@ -82,7 +97,7 @@ export const SplashScreenContainer = styled.View`
   justify-content: center;
   align-items: center;
   flex: 1;
-  background-color: #054dd9;
+  background-color: #2301e4;
 `;
 
 export const SplashAdditionalContainer = styled.View``;
@@ -217,16 +232,12 @@ export const Auth = styled.View`
 
 export const AuthContainer = styled.View``;
 
-// welcome back
-
 export const HeaderGraphic = styled.View`
   position: absolute;
   width: 100%;
   top: -50px;
   z-index: -100;
 `;
-
-// sign up // sign in button
 
 export const SignUp = styled.TouchableOpacity`
   margin-bottom: 30px;

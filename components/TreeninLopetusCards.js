@@ -24,7 +24,7 @@ export default function TreeninLopetusCards({ data }) {
         <Text style={{ fontFamily: 'MontserratSemiBold', color: themeColor }} medium>
           TREENIT{' '}
         </Text>
-        <Text style={{ fontFamily: 'MontserratSemiBold', color: '#054dd9' }} title color="#054dd9">
+        <Text style={{ fontFamily: 'MontserratSemiBold', color: '#2301E4' }} title color="#054dd9">
           {Object.keys(data).length}
         </Text>
       </Card>
@@ -41,7 +41,7 @@ export default function TreeninLopetusCards({ data }) {
         <Text style={{ fontFamily: 'MontserratSemiBold', color: themeColor }} medium>
           SUORITUS %{' '}
         </Text>
-        <Text style={{ fontFamily: 'MontserratSemiBold', color: '#054dd9' }} title color="#054dd9">
+        <Text style={{ fontFamily: 'MontserratSemiBold', color: '#2301E4' }} title color="#054dd9">
           100
         </Text>
       </Card>
@@ -58,11 +58,7 @@ export default function TreeninLopetusCards({ data }) {
         <Text style={{ fontFamily: 'MontserratSemiBold', color: themeColor }} medium>
           Oliko treeni mieluisa?{' '}
         </Text>
-        <Text
-          style={{ fontFamily: 'MontserratSemiBold', color: themeColor }}
-          marginTop="10px"
-          small
-        >
+        <Text style={{ fontFamily: 'MontserratRegular', color: themeColor }} marginTop="10px" small>
           Annathan palautetta, jotta voin kehittää treenitarjontaa
         </Text>
         <PalauteButtonContainer>

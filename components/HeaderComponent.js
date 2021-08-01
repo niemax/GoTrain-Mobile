@@ -20,9 +20,7 @@ const HeaderComponent = (props) => {
 
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
-  const icon = (
-    <Feather name="log-out" size={24} color={colorScheme === 'dark' ? 'white' : 'black'} />
-  );
+  const icon = <Feather name="log-out" size={24} color="white" />;
 
   async function getWeatherData(lati, longi) {
     const API = `https://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${longi}&units=metric&appid=909c3e2e0f9c07b670efd67b1b90752f`;
@@ -73,17 +71,11 @@ const HeaderComponent = (props) => {
 
   return (
     <Header
-      containerStyle={{
-        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-        borderBottomWidth: 0,
-        marginBottom: 25,
-      }}
-      elevated="true"
       rightComponent={<ProfileIcon onPress={handleLogOut}>{icon}</ProfileIcon>}
       centerComponent={
         !weatherLoading ? (
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-            <Text medium center>
+            <Text style={{ color: 'white' }} medium center>
               {' '}
               {temp}
               {'\u00b0'}

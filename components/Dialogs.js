@@ -1,12 +1,12 @@
-import React, { useRef, useState, useCallback, useMemo } from 'react';
+import React, { useRef, useState, createRef } from 'react';
 import { Alert, Button, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { Feather, Entypo } from '@expo/vector-icons';
 import Dialog from 'react-native-dialog';
 import { FloatingActionButton } from '../utils/Styling';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Text from './Text';
 import { ListItem } from 'react-native-elements';
-import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import ActionSheet from 'react-native-actions-sheet';
 
 export default function Dialogs({
   visible,
@@ -23,26 +23,35 @@ export default function Dialogs({
   setToistotPainotData,
   sarjatLength,
 }) {
-  const [done, setDone] = useState(done);
-  const lisaaIcon = <Feather name="edit-2" size={26} style={{ marginLeft: 180 }} />;
-  const fabIcon = <Feather name="edit-2" size={26} color="white" />;
-
-  const notDoneIcon = (
-    <Feather name="x" size={26} color="red" style={{ marginLeft: 45 }} ref={listItemRef} />
-  );
-
-  const doneIcon = (
-    <Feather name="check-circle" size={26} color="green" style={{ marginLeft: 50 }} />
-  );
+  const [currentItem, setCurrentItem] = useState([]);
+  const actionSheetRef = useRef(null);
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
-  const bottomSheetModalRef = useRef(null);
 
-  const snapPoints = useMemo(() => ['25%', '40%'], []);
-  const listItemRef = useRef(0);
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
+  const lisaaIcon = (
+    <Entypo
+      name="edit"
+      size={26}
+      color={colorScheme === 'dark' ? '#fff' : '#000'}
+      style={{ position: 'relative', left: 200 }}
+    />
+  );
+  const fabIcon = <Entypo name="edit" size={26} color="white" />;
+  const notDoneIcon = (
+    <Feather name="x" size={26} color="red" style={{ position: 'relative', left: 230 }} />
+  );
+  const doneIcon = (
+    <Feather
+      name="check-circle"
+      size={26}
+      color="green"
+      style={{ position: 'relative', left: 230 }}
+    />
+  );
+
+  const handlePresentModalPress = () => {
+    actionSheetRef.current.setModalVisible();
+  };
 
   const handleToistotPainotData = () => {
     const newArr = [...toistotPainotData];
@@ -62,112 +71,93 @@ export default function Dialogs({
     }
     setToistotPainotData(newArr);
     setToisto(''), setPaino(''), setVisible(false);
-    setDone(!done);
-    refs();
   };
-  const refs = () => {
-    const r = listItemRef.current;
-    console.log(r);
+
+  const handlePress = (_, idx) => {
+    setVisible(true);
+    const currentItemArr = [...currentItem];
+    setCurrentItem([idx, ...currentItemArr]);
+    console.log(currentItemArr);
+  };
+
+  const renderIcon = (idx) => {
+    let icon;
+    if (!currentItem.includes(idx)) {
+      icon = notDoneIcon;
+    } else {
+      icon = doneIcon;
+    }
+    return icon;
   };
 
   return (
-    <>
-      <BottomSheetModalProvider>
-        <View style={styles.container}>
-          <FloatingActionButton
-            style={{
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 6,
-              },
-              shadowOpacity: 0.37,
-              shadowRadius: 7.49,
+    <View style={styles.container}>
+      <FloatingActionButton
+        style={{
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 6,
+          },
+          shadowOpacity: 0.37,
+          shadowRadius: 7.49,
 
-              elevation: 12,
-            }}
-            onPress={handlePresentModalPress}
-          >
-            <Text>{fabIcon}</Text>
-          </FloatingActionButton>
+          elevation: 12,
+        }}
+        onPress={handlePresentModalPress}
+      >
+        <Text>{fabIcon}</Text>
+      </FloatingActionButton>
 
-          <BottomSheetModal
-            style={{
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 8,
-              },
-              shadowOpacity: 0.46,
-              shadowRadius: 11.14,
+      <ActionSheet ref={actionSheetRef}>
+        {Array.from(Array(parseInt(sarjatLength))).map((i, idx) => (
+          <TouchableOpacity onPress={() => handlePress(i, idx)}>
+            <ListItem
+              containerStyle={{ backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5' }}
+              key={i}
+              bottomDivider
+            >
+              <ListItem.Content>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    padding: 10,
+                  }}
+                >
+                  <Text style={{ color: colorScheme === 'dark' ? 'white' : 'black' }} medium>
+                    Sarja {idx + 1}
+                  </Text>
 
-              elevation: 17,
-            }}
-            enableOverDrag={true}
-            ref={bottomSheetModalRef}
-            index={1}
-            snapPoints={snapPoints}
-          >
-            <View style={{ flex: 1 }}>
-              <Text style={{ color: 'black' }} large>
-                Syötä Tiedot
-              </Text>
-            </View>
-            <View style={styles.contentContainer}>
-              {Array.from(Array(parseInt(sarjatLength))).map((i, idx) => (
-                <TouchableOpacity onPress={() => setVisible(true)}>
-                  <ListItem key={i} bottomDivider>
-                    <ListItem.Content>
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                        }}
-                      >
-                        <Text style={{ color: 'black' }} marginTop="25px" medium>
-                          Sarja {idx + 1}
-                        </Text>
-                        {lisaaIcon}
-                        {done ? doneIcon : notDoneIcon}
-                      </View>
-                    </ListItem.Content>
-                  </ListItem>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </BottomSheetModal>
-        </View>
-      </BottomSheetModalProvider>
+                  {lisaaIcon}
+                  {renderIcon(idx)}
+                </View>
+              </ListItem.Content>
+            </ListItem>
+          </TouchableOpacity>
+        ))}
 
-      <Dialog.Container visible={visible}>
-        <Dialog.Title>Lisää sarjan tiedot</Dialog.Title>
-        <Text medium center marginBottom="10px">
-          Toistot
-        </Text>
-        <Dialog.Input keyboardType="numeric" onChangeText={(text) => setToisto(text)} />
-        <Text medium center marginBottom="10px">
-          Painot(kg)
-        </Text>
-        <Dialog.Input keyboardType="numeric" onChangeText={(text) => setPaino(text)} />
-        <Text medium center marginBottom="10px">
-          Lisätiedot
-        </Text>
-        <Dialog.Input multiline numberOfLines={5} onChangeText={(text) => setLisatieto(text)} />
+        <Dialog.Container visible={visible}>
+          <Dialog.Title>Lisää sarjan tiedot</Dialog.Title>
+          <Text medium center marginBottom="10px">
+            Toistot
+          </Text>
+          <Dialog.Input keyboardType="numeric" onChangeText={(text) => setToisto(text)} />
+          <Text medium center marginBottom="10px">
+            Painot(kg)
+          </Text>
+          <Dialog.Input keyboardType="numeric" onChangeText={(text) => setPaino(text)} />
+          <Text medium center marginBottom="10px">
+            Lisätiedot
+          </Text>
+          <Dialog.Input multiline numberOfLines={5} onChangeText={(text) => setLisatieto(text)} />
 
-        <Dialog.Button label="Lisää" onPress={handleToistotPainotData} />
-        <Dialog.Button label="Peruuta" onPress={() => setVisible(false)} />
-      </Dialog.Container>
-    </>
+          <Dialog.Button label="Lisää" onPress={handleToistotPainotData} />
+          <Dialog.Button label="Peruuta" onPress={() => setVisible(false)} />
+        </Dialog.Container>
+      </ActionSheet>
+    </View>
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    alignItems: 'flex-end',
-  },
-  contentContainer: {
-    flex: 8,
-    padding: 10,
-  },
+  container: { flex: 1, alignItems: 'flex-end', padding: 24 },
 });

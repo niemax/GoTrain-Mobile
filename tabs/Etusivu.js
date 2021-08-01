@@ -53,7 +53,14 @@ const Etusivu = () => {
       }}
     >
       <HeaderContainer>
-        <HeaderComponent leftComponent={{ text: <Text medium>KOTI</Text> }} />
+        <HeaderComponent
+          containerStyle={{
+            backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+            borderBottomWidth: 0,
+            marginBottom: 25,
+          }}
+          leftComponent={{ text: <Text medium>KOTI</Text> }}
+        />
       </HeaderContainer>
       <TextContainer>
         <Text fontFamily="MontserratRegular" marginLeft="25px" marginBottom="25px" medium left>
