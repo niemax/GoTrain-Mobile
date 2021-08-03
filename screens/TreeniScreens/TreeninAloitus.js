@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Dimensions, ScrollView } from 'react-native';
-import styled from 'styled-components/native';
 import Carousel from 'react-native-snap-carousel';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { Ionicons, Feather } from '@expo/vector-icons';
@@ -16,14 +15,13 @@ import Text from '../../components/Text';
 import * as Haptics from 'expo-haptics';
 import LinearGradientButton from '../../components/LinearGradientButton';
 import {
-  VideoContainer,
+  IconTouchable2,
   UtilsContainer,
   AloitusRenderContainer,
   AloitusButtonContainer,
   ExtraContainer,
   PreviousButton,
   NextButton,
-  DoneButton,
   LoadingView,
   SeuraavaksiContainer,
 } from '../../utils/Styling';
@@ -118,9 +116,9 @@ const AloitaTreeni = ({ route, navigation }) => {
         >
           <ScrollView>
             <ExtraContainer>
-              <IconTouchable onPress={() => navigation.goBack()} left marginLeft="15px">
+              <IconTouchable2 onPress={() => navigation.goBack()} left marginLeft="15px">
                 <Ionicons name="return-up-back-outline" size={28} color={colorIcon} />
-              </IconTouchable>
+              </IconTouchable2>
               <Text medium marginRight="15px">
                 <Text medium>TEHTY</Text> {doneCount} / {treeniData.length}
               </Text>
@@ -155,7 +153,7 @@ const AloitaTreeni = ({ route, navigation }) => {
 
                 <TouchableOpacity onPress={() => setProgress(item, index)}>
                   <LinearGradientButton>
-                    <Feather name="check-circle" size={80} color={btnColor} />
+                    <Feather name="check-circle" color={btnColor} size={80} />
                   </LinearGradientButton>
                 </TouchableOpacity>
                 {index < treenitLength - 1 && (
@@ -232,7 +230,3 @@ const AloitaTreeni = ({ route, navigation }) => {
 };
 
 export default AloitaTreeni;
-
-export const IconTouchable = styled.TouchableOpacity`
-  margin-left: 10px;
-`;

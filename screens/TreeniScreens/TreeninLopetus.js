@@ -67,14 +67,8 @@ const LopetaTreeni = ({ data, treeni }) => {
       }}
     >
       <LottieAnimationCongratulations />
-      <Text
-        fontFamily="MontserratSemiBold"
-        style={{ color: themeColor }}
-        marginTop="20px"
-        large
-        medium
-      >
-        {treeni.toUpperCase()} SUORITETTU
+      <Text fontFamily="MontserratBold" style={{ color: themeColor }} marginTop="20px" large medium>
+        {treeni.toUpperCase()} SUORITETTU!
       </Text>
       <TreeninLopetusCards data={data} />
       {shoot ? (

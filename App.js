@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as firebase from 'firebase';
@@ -17,7 +17,6 @@ export default AppContainer = () => {
 
   return (
     <AppearanceProvider>
-      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
       <App />
     </AppearanceProvider>
   );

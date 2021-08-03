@@ -10,7 +10,7 @@ export default function LinearGradientButton() {
       colors={['#2301E4', '#054dd9']}
       style={styles.background}
     >
-      <Feather name="check" size={44} color="white" />
+      <Feather name="check" size={46} color="white" />
     </LinearGradient>
   );
 }
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     elevation: 8,
     width: 75,
     height: 75,
-    borderRadius: 36,
+    borderRadius: 38,
     justifyContent: 'center',
     alignItems: 'center',
   },

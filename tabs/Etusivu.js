@@ -57,7 +57,6 @@ const Etusivu = () => {
           containerStyle={{
             backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
             borderBottomWidth: 0,
-            marginBottom: 25,
           }}
           leftComponent={{ text: <Text medium>KOTI</Text> }}
         />

@@ -67,11 +67,11 @@ export default function TreeninEsittely({ route, navigation }) {
       <Image style={styles.image} source={{ uri: `${API}/api/${image}`, cache: 'default' }} />
       <View style={{ flexDirection: 'row', position: 'absolute', top: 35 }}>
         <IconTouchable onPress={() => navigation.goBack()}>
-          <Feather name="arrow-left-circle" size={38} color="white" />
+          <Feather name="chevron-left" size={32} color="white" />
         </IconTouchable>
-        <IconTouchable onPress={() => showToast()}>
-          <Feather name="heart" size={38} color="white" style={{ marginLeft: 300 }} />
-        </IconTouchable>
+        {/*         <IconTouchable onPress={() => showToast()}>
+          <Feather name="heart" size={32} color="white" style={{ marginLeft: 300 }} />
+        </IconTouchable> */}
       </View>
 
       {!isLoading ? (

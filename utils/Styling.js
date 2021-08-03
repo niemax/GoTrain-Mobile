@@ -8,19 +8,21 @@ export const TehdytMainContainer = styled.View`
   flex: 1;
 `;
 export const TehdytTreenitBoxContainer = styled.View`
-  height: 100px;
-  justify-content: center;
-  width: 80%;
-  margin-left: 40px;
-  position: relative;
+  height: 90px;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 90%;
+  margin-left: 20px;
   border-radius: 25px;
-  bottom: 25;
+  bottom: 40px;
+  flex-direction: row;
 `;
 export const TehdytTreenitContainer = styled.View`
   background-color: #2301e4;
   border-bottom-left-radius: 30px;
-  flex: 0.1;
+  height: 50px;
 `;
+
 export const AgendaContainer = styled.View``;
 export const SignupContainer = styled.View`
   flex: 1;
@@ -41,7 +43,7 @@ export const ContentLoaderView = styled.View`
   flex: 1;
   margin-left: 4px;
 `;
-
+export const AgendaView = styled.View``;
 export const RenderContainer = styled.View`
   flex: 1;
   background-color: #141314;
@@ -81,18 +83,31 @@ export const SignupButtonContainer = styled.View`
   margin-top: 30px;
 `;
 //#947AFF
-export const IconTouchable = styled.TouchableOpacity``;
-
+export const IconTouchable = styled.TouchableOpacity`
+  background-color: grey;
+  opacity: 0.5;
+  height: 35px;
+  margin-left: 5px;
+  width: 35px;
+  justify-content: center;
+  border-radius: 25px;
+`;
+export const IconTouchable2 = styled.TouchableOpacity`
+  margin-left: 10px;
+`;
+export const ProfileIcon = styled.TouchableOpacity`
+  margin-top: 5px;
+`;
 export const PalauteIcon = styled.TouchableOpacity``;
 
 export const ModalContainer = styled.View``;
 
 export const LottieContainer = styled.View`
+  margin-top: 30px;
   justify-content: center;
   align-items: center;
   flex: 1;
 `;
-
 export const SplashScreenContainer = styled.View`
   justify-content: center;
   align-items: center;
@@ -117,8 +132,6 @@ export const AloitusRenderContainer = styled.View`
   background-color: #141314;
 `;
 export const TreeninAloitusLoadingContainer = styled.View`
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 export const DialogContainer = styled.View`
@@ -197,20 +210,6 @@ export const BackgroundContainer = styled.View`
   border-radius: 30px;
   align-items: center;
   justify-content: center;
-`;
-
-export const LopetaButton = styled.TouchableOpacity`
-  margin-bottom: 30px;
-  margin-left: 35px;
-  width: 80%;
-  height: 48px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 30px;
-  shadow-color: 'rgba(0,0,0, .4)';
-  shadow-opacity: 0.5;
-  background-color: ${(props) => props.color ?? '#054dd9'};
-  flex-direction: row;
 `;
 
 export const PalauteButtonContainer = styled.View`

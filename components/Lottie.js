@@ -35,8 +35,6 @@ export const LottieAnimationMain = () => {
 export const LottieLoading = () => {
   const animation = useRef(null);
 
-  const [count, setCount] = useState(5);
-
   useEffect(() => {
     animation.current.play();
   }, []);
@@ -47,15 +45,12 @@ export const LottieLoading = () => {
 };
 
 export const LottieLoadingAloitus = () => {
-  const animation = useRef(null);
-
   const [count, setCount] = useState(5);
 
   useEffect(() => {
     setInterval(() => {
       setCount((c) => c - 1);
     }, 1000);
-    animation.current.play();
 
     return () => {
       clearInterval();
@@ -67,7 +62,6 @@ export const LottieLoadingAloitus = () => {
       <Text marginBottom="220px" large style={{ color: '#fff' }}>
         Treenisi alkaa {count} sekunnin päästä. Tsemppiä treeniin!
       </Text>
-      <LottieView ref={animation} source={require('../assets/json/16404-loading-dialogue.json')} />
     </TreeninAloitusLoadingContainer>
   );
 };
@@ -83,4 +77,14 @@ export const LottieSignup = () => {
       <LottieView ref={animation} source={require('../assets/json/60820-bicycle-riding.json')} />
     </LottieContainer>
   );
+};
+
+export const LottieAgenda = () => {
+  const animation = useRef(null);
+
+  useEffect(() => {
+    animation.current.play();
+  }, []);
+
+  return <LottieView ref={animation} source={require('../assets/json/24454-404.json')} />;
 };
