@@ -6,6 +6,7 @@ import * as firebase from 'firebase';
 import { Agenda, LocaleConfig } from 'react-native-calendars';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import { LottieAgenda } from './Lottie';
+import { ActivityIndicator } from 'react-native-paper';
 
 LocaleConfig.locales.fi = {
   monthNames: [
@@ -52,13 +53,14 @@ LocaleConfig.defaultLocale = 'fi';
 
 export default function AgendaComponent() {
   const [calendarItems, setCalendarItems] = useState({});
-  const [calendarToggled, setCalendarToggled] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
   const themeColor = colorScheme === 'dark' ? 'white' : 'black';
 
-  const getData = () => {
+  const getData = async () => {
+    setLoading(true);
     const db = firebase.firestore();
     const { currentUser } = firebase.auth();
 
@@ -89,76 +91,88 @@ export default function AgendaComponent() {
 
         setCalendarItems(reduced);
       });
+    setInterval(() => {
+      setLoading(false);
+    }, 1000);
   };
 
   useEffect(() => {
     getData();
   }, []);
 
-  const renderItem = (item, index) => (
-    <View style={{ flex: 1 }} key={index}>
-      <Text
-        fontFamily="MontserratRegular"
-        style={{ color: colorScheme === 'dark' ? 'white' : 'black' }}
-        large
-        left
-        marginTop="35px"
-        marginBottom="15px"
-      >
-        {item.treeni}
-      </Text>
+  const renderItem = (item, index) => {
+    if (loading) return <ActivityIndicator size="small" style={{ marginTop: 100 }} />;
+    return (
+      <View>
+        <Text
+          fontFamily="MontserratRegular"
+          style={{ color: colorScheme === 'dark' ? 'white' : 'black' }}
+          large
+          left
+          marginTop="35px"
+          marginBottom="15px"
+        >
+          {item.treeni}
+        </Text>
 
-      {Object.values(item.treeniData).map((treeni) => {
-        const descSarjat = (
-          <Text left medium>
-            Sarjat: {treeni.sarjat}
-          </Text>
-        );
-        let descToistot = '';
-        let descPainot = '';
-        let descLisatiedot = '';
+        {Object.values(item.treeniData).map((treeni) => {
+          const descSarjat = (
+            <Text fontFamily="MontserratRegular" marginTop="10px" left medium>
+              Sarjat: {treeni.sarjat}
+            </Text>
+          );
+          let descToistot = '';
+          let descPainot = '';
+          let descLisatiedot = '';
 
-        Object.values(treeni.suoritusStats).forEach((itm, i) => {
-          descToistot += `Sarja ${i + 1}: ${itm.toistot}\n`;
-          descPainot += `Sarja ${i + 1}: ${itm.painot}\n`;
-          descLisatiedot += `Sarja ${i + 1}: ${itm.lisatiedot}\n`;
-        });
+          Object.values(treeni.suoritusStats).forEach((itm, i) => {
+            descToistot += `Sarja ${i + 1}: ${itm.toistot}\n`;
+            descPainot += `Sarja ${i + 1}: ${itm.painot}kg\n`;
+            descLisatiedot += `Sarja ${i + 1}: ${itm.lisatiedot}\n`;
+          });
 
-        return (
-          <>
-            <Text marginBottom="15px" marginTop="25px" left large>
-              {treeni.nimi}
-            </Text>
-            <Text marginTop="10px" medium fontFamily="MontserratRegular" left>
-              {descSarjat}
-            </Text>
-            <Text marginTop="10px" medium left>
-              Toistot
-            </Text>
-            <Text medium fontFamily="MontserratRegular" left>
-              {descToistot}
-            </Text>
-            <Text marginTop="10px" medium left>
-              Painot
-            </Text>
-            <Text medium fontFamily="MontserratRegular" left>
-              {descPainot}
-            </Text>
-            <Text marginTop="10px" medium left>
-              Lisätiedot
-            </Text>
-            <Text medium fontFamily="MontserratRegular" left>
-              {descLisatiedot}
-            </Text>
-          </>
-        );
-      })}
-    </View>
-  );
+          return (
+            <View key={index}>
+              <Text
+                fontFamily="MontserratSemiBold"
+                marginBottom="15px"
+                marginTop="20px"
+                left
+                vinkkiTitle
+              >
+                {treeni.nimi}
+              </Text>
+              <Text marginTop="10px" medium fontFamily="MontserratRegular" left>
+                {descSarjat}
+              </Text>
+              <Text marginBottom="5px" marginTop="10px" fontFamily="MontserratRegular" medium left>
+                Toistot
+              </Text>
+              <Text medium fontFamily="MontserratRegular" left>
+                {descToistot}
+              </Text>
+              <Text marginBottom="5px" marginTop="10px" fontFamily="MontserratRegular" medium left>
+                Painot
+              </Text>
+              <Text medium fontFamily="MontserratRegular" left>
+                {descPainot}
+              </Text>
+              <Text marginBottom="5px" marginTop="10px" fontFamily="MontserratRegular" medium left>
+                Lisätiedot
+              </Text>
+              <Text medium fontFamily="MontserratRegular" left>
+                {descLisatiedot}
+              </Text>
+            </View>
+          );
+        })}
+      </View>
+    );
+  };
 
   return (
     <Agenda
-      renderEmptyDate={() => (
+      renderEmptyData={() => (
         <>
           <LottieAgenda />
           <Text marginTop="35px" fontFamily="MontserratSemiBold" vinkkiTitle center>
@@ -166,7 +180,6 @@ export default function AgendaComponent() {
           </Text>
         </>
       )}
-      onDayPress={getData}
       theme={{
         calendarBackground: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
@@ -182,6 +195,7 @@ export default function AgendaComponent() {
         textDayHeaderFontFamily: 'MontserratRegular',
         minDate: '2021-05-01',
       }}
+      firstDay={1}
       items={calendarItems}
       renderItem={renderItem}
     />

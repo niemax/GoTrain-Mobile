@@ -86,5 +86,7 @@ export const LottieAgenda = () => {
     animation.current.play();
   }, []);
 
-  return <LottieView ref={animation} source={require('../assets/json/24454-404.json')} />;
+  return (
+    <LottieView ref={animation} source={require('../assets/json/lf30_editor_53tpjpep.json')} />
+  );
 };

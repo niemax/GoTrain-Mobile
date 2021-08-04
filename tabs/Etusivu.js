@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import * as firebase from 'firebase';
 import styled from 'styled-components/native';
-import * as Location from 'expo-location';
 import moment from 'moment';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Text from '../components/Text';
