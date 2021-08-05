@@ -69,14 +69,14 @@ const TehdytTreenitStats = () => {
             {loading ? <ActivityIndicator style={{ marginTop: 8 }} size="small" /> : dataLength}
           </Text>
         </View>
-        <View style={{ borderLeftWidth: 0.3, borderLeftColor: 'grey', height: 50 }} />
+        <View style={{ borderLeftWidth: 0.4, borderLeftColor: 'grey', height: 45 }} />
         <View style={{ flexDirection: 'column', alignItems: 'center' }}>
           {loading ? null : <AntDesign name="heart" size={24} color="#F82F6B" />}
           <Text style={{ color: '#054dd9' }} medium>
             {loading ? <ActivityIndicator style={{ marginTop: 8 }} size="small" /> : favorite}
           </Text>
         </View>
-        <View style={{ borderLeftWidth: 1, borderLeftColor: 'grey', height: 50 }} />
+        <View style={{ borderRightWidth: 0.4, borderRightColor: 'grey', height: 45 }} />
         <View style={{ flexDirection: 'column' }}>
           <Text marginBottom="5px" fontFamily="MontserratRegular" medium>
             KA / VIIKKO

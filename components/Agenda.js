@@ -93,12 +93,12 @@ export default function AgendaComponent() {
       });
     setInterval(() => {
       setLoading(false);
-    }, 1000);
+    }, 2000);
   };
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [calendarItems]);
 
   const renderItem = (item, index) => {
     if (loading) return <ActivityIndicator size="small" style={{ marginTop: 100 }} />;
@@ -195,7 +195,7 @@ export default function AgendaComponent() {
         textDayHeaderFontFamily: 'MontserratRegular',
         minDate: '2021-05-01',
       }}
-      firstDay={1}
+      onDayPress={getData}
       items={calendarItems}
       renderItem={renderItem}
     />

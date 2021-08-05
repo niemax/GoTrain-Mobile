@@ -13,8 +13,8 @@ export const TehdytTreenitBoxContainer = styled.View`
   align-items: center;
   width: 90%;
   margin-left: 20px;
-  border-radius: 25px;
-  bottom: 40px;
+  border-radius: 20px;
+  bottom: 30px;
   flex-direction: row;
 `;
 export const TehdytTreenitContainer = styled.View`
