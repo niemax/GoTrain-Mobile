@@ -6,22 +6,17 @@ import * as firebase from 'firebase';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
-import { Appearance, AppearanceProvider, useColorScheme } from 'react-native-appearance';
+import { AppearanceProvider } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import configKeys from './config/Firebase';
 import MainAppStack from './navigation/MainAppNav';
 
-export default AppContainer = () => {
-  Appearance.getColorScheme();
-  const colorScheme = useColorScheme();
-
-  return (
-    <AppearanceProvider>
-      <StatusBar style="auto" />
-      <App />
-    </AppearanceProvider>
-  );
-};
+export default AppContainer = () => (
+  <AppearanceProvider>
+    <StatusBar style="auto" />
+    <App />
+  </AppearanceProvider>
+);
 
 const App = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -47,14 +42,12 @@ const App = () => {
 
   if (fontsLoaded) {
     return (
-      <>
-        <NavigationContainer>
-          <SafeAreaProvider>
-            <MainAppStack />
-            <Toast ref={(ref) => Toast.setRef(ref)} />
-          </SafeAreaProvider>
-        </NavigationContainer>
-      </>
+      <NavigationContainer>
+        <SafeAreaProvider>
+          <MainAppStack />
+          <Toast ref={(ref) => Toast.setRef(ref)} />
+        </SafeAreaProvider>
+      </NavigationContainer>
     );
   }
   return <AppLoading />;

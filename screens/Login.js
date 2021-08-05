@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView, KeyboardAvoidingView } from 'react-native';
 import * as firebase from 'firebase';
-
 import { Ionicons } from '@expo/vector-icons';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Text from '../components/Text';
@@ -80,8 +79,7 @@ const Login = ({ navigation }) => {
               autoCapitalize="none"
               autoCorrect={false}
               autoFocus={false}
-              value={email}
-              onChangeText={(email) => setEmail(email)}
+              onChangeText={(e) => setEmail(e)}
             />
 
             <Text
@@ -98,8 +96,7 @@ const Login = ({ navigation }) => {
               autoCorrect={false}
               autoFocus={false}
               secureTextEntry
-              value={password}
-              onChangeText={(password) => setPassword(password)}
+              onChangeText={(p) => setPassword(p)}
             />
           </Actions>
           <SignupButtonContainer>

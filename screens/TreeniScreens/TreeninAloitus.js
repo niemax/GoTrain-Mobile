@@ -43,7 +43,7 @@ const AloitaTreeni = ({ route, navigation }) => {
   const [open, setOpen] = useState(false);
 
   const carousel = useRef();
-  const { treeni } = route.params;
+  const { treeninNimi } = route.params;
 
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
@@ -51,7 +51,7 @@ const AloitaTreeni = ({ route, navigation }) => {
   useEffect(() => {
     try {
       axios
-        .get(`${API}/api/treenit/${treeni}`)
+        .get(`${API}/api/treenit/${treeninNimi}`)
         .then((response) => setTreeniData(response.data[0].liikkeet))
         .catch((err) => {
           console.log(err);
@@ -64,7 +64,7 @@ const AloitaTreeni = ({ route, navigation }) => {
     } catch (error) {
       console.error(error);
     }
-  }, [treeni]);
+  }, [treeninNimi]);
 
   const setProgress = (item, index) => {
     const treenit = { ...tehdytTreenit };

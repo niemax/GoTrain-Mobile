@@ -6,6 +6,7 @@ import { ListItem } from 'react-native-elements';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import { API } from '@env';
+import CachedImage from 'react-native-expo-cached-image';
 import axios from 'axios';
 import { LottieLoading } from '../../components/Lottie';
 import TreeninKuvausData from '../../components/TreeninKuvausData';
@@ -26,6 +27,7 @@ export default function TreeninEsittely({ route, navigation }) {
   const [kohderyhma, setKohderyhma] = useState('');
   const [treeniText, setTreeniText] = useState('');
   const [aloitaRoute, setAloitaRoute] = useState('');
+  const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   const colorScheme = useColorScheme();
@@ -39,13 +41,12 @@ export default function TreeninEsittely({ route, navigation }) {
       axios
         .get(`${API}/api/treenit/${treeninNimi}`)
         .then((response) => {
-          console.log(response.data);
+          console.log(response.data[0].name);
           setTreeniData(response.data[0].liikkeet);
           setTreeninKesto(response.data[0].kuvaus.treeninkesto);
           setKohderyhma(response.data[0].kuvaus.kohderyhma);
           setTreeniText(response.data[0].kuvaus.treenitext);
           setAloitaRoute(response.data[0].kuvaus.aloitaRoute);
-          //   console.log(response.data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -64,7 +65,7 @@ export default function TreeninEsittely({ route, navigation }) {
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
       }}
     >
-      <Image style={styles.image} source={{ uri: `${API}/api/${image}`, cache: 'default' }} />
+      <Image style={styles.image} source={{ uri: `${API}/api/${image}` }} />
       <View style={{ flexDirection: 'row', position: 'absolute', top: 35 }}>
         <IconTouchable onPress={() => navigation.goBack()}>
           <Feather name="chevron-left" size={32} color="white" />
@@ -142,7 +143,7 @@ export default function TreeninEsittely({ route, navigation }) {
           <AloitaButton
             onPress={() =>
               navigation.navigate('TreeninAloitus', {
-                treeni: treeninNimi,
+                treeninNimi: treeninNimi,
               })
             }
           >

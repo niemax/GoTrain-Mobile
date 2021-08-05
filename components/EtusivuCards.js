@@ -5,6 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { API } from '@env';
+import CachedImage from 'react-native-expo-cached-image';
 import { ContentLoaderView } from '../utils/Styling';
 import Skeleton from './Skeleton';
 import Text from './Text';
@@ -44,11 +45,12 @@ export default Cards = () => {
   return (
     <ContentLoaderView>
       <ScrollView>
-        {cardData.map(({ nimi, image, treeninkesto, navigationRoute }) => (
+        {cardData.map(({ nimi, image, treeninkesto }) => (
           <TouchableOpacity key={nimi}>
+            {/*   <CachedImage source={{ uri: `${API}/api/${image}` }} isBackground={true} /> */}
             <Tile
               onPress={() =>
-                navigation.navigate(navigationRoute, {
+                navigation.navigate('TreeninEsittely', {
                   treeninNimi: nimi,
                   image: image,
                 })

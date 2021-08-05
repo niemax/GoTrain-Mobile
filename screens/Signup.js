@@ -86,8 +86,7 @@ const Signup = ({ navigation }) => {
               autoCapitalize="none"
               autoCorrect={false}
               autoFocus={false}
-              value={name}
-              onChangeText={(name) => setName(name)}
+              onChangeText={(n) => setName(n)}
             />
 
             <Text
@@ -103,8 +102,7 @@ const Signup = ({ navigation }) => {
               autoCapitalize="none"
               autoCorrect={false}
               autoFocus={false}
-              value={email}
-              onChangeText={(email) => setEmail(email)}
+              onChangeText={(e) => setEmail(e)}
             />
 
             <Text
