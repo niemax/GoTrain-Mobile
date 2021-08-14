@@ -84,6 +84,11 @@ const AloitaTreeni = ({ route, navigation }) => {
         type: 'success',
         visibilityTime: 1000,
       });
+      if (index < treeniData.length - 1) {
+        setTimeout(() => {
+          carousel.current.snapToNext();
+        }, 1000);
+      }
     } else {
       delete treenit[item.nimi];
       setDoneCount((count) => count - 1);
@@ -94,17 +99,18 @@ const AloitaTreeni = ({ route, navigation }) => {
         visibilityTime: 1500,
       });
     }
-    setToistotPainotData('');
     setTehdytTreenit(treenit);
+    setToistotPainotData('');
     setPbProgress(Object.keys(treenit).length / treeniData.length);
-    console.log('treenit', treenit, Object.keys(treenit).length);
   };
 
   const renderItem = ({ item, index }) => {
-    const btnColor = tehdytTreenit.hasOwnProperty(item.nimi) ? 'green' : 'white';
     const treenitLength = Object.keys(treeniData).length;
     const colorIcon = colorScheme === 'dark' ? 'white' : 'black';
     const nextValue = treeniData[(index + 1) % treeniData.length].nimi;
+    const ifDoneBtnColor = !tehdytTreenit.hasOwnProperty(item.nimi)
+      ? ['#2301E4', '#054dd9']
+      : ['#00FFBA', '#78E7C7'];
 
     if (!isLoading) {
       return (
@@ -128,7 +134,7 @@ const AloitaTreeni = ({ route, navigation }) => {
             <Progress.Bar
               progress={pbProgress}
               width={null}
-              height={6}
+              height={5}
               borderWidth={null}
               color="#2301E4"
             />
@@ -152,9 +158,7 @@ const AloitaTreeni = ({ route, navigation }) => {
                 )}
 
                 <TouchableOpacity onPress={() => setProgress(item, index)}>
-                  <LinearGradientButton>
-                    <Feather name="check-circle" color={btnColor} size={80} />
-                  </LinearGradientButton>
+                  <LinearGradientButton colors={ifDoneBtnColor} />
                 </TouchableOpacity>
                 {index < treenitLength - 1 && (
                   <NextButton
@@ -212,7 +216,7 @@ const AloitaTreeni = ({ route, navigation }) => {
   };
 
   if (pbProgress >= 1) {
-    return <LopetaTreeni treeni={treeni} data={tehdytTreenit} />;
+    return <LopetaTreeni treeni={treeninNimi} data={tehdytTreenit} />;
   }
   return (
     <Carousel
@@ -225,6 +229,7 @@ const AloitaTreeni = ({ route, navigation }) => {
       scrollEnabled={false}
       inactiveSlideScale={1}
       inactiveSlideOpacity={1}
+      layout="tinder"
     />
   );
 };

@@ -4,7 +4,6 @@ export const Container = styled.View`
   flex: 1;
 `;
 export const TehdytMainContainer = styled.View`
-  background-color: grey;
   flex: 1;
 `;
 export const TehdytTreenitBoxContainer = styled.View`
@@ -14,13 +13,19 @@ export const TehdytTreenitBoxContainer = styled.View`
   width: 90%;
   margin-left: 20px;
   border-radius: 20px;
-  bottom: 30px;
   flex-direction: row;
 `;
 export const TehdytTreenitContainer = styled.View`
+  flex: 1;
   background-color: #2301e4;
   border-bottom-left-radius: 30px;
   height: 50px;
+`;
+
+export const LopetusCardsContainer = styled.View`
+  background-color: #2301e4;
+  border-bottom-left-radius: 30px;
+  height: 220px;
 `;
 
 export const AgendaContainer = styled.View``;

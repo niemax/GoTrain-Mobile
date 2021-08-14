@@ -25,10 +25,6 @@ const TreeninEsikatselu = ({ route, navigation }) => {
         <YoutubePlayer height={240} videoId={videoID} />
       </VideoContainer>
       <ScrollView>
-        <Text large left>
-          {' '}
-          {nimi}{' '}
-        </Text>
         <WarningContainer>
           {icon}
           <Text medium left>
@@ -41,14 +37,6 @@ const TreeninEsikatselu = ({ route, navigation }) => {
           </Text>
         </TextContainer>
       </ScrollView>
-
-      <SuljeContainer>
-        <AloitaButton onPress={() => navigation.goBack()}>
-          <Text style={{ color: '#fff' }} large>
-            Sulje
-          </Text>
-        </AloitaButton>
-      </SuljeContainer>
     </Container>
   );
 };

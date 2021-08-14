@@ -3,6 +3,7 @@ import Text from '../../components/Text';
 import ConfettiCannon from 'react-native-confetti-cannon';
 import { useNavigation } from '@react-navigation/native';
 import * as firebase from 'firebase';
+import { LopetusCardsContainer } from '../../utils/Styling';
 import moment from 'moment';
 import 'moment/locale/fi';
 import { Appearance, useColorScheme } from 'react-native-appearance';
@@ -66,7 +67,9 @@ const LopetaTreeni = ({ data, treeni }) => {
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
       }}
     >
-      <LottieAnimationCongratulations />
+      <LopetusCardsContainer>
+        <LottieAnimationCongratulations />
+      </LopetusCardsContainer>
       <Text fontFamily="MontserratBold" style={{ color: themeColor }} marginTop="20px" large medium>
         {treeni.toUpperCase()} SUORITETTU!
       </Text>

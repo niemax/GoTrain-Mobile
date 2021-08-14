@@ -5,6 +5,7 @@ import Dialog from 'react-native-dialog';
 import { FloatingActionButton } from '../utils/Styling';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Text from './Text';
+import * as Haptics from 'expo-haptics';
 import { ListItem } from 'react-native-elements';
 import ActionSheet from 'react-native-actions-sheet';
 
@@ -51,6 +52,7 @@ export default function Dialogs({
 
   const handlePresentModalPress = () => {
     actionSheetRef.current.setModalVisible();
+    Haptics.selectionAsync();
   };
 
   const handleToistotPainotData = () => {
@@ -70,14 +72,13 @@ export default function Dialogs({
       console.error(e);
     }
     setToistotPainotData(newArr);
-    setToisto(''), setPaino(''), setVisible(false);
+    setToisto(''), setPaino(''), setLisatieto(''), setVisible(false);
   };
 
   const handlePress = (_, idx) => {
     setVisible(true);
     const currentItemArr = [...currentItem];
     setCurrentItem([idx, ...currentItemArr]);
-    console.log(currentItemArr);
   };
 
   const renderIcon = (idx) => {

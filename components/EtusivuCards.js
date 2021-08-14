@@ -79,7 +79,7 @@ export default Cards = () => {
                   </Text>
                 </View>
               }
-              containerStyle={{ marginBottom: 5 }}
+              containerStyle={{ marginBottom: 5, justifyContent: 'center' }}
               height={150}
               imageContainerStyle={{
                 opacity: 0.9,

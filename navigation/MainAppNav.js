@@ -41,26 +41,38 @@ const MainAppStack = () => (
   </Stack.Navigator>
 );
 
-const KotiScreens = () => (
-  <Stack.Navigator initialRouteName="KotiTab">
-    <Stack.Screen name="KotiTab" options={{ headerShown: false }} component={KotiMainTab} />
-    <Stack.Screen
-      name="TreeninEsittely"
-      options={{ headerShown: false, gestureEnabled: false }}
-      component={TreeninEsittely}
-    />
-    <Stack.Screen
-      name="TreeninEsikatselu"
-      options={{ headerShown: false, gestureEnabled: false }}
-      component={TreeninEsikatselu}
-    />
-    <Stack.Screen
-      name="TreeninAloitus"
-      options={{ headerShown: false, gestureEnabled: false }}
-      component={TreeninAloitus}
-    />
-  </Stack.Navigator>
-);
+const KotiScreens = () => {
+  Appearance.getColorScheme();
+  const colorScheme = useColorScheme();
+
+  return (
+    <Stack.Navigator initialRouteName="KotiTab">
+      <Stack.Screen name="KotiTab" options={{ headerShown: false }} component={KotiMainTab} />
+      <Stack.Screen
+        name="TreeninEsittely"
+        options={{ headerShown: false, gestureEnabled: true }}
+        component={TreeninEsittely}
+      />
+      <Stack.Screen
+        name="TreeninEsikatselu"
+        options={({ route }) => ({
+          title: route.params.nimi,
+          headerStyle: {
+            backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+          },
+          headerBackTitle: 'Back',
+          headerTintColor: colorScheme === 'dark' ? 'white' : 'black',
+        })}
+        component={TreeninEsikatselu}
+      />
+      <Stack.Screen
+        name="TreeninAloitus"
+        options={{ headerShown: false, gestureEnabled: false }}
+        component={TreeninAloitus}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const Tab = createMaterialBottomTabNavigator();
 

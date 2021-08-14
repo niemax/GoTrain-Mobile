@@ -12,10 +12,7 @@ export const LottieAnimationCongratulations = () => {
 
   return (
     <LottieContainer>
-      <LottieView
-        ref={animation}
-        source={require('../assets/json/16729-congratulation-icon.json')}
-      />
+      <LottieView ref={animation} source={require('../assets/json/lf30_editor_x9dqgsjq.json')} />
     </LottieContainer>
   );
 };
@@ -29,18 +26,6 @@ export const LottieAnimationMain = () => {
 
   return (
     <LottieView ref={animation} source={require('../assets/json/60820-bicycle-riding.json')} />
-  );
-};
-
-export const LottieLoading = () => {
-  const animation = useRef(null);
-
-  useEffect(() => {
-    animation.current.play();
-  }, []);
-
-  return (
-    <LottieView ref={animation} source={require('../assets/json/16404-loading-dialogue.json')} />
   );
 };
 

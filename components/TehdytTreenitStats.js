@@ -5,7 +5,7 @@ import 'moment/locale/fi';
 import { AntDesign } from '@expo/vector-icons';
 import Text from '../components/Text';
 import * as firebase from 'firebase';
-import { TehdytTreenitContainer, TehdytTreenitBoxContainer } from '../utils/Styling';
+import { TehdytTreenitBoxContainer } from '../utils/Styling';
 
 const TehdytTreenitStats = () => {
   const [dataLength, setDataLength] = useState('');
@@ -13,9 +13,9 @@ const TehdytTreenitStats = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const db = firebase.firestore();
     const { currentUser } = firebase.auth();
-    setLoading(true);
     db.collection('users')
       .doc(currentUser.uid)
       .collection('treenidata')
@@ -28,16 +28,13 @@ const TehdytTreenitStats = () => {
           const { treeni } = item.data();
           arr.push(treeni);
         });
-        console.log(arr);
         const reduced = arr.reduce((acc, curr) =>
           arr.filter((item) => item === acc).length > arr.filter((item) => item === curr).length
             ? acc
             : curr
         );
         setFavorite(reduced);
-        setTimeout(() => {
-          setLoading(false);
-        }, 2500);
+        setLoading(false);
       }, {});
   }, []);
 
@@ -46,10 +43,9 @@ const TehdytTreenitStats = () => {
 
   return (
     <>
-      <TehdytTreenitContainer />
       <TehdytTreenitBoxContainer
         style={{
-          backgroundColor: colorScheme === 'dark' ? '#141414' : '#fff',
+          backgroundColor: '#2301e4',
           shadowColor: '#000',
           shadowOffset: {
             width: 0,
@@ -57,31 +53,32 @@ const TehdytTreenitStats = () => {
           },
           shadowOpacity: 0.2,
           shadowRadius: 1.41,
-
           elevation: 2,
+          marginTop: 5,
+          marginBottom: 3,
         }}
       >
         <View style={{ flexDirection: 'column' }}>
-          <Text marginBottom="5px" fontFamily="MontserratRegular" medium>
+          <Text style={{ color: 'white' }} marginBottom="5px" fontFamily="MontserratRegular" medium>
             TREENIT
           </Text>
-          <Text style={{ color: '#054dd9' }} medium>
+          <Text style={{ color: 'white' }} medium>
             {loading ? <ActivityIndicator style={{ marginTop: 8 }} size="small" /> : dataLength}
           </Text>
         </View>
         <View style={{ borderLeftWidth: 0.4, borderLeftColor: 'grey', height: 45 }} />
         <View style={{ flexDirection: 'column', alignItems: 'center' }}>
           {loading ? null : <AntDesign name="heart" size={24} color="#F82F6B" />}
-          <Text style={{ color: '#054dd9' }} medium>
+          <Text style={{ color: 'white' }} medium>
             {loading ? <ActivityIndicator style={{ marginTop: 8 }} size="small" /> : favorite}
           </Text>
         </View>
         <View style={{ borderRightWidth: 0.4, borderRightColor: 'grey', height: 45 }} />
         <View style={{ flexDirection: 'column' }}>
-          <Text marginBottom="5px" fontFamily="MontserratRegular" medium>
+          <Text style={{ color: 'white' }} marginBottom="5px" fontFamily="MontserratRegular" medium>
             KA / VIIKKO
           </Text>
-          <Text style={{ color: '#054dd9' }} medium>
+          <Text style={{ color: 'white' }} medium>
             {loading ? <ActivityIndicator style={{ marginTop: 8 }} size="small" /> : dataLength / 4}
           </Text>
         </View>

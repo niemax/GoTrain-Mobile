@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import * as firebase from 'firebase';
 import { Agenda, LocaleConfig } from 'react-native-calendars';
 import { Appearance, useColorScheme } from 'react-native-appearance';
+import { Ionicons } from '@expo/vector-icons';
 import { LottieAgenda } from './Lottie';
 import { ActivityIndicator } from 'react-native-paper';
 
@@ -91,81 +92,84 @@ export default function AgendaComponent() {
 
         setCalendarItems(reduced);
       });
-    setInterval(() => {
-      setLoading(false);
-    }, 2000);
+    setLoading(false);
   };
 
   useEffect(() => {
     getData();
-  }, [calendarItems]);
+  }, []);
 
   const renderItem = (item, index) => {
-    if (loading) return <ActivityIndicator size="small" style={{ marginTop: 100 }} />;
+    if (loading) return <ActivityIndicator size="large" style={{ marginTop: 100 }} />;
     return (
-      <View>
-        <Text
-          fontFamily="MontserratRegular"
-          style={{ color: colorScheme === 'dark' ? 'white' : 'black' }}
-          large
-          left
-          marginTop="35px"
-          marginBottom="15px"
-        >
-          {item.treeni}
-        </Text>
-
-        {Object.values(item.treeniData).map((treeni) => {
-          const descSarjat = (
-            <Text fontFamily="MontserratRegular" marginTop="10px" left medium>
-              Sarjat: {treeni.sarjat}
+      <View
+        style={{
+          backgroundColor: colorScheme === 'light' ? '#F9F8F5' : '#141314',
+          padding: 10,
+          margin: 5,
+          borderRadius: 20,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+          shadowOpacity: 0.18,
+          shadowRadius: 1.0,
+          elevation: 1,
+          marginTop: 30,
+        }}
+      >
+        <View style={{ flexDirection: 'row' }}>
+          <Ionicons
+            name="md-barbell-outline"
+            size={24}
+            style={{ marginRight: 10 }}
+            color={themeColor}
+          />
+          <Text
+            fontFamily="MontserratRegular"
+            style={{ color: colorScheme === 'dark' ? 'white' : 'black' }}
+            vinkkiTitle
+            left
+          >
+            {item.treeni}
+          </Text>
+        </View>
+        {Object.values(item.treeniData).map((treeni) => (
+          <View key={treeni.nimi}>
+            <Text left medium marginLeft="25px" marginTop="20px" marginBottom="10px">
+              {treeni.nimi}
             </Text>
-          );
-          let descToistot = '';
-          let descPainot = '';
-          let descLisatiedot = '';
 
-          Object.values(treeni.suoritusStats).forEach((itm, i) => {
-            descToistot += `Sarja ${i + 1}: ${itm.toistot}\n`;
-            descPainot += `Sarja ${i + 1}: ${itm.painot}kg\n`;
-            descLisatiedot += `Sarja ${i + 1}: ${itm.lisatiedot}\n`;
-          });
-
-          return (
-            <View key={index}>
-              <Text
-                fontFamily="MontserratSemiBold"
-                marginBottom="15px"
-                marginTop="20px"
-                left
-                vinkkiTitle
+            {Object.values(treeni.suoritusStats).map((itm, i) => (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                }}
               >
-                {treeni.nimi}
-              </Text>
-              <Text marginTop="10px" medium fontFamily="MontserratRegular" left>
-                {descSarjat}
-              </Text>
-              <Text marginBottom="5px" marginTop="10px" fontFamily="MontserratRegular" medium left>
-                Toistot
-              </Text>
-              <Text medium fontFamily="MontserratRegular" left>
-                {descToistot}
-              </Text>
-              <Text marginBottom="5px" marginTop="10px" fontFamily="MontserratRegular" medium left>
-                Painot
-              </Text>
-              <Text medium fontFamily="MontserratRegular" left>
-                {descPainot}
-              </Text>
-              <Text marginBottom="5px" marginTop="10px" fontFamily="MontserratRegular" medium left>
-                Lisätiedot
-              </Text>
-              <Text medium fontFamily="MontserratRegular" left>
-                {descLisatiedot}
-              </Text>
-            </View>
-          );
-        })}
+                <View>
+                  <Text style={{ color: 'grey' }}>Sarja</Text>
+                  <Text vinkit>{i + 1}</Text>
+                </View>
+                <View>
+                  <Text style={{ color: 'grey' }}>Toistot</Text>
+                  <Text vinkit>{itm.toistot}</Text>
+                </View>
+                <View>
+                  <Text style={{ color: 'grey' }}>Painot</Text>
+                  <Text vinkit>{itm.painot}</Text>
+                </View>
+                {/*                 <View style={{ marginTop: 5, marginLeft: 35 }}>
+                  <Text style={{ color: 'grey' }}>Huom</Text>
+                  <Text small>{itm.lisatiedot}</Text>
+                </View>
+  */}
+              </View>
+            ))}
+            <View style={{ margin: 20, borderWidth: 0.4, borderBottomColor: 'grey' }} />
+          </View>
+        ))}
       </View>
     );
   };
@@ -195,6 +199,7 @@ export default function AgendaComponent() {
         textDayHeaderFontFamily: 'MontserratRegular',
         minDate: '2021-05-01',
       }}
+      firstDay={1}
       onDayPress={getData}
       items={calendarItems}
       renderItem={renderItem}

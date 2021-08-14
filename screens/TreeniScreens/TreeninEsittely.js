@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Image, StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import styled from 'styled-components/native';
 import { Ionicons, Feather } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements';
@@ -93,6 +100,7 @@ export default function TreeninEsittely({ route, navigation }) {
                     nimi: nimi,
                     videoID: videoId,
                     ohjeet: ohjeet,
+                    title: nimi,
                   })
                 }
               >
@@ -135,7 +143,7 @@ export default function TreeninEsittely({ route, navigation }) {
           </ScrollView>
         </MainDataContainer>
       ) : (
-        <LottieLoading />
+        <ActivityIndicator style={{ marginTop: 200 }} size="large" />
       )}
 
       {!isLoading && (

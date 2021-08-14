@@ -1,24 +1,52 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { View, Dimensions } from 'react-native';
+import TehdytTreenitCalendar from '../components/TehdytCalendarView';
+import TehdytAdditional from '../components/TehdytAdditional';
+import TehdytHae from '../components/TehdytHae';
+import { Container } from '../utils/Styling';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import 'moment/locale/fi';
-import { Feather } from '@expo/vector-icons';
-import AgendaComponent from '../components/Agenda';
-import HeaderComponent from '../components/HeaderComponent';
-import Text from '../components/Text';
-import { loggingOut } from '../API/FirebaseMethods';
-import TehdytTreenitStats from '../components/TehdytTreenitStats';
-import { TehdytMainContainer } from '../utils/Styling';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
-const TehdytTreenit = () => {
-  const icon = <Feather name="log-out" size={24} color="white" />;
+const renderScene = SceneMap({
+  first: TehdytTreenitCalendar,
+  second: TehdytAdditional,
+  third: TehdytHae,
+});
 
-  Appearance.getColorScheme();
+Appearance.getColorScheme();
+
+export default function TehdytTreenit() {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'first', title: 'Kalenteri' },
+    { key: 'second', title: 'Tilastot' },
+    { key: 'third', title: 'Hae' },
+  ]);
   const colorScheme = useColorScheme();
 
+  const renderTabBar = (props) => (
+    <TabBar
+      activeColor={colorScheme === 'dark' ? '#fff' : '#000'}
+      inactiveColor={colorScheme === 'dark' ? '#fff' : '#000'}
+      {...props}
+      indicatorStyle={{ backgroundColor: '#2301E4' }}
+      style={{ backgroundColor: 'transparent', marginTop: 40, marginBottom: 20 }}
+    />
+  );
+
   return (
-    <TehdytMainContainer
-      style={{ backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5' }}
+    <Container style={{ backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5' }}>
+      <TabView
+        lazy
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        renderTabBar={renderTabBar}
+        onIndexChange={setIndex}
+        initialLayout={{ width: Dimensions.get('window').width }}
+      />
+    </Container>
+  );
+  /*   style={{ backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5' }}
     >
       <HeaderComponent
         rightComponent={<TouchableOpacity onPress={loggingOut}>{icon}</TouchableOpacity>}
@@ -33,8 +61,5 @@ const TehdytTreenit = () => {
 
       <TehdytTreenitStats />
       <AgendaComponent />
-    </TehdytMainContainer>
-  );
-};
-
-export default TehdytTreenit;
+    </TehdytMainContainer> */
+}

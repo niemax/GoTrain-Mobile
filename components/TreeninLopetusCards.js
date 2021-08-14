@@ -17,8 +17,8 @@ export default function TreeninLopetusCards({ data }) {
           elevation: 3,
           height: 100,
           width: '92%',
-          backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-          borderRadius: 15,
+          backgroundColor: colorScheme === 'dark' ? '#191919' : '#F9F8F5',
+          borderRadius: 20,
         }}
       >
         <Text style={{ fontFamily: 'MontserratBold', color: themeColor }} medium>
@@ -34,8 +34,8 @@ export default function TreeninLopetusCards({ data }) {
           elevation: 3,
           height: 100,
           width: '92%',
-          backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-          borderRadius: 15,
+          backgroundColor: colorScheme === 'dark' ? '#191919' : '#F9F8F5',
+          borderRadius: 20,
         }}
       >
         <Text style={{ fontFamily: 'MontserratBold', color: themeColor }} medium>
@@ -51,8 +51,8 @@ export default function TreeninLopetusCards({ data }) {
           elevation: 3,
           height: 200,
           width: '92%',
-          backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-          borderRadius: 15,
+          backgroundColor: colorScheme === 'dark' ? '#191919' : '#F9F8F5',
+          borderRadius: 20,
         }}
       >
         <Text style={{ fontFamily: 'MontserratBold', color: themeColor }} medium>
@@ -63,13 +63,13 @@ export default function TreeninLopetusCards({ data }) {
         </Text>
         <PalauteButtonContainer>
           <PalauteIcon>
-            <Ionicons name="ios-sad-outline" size={64} color="orange" />
+            <Ionicons name="ios-sad-outline" size={64} color="grey" />
           </PalauteIcon>
           <PalauteIcon>
-            <FontAwesome5 name="smile-beam" size={64} color="green" />
+            <FontAwesome5 name="smile-beam" size={64} color="grey" />
           </PalauteIcon>
           <PalauteIcon>
-            <Ionicons name="ios-sad-outline" size={64} color="red" />
+            <Ionicons name="ios-sad-outline" size={64} color="grey" />
           </PalauteIcon>
         </PalauteButtonContainer>
       </Card>
