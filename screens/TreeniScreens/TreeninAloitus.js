@@ -202,6 +202,8 @@ const AloitaTreeni = ({ route, navigation }) => {
               toistotPainotData={toistotPainotData}
               setToistotPainotData={setToistotPainotData}
               sarjatLength={item.sarjat}
+              video={item.videoId}
+              index={index}
             />
           </ScrollView>
         </AloitusRenderContainer>

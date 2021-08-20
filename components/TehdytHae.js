@@ -35,7 +35,6 @@ export default function TehdytHae() {
     db.collection('users')
       .doc(currentUser.uid)
       .collection('treenidata')
-      .orderBy('timestamp', 'desc')
       .get()
 
       .then((snapshot) => {

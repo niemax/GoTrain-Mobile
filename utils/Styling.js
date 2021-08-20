@@ -266,3 +266,32 @@ export const SignIn = styled.TouchableOpacity`
   shadow-opacity: 0.5;
   background-color: ${(props) => props.color ?? '#fff'};
 `;
+
+export const TaukoButton = styled.TouchableOpacity`
+  height: 50px;
+  width: 80px;
+  background-color: #e09d00;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+`;
+
+export const JatkaButton = styled.TouchableOpacity`
+  height: 50px;
+  width: 70px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: #34b700;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+`;
+
+export const LisaAikaButton = styled.TouchableOpacity`
+  height: 50px;
+  width: 80px;
+  background-color: #2301e4;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+`;

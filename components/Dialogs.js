@@ -1,6 +1,6 @@
-import React, { useRef, useState, createRef } from 'react';
-import { Alert, Button, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Feather, Entypo } from '@expo/vector-icons';
+import React, { useRef, useState } from 'react';
+import { Alert, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Feather, Entypo, Ionicons } from '@expo/vector-icons';
 import Emoji from 'react-native-emoji';
 import AloitusTimer from './AloitusTimer';
 import Dialog from 'react-native-dialog';
@@ -22,6 +22,8 @@ export default function Dialogs({
   toistotPainotData,
   setToistotPainotData,
   sarjatLength,
+  videoId,
+  index,
 }) {
   const [currentItem, setCurrentItem] = useState([]);
   const [timerVisible, setTimerVisible] = useState(false);
@@ -42,6 +44,7 @@ export default function Dialogs({
     />
   );
   const fabIcon = <Entypo name="edit" size={26} color="white" />;
+  const timerIcon = <Ionicons name="timer-outline" size={30} color="white" />;
   const notDoneIcon = (
     <Feather name="x" size={26} color="red" style={{ position: 'relative', left: 230 }} />
   );
@@ -103,22 +106,6 @@ export default function Dialogs({
 
   return (
     <View style={styles.container}>
-      <FloatingActionButton
-        style={{
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 6,
-          },
-          shadowOpacity: 0.37,
-          shadowRadius: 7.49,
-          elevation: 12,
-        }}
-        onPress={handlePresentModalPress}
-      >
-        <Text>{fabIcon}</Text>
-      </FloatingActionButton>
-
       <ActionSheet
         ref={actionSheetRef}
         eleavtion={3}
@@ -129,11 +116,10 @@ export default function Dialogs({
         }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
-          <Emoji name="dizzy" style={{ fontSize: 25, marginLeft: 15 }} />
           <Text left vinkkiTitle marginLeft="25px" marginBottom="10px" marginTop="10px">
             Syötä sarjojen tiedot
           </Text>
-          <Emoji name="dizzy" style={{ fontSize: 25, marginLeft: 10 }} />
+          <Emoji name="collision" style={{ fontSize: 30, marginLeft: 2 }} />
         </View>
         {Array.from(Array(parseInt(sarjatLength))).map((i, idx) => (
           <TouchableOpacity onPress={() => handlePress(i, idx)}>
@@ -166,7 +152,7 @@ export default function Dialogs({
           </TouchableOpacity>
         ))}
 
-        <Dialog.Container visible={visible}>
+        <Dialog.Container visible={visible} contentStyle={{ opacity: 0.98 }}>
           <Dialog.Title>Lisää sarjan tiedot</Dialog.Title>
           <Text medium center marginBottom="10px">
             Toistot
@@ -185,15 +171,53 @@ export default function Dialogs({
           <Dialog.Button label="Peruuta" onPress={() => setVisible(false)} />
         </Dialog.Container>
       </ActionSheet>
-      <Dialog.Container
-        /* onBackdropPress={() => setTimerVisible(!timerVisible)} */
-        visible={timerVisible}
-      >
-        <AloitusTimer />
+
+      <Dialog.Container visible={timerVisible} contentStyle={{ opacity: 0.98 }}>
+        <AloitusTimer videoId={videoId} index={index} />
+        <Dialog.Button label="Sulje" onPress={() => setTimerVisible(false)} />
       </Dialog.Container>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginVertical: 55,
+          marginHorizontal: 10,
+        }}
+      >
+        <FloatingActionButton
+          style={{
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 6,
+            },
+            shadowOpacity: 0.37,
+            shadowRadius: 7.49,
+            elevation: 12,
+          }}
+          onPress={() => setTimerVisible(true)}
+        >
+          <Text>{timerIcon}</Text>
+        </FloatingActionButton>
+        <FloatingActionButton
+          style={{
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 6,
+            },
+            shadowOpacity: 0.37,
+            shadowRadius: 7.49,
+            elevation: 12,
+          }}
+          onPress={handlePresentModalPress}
+        >
+          <Text>{fabIcon}</Text>
+        </FloatingActionButton>
+      </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'flex-end', marginHorizontal: 15, marginVertical: 40 },
+  container: { flex: 1 },
 });
