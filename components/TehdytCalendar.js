@@ -3,14 +3,14 @@ import { TouchableOpacity } from 'react-native';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import 'moment/locale/fi';
 import { Feather } from '@expo/vector-icons';
-import AgendaComponent from '../components/Agenda';
-import HeaderComponent from '../components/HeaderComponent';
-import Text from '../components/Text';
+import AgendaComponent from './Agenda';
+import HeaderComponent from './HeaderComponent';
+import Text from './Text';
 import { loggingOut } from '../API/FirebaseMethods';
-import TehdytTreenitStats from '../components/TehdytTreenitStats';
+import TehdytTreenitStats from './TehdytTreenitStats';
 import { TehdytMainContainer } from '../utils/Styling';
 
-const TehdytTreenitCalendar = () => {
+export default function TehdytCalendar() {
   const icon = <Feather name="log-out" size={24} color="white" />;
 
   Appearance.getColorScheme();
@@ -25,6 +25,4 @@ const TehdytTreenitCalendar = () => {
       <AgendaComponent />
     </TehdytMainContainer>
   );
-};
-
-export default TehdytTreenitCalendar;
+}

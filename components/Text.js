@@ -29,7 +29,7 @@ const Text = styled.Text`
   /* prettier-ignore */
   fontFamily: ${(props) => props.fontFamily ?? 'MontserratSemiBold'}
 
-${({ title, vinkit, vinkkiTitle, large, medium, small, treeninNimi, sarjat }) => {
+${({ title, vinkit, vinkkiTitle, large, medium, hae }) => {
     switch (true) {
       case title:
         return `font-size: 32px`;
@@ -45,6 +45,9 @@ ${({ title, vinkit, vinkkiTitle, large, medium, small, treeninNimi, sarjat }) =>
 
       case medium:
         return `font-size: 16px`;
+
+      case hae:
+        return `font-size: 14px`;
 
       default:
         return `font-size: 11px`;

@@ -13,9 +13,7 @@ import { ListItem } from 'react-native-elements';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import { API } from '@env';
-import CachedImage from 'react-native-expo-cached-image';
 import axios from 'axios';
-import { LottieLoading } from '../../components/Lottie';
 import TreeninKuvausData from '../../components/TreeninKuvausData';
 import { Container, ButtonContainer, IconTouchable, AloitaButton } from '../../utils/Styling';
 import Text from '../../components/Text';
@@ -34,7 +32,6 @@ export default function TreeninEsittely({ route, navigation }) {
   const [kohderyhma, setKohderyhma] = useState('');
   const [treeniText, setTreeniText] = useState('');
   const [aloitaRoute, setAloitaRoute] = useState('');
-  const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   const colorScheme = useColorScheme();
@@ -104,7 +101,31 @@ export default function TreeninEsittely({ route, navigation }) {
                   })
                 }
               >
-                <ListItem
+                <View
+                  style={{
+                    height: 100,
+                    backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    padding: 13,
+                    marginHorizontal: 5,
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Text fontFamily="MontserratRegular" medium>
+                    {nimi}
+                  </Text>
+                  <Text fontFamily="MontserratRegular" medium opacity={0.7}>
+                    {sarjat} sarjaa
+                  </Text>
+                  <Ionicons
+                    name="ios-chevron-forward-sharp"
+                    size={24}
+                    color={themeColor}
+                    style={{ opacity: 0.4 }}
+                  />
+                </View>
+                {/* <ListItem
                   containerStyle={{
                     height: 100,
                     backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
@@ -112,32 +133,24 @@ export default function TreeninEsittely({ route, navigation }) {
                   bottomDivider
                 >
                   <ListItem.Content>
-                    <TextContainer>
-                      <Text fontFamily="MontserratRegular" medium>
-                        {nimi}
-                      </Text>
-                      <Text
-                        fontFamily="MontserratRegular"
-                        style={{
-                          position: 'absolute',
-                          left: 235,
-                          color: colorScheme === 'dark' ? '#fff' : '#000',
-                        }}
-                        medium
-                        opacity={0.7}
-                      >
-                        {sarjat} sarjaa
-                      </Text>
-                    </TextContainer>
+                    <Text fontFamily="MontserratRegular" medium>
+                      {nimi}
+                    </Text>
+                    <Text
+                      fontFamily="MontserratRegular"
+                      style={{
+                        position: 'absolute',
+                        left: 235,
+                        color: colorScheme === 'dark' ? '#fff' : '#000',
+                      }}
+                      medium
+                      opacity={0.7}
+                    >
+                      {sarjat} sarjaa
+                    </Text>
                   </ListItem.Content>
 
-                  <Ionicons
-                    name="ios-chevron-forward-sharp"
-                    size={24}
-                    color={themeColor}
-                    style={{ opacity: 0.4 }}
-                  />
-                </ListItem>
+                </ListItem> */}
               </TouchableOpacity>
             ))}
           </ScrollView>

@@ -122,9 +122,7 @@ export const SplashScreenContainer = styled.View`
 
 export const SplashAdditionalContainer = styled.View``;
 
-export const VideoContainer = styled.View`
-  margin-top: 10px;
-`;
+export const VideoContainer = styled.View``;
 
 export const UtilsContainer = styled.View`
   margin-top: 10px;

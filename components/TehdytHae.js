@@ -1,14 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, FlatList, TextInput } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  TextInput,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import Text from './Text';
+import { Feather } from '@expo/vector-icons';
 import * as firebase from 'firebase';
-import { SearchBar } from 'react-native-elements';
+import { Appearance, useColorScheme } from 'react-native-appearance';
+import { LottieHae } from './Lottie';
+import { useNavigation } from '@react-navigation/native';
 
 export default function TehdytHae() {
   const [loading, setLoading] = useState(false);
   const [defaultData, setDefaultData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [input, setInput] = useState('');
+
+  const colorScheme = useColorScheme();
+  Appearance.getColorScheme();
+  const themeColor = colorScheme === 'dark' ? 'white' : 'black';
+  const navigation = useNavigation();
 
   useEffect(() => {
     setLoading(true);
@@ -22,43 +39,89 @@ export default function TehdytHae() {
       .get()
 
       .then((snapshot) => {
+        const arr = [];
         snapshot.docs.map((dbData) => {
-          setDefaultData(dbData.data());
+          arr.push(dbData.data());
+          setDefaultData(arr);
           setLoading(false);
         });
       });
   }, []);
 
   const updateInput = (input) => {
-    if (input) {
-      const newData = Object.keys(defaultData).filter((item) => {
-        const itemData = item.treeni ? item.treeni.toUpperCase() : ''.toUpperCase();
-        const textData = input.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      console.log(newData);
-      setFilteredData(newData);
-      setInput(input);
-    } else {
-      setFilteredData(defaultData);
-      setInput(input);
-    }
-    /* const filtered = defaultData.filter((item) => {
-      return item.treeni.toLowerCase().includes(input.toLowerCase());
+    const filtered = defaultData.filter((item) => {
+      return item.treeni.toUpperCase().includes(input.toUpperCase());
     });
-    console.log(filtered);
-    setInput(input);
-    setFilteredData(filtered); */
+    setFilteredData(filtered);
   };
 
-  const SearchView = ({ item }) => {
-    return <Text>{item.treeni}</Text>;
+  const ItemSeparatorView = () => {
+    return (
+      <View
+        style={{ height: 1, width: '100%', marginLeft: 25, backgroundColor: 'grey', opacity: 0.1 }}
+      />
+    );
+  };
+
+  const SearchView = ({ item, index }) => {
+    return (
+      <View style={styles.list}>
+        <View
+          style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+        >
+          <Text hae>
+            {item.pvm} - {item.treeni}
+          </Text>
+          <Feather name="chevron-right" size={24} color="grey" />
+        </View>
+      </View>
+    );
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <TextInput placeholder="Search" input={input} onChangeText={updateInput} />
-      <FlatList data={filteredData} keyExtractor={(item) => item.treeni} renderItem={SearchView} />
-    </View>
+    <SafeAreaView>
+      <FlatList
+        data={filteredData}
+        keyExtractor={(index) => index.toString()}
+        renderItem={SearchView}
+        ItemSeparatorComponent={ItemSeparatorView}
+        ListEmptyComponent={
+          <View style={{ minHeight: 300, marginTop: 50 }}>
+            <LottieHae />
+          </View>
+        }
+        ListHeaderComponent={
+          <>
+            <TextInput
+              style={{ color: themeColor }}
+              placeholderTextColor="grey"
+              placeholder="Etsi treenin nimellä..."
+              autoFocus={true}
+              input={input}
+              onChangeText={(input) => updateInput(input)}
+            />
+
+            <Feather name="search" size={18} style={{ marginRight: 5 }} color="grey" />
+          </>
+        }
+        ListHeaderComponentStyle={{
+          flex: 1,
+          flexDirection: 'row',
+          marginLeft: 22,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '90%',
+          height: '85%',
+          padding: 5,
+        }}
+      />
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  list: {
+    padding: 15,
+    margin: 10,
+  },
+});

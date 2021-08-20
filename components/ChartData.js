@@ -13,17 +13,17 @@ const screenWidth = Dimensions.get('window').width;
 const chartConfig = {
   backgroundGradientFromOpacity: 0,
   backgroundGradientToOpacity: 0,
-  color: (opacity = 1) => `rgba(5, 68, 217, ${opacity})`,
+  color: (opacity = 1) => `rgba(56, 125, 255, ${opacity})`,
 };
 
 export default function ChartData() {
   const [xValue, setXValue] = useState([]);
-  const [chartData, setChartData] = useState();
   const [yValue, setYValue] = useState([]);
 
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
   const themeColor = colorScheme === 'dark' ? 'white' : 'black';
+  const chartColor = colorScheme === 'dark' ? '#191919' : 'white';
 
   function getData() {
     const db = firebase.firestore();
@@ -83,8 +83,23 @@ export default function ChartData() {
           style={{ marginTop: 15, marginLeft: 5 }}
         />
       </View>
-      <View style={styles.chart}>
+      <View
+        style={{
+          borderRadius: 20,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+          shadowOpacity: 0.22,
+          shadowRadius: 2.22,
+          margin: 8,
+          elevation: 3,
+          backgroundColor: chartColor,
+        }}
+      >
         <BarChart
+          verticalLabelRotation={15}
           showValuesOnTopOfBars={true}
           data={barData}
           width={screenWidth}
@@ -95,21 +110,3 @@ export default function ChartData() {
     </Container>
   );
 }
-
-const styles = () =>
-  StyleSheet.create({
-    chart: {
-      flex: 1,
-      borderRadius: 20,
-      shadowColor: '#000',
-      backgroundColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      margin: 10,
-      elevation: 5,
-    },
-  });

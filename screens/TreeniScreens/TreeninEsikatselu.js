@@ -1,17 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
-import { Ionicons, Feather } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Text from '../../components/Text';
-import { AloitaButton } from '../../utils/Styling';
 
 const TreeninEsikatselu = ({ route, navigation }) => {
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
 
-  const { nimi, videoID, ohjeet } = route.params;
+  const { videoID, ohjeet } = route.params;
 
   const icon = <Feather name="info" size={24} color={colorScheme === 'dark' ? 'white' : 'black'} />;
 
@@ -21,9 +20,7 @@ const TreeninEsikatselu = ({ route, navigation }) => {
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
       }}
     >
-      <VideoContainer>
-        <YoutubePlayer height={240} videoId={videoID} />
-      </VideoContainer>
+      <YoutubePlayer height={230} videoId={videoID} />
       <ScrollView>
         <WarningContainer>
           {icon}
@@ -45,10 +42,6 @@ export default TreeninEsikatselu;
 
 const Container = styled.View`
   flex: 1;
-`;
-
-const VideoContainer = styled.View`
-  margin-top: 65px;
 `;
 
 const TextContainer = styled.View`

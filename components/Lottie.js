@@ -33,12 +33,11 @@ export const LottieLoadingAloitus = () => {
   const [count, setCount] = useState(5);
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       setCount((c) => c - 1);
     }, 1000);
-
     return () => {
-      clearInterval();
+      clearInterval(interval);
     };
   }, []);
 
@@ -73,5 +72,17 @@ export const LottieAgenda = () => {
 
   return (
     <LottieView ref={animation} source={require('../assets/json/lf30_editor_53tpjpep.json')} />
+  );
+};
+
+export const LottieHae = () => {
+  const animation = useRef(null);
+
+  useEffect(() => {
+    animation.current.play();
+  }, []);
+
+  return (
+    <LottieView ref={animation} source={require('../assets/json/lf30_editor_6qgmlo9x.json')} />
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Ionicons, AntDesign, Feather } from '@expo/vector-icons';
@@ -6,6 +7,7 @@ import { Appearance, useColorScheme } from 'react-native-appearance';
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';
 import TehdytTreenit from '../tabs/TehdytTreenit';
+import TehdytTreenitData from '../screens/TehdytTreenitData';
 import Etusivu from '../tabs/Etusivu';
 import TreeninEsittely from '../screens/TreeniScreens/TreeninEsittely';
 import TreeninEsikatselu from '../screens/TreeniScreens/TreeninEsikatselu';
@@ -31,7 +33,7 @@ const MainAppStack = () => (
     <Stack.Screen
       name="Kotisivu"
       options={{ headerShown: false, gestureEnabled: false }}
-      component={KotiScreens}
+      component={TreeniScreens}
     />
     <Stack.Screen
       name="SplashScreen"
@@ -41,7 +43,7 @@ const MainAppStack = () => (
   </Stack.Navigator>
 );
 
-const KotiScreens = () => {
+const TreeniScreens = () => {
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
 
@@ -59,6 +61,7 @@ const KotiScreens = () => {
           title: route.params.nimi,
           headerStyle: {
             backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+            borderBottomWidth: 0,
           },
           headerBackTitle: 'Back',
           headerTintColor: colorScheme === 'dark' ? 'white' : 'black',
@@ -74,6 +77,22 @@ const KotiScreens = () => {
   );
 };
 
+const TehdytTreenitStack = () => (
+  <Stack.Navigator
+    initialRouteName="TehdytTreenit" // VAIHDA TÄMÄ TAKAISIN SIGNUP
+  >
+    <Stack.Screen
+      name="TehdytTreenit"
+      options={{ headerShown: false, gestureEnabled: true }}
+      component={TehdytTreenit}
+    />
+    <Stack.Screen
+      name="TehdytTreenitData"
+      options={{ headerShown: false, gestureEnabled: true }}
+      component={TehdytTreenitData}
+    />
+  </Stack.Navigator>
+);
 const Tab = createMaterialBottomTabNavigator();
 
 const KotiMainTab = () => {
@@ -87,6 +106,9 @@ const KotiMainTab = () => {
       initialRouteName="Koti"
       activeColor={activeColor}
       barStyle={{ backgroundColor: themeColor }}
+      options={{
+        keyboardHidesTabBar: false,
+      }}
     >
       <Tab.Screen
         name="Kotisivu"
@@ -99,7 +121,7 @@ const KotiMainTab = () => {
       />
       <Tab.Screen
         name="TehdytTreenit"
-        component={TehdytTreenit}
+        component={TehdytTreenitStack}
         options={{
           tabBarLabel: 'Minä',
           tabBarColor: themeColor,

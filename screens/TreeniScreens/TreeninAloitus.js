@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Dimensions, ScrollView } from 'react-native';
+import { Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { Ionicons, Feather } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
@@ -25,7 +25,6 @@ import {
   LoadingView,
   SeuraavaksiContainer,
 } from '../../utils/Styling';
-import { TouchableOpacity } from '@gorhom/bottom-sheet';
 
 const { width: viewportWidth } = Dimensions.get('window');
 

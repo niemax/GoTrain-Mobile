@@ -22,6 +22,7 @@ export default function TreeninKuvausData({ treeninKesto, kohderyhma, treeniText
       <View
         style={{
           flexDirection: 'row',
+          justifyContent: 'flex-start',
           marginTop: 20,
           marginLeft: 10,
           marginBottom: 20,

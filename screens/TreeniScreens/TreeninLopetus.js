@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ScrollView } from 'react-native';
 import Text from '../../components/Text';
 import ConfettiCannon from 'react-native-confetti-cannon';
 import { useNavigation } from '@react-navigation/native';
@@ -9,13 +10,7 @@ import 'moment/locale/fi';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import TreeninLopetusCards from '../../components/TreeninLopetusCards';
-import {
-  ButtonContainer,
-  PalauteIcon,
-  PalauteButtonContainer,
-  Container,
-  AloitaButton,
-} from '../../utils/Styling';
+import { ButtonContainer, Container, AloitaButton } from '../../utils/Styling';
 import { LottieAnimationCongratulations } from '../../components/Lottie';
 
 const LopetaTreeni = ({ data, treeni }) => {
@@ -67,30 +62,38 @@ const LopetaTreeni = ({ data, treeni }) => {
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
       }}
     >
-      <LopetusCardsContainer>
-        <LottieAnimationCongratulations />
-      </LopetusCardsContainer>
-      <Text fontFamily="MontserratBold" style={{ color: themeColor }} marginTop="20px" large medium>
-        {treeni.toUpperCase()} SUORITETTU!
-      </Text>
-      <TreeninLopetusCards data={data} />
-      {shoot ? (
-        <ConfettiCannon
-          count={250}
-          origin={{ x: 0, y: -20 }}
-          autoStart={false}
-          fallSpeed={7000}
-          fadeOut
-        />
-      ) : null}
+      <ScrollView>
+        <LopetusCardsContainer>
+          <LottieAnimationCongratulations />
+        </LopetusCardsContainer>
+        <Text
+          fontFamily="MontserratBold"
+          style={{ color: themeColor }}
+          marginTop="20px"
+          large
+          medium
+        >
+          {treeni.toUpperCase()} SUORITETTU!
+        </Text>
+        <TreeninLopetusCards data={data} />
+        {shoot ? (
+          <ConfettiCannon
+            count={250}
+            origin={{ x: 0, y: -20 }}
+            autoStart={false}
+            fallSpeed={7000}
+            fadeOut
+          />
+        ) : null}
 
-      <ButtonContainer>
-        <AloitaButton onPress={saveToDatabase}>
-          <Text style={{ color: '#fff' }} large>
-            Sulje
-          </Text>
-        </AloitaButton>
-      </ButtonContainer>
+        <ButtonContainer>
+          <AloitaButton onPress={saveToDatabase}>
+            <Text style={{ color: '#fff' }} large>
+              Sulje
+            </Text>
+          </AloitaButton>
+        </ButtonContainer>
+      </ScrollView>
     </Container>
   );
 };

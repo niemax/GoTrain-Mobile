@@ -146,6 +146,7 @@ export default function AgendaComponent() {
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-around',
+                  paddingVertical: 4,
                 }}
               >
                 <View>
@@ -167,7 +168,9 @@ export default function AgendaComponent() {
   */}
               </View>
             ))}
-            <View style={{ margin: 20, borderWidth: 0.4, borderBottomColor: 'grey' }} />
+            <View
+              style={{ height: 1, width: '90%', margin: 25, backgroundColor: 'grey', opacity: 0.2 }}
+            />
           </View>
         ))}
       </View>
