@@ -71,7 +71,7 @@ export default function AloitusTimer() {
 
   const handleLisaAika = () => {
     Haptics.selectionAsync();
-    setCount((count) => count + 15);
+    setCount((prevCount) => prevCount + 15);
   };
 
   const handleTauko = () => {
@@ -98,7 +98,7 @@ export default function AloitusTimer() {
       >
         {(fill) =>
           count - elapsed > 0 ? (
-            <Text title fontFamily="MontserratBold" style={{ color: '#2301e4' }}>
+            <Text title fontFamily="MontserratBold" style={{ color: '#054dd9' }}>
               {count - elapsed}s
             </Text>
           ) : (

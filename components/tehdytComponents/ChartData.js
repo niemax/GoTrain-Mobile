@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Dimensions, View, StyleSheet } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import { Container } from '../utils/Styling';
 import * as firebase from 'firebase';
+import { Container } from '../../utils/Styling';
 import 'firebase/firestore';
-import Text from './Text';
+import Text from '../Text';
 import { Feather } from '@expo/vector-icons';
 
 const screenWidth = Dimensions.get('window').width;

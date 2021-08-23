@@ -3,9 +3,9 @@ import { View, ActivityIndicator } from 'react-native';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import 'moment/locale/fi';
 import { AntDesign } from '@expo/vector-icons';
-import Text from '../components/Text';
+import Text from '../../components/Text';
 import * as firebase from 'firebase';
-import { TehdytTreenitBoxContainer } from '../utils/Styling';
+import { TehdytTreenitBoxContainer } from '../../utils/Styling';
 
 const TehdytTreenitStats = () => {
   const [dataLength, setDataLength] = useState('');

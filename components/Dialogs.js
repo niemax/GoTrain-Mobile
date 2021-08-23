@@ -108,9 +108,7 @@ export default function Dialogs({
     <View style={styles.container}>
       <ActionSheet
         ref={actionSheetRef}
-        eleavtion={3}
         headerAlwaysVisible="true"
-        gestureEnabled="true"
         containerStyle={{
           backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
         }}
@@ -173,7 +171,7 @@ export default function Dialogs({
       </ActionSheet>
 
       <Dialog.Container visible={timerVisible} contentStyle={{ opacity: 0.98 }}>
-        <AloitusTimer videoId={videoId} index={index} />
+        <AloitusTimer />
         <Dialog.Button label="Sulje" onPress={() => setTimerVisible(false)} />
       </Dialog.Container>
       <View

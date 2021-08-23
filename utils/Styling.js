@@ -290,7 +290,7 @@ export const JatkaButton = styled.TouchableOpacity`
 export const LisaAikaButton = styled.TouchableOpacity`
   height: 50px;
   width: 80px;
-  background-color: #2301e4;
+  background-color: #30f
   align-items: center;
   justify-content: center;
   border-radius: 20px;

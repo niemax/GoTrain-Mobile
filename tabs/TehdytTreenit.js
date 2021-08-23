@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Dimensions } from 'react-native';
-import TehdytCalendar from '../components/TehdytCalendar';
-import TehdytChart from '../components/TehdytChart';
-import TehdytHae from '../components/TehdytHae';
-import { Container } from '../utils/Styling';
-import { Appearance, useColorScheme } from 'react-native-appearance';
+import { Dimensions } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import { Appearance, useColorScheme } from 'react-native-appearance';
+import TehdytCalendar from '../components/tehdytComponents/TehdytCalendar';
+import TehdytChart from '../components/tehdytComponents/TehdytChart';
+import TehdytHae from '../components/tehdytComponents/TehdytHae';
+import { Container } from '../utils/Styling';
 
 const renderScene = SceneMap({
   first: TehdytCalendar,

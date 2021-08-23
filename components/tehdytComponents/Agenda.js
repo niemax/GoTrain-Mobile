@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
-import Text from './Text';
+import { View, ActivityIndicator } from 'react-native';
 import { format } from 'date-fns';
 import * as firebase from 'firebase';
 import { Agenda, LocaleConfig } from 'react-native-calendars';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import { Ionicons } from '@expo/vector-icons';
-import { LottieAgenda } from './Lottie';
-import { ActivityIndicator } from 'react-native-paper';
+import Text from '../../components/Text';
+import { LottieAgenda } from '../../components/Lottie';
 
 LocaleConfig.locales.fi = {
   monthNames: [
@@ -115,6 +114,7 @@ export default function AgendaComponent() {
           },
           shadowOpacity: 0.18,
           shadowRadius: 1.0,
+
           elevation: 1,
           marginTop: 30,
         }}

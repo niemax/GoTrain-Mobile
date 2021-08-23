@@ -9,12 +9,12 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import Text from './Text';
 import { Feather } from '@expo/vector-icons';
 import * as firebase from 'firebase';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import { LottieHae } from './Lottie';
 import { useNavigation } from '@react-navigation/native';
+import { LottieHae } from '../../components/Lottie';
+import Text from '../../components/Text';
 
 export default function TehdytHae() {
   const [loading, setLoading] = useState(false);
@@ -35,6 +35,7 @@ export default function TehdytHae() {
     db.collection('users')
       .doc(currentUser.uid)
       .collection('treenidata')
+      .orderBy('timestamp', 'desc')
       .get()
 
       .then((snapshot) => {
@@ -54,18 +55,17 @@ export default function TehdytHae() {
     setFilteredData(filtered);
   };
 
-  const ItemSeparatorView = () => {
-    return (
-      <View
-        style={{ height: 1, width: '100%', marginLeft: 25, backgroundColor: 'grey', opacity: 0.1 }}
-      />
-    );
-  };
+  const ItemSeparatorView = () => (
+    <View
+      style={{ height: 1, width: '100%', marginLeft: 25, backgroundColor: 'grey', opacity: 0.1 }}
+    />
+  );
 
-  const SearchView = ({ item, index }) => {
-    return (
-      <View style={styles.list}>
+  const SearchView = ({ item, index }) => (
+    <View style={styles.list}>
+      <TouchableOpacity onPress={navigation.navigate('TehdytTreenitData')}>
         <View
+          key={index}
           style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
         >
           <Text hae>
@@ -73,9 +73,9 @@ export default function TehdytHae() {
           </Text>
           <Feather name="chevron-right" size={24} color="grey" />
         </View>
-      </View>
-    );
-  };
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <SafeAreaView>
@@ -95,7 +95,7 @@ export default function TehdytHae() {
               style={{ color: themeColor }}
               placeholderTextColor="grey"
               placeholder="Etsi treenin nimellä..."
-              autoFocus={true}
+              /* autoFocus={true} */
               input={input}
               onChangeText={(input) => updateInput(input)}
             />
