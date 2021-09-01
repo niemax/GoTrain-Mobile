@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Alert, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Alert, View, StyleSheet, TouchableOpacity, Touchable } from 'react-native';
 import { Feather, Entypo, Ionicons } from '@expo/vector-icons';
 import Emoji from 'react-native-emoji';
 import AloitusTimer from './AloitusTimer';
@@ -27,6 +27,7 @@ export default function Dialogs({
 }) {
   const [currentItem, setCurrentItem] = useState([]);
   const [timerVisible, setTimerVisible] = useState(false);
+  const [timerOn, setTimerOn] = useState(false);
   const actionSheetRef = useRef(null);
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
@@ -39,23 +40,14 @@ export default function Dialogs({
     <Entypo
       name="edit"
       size={26}
-      style={{ position: 'relative', left: 200 }}
+      style={{ position: 'relative', left: 230 }}
       color={colorScheme === 'dark' ? '#fff' : '#000'}
     />
   );
   const fabIcon = <Entypo name="edit" size={26} color="white" />;
   const timerIcon = <Ionicons name="timer-outline" size={30} color="white" />;
-  const notDoneIcon = (
-    <Feather name="x" size={26} color="red" style={{ position: 'relative', left: 230 }} />
-  );
-  const doneIcon = (
-    <Feather
-      name="check-circle"
-      style={{ position: 'relative', left: 230 }}
-      size={26}
-      color="green"
-    />
-  );
+  const notDoneIcon = <Feather name="x" size={26} color="red" />;
+  const doneIcon = <Feather name="check" size={26} color="#78E7C7" />;
 
   const handlePresentModalPress = () => {
     actionSheetRef.current.show();
@@ -104,6 +96,11 @@ export default function Dialogs({
     return icon;
   };
 
+  const handleCancel = (idx) => {
+    setVisible(false);
+    currentItem.splice(idx, 1);
+  };
+
   return (
     <View style={styles.container}>
       <ActionSheet
@@ -128,14 +125,27 @@ export default function Dialogs({
               <View
                 style={{
                   flexDirection: 'row',
-                  padding: 26,
+                  paddingHorizontal: 26,
+                  marginVertical: 20,
                 }}
               >
                 <Text style={{ color: colorScheme === 'dark' ? 'white' : 'black' }} medium>
                   Sarja {idx + 1}
                 </Text>
                 {lisaaIcon}
-                {renderIcon(idx)}
+                <TouchableOpacity
+                  style={{
+                    height: 30,
+                    width: 30,
+                    opacity: 0.6,
+                    borderRadius: 20,
+                    backgroundColor: 'grey',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {renderIcon(idx)}
+                </TouchableOpacity>
               </View>
               <View
                 style={{
@@ -147,27 +157,30 @@ export default function Dialogs({
                 }}
               />
             </View>
+            <Dialog.Container visible={visible} contentStyle={{ opacity: 0.98 }}>
+              <Dialog.Title>Lisää sarjan tiedot</Dialog.Title>
+              <Text medium center marginBottom="10px">
+                Toistot
+              </Text>
+              <Dialog.Input keyboardType="numeric" onChangeText={(text) => setToisto(text)} />
+              <Text medium center marginBottom="10px">
+                Painot(kg)
+              </Text>
+              <Dialog.Input keyboardType="numeric" onChangeText={(text) => setPaino(text)} />
+              <Text medium center marginBottom="10px">
+                Lisätiedot
+              </Text>
+              <Dialog.Input
+                multiline
+                numberOfLines={5}
+                onChangeText={(text) => setLisatieto(text)}
+              />
+
+              <Dialog.Button label="Lisää" onPress={handleToistotPainotData} />
+              <Dialog.Button label="Peruuta" onPress={handleCancel} />
+            </Dialog.Container>
           </TouchableOpacity>
         ))}
-
-        <Dialog.Container visible={visible} contentStyle={{ opacity: 0.98 }}>
-          <Dialog.Title>Lisää sarjan tiedot</Dialog.Title>
-          <Text medium center marginBottom="10px">
-            Toistot
-          </Text>
-          <Dialog.Input keyboardType="numeric" onChangeText={(text) => setToisto(text)} />
-          <Text medium center marginBottom="10px">
-            Painot(kg)
-          </Text>
-          <Dialog.Input keyboardType="numeric" onChangeText={(text) => setPaino(text)} />
-          <Text medium center marginBottom="10px">
-            Lisätiedot
-          </Text>
-          <Dialog.Input multiline numberOfLines={5} onChangeText={(text) => setLisatieto(text)} />
-
-          <Dialog.Button label="Lisää" onPress={handleToistotPainotData} />
-          <Dialog.Button label="Peruuta" onPress={() => setVisible(false)} />
-        </Dialog.Container>
       </ActionSheet>
 
       <Dialog.Container visible={timerVisible} contentStyle={{ opacity: 0.98 }}>
@@ -178,8 +191,8 @@ export default function Dialogs({
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          marginVertical: 55,
-          marginHorizontal: 10,
+          marginVertical: 30,
+          marginHorizontal: 18,
         }}
       >
         <FloatingActionButton

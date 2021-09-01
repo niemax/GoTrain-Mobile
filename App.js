@@ -8,8 +8,9 @@ import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { AppearanceProvider } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
-import configKeys from './config/Firebase';
-import MainAppStack from './navigation/MainAppNav';
+import configKeys from './src/config/Firebase';
+import MainAppStack from './src/navigation/MainAppNav';
+import { toastConfig } from './src/config/toastConfig';
 
 export default AppContainer = () => (
   <AppearanceProvider>
@@ -24,9 +25,9 @@ const App = () => {
   async function loadFonts() {
     await Font.loadAsync({
       // Load the main font from static assets
-      MontserratBold: require('./assets/fonts/Montserrat-Bold.ttf'),
-      MontserratSemiBold: require('./assets/fonts/Montserrat-SemiBold.ttf'),
-      MontserratRegular: require('./assets/fonts/Montserrat-Regular.ttf'),
+      MontserratBold: require('./src/assets/fonts/Montserrat-Bold.ttf'),
+      MontserratSemiBold: require('./src/assets/fonts/Montserrat-SemiBold.ttf'),
+      MontserratRegular: require('./src/assets/fonts/Montserrat-Regular.ttf'),
     });
     setFontsLoaded(true);
   }
@@ -45,7 +46,7 @@ const App = () => {
       <NavigationContainer>
         <SafeAreaProvider>
           <MainAppStack />
-          <Toast ref={(ref) => Toast.setRef(ref)} />
+          <Toast config={toastConfig} ref={(ref) => Toast.setRef(ref)} />
         </SafeAreaProvider>
       </NavigationContainer>
     );

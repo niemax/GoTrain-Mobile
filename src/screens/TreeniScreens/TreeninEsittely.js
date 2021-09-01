@@ -7,9 +7,9 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
+import Dialog from 'react-native-dialog';
 import styled from 'styled-components/native';
 import { Ionicons, Feather } from '@expo/vector-icons';
-import { ListItem } from 'react-native-elements';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import { API } from '@env';
@@ -17,6 +17,7 @@ import axios from 'axios';
 import TreeninKuvausData from '../../components/TreeninKuvausData';
 import { Container, ButtonContainer, IconTouchable, AloitaButton } from '../../utils/Styling';
 import Text from '../../components/Text';
+import EsittelyAloitusTimer from '../../components/EsittelyAloitusTimer';
 
 const showToast = () => {
   Toast.show({
@@ -32,7 +33,9 @@ export default function TreeninEsittely({ route, navigation }) {
   const [kohderyhma, setKohderyhma] = useState('');
   const [treeniText, setTreeniText] = useState('');
   const [aloitaRoute, setAloitaRoute] = useState('');
+  const [timerVisible, setTimerVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [count, setCount] = useState(0);
 
   const colorScheme = useColorScheme();
   Appearance.getColorScheme();
@@ -63,12 +66,23 @@ export default function TreeninEsittely({ route, navigation }) {
     }
   }, [treeninNimi]);
 
+  const handleAloitusButton = () => {
+    setTimerVisible(true);
+
+    setTimeout(() => {
+      setTimerVisible(false);
+    }, 5000);
+  };
+
   return (
     <Container
       style={{
         backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
       }}
     >
+      <Dialog.Container visible={timerVisible} contentStyle={{ opacity: 0.98 }}>
+        <EsittelyAloitusTimer treeninNimi={treeninNimi} />
+      </Dialog.Container>
       <Image style={styles.image} source={{ uri: `${API}/api/${image}` }} />
       <View style={{ flexDirection: 'row', position: 'absolute', top: 35 }}>
         <IconTouchable onPress={() => navigation.goBack()}>
@@ -108,7 +122,6 @@ export default function TreeninEsittely({ route, navigation }) {
                     flexDirection: 'row',
                     alignItems: 'center',
                     padding: 13,
-                    marginHorizontal: 5,
                     justifyContent: 'space-between',
                   }}
                 >
@@ -125,6 +138,15 @@ export default function TreeninEsittely({ route, navigation }) {
                     style={{ opacity: 0.4 }}
                   />
                 </View>
+                <View
+                  style={{
+                    height: 1,
+                    width: '100%',
+                    marginLeft: 20,
+                    backgroundColor: 'grey',
+                    opacity: 0.1,
+                  }}
+                />
                 {/* <ListItem
                   containerStyle={{
                     height: 100,
@@ -161,13 +183,7 @@ export default function TreeninEsittely({ route, navigation }) {
 
       {!isLoading && (
         <ButtonContainer>
-          <AloitaButton
-            onPress={() =>
-              navigation.navigate('TreeninAloitus', {
-                treeninNimi: treeninNimi,
-              })
-            }
-          >
+          <AloitaButton onPress={handleAloitusButton}>
             <Text style={{ color: '#fff' }} large>
               Aloita
             </Text>

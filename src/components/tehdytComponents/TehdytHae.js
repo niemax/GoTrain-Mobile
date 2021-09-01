@@ -55,6 +55,11 @@ export default function TehdytHae() {
     setFilteredData(filtered);
   };
 
+  const handlePress = (item, index) => {
+    console.log(item, index);
+    navigation.navigate('TehdytTreenitData', { data: item });
+  };
+
   const ItemSeparatorView = () => (
     <View
       style={{ height: 1, width: '100%', marginLeft: 25, backgroundColor: 'grey', opacity: 0.1 }}
@@ -63,9 +68,8 @@ export default function TehdytHae() {
 
   const SearchView = ({ item, index }) => (
     <View style={styles.list}>
-      <TouchableOpacity onPress={navigation.navigate('TehdytTreenitData')}>
+      <TouchableOpacity onPress={handlePress(item, index)}>
         <View
-          key={index}
           style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
         >
           <Text hae>
@@ -78,43 +82,42 @@ export default function TehdytHae() {
   );
 
   return (
-    <SafeAreaView>
-      <FlatList
-        data={filteredData}
-        keyExtractor={(index) => index.toString()}
-        renderItem={SearchView}
-        ItemSeparatorComponent={ItemSeparatorView}
-        ListEmptyComponent={
-          <View style={{ minHeight: 300, marginTop: 50 }}>
-            <LottieHae />
-          </View>
-        }
-        ListHeaderComponent={
-          <>
-            <TextInput
-              style={{ color: themeColor }}
-              placeholderTextColor="grey"
-              placeholder="Etsi treenin nimellä..."
-              /* autoFocus={true} */
-              input={input}
-              onChangeText={(input) => updateInput(input)}
-            />
+    <FlatList
+      automaticallyAdjustContentInsets={false}
+      data={filteredData}
+      keyExtractor={(item) => item.timestamp.toString()}
+      renderItem={SearchView}
+      ItemSeparatorComponent={ItemSeparatorView}
+      ListEmptyComponent={
+        <View style={{ minHeight: 300, marginTop: 50 }}>
+          <LottieHae />
+        </View>
+      }
+      ListHeaderComponent={
+        <>
+          <TextInput
+            style={{ color: themeColor }}
+            placeholderTextColor="grey"
+            placeholder="Etsi treenin nimellä..."
+            /* autoFocus={true} */
+            input={input}
+            onChangeText={updateInput}
+          />
 
-            <Feather name="search" size={18} style={{ marginRight: 5 }} color="grey" />
-          </>
-        }
-        ListHeaderComponentStyle={{
-          flex: 1,
-          flexDirection: 'row',
-          marginLeft: 22,
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '90%',
-          height: '85%',
-          padding: 5,
-        }}
-      />
-    </SafeAreaView>
+          <Feather name="search" size={18} style={{ marginRight: 5 }} color="grey" />
+        </>
+      }
+      ListHeaderComponentStyle={{
+        flex: 1,
+        flexDirection: 'row',
+        marginLeft: 22,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '90%',
+        height: '85%',
+        padding: 5,
+      }}
+    />
   );
 }
 

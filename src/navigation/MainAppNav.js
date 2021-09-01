@@ -106,9 +106,6 @@ const KotiMainTab = () => {
       initialRouteName="Koti"
       activeColor={activeColor}
       barStyle={{ backgroundColor: themeColor }}
-      options={{
-        keyboardHidesTabBar: false,
-      }}
     >
       <Tab.Screen
         name="Kotisivu"
@@ -126,6 +123,7 @@ const KotiMainTab = () => {
           tabBarLabel: 'Minä',
           tabBarColor: themeColor,
           tabBarIcon: ({ color }) => <Feather name="check-circle" size={24} color={activeColor} />,
+          tabBarStyle: { display: 'none' },
         }}
       />
     </Tab.Navigator>

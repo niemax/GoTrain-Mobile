@@ -26,6 +26,7 @@ export default function TehdytTreenit() {
 
   const renderTabBar = (props) => (
     <TabBar
+      lazy
       activeColor={colorScheme === 'dark' ? '#fff' : '#000'}
       inactiveColor={colorScheme === 'dark' ? '#fff' : '#000'}
       indicatorStyle={{ backgroundColor: '#2301E4' }}
@@ -40,6 +41,7 @@ export default function TehdytTreenit() {
         navigationState={{ index, routes }}
         renderScene={renderScene}
         renderTabBar={renderTabBar}
+        keyboardDismissMode="none"
         onIndexChange={setIndex}
         initialLayout={{ width: Dimensions.get('window').width }}
       />

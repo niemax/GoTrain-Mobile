@@ -61,12 +61,6 @@ const HeaderComponent = (props) => {
     getWeatherData(coords.latitude, coords.longitude);
   }
 
-  const handleLogOut = () => {
-    loggingOut();
-    navigation.navigate('Login');
-    console.log('Logged out!');
-  };
-
   useEffect(() => {
     getLocation();
   }, [currentDate]);

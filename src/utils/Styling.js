@@ -81,7 +81,6 @@ export const ButtonContainer = styled.View`
   justify-content: center;
   align-items: center;
   height: 12%;
-  padding: 0px;
 `;
 
 export const SignupButtonContainer = styled.View`
@@ -295,3 +294,5 @@ export const LisaAikaButton = styled.TouchableOpacity`
   justify-content: center;
   border-radius: 20px;
 `;
+
+export const MinusAikaButton = styled.TouchableOpacity``;
