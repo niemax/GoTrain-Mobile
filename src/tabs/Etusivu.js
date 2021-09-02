@@ -1,49 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
-import * as firebase from 'firebase';
 import styled from 'styled-components/native';
-import moment from 'moment';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Text from '../components/Text';
 import HeaderComponent from '../components/HeaderComponent';
-import { Container } from '../utils/Styling';
+import { Container, WelcomeNameContainer } from '../utils/Styling';
+import { getCurrentDate, getUserInfo } from '../utils/helperFuncs/getCurrentDate';
 import Cards from '../components/EtusivuCards';
 import 'moment/locale/fi';
+import WelcomeNameSkeleton from '../components/skeletons/welcomeNameSkeleton';
 import TervetuloaText from '../components/TervetuloaText';
 
 const Etusivu = () => {
   const [currentDate, setCurrentDate] = useState('');
-  const [text, setText] = useState('');
+  const [username, setUserName] = useState('');
+  const [loading, setLoading] = useState(false);
 
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
 
-  const getCurrentDate = () => {
-    const date = moment().locale('fi').format('LL');
-    setCurrentDate(date);
-  };
-
   useEffect(() => {
-    getCurrentDate();
-    getUserInfo();
+    setLoading(true);
+    const { date } = getCurrentDate();
+    setCurrentDate(date);
+    const { dataObj } = getUserInfo();
+    setTimeout(() => {}, 2000);
+    //    setLoading(false);
   }, [currentDate]);
-
-  const getUserInfo = async () => {
-    const { currentUser } = firebase.auth();
-
-    try {
-      const doc = await firebase.firestore().collection('users').doc(currentUser.uid).get();
-
-      if (!doc.exists) {
-        console.error('No user data found!');
-      } else {
-        const dataObj = doc.data();
-        setText(dataObj.name);
-      }
-    } catch (err) {
-      Alert.alert('There is an error.', err.message);
-    }
-  };
 
   return (
     <Container
@@ -64,9 +46,8 @@ const Etusivu = () => {
         <Text fontFamily="MontserratRegular" marginLeft="25px" marginBottom="25px" medium left>
           {currentDate.toUpperCase()}
         </Text>
-        <TervetuloaText teksti={text} />
+        <TervetuloaText nimi={username} />
       </TextContainer>
-
       <Cards />
     </Container>
   );

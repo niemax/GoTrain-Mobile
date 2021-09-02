@@ -34,7 +34,7 @@ export default function EsittelyAloitusTimer({ treeninNimi }) {
         tintColor="#2301e4"
         backgroundColor="black"
       >
-        {(fill) => (
+        {() => (
           <Text title fontFamily="MontserratBold" style={{ color: '#054dd9' }}>
             {count}s
           </Text>

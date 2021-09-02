@@ -77,22 +77,35 @@ const TreeniScreens = () => {
   );
 };
 
-const TehdytTreenitStack = () => (
-  <Stack.Navigator
-    initialRouteName="TehdytTreenit" // VAIHDA TÄMÄ TAKAISIN SIGNUP
-  >
-    <Stack.Screen
-      name="TehdytTreenit"
-      options={{ headerShown: false, gestureEnabled: true }}
-      component={TehdytTreenit}
-    />
-    <Stack.Screen
-      name="TehdytTreenitData"
-      options={{ headerShown: false, gestureEnabled: true }}
-      component={TehdytTreenitData}
-    />
-  </Stack.Navigator>
-);
+const TehdytTreenitStack = () => {
+  Appearance.getColorScheme();
+  const colorScheme = useColorScheme();
+
+  return (
+    <Stack.Navigator
+      initialRouteName="TehdytTreenit" // VAIHDA TÄMÄ TAKAISIN SIGNUP
+    >
+      <Stack.Screen
+        name="TehdytTreenit"
+        options={{ headerShown: false, gestureEnabled: true }}
+        component={TehdytTreenit}
+      />
+      <Stack.Screen
+        name="TehdytTreenitData"
+        options={({ route }) => ({
+          title: route.params.date,
+          headerStyle: {
+            backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+            borderBottomWidth: 0,
+          },
+          headerBackTitle: 'Back',
+          headerTintColor: colorScheme === 'dark' ? 'white' : 'black',
+        })}
+        component={TehdytTreenitData}
+      />
+    </Stack.Navigator>
+  );
+};
 const Tab = createMaterialBottomTabNavigator();
 
 const KotiMainTab = () => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import 'moment/locale/fi';
-import AgendaComponent from './Agenda';
-import TehdytTreenitStats from './TehdytTreenitStats';
+import AgendaComponent from '../tehdytComponents/Agenda';
+import TehdytTreenitStats from '../tehdytComponents/TehdytTreenitStats';
 import { TehdytMainContainer } from '../../utils/Styling';
 
 export default function TehdytCalendar() {
@@ -14,7 +14,6 @@ export default function TehdytCalendar() {
       style={{ backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5' }}
     >
       <TehdytTreenitStats />
-
       <AgendaComponent />
     </TehdytMainContainer>
   );

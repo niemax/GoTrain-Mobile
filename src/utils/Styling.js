@@ -44,9 +44,9 @@ export const Footer = styled.View`
 export const Actions = styled.View``;
 
 export const ContentLoaderView = styled.View`
-  margin-top: 20px;
   flex: 1;
-  margin-left: 4px;
+  align-items: center;
+  justify-content: center;
 `;
 export const AgendaView = styled.View``;
 export const RenderContainer = styled.View`
@@ -296,3 +296,9 @@ export const LisaAikaButton = styled.TouchableOpacity`
 `;
 
 export const MinusAikaButton = styled.TouchableOpacity``;
+
+export const WelcomeNameContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;

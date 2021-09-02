@@ -94,89 +94,61 @@ export default function TreeninEsittely({ route, navigation }) {
       </View>
 
       {!isLoading ? (
-        <MainDataContainer>
-          <ScrollView style={{ marginTop: 10 }}>
-            <TreeninKuvausData
-              treeninKesto={treeninKesto}
-              kohderyhma={kohderyhma}
-              treeniText={treeniText}
-              treeniData={treeniData}
-            />
+        <ScrollView style={{ marginTop: 10 }}>
+          <TreeninKuvausData
+            treeninKesto={treeninKesto}
+            kohderyhma={kohderyhma}
+            treeniText={treeniText}
+            treeniData={treeniData}
+          />
 
-            {treeniData.map(({ nimi, videoId, ohjeet, sarjat }) => (
-              <TouchableOpacity
-                key={nimi}
-                onPress={() =>
-                  navigation.navigate('TreeninEsikatselu', {
-                    nimi: nimi,
-                    videoID: videoId,
-                    ohjeet: ohjeet,
-                    title: nimi,
-                  })
-                }
+          {treeniData.map(({ nimi, videoId, ohjeet, sarjat }) => (
+            <TouchableOpacity
+              key={nimi}
+              onPress={() =>
+                navigation.navigate('TreeninEsikatselu', {
+                  nimi: nimi,
+                  videoID: videoId,
+                  ohjeet: ohjeet,
+                  title: nimi,
+                })
+              }
+            >
+              <View
+                style={{
+                  height: 100,
+                  backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  padding: 13,
+                  justifyContent: 'space-between',
+                }}
               >
-                <View
-                  style={{
-                    height: 100,
-                    backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: 13,
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text fontFamily="MontserratRegular" medium>
-                    {nimi}
-                  </Text>
-                  <Text fontFamily="MontserratRegular" medium opacity={0.7}>
-                    {sarjat} sarjaa
-                  </Text>
-                  <Ionicons
-                    name="ios-chevron-forward-sharp"
-                    size={24}
-                    color={themeColor}
-                    style={{ opacity: 0.4 }}
-                  />
-                </View>
-                <View
-                  style={{
-                    height: 1,
-                    width: '100%',
-                    marginLeft: 20,
-                    backgroundColor: 'grey',
-                    opacity: 0.1,
-                  }}
+                <Text fontFamily="MontserratRegular" medium>
+                  {nimi}
+                </Text>
+                <Text fontFamily="MontserratRegular" medium opacity={0.7}>
+                  {sarjat} sarjaa
+                </Text>
+                <Ionicons
+                  name="ios-chevron-forward-sharp"
+                  size={24}
+                  color={themeColor}
+                  style={{ opacity: 0.4 }}
                 />
-                {/* <ListItem
-                  containerStyle={{
-                    height: 100,
-                    backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-                  }}
-                  bottomDivider
-                >
-                  <ListItem.Content>
-                    <Text fontFamily="MontserratRegular" medium>
-                      {nimi}
-                    </Text>
-                    <Text
-                      fontFamily="MontserratRegular"
-                      style={{
-                        position: 'absolute',
-                        left: 235,
-                        color: colorScheme === 'dark' ? '#fff' : '#000',
-                      }}
-                      medium
-                      opacity={0.7}
-                    >
-                      {sarjat} sarjaa
-                    </Text>
-                  </ListItem.Content>
-
-                </ListItem> */}
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </MainDataContainer>
+              </View>
+              <View
+                style={{
+                  height: 1,
+                  width: '100%',
+                  marginLeft: 20,
+                  backgroundColor: 'grey',
+                  opacity: 0.1,
+                }}
+              />
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       ) : (
         <ActivityIndicator style={{ marginTop: 200 }} size="large" />
       )}
@@ -197,16 +169,6 @@ export default function TreeninEsittely({ route, navigation }) {
 const styles = StyleSheet.create({
   image: {
     height: '30%',
+    opacity: 0.93,
   },
 });
-
-const TextContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  flex: 1;
-  align-items: center;
-`;
-
-const MainDataContainer = styled.View`
-  flex: 2;
-`;

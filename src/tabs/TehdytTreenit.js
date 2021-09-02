@@ -2,9 +2,9 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import TehdytCalendar from '../components/tehdytComponents/TehdytCalendar';
-import TehdytChart from '../components/tehdytComponents/TehdytChart';
-import TehdytHae from '../components/tehdytComponents/TehdytHae';
+import TehdytCalendar from '../components/tehdytTabViewScreens/TehdytCalendar';
+import TehdytChart from '../components/tehdytTabViewScreens/TehdytChart';
+import TehdytHae from '../components/tehdytTabViewScreens/TehdytHae';
 import { Container } from '../utils/Styling';
 
 const renderScene = SceneMap({
@@ -47,20 +47,4 @@ export default function TehdytTreenit() {
       />
     </Container>
   );
-  /*   style={{ backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5' }}
-    >
-      <HeaderComponent
-        rightComponent={<TouchableOpacity onPress={loggingOut}>{icon}</TouchableOpacity>}
-        leftComponent={
-          <Text style={{ color: 'white' }} medium>
-            MINÄ
-          </Text>
-        }
-        centerComponent={null}
-        containerStyle={{ backgroundColor: '#2301E4', borderBottomWidth: 'none' }}
-      />
-
-      <TehdytTreenitStats />
-      <AgendaComponent />
-    </TehdytMainContainer> */
 }

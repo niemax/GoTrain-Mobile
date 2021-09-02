@@ -1,13 +1,13 @@
 import React from 'react';
 import Text from './Text';
 
-export default function TervetuloaTeksti({ teksti }) {
+export default function TervetuloaTeksti({ nimi }) {
   return (
     <Text
       fontFamily="MontserratRegular"
       marginTop="10px"
       large
       center
-    >{`Hei, ${teksti}!\n Mitä tänään treenattaisiin?`}</Text>
+    >{`Hei, ${nimi}!\n Mitä tänään treenattaisiin?`}</Text>
   );
 }

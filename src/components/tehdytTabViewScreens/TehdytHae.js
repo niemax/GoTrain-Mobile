@@ -13,8 +13,8 @@ import { Feather } from '@expo/vector-icons';
 import * as firebase from 'firebase';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import { useNavigation } from '@react-navigation/native';
-import { LottieHae } from '../../components/Lottie';
-import Text from '../../components/Text';
+import { LottieHae } from '../Lottie';
+import Text from '../Text';
 
 export default function TehdytHae() {
   const [loading, setLoading] = useState(false);
@@ -55,11 +55,6 @@ export default function TehdytHae() {
     setFilteredData(filtered);
   };
 
-  const handlePress = (item, index) => {
-    console.log(item, index);
-    navigation.navigate('TehdytTreenitData', { data: item });
-  };
-
   const ItemSeparatorView = () => (
     <View
       style={{ height: 1, width: '100%', marginLeft: 25, backgroundColor: 'grey', opacity: 0.1 }}
@@ -68,7 +63,14 @@ export default function TehdytHae() {
 
   const SearchView = ({ item, index }) => (
     <View style={styles.list}>
-      <TouchableOpacity onPress={handlePress(item, index)}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('TehdytTreenitData', {
+            data: item,
+            date: item.pvm,
+          })
+        }
+      >
         <View
           style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
         >

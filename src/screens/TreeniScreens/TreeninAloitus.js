@@ -8,10 +8,10 @@ import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
 import { API } from '@env';
+import * as Haptics from 'expo-haptics';
 import Dialogs from '../../components/Dialogs';
 import LopetaTreeni from './TreeninLopetus';
 import Text from '../../components/Text';
-import * as Haptics from 'expo-haptics';
 import { toastConfig } from '../../config/toastConfig';
 import LinearGradientButton from '../../components/LinearGradientButton';
 import {

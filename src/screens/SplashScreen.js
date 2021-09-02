@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Image, ActivityIndicator } from 'react-native';
 import * as firebase from 'firebase';
-
 import { SplashScreenContainer, SplashAdditionalContainer } from '../utils/Styling';
 
 export default function SplashScreen({ navigation }) {

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { View, ActivityIndicator } from 'react-native';
-import { format } from 'date-fns';
-import * as firebase from 'firebase';
+import React from 'react';
+import { View } from 'react-native';
 import { Agenda, LocaleConfig } from 'react-native-calendars';
 import { Appearance, useColorScheme } from 'react-native-appearance';
+import useAgendaQuery from '../../hooks/useAgendaQuery';
 import { Ionicons } from '@expo/vector-icons';
 import Text from '../../components/Text';
 import { LottieAgenda } from '../../components/Lottie';
@@ -52,130 +51,82 @@ LocaleConfig.locales.fi = {
 LocaleConfig.defaultLocale = 'fi';
 
 export default function AgendaComponent() {
-  const [calendarItems, setCalendarItems] = useState({});
-  const [loading, setLoading] = useState(false);
-
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
   const themeColor = colorScheme === 'dark' ? 'white' : 'black';
 
-  const getData = async () => {
-    setLoading(true);
-    const db = firebase.firestore();
-    const { currentUser } = firebase.auth();
+  const { calendarData, error, loading } = useAgendaQuery();
 
-    db.collection('users')
-      .doc(currentUser.uid)
-      .collection('treenidata')
-      .orderBy('timestamp', 'desc')
-      .get()
+  const renderItem = (item, index) => (
+    <View
+      style={{
+        backgroundColor: colorScheme === 'light' ? '#F9F8F5' : '#141314',
+        padding: 10,
+        margin: 5,
+        borderRadius: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 1,
+        },
+        shadowOpacity: 0.18,
+        shadowRadius: 1.0,
 
-      .then((snapshot) => {
-        const mappedData = snapshot.docs.map((treeni) => {
-          const data = treeni.data();
-          const { timestamp } = data;
-
-          return {
-            ...data,
-            date: format(timestamp, 'yyyy-MM-dd'),
-          };
-        });
-
-        const reduced = mappedData.reduce((acc, currentItem) => {
-          const { date, ...rest } = currentItem;
-
-          acc[date] = [rest];
-
-          return acc;
-        }, {});
-
-        setCalendarItems(reduced);
-      });
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const renderItem = (item, index) => {
-    if (loading) return <ActivityIndicator size="large" style={{ marginTop: 100 }} />;
-    return (
-      <View
-        style={{
-          backgroundColor: colorScheme === 'light' ? '#F9F8F5' : '#141314',
-          padding: 10,
-          margin: 5,
-          borderRadius: 20,
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 1,
-          },
-          shadowOpacity: 0.18,
-          shadowRadius: 1.0,
-
-          elevation: 1,
-          marginTop: 30,
-        }}
-      >
-        <View style={{ flexDirection: 'row' }}>
-          <Ionicons
-            name="md-barbell-outline"
-            size={24}
-            style={{ marginRight: 10 }}
-            color={themeColor}
-          />
-          <Text
-            fontFamily="MontserratRegular"
-            style={{ color: colorScheme === 'dark' ? 'white' : 'black' }}
-            vinkkiTitle
-            left
-          >
-            {item.treeni}
-          </Text>
-        </View>
-        {Object.values(item.treeniData).map((treeni) => (
-          <View key={treeni.nimi}>
-            <Text left medium marginLeft="25px" marginTop="20px" marginBottom="10px">
-              {treeni.nimi}
-            </Text>
-
-            {Object.values(treeni.suoritusStats).map((itm, i) => (
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-around',
-                  paddingVertical: 4,
-                }}
-              >
-                <View>
-                  <Text style={{ color: 'grey' }}>Sarja</Text>
-                  <Text vinkit>{i + 1}</Text>
-                </View>
-                <View>
-                  <Text style={{ color: 'grey' }}>Toistot</Text>
-                  <Text vinkit>{itm.toistot}</Text>
-                </View>
-                <View>
-                  <Text style={{ color: 'grey' }}>Painot</Text>
-                  <Text vinkit>{itm.painot}</Text>
-                </View>
-                {/*                 <View style={{ marginTop: 5, marginLeft: 35 }}>
-                  <Text style={{ color: 'grey' }}>Huom</Text>
-                  <Text small>{itm.lisatiedot}</Text>
-                </View>
-  */}
-              </View>
-            ))}
-            <View
-              style={{ height: 1, width: '90%', margin: 25, backgroundColor: 'grey', opacity: 0.2 }}
-            />
-          </View>
-        ))}
+        elevation: 1,
+        marginTop: 30,
+      }}
+    >
+      <View style={{ flexDirection: 'row' }}>
+        <Ionicons
+          name="md-barbell-outline"
+          size={24}
+          style={{ marginRight: 10 }}
+          color={themeColor}
+        />
+        <Text
+          fontFamily="MontserratRegular"
+          style={{ color: colorScheme === 'dark' ? 'white' : 'black' }}
+          vinkkiTitle
+          left
+        >
+          {item.treeni}
+        </Text>
       </View>
-    );
-  };
+      {Object.values(item.treeniData).map((treeni) => (
+        <View key={treeni.nimi}>
+          <Text left medium marginLeft="25px" marginTop="20px" marginBottom="10px">
+            {treeni.nimi}
+          </Text>
+
+          {Object.values(treeni.suoritusStats).map((itm, i) => (
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                paddingVertical: 4,
+              }}
+            >
+              <View>
+                <Text style={{ color: 'grey' }}>Sarja</Text>
+                <Text vinkit>{i + 1}</Text>
+              </View>
+              <View>
+                <Text style={{ color: 'grey' }}>Toistot</Text>
+                <Text vinkit>{itm.toistot}</Text>
+              </View>
+              <View>
+                <Text style={{ color: 'grey' }}>Painot</Text>
+                <Text vinkit>{itm.painot}</Text>
+              </View>
+            </View>
+          ))}
+          <View
+            style={{ height: 1, width: '90%', margin: 25, backgroundColor: 'grey', opacity: 0.2 }}
+          />
+        </View>
+      ))}
+    </View>
+  );
 
   return (
     <Agenda
@@ -203,8 +154,7 @@ export default function AgendaComponent() {
         minDate: '2021-05-01',
       }}
       firstDay={1}
-      onDayPress={getData}
-      items={calendarItems}
+      items={calendarData}
       renderItem={renderItem}
     />
   );

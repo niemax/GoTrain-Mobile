@@ -1,53 +1,103 @@
-import React, { useState, useEffect } from 'react';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
-import { Tile } from 'react-native-elements';
+import React from 'react';
+import { ScrollView, TouchableOpacity, View, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { API } from '@env';
 import CachedImage from 'react-native-expo-cached-image';
+import { useFetch } from '../hooks/useFetch';
 import { ContentLoaderView } from '../utils/Styling';
-import Skeleton from './Skeleton';
+import Skeleton from './skeletons/Skeleton';
 import Text from './Text';
 
 export default Cards = () => {
-  const [cardData, setCardData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+  const { responseData, loading } = useFetch(`${API}/api/cards/etusivucards`);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    try {
-      axios
-        .get(`${API}/api/cards/etusivucards`)
-        .then((response) => setCardData(response.data))
-
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setTimeout(() => {
-            setLoading(false);
-          }, 1500);
-        });
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
-
   if (loading) {
-    return (
-      <ContentLoaderView>
-        <Skeleton length={cardData.length} />
-      </ContentLoaderView>
-    );
+    return <Skeleton length={responseData.length} />;
   }
   return (
-    <ContentLoaderView>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginTop: 10,
+      }}
+    >
+      {responseData.map(({ nimi, image, treeninkesto }) => (
+        <TouchableOpacity
+          style={{
+            height: 160,
+            width: '47%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginHorizontal: 5,
+            marginVertical: 9,
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+
+            elevation: 5,
+          }}
+          onPress={() =>
+            navigation.navigate('TreeninEsittely', {
+              treeninNimi: nimi,
+              image: image,
+            })
+          }
+        >
+          <Image
+            style={{
+              width: '100%',
+              height: '100%',
+              opacity: 0.8,
+              borderRadius: 20,
+            }}
+            source={{ uri: `${API}/api/${image}` }}
+          />
+          <View
+            style={{
+              position: 'absolute',
+              top: 50,
+              borderRadius: 5,
+              width: '50%',
+              backgroundColor: '#2301e4',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            <Text medium fontFamily="MontserratBold" style={{ color: 'white' }}>
+              {nimi}
+            </Text>
+          </View>
+          <View
+            style={{
+              position: 'absolute',
+              top: 80,
+              borderRadius: 5,
+              width: 'auto',
+              flexDirection: 'column',
+              backgroundColor: '#78E7C7',
+              justifyContent: 'center',
+            }}
+          >
+            <Text medium fontFamily="MontserratBold" style={{ color: 'white' }}>
+              <Feather name="clock" size={18} color="white" />
+              {treeninkesto}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      ))}
+    </View>
+    /*    <ContentLoaderView>
       <ScrollView>
-        {cardData.map(({ nimi, image, treeninkesto }) => (
+        {responseData.map(({ nimi, image, treeninkesto }) => (
           <TouchableOpacity key={nimi}>
-            {/*   <CachedImage source={{ uri: `${API}/api/${image}` }} isBackground={true} /> */}
             <Tile
               onPress={() =>
                 navigation.navigate('TreeninEsittely', {
@@ -79,7 +129,6 @@ export default Cards = () => {
                   </Text>
                 </View>
               }
-              containerStyle={{ marginBottom: 5, justifyContent: 'center' }}
               height={150}
               imageContainerStyle={{
                 opacity: 0.9,
@@ -90,6 +139,6 @@ export default Cards = () => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </ContentLoaderView>
+    </ContentLoaderView> */
   );
 };
