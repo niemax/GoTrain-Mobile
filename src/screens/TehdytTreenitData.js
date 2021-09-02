@@ -9,6 +9,7 @@ export default function TehdytTreenitData({ route }) {
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
   const dataArr = [data];
+  const randomColor = '#' + (((1 << 24) * Math.random()) | 0).toString(16);
 
   return (
     <View style={{ flex: 1, backgroundColor: colorScheme === 'light' ? '#F9F8F5' : '#141314' }}>
@@ -16,19 +17,27 @@ export default function TehdytTreenitData({ route }) {
         <ScrollView
           key={index.toString()}
           contentContainerStyle={{
-            marginTop: 20,
             justifyContent: 'flex-start',
             alignItems: 'left',
-            marginLeft: 25,
+            marginLeft: 20,
           }}
         >
-          <Text fontFamily="MontserratBold" left large>
-            {item.treeni}
-          </Text>
-
+          <View
+            style={{
+              backgroundColor: randomColor,
+              width: 160,
+              marginTop: 15,
+              borderRadius: 20,
+              alignItems: 'center',
+            }}
+          >
+            <Text style={{ color: 'white' }} fontFamily="MontserratBold" left large>
+              {item.treeni}
+            </Text>
+          </View>
           {Object.values(item.treeniData).map((i) => (
             <View style={{ marginTop: 20 }}>
-              <Text left marginTop="10px" fontFamily="MontserratBold" medium>
+              <Text left marginTop="10px" fontFamily="MontserratBold" vinkkiTitle>
                 {i.nimi}
               </Text>
               <Text left fontFamily="MontserratRegular" marginTop="10px" medium>

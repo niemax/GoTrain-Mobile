@@ -80,6 +80,7 @@ const TreeniScreens = () => {
 const TehdytTreenitStack = () => {
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
+  const randomColor = '#' + (((1 << 24) * Math.random()) | 0).toString(16);
 
   return (
     <Stack.Navigator
@@ -95,8 +96,9 @@ const TehdytTreenitStack = () => {
         options={({ route }) => ({
           title: route.params.date,
           headerStyle: {
-            backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-            borderBottomWidth: 0,
+            backgroundColor: randomColor,
+            opacity: 0.97,
+            borderBottomWidth: null,
           },
           headerBackTitle: 'Back',
           headerTintColor: colorScheme === 'dark' ? 'white' : 'black',

@@ -22,10 +22,7 @@ export default function TehdytTreenitData({ route }) {
             marginLeft: 25,
           }}
         >
-          <Text fontFamily="MontserratBold" left large>
-            {item.treeni}
-          </Text>
-
+          <View style={{ backgroundColor: '#2301e4', width: 500, height: 500 }}></View>
           {Object.values(item.treeniData).map((i) => (
             <View style={{ marginTop: 20 }}>
               <Text left marginTop="10px" fontFamily="MontserratBold" medium>
@@ -37,7 +34,7 @@ export default function TehdytTreenitData({ route }) {
               <Text left marginTop="10px" marginBottom="5px" medium>
                 Toistot
               </Text>
-              {Object.values(i.suoritusStats).map((itm, idx) => (
+              {Object.values(i?.suoritusStats).map((itm, idx) => (
                 <View style={{ alignItems: 'left' }}>
                   <Text fontFamily="MontserratRegular" hae>
                     Sarja {idx + 1} - {itm.toistot}
