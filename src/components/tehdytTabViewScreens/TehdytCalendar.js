@@ -10,9 +10,7 @@ export default function TehdytCalendar() {
   const colorScheme = useColorScheme();
 
   return (
-    <TehdytMainContainer
-      style={{ backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5' }}
-    >
+    <TehdytMainContainer style={{ backgroundColor: colorScheme === 'dark' ? '#141314' : 'white' }}>
       <TehdytTreenitStats />
       <AgendaComponent />
     </TehdytMainContainer>

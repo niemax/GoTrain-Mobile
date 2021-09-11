@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, ScrollView } from 'react-native';
-import { Container } from '../utils/Styling';
 import Text from '../components/Text';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 
+Appearance.getColorScheme();
+
 export default function TehdytTreenitData({ route }) {
   const { data, nimi } = route.params;
-  Appearance.getColorScheme();
   const colorScheme = useColorScheme();
   const dataArr = [data];
   const randomColor = '#' + (((1 << 24) * Math.random()) | 0).toString(16);
@@ -46,7 +46,7 @@ export default function TehdytTreenitData({ route }) {
               <Text left marginTop="10px" marginBottom="5px" medium>
                 Toistot
               </Text>
-              {Object.values(i.suoritusStats).map((itm, idx) => (
+              {Object.values(item.suoritusStats).map((itm, idx) => (
                 <View style={{ alignItems: 'left' }}>
                   <Text fontFamily="MontserratRegular" hae>
                     Sarja {idx + 1} - {itm.toistot}
@@ -57,13 +57,18 @@ export default function TehdytTreenitData({ route }) {
                 Painot
               </Text>
               {Object.values(
-                i.suoritusStats.map((itm, idx) => (
-                  <View style={{ alignItems: 'left' }}>
-                    <Text fontFamily="MontserratRegular" hae>
-                      Sarja {idx + 1} - {itm.painot}
-                    </Text>
-                  </View>
-                ))
+                i.suoritusStats.map((itm, idx) => {
+                  if (itm) {
+                    return (
+                      <View style={{ alignItems: 'left' }}>
+                        <Text fontFamily="MontserratRegular" hae>
+                          Sarja {idx + 1} - {itm.painot}
+                        </Text>
+                      </View>
+                    );
+                  }
+                  return null;
+                })
               )}
             </View>
           ))}

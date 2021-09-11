@@ -60,7 +60,7 @@ export default function AgendaComponent() {
   const renderItem = (item, index) => (
     <View
       style={{
-        backgroundColor: colorScheme === 'light' ? '#F9F8F5' : '#141314',
+        backgroundColor: colorScheme === 'light' ? '#F9F8F5' : 'white',
         padding: 10,
         margin: 5,
         borderRadius: 20,
@@ -139,8 +139,8 @@ export default function AgendaComponent() {
         </>
       )}
       theme={{
-        calendarBackground: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+        calendarBackground: colorScheme === 'dark' ? '#141314' : 'white',
+        backgroundColor: colorScheme === 'dark' ? '#141314' : 'white',
         agendaDayTextColor: '#2301E4',
         agendaDayNumColor: '#2301E4',
         agendaTodayColor: '#2301E4',

@@ -13,7 +13,7 @@ export default function TreeninKuvausData({ treeninKesto, kohderyhma, treeniText
   return (
     <Container
       style={{
-        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+        backgroundColor: colorScheme === 'dark' ? '#141314' : 'white',
       }}
     >
       <Text vinkkiTitle left marginLeft="15px">

@@ -81,7 +81,7 @@ export default function AloitusTimer({ timerOn }) {
         </Text>
         <AnimatedCircularProgress
           size={150}
-          width={6}
+          width={7}
           fill={count - elapsed}
           tintColor="#2301e4"
           backgroundColor="black"

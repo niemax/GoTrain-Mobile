@@ -26,119 +26,273 @@ export default Cards = () => {
       }}
     >
       {responseData.map(({ nimi, image, treeninkesto }) => (
-        <TouchableOpacity
-          style={{
-            height: 160,
-            width: '47%',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginHorizontal: 5,
-            marginVertical: 9,
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-
-            elevation: 5,
-          }}
-          onPress={() =>
-            navigation.navigate('TreeninEsittely', {
-              treeninNimi: nimi,
-              image: image,
-            })
-          }
-        >
-          <Image
+        <>
+          <TouchableOpacity
+            style={{
+              height: 160,
+              width: '47%',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginHorizontal: 5,
+              marginVertical: 9,
+              backgroundColor: 'grey',
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
+            }}
+            onPress={() =>
+              navigation.navigate('TreeninEsittely', {
+                treeninNimi: nimi,
+                image: image,
+              })
+            }
+          >
+            {/* <Image
             style={{
               width: '100%',
               height: '100%',
               opacity: 0.8,
               borderRadius: 20,
             }}
-            source={{ uri: `${API}/api/${image}` }}
-          />
-          <View
+            source={{ uri: `${API}/api/${image}`, cache: 'default' }}
+          /> */}
+            <View
+              style={{
+                position: 'absolute',
+                top: 50,
+                borderRadius: 5,
+                width: '50%',
+                backgroundColor: '#2301e4',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <Text medium fontFamily="MontserratBold" style={{ color: 'white' }}>
+                {nimi}
+              </Text>
+            </View>
+            <View
+              style={{
+                position: 'absolute',
+                top: 80,
+                borderRadius: 5,
+                width: 'auto',
+                flexDirection: 'column',
+                backgroundColor: '#78E7C7',
+                justifyContent: 'center',
+              }}
+            >
+              <Text medium fontFamily="MontserratBold" style={{ color: 'white' }}>
+                <Feather name="clock" size={18} color="white" />
+                {treeninkesto}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
             style={{
-              position: 'absolute',
-              top: 50,
-              borderRadius: 5,
-              width: '50%',
-              backgroundColor: '#2301e4',
-              flexDirection: 'column',
+              height: 160,
+              width: '47%',
               justifyContent: 'center',
+              alignItems: 'center',
+              marginHorizontal: 5,
+              marginVertical: 9,
+              backgroundColor: 'grey',
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
             }}
+            onPress={() =>
+              navigation.navigate('TreeninEsittely', {
+                treeninNimi: nimi,
+                image: image,
+              })
+            }
           >
-            <Text medium fontFamily="MontserratBold" style={{ color: 'white' }}>
-              {nimi}
-            </Text>
-          </View>
-          <View
+            {/* <Image
             style={{
-              position: 'absolute',
-              top: 80,
-              borderRadius: 5,
-              width: 'auto',
-              flexDirection: 'column',
-              backgroundColor: '#78E7C7',
-              justifyContent: 'center',
+              width: '100%',
+              height: '100%',
+              opacity: 0.8,
+              borderRadius: 20,
             }}
+            source={{ uri: `${API}/api/${image}`, cache: 'default' }}
+          /> */}
+            <View
+              style={{
+                position: 'absolute',
+                top: 50,
+                borderRadius: 5,
+                width: '50%',
+                backgroundColor: '#2301e4',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <Text medium fontFamily="MontserratBold" style={{ color: 'white' }}>
+                {nimi}
+              </Text>
+            </View>
+            <View
+              style={{
+                position: 'absolute',
+                top: 80,
+                borderRadius: 5,
+                width: 'auto',
+                flexDirection: 'column',
+                backgroundColor: '#78E7C7',
+                justifyContent: 'center',
+              }}
+            >
+              <Text medium fontFamily="MontserratBold" style={{ color: 'white' }}>
+                <Feather name="clock" size={18} color="white" />
+                {treeninkesto}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              height: 160,
+              width: '47%',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginHorizontal: 5,
+              marginVertical: 9,
+              backgroundColor: 'grey',
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
+            }}
+            onPress={() =>
+              navigation.navigate('TreeninEsittely', {
+                treeninNimi: nimi,
+                image: image,
+              })
+            }
           >
-            <Text medium fontFamily="MontserratBold" style={{ color: 'white' }}>
-              <Feather name="clock" size={18} color="white" />
-              {treeninkesto}
-            </Text>
-          </View>
-        </TouchableOpacity>
+            {/* <Image
+            style={{
+              width: '100%',
+              height: '100%',
+              opacity: 0.8,
+              borderRadius: 20,
+            }}
+            source={{ uri: `${API}/api/${image}`, cache: 'default' }}
+          /> */}
+            <View
+              style={{
+                position: 'absolute',
+                top: 50,
+                borderRadius: 5,
+                width: '50%',
+                backgroundColor: '#2301e4',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <Text medium fontFamily="MontserratBold" style={{ color: 'white' }}>
+                {nimi}
+              </Text>
+            </View>
+            <View
+              style={{
+                position: 'absolute',
+                top: 80,
+                borderRadius: 5,
+                width: 'auto',
+                flexDirection: 'column',
+                backgroundColor: '#78E7C7',
+                justifyContent: 'center',
+              }}
+            >
+              <Text medium fontFamily="MontserratBold" style={{ color: 'white' }}>
+                <Feather name="clock" size={18} color="white" />
+                {treeninkesto}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              height: 160,
+              width: '47%',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginHorizontal: 5,
+              marginVertical: 9,
+              backgroundColor: 'grey',
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
+            }}
+            onPress={() =>
+              navigation.navigate('TreeninEsittely', {
+                treeninNimi: nimi,
+                image: image,
+              })
+            }
+          >
+            {/* <Image
+            style={{
+              width: '100%',
+              height: '100%',
+              opacity: 0.8,
+              borderRadius: 20,
+            }}
+            source={{ uri: `${API}/api/${image}`, cache: 'default' }}
+          /> */}
+            <View
+              style={{
+                position: 'absolute',
+                top: 50,
+                borderRadius: 5,
+                width: '50%',
+                backgroundColor: '#2301e4',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <Text medium fontFamily="MontserratBold" style={{ color: 'white' }}>
+                {nimi}
+              </Text>
+            </View>
+            <View
+              style={{
+                position: 'absolute',
+                top: 80,
+                borderRadius: 5,
+                width: 'auto',
+                flexDirection: 'column',
+                backgroundColor: '#78E7C7',
+                justifyContent: 'center',
+              }}
+            >
+              <Text medium fontFamily="MontserratBold" style={{ color: 'white' }}>
+                <Feather name="clock" size={18} color="white" />
+                {treeninkesto}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </>
       ))}
     </View>
-    /*    <ContentLoaderView>
-      <ScrollView>
-        {responseData.map(({ nimi, image, treeninkesto }) => (
-          <TouchableOpacity key={nimi}>
-            <Tile
-              onPress={() =>
-                navigation.navigate('TreeninEsittely', {
-                  treeninNimi: nimi,
-                  image: image,
-                })
-              }
-              imageSrc={{
-                uri: `${API}/api/${image}`,
-                cache: 'default',
-              }}
-              title={
-                <Text title style={{ color: '#FFF', fontFamily: 'MontserratBold' }}>
-                  {nimi}
-                </Text>
-              }
-              featured
-              caption={
-                <View style={{ flexDirection: 'row' }}>
-                  <Feather name="clock" size={28} color="white" />
-                  <Text
-                    medium
-                    style={{
-                      color: '#FFF',
-                      fontFamily: 'MontserratSemiBold',
-                    }}
-                  >
-                    {treeninkesto}
-                  </Text>
-                </View>
-              }
-              height={150}
-              imageContainerStyle={{
-                opacity: 0.9,
-                width: '98%',
-                borderRadius: 15,
-              }}
-            />
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-    </ContentLoaderView> */
   );
 };

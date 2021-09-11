@@ -16,12 +16,13 @@ const chartConfig = {
   color: (opacity = 1) => `rgba(56, 125, 255, ${opacity})`,
 };
 
+Appearance.getColorScheme();
+
 export default function ChartData() {
   const [xValue, setXValue] = useState([]);
   const [yValue, setYValue] = useState([]);
-
-  Appearance.getColorScheme();
   const colorScheme = useColorScheme();
+
   const themeColor = colorScheme === 'dark' ? 'white' : 'black';
   const chartColor = colorScheme === 'dark' ? '#191919' : 'white';
 
@@ -69,7 +70,7 @@ export default function ChartData() {
   return (
     <Container
       style={{
-        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+        backgroundColor: colorScheme === 'dark' ? '#141314' : 'white',
       }}
     >
       <View style={{ flexDirection: 'row' }}>
@@ -100,7 +101,7 @@ export default function ChartData() {
       >
         <BarChart
           verticalLabelRotation={15}
-          showValuesOnTopOfBars={true}
+          showValuesOnTopOfBars="true"
           data={barData}
           width={screenWidth}
           height={250}

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Platform } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { Ionicons, AntDesign, Feather } from '@expo/vector-icons';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Feather } from '@expo/vector-icons';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';
@@ -56,6 +56,8 @@ const TreeniScreens = () => {
         component={TreeninEsittely}
       />
       <Stack.Screen
+        screenOptions={{ mode: 'modal' }}
+        mode="modal"
         name="TreeninEsikatselu"
         options={({ route }) => ({
           title: route.params.nimi,
@@ -80,7 +82,6 @@ const TreeniScreens = () => {
 const TehdytTreenitStack = () => {
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
-  const randomColor = '#' + (((1 << 24) * Math.random()) | 0).toString(16);
 
   return (
     <Stack.Navigator
@@ -96,9 +97,8 @@ const TehdytTreenitStack = () => {
         options={({ route }) => ({
           title: route.params.date,
           headerStyle: {
-            backgroundColor: randomColor,
-            opacity: 0.97,
-            borderBottomWidth: null,
+            backgroundColor: colorScheme === 'dark' ? '#141314' : 'white',
+            borderBottomWidth: 0,
           },
           headerBackTitle: 'Back',
           headerTintColor: colorScheme === 'dark' ? 'white' : 'black',
@@ -113,7 +113,7 @@ const Tab = createMaterialBottomTabNavigator();
 const KotiMainTab = () => {
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
-  const themeColor = colorScheme === 'dark' ? '#141314' : '#F9F8F5';
+  const themeColor = colorScheme === 'dark' ? '#141314' : 'white';
   const activeColor = colorScheme === 'dark' ? 'white' : 'black';
 
   return (
@@ -144,5 +144,15 @@ const KotiMainTab = () => {
     </Tab.Navigator>
   );
 };
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Drawer" component={Drawer} />
+    </Drawer.Navigator>
+  );
+}
 
 export default MainAppStack;

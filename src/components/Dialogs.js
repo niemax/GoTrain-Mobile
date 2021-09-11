@@ -46,8 +46,8 @@ export default function Dialogs({
   );
   const fabIcon = <Entypo name="edit" size={26} color="white" />;
   const timerIcon = <Ionicons name="timer-outline" size={30} color="white" />;
-  const notDoneIcon = <Feather name="x" size={26} color="red" />;
-  const doneIcon = <Feather name="check" size={26} color="#78E7C7" />;
+  const notDoneIcon = <Feather name="x" size={30} color="red" />;
+  const doneIcon = <Feather name="check" size={30} color="#78E7C7" />;
 
   const handlePresentModalPress = () => {
     actionSheetRef.current.show();
@@ -125,33 +125,33 @@ export default function Dialogs({
               <View
                 style={{
                   flexDirection: 'row',
-                  paddingHorizontal: 26,
+                  paddingHorizontal: 20,
                   marginVertical: 20,
+                  alignItems: 'center',
                 }}
               >
-                <Text style={{ color: colorScheme === 'dark' ? 'white' : 'black' }} medium>
-                  Sarja {idx + 1}
-                </Text>
-                {lisaaIcon}
-                <TouchableOpacity
+                <View
                   style={{
-                    height: 30,
-                    width: 30,
-                    opacity: 0.6,
-                    borderRadius: 20,
                     backgroundColor: 'grey',
-                    alignItems: 'center',
+                    opacity: 0.6,
+                    height: 50,
+                    width: 50,
+                    borderRadius: '50%',
                     justifyContent: 'center',
                   }}
                 >
-                  {renderIcon(idx)}
-                </TouchableOpacity>
+                  <Text style={{ color: colorScheme === 'dark' ? 'white' : 'black' }} large>
+                    {idx + 1}
+                  </Text>
+                </View>
+                {lisaaIcon}
+                <TouchableOpacity>{renderIcon(idx)}</TouchableOpacity>
               </View>
               <View
                 style={{
                   height: 1,
                   width: '100%',
-                  marginLeft: 20,
+                  marginLeft: 100,
                   backgroundColor: 'grey',
                   opacity: 0.12,
                 }}

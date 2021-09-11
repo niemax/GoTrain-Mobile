@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Touchable } from 'react-native';
 import * as Location from 'expo-location';
 import { Header } from 'react-native-elements';
-import { Ionicons, Feather } from '@expo/vector-icons';
-import styled from 'styled-components/native';
+import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import { loggingOut } from '../API/FirebaseMethods';
+import { DrawerActions } from '@react-navigation/native';
 import Text from './Text';
+import { TouchableOpacity } from '@gorhom/bottom-sheet';
 
 const HeaderComponent = (props) => {
   const [temp, setTemp] = useState(null);
@@ -69,7 +69,9 @@ const HeaderComponent = (props) => {
     <Header
       centerComponent={
         !weatherLoading ? (
-          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+          >
             <Text medium center>
               {' '}
               {temp}
@@ -83,6 +85,13 @@ const HeaderComponent = (props) => {
         ) : (
           <Text medium>Loading...</Text>
         )
+      }
+      rightComponent={
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <Feather name="settings" size={24} color={colorScheme === 'dark' ? 'white' : 'black'} />
+          </TouchableOpacity>
+        </View>
       }
       {...props}
     />

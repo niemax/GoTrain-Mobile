@@ -39,7 +39,6 @@ const TehdytTreenitStats = () => {
   }, []);
 
   Appearance.getColorScheme();
-  const colorScheme = useColorScheme();
 
   return (
     <>

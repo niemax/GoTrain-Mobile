@@ -77,7 +77,7 @@ export default function TreeninEsittely({ route, navigation }) {
   return (
     <Container
       style={{
-        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+        backgroundColor: colorScheme === 'dark' ? '#141314' : 'white',
       }}
     >
       <Dialog.Container visible={timerVisible} contentStyle={{ opacity: 0.98 }}>
@@ -117,7 +117,7 @@ export default function TreeninEsittely({ route, navigation }) {
               <View
                 style={{
                   height: 100,
-                  backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+                  backgroundColor: colorScheme === 'dark' ? '#141314' : 'white',
                   flexDirection: 'row',
                   alignItems: 'center',
                   padding: 13,

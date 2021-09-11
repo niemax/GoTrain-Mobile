@@ -17,7 +17,7 @@ const TreeninEsikatselu = ({ route, navigation }) => {
   return (
     <Container
       style={{
-        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+        backgroundColor: colorScheme === 'dark' ? '#141314' : 'white',
       }}
     >
       <YoutubePlayer height={230} videoId={videoID} />

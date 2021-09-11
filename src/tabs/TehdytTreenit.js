@@ -36,7 +36,7 @@ export default function TehdytTreenit() {
   );
 
   return (
-    <Container style={{ backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5' }}>
+    <Container style={{ backgroundColor: colorScheme === 'dark' ? '#141314' : 'white' }}>
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}

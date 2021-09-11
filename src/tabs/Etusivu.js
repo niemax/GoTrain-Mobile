@@ -4,39 +4,38 @@ import { Appearance, useColorScheme } from 'react-native-appearance';
 import Text from '../components/Text';
 import HeaderComponent from '../components/HeaderComponent';
 import { Container, WelcomeNameContainer } from '../utils/Styling';
-import { getCurrentDate, getUserInfo } from '../utils/helperFuncs/getCurrentDate';
+import useUserInfo from '../hooks/useUserInfo';
+import { getCurrentDate } from '../utils/helperFuncs/getCurrentDate';
 import Cards from '../components/EtusivuCards';
 import 'moment/locale/fi';
-import WelcomeNameSkeleton from '../components/skeletons/welcomeNameSkeleton';
 import TervetuloaText from '../components/TervetuloaText';
 
 const Etusivu = () => {
   const [currentDate, setCurrentDate] = useState('');
-  const [username, setUserName] = useState('');
   const [loading, setLoading] = useState(false);
+  const { username } = useUserInfo();
 
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
 
   useEffect(() => {
-    setLoading(true);
+    console.log(username);
     const { date } = getCurrentDate();
     setCurrentDate(date);
-    const { dataObj } = getUserInfo();
     setTimeout(() => {}, 2000);
-    //    setLoading(false);
+    setLoading(false);
   }, [currentDate]);
 
   return (
     <Container
       style={{
-        backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+        backgroundColor: colorScheme === 'dark' ? '#141314' : 'white',
       }}
     >
       <HeaderContainer>
         <HeaderComponent
           containerStyle={{
-            backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+            backgroundColor: colorScheme === 'dark' ? '#141314' : 'white',
             borderBottomWidth: 0,
           }}
           leftComponent={{ text: <Text medium>KOTI</Text> }}
@@ -46,7 +45,7 @@ const Etusivu = () => {
         <Text fontFamily="MontserratRegular" marginLeft="25px" marginBottom="25px" medium left>
           {currentDate.toUpperCase()}
         </Text>
-        <TervetuloaText nimi={username} />
+        <TervetuloaText /* nimi={username} */ />
       </TextContainer>
       <Cards />
     </Container>
