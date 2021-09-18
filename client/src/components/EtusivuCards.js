@@ -3,7 +3,6 @@ import { ScrollView, TouchableOpacity, View, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { API, localhost } from '@env';
-import CachedImage from 'react-native-expo-cached-image';
 import { useFetch } from '../hooks/useFetch';
 import Skeleton from './skeletons/Skeleton';
 import Text from './Text';
