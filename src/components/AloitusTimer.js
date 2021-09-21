@@ -1,36 +1,33 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { AppState, View, TouchableOpacity, Touchable } from 'react-native';
+import { AppState, SegmentedControlIOSComponent } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Ionicons } from '@expo/vector-icons';
 import Text from './Text';
-import { Feather } from '@expo/vector-icons';
-import * as Haptics from 'expo-haptics';
-import { Appearance, useColorScheme } from 'react-native-appearance';
 import { differenceInSeconds } from 'date-fns';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { TaukoButton, JatkaButton, LisaAikaButton } from '../utils/Styling';
 
-export default function AloitusTimer({ timerOn }) {
+export default function AloitusTimer({ timerOn, setTimerOn }) {
   const [count, setCount] = useState(150);
   const [elapsed, setElapsed] = useState(0);
-  const [totalTime, setTotalTime] = useState();
   const appState = useRef(AppState.currentState);
-
-  Appearance.getColorScheme();
-  const colorScheme = useColorScheme();
-  const themeColor = colorScheme === 'dark' ? 'white' : 'black';
+  const timerIcon = <Ionicons name="timer-outline" size={38} color="#338467" />;
 
   useEffect(() => {
     let timerInterval;
-    if (count <= 0 || count - elapsed <= 0) clearInterval(timerInterval);
-
-    timerInterval = setInterval(() => {
-      setCount((c) => c - 1);
-    }, 1000);
-
+    if (elapsed >= count) {
+      clearInterval(timerInterval);
+      setTimerOn(false);
+      setCount(150);
+    }
+    if (timerOn) {
+      timerInterval = setInterval(() => {
+        setCount((c) => c - 1);
+      }, 1000);
+    }
     return () => {
       clearInterval(timerInterval);
     };
-  }, [count, elapsed]);
+  }, [count, elapsed, timerOn]);
 
   const getElapsedTime = async () => {
     try {
@@ -45,7 +42,6 @@ export default function AloitusTimer({ timerOn }) {
   const handleAppStateChange = async (nextAppState) => {
     if (appState.current.match(/inactive|background/) && nextAppState === 'active') {
       const elapsed = await getElapsedTime();
-      elapsed.toFixed(0);
       setElapsed(elapsed);
     } else {
       try {
@@ -63,54 +59,15 @@ export default function AloitusTimer({ timerOn }) {
     return () => AppState.removeEventListener('change', handleAppStateChange);
   }, []);
 
-  const handleLisaAika = () => {
-    Haptics.selectionAsync();
-    setCount((prevCount) => prevCount + 15);
-  };
-
-  const handleMinusAika = () => {
-    Haptics.selectionAsync();
-    setCount((prevCount) => prevCount - 15);
-  };
-
   return (
     <>
-      <View style={{ height: 250, alignItems: 'center' }}>
-        <Text fontFamily="MontserratBold" large marginBottom="30px">
-          TAUKO
-        </Text>
-        <AnimatedCircularProgress
-          size={150}
-          width={7}
-          fill={count - elapsed}
-          tintColor="#2301e4"
-          backgroundColor="black"
-        >
-          {(fill) =>
-            count - elapsed > 0 ? (
-              <Text title fontFamily="MontserratBold" style={{ color: '#054dd9' }}>
-                {count - elapsed}s
-              </Text>
-            ) : (
-              <Text medium>Tauko päättynyt</Text>
-            )
-          }
-        </AnimatedCircularProgress>
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginHorizontal: 10,
-        }}
-      >
-        <TouchableOpacity onPress={handleMinusAika}>
-          <Feather name="minus" size={56} color={themeColor} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleLisaAika}>
-          <Feather name="plus" size={56} color={themeColor} />
-        </TouchableOpacity>
-      </View>
+      <AnimatedCircularProgress size={70} width={4} fill={count - elapsed} tintColor="#338467">
+        {(fill) => (
+          <Text large fontFamily="MontserratBold" style={{ color: '#338467' }}>
+            {timerOn ? fill.toFixed(0) : timerIcon}
+          </Text>
+        )}
+      </AnimatedCircularProgress>
     </>
   );
 }

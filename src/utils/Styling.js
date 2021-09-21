@@ -23,7 +23,6 @@ export const TehdytTreenitContainer = styled.View`
 `;
 
 export const LopetusCardsContainer = styled.View`
-  background-color: #2301e4;
   border-bottom-left-radius: 30px;
   height: 220px;
 `;
@@ -59,13 +58,21 @@ export const ParagraphContainer = styled.View`
 `;
 
 export const AloitaButton = styled.TouchableOpacity`
-  elevation: 6;
-  width: 80%;
-  height: 50px;
+  width: 70px;
+  height: 70px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  background-color: #338467;
+`;
+
+export const LopetaButton = styled.TouchableOpacity`
+  width: 350px;
+  height: 60px;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  background-color: #2301e4;
+  background-color: #338467;
 `;
 
 export const FloatingActionButton = styled.TouchableOpacity`
@@ -74,7 +81,7 @@ export const FloatingActionButton = styled.TouchableOpacity`
   height: 65px;
   justify-content: center;
   border-radius: 60px;
-  background-color: #2301e4;
+  background-color: #338467;
 `;
 
 export const ButtonContainer = styled.View`
@@ -116,7 +123,7 @@ export const SplashScreenContainer = styled.View`
   justify-content: center;
   align-items: center;
   flex: 1;
-  background-color: #2301e4;
+  background-color: #338467;
 `;
 
 export const SplashAdditionalContainer = styled.View``;
@@ -177,7 +184,7 @@ export const LoadingView = styled.View`
 `;
 
 export const Loading = styled.ActivityIndicator`
-  margin-top: 30px;
+  margin-top: 150;
 `;
 
 export const ProgressBarContainer = styled.View`

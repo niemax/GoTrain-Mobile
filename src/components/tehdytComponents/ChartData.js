@@ -7,13 +7,14 @@ import { Container } from '../../utils/Styling';
 import 'firebase/firestore';
 import Text from '../Text';
 import { Feather } from '@expo/vector-icons';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const screenWidth = Dimensions.get('window').width;
 
 const chartConfig = {
   backgroundGradientFromOpacity: 0,
   backgroundGradientToOpacity: 0,
-  color: (opacity = 1) => `rgba(56, 125, 255, ${opacity})`,
+  color: (opacity = 1) => `rgba(23, 78, 58, ${opacity})`,
 };
 
 Appearance.getColorScheme();
@@ -86,7 +87,7 @@ export default function ChartData() {
       </View>
       <View
         style={{
-          borderRadius: 20,
+          borderRadius: 10,
           shadowColor: '#000',
           shadowOffset: {
             width: 0,
@@ -99,14 +100,16 @@ export default function ChartData() {
           backgroundColor: chartColor,
         }}
       >
-        <BarChart
-          verticalLabelRotation={15}
-          showValuesOnTopOfBars="true"
-          data={barData}
-          width={screenWidth}
-          height={250}
-          chartConfig={chartConfig}
-        />
+        <ScrollView horizontal="true">
+          <BarChart
+            verticalLabelRotation={8}
+            showValuesOnTopOfBars="true"
+            data={barData}
+            width={screenWidth}
+            height={250}
+            chartConfig={chartConfig}
+          />
+        </ScrollView>
       </View>
     </Container>
   );

@@ -29,7 +29,7 @@ export default function TehdytTreenit() {
       lazy
       activeColor={colorScheme === 'dark' ? '#fff' : '#000'}
       inactiveColor={colorScheme === 'dark' ? '#fff' : '#000'}
-      indicatorStyle={{ backgroundColor: '#2301E4' }}
+      indicatorStyle={{ backgroundColor: '#338467' }}
       style={{ backgroundColor: 'transparent', marginTop: 40, marginBottom: 20 }}
       {...props}
     />
@@ -38,6 +38,7 @@ export default function TehdytTreenit() {
   return (
     <Container style={{ backgroundColor: colorScheme === 'dark' ? '#141314' : 'white' }}>
       <TabView
+        swipeEnabled="false"
         navigationState={{ index, routes }}
         renderScene={renderScene}
         renderTabBar={renderTabBar}

@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { Alert, View, StyleSheet, TouchableOpacity, Touchable } from 'react-native';
+import { Alert, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Feather, Entypo, Ionicons } from '@expo/vector-icons';
-import Emoji from 'react-native-emoji';
 import AloitusTimer from './AloitusTimer';
 import Dialog from 'react-native-dialog';
 import { FloatingActionButton } from '../utils/Styling';
@@ -22,11 +21,8 @@ export default function Dialogs({
   toistotPainotData,
   setToistotPainotData,
   sarjatLength,
-  videoId,
-  index,
 }) {
   const [currentItem, setCurrentItem] = useState([]);
-  const [timerVisible, setTimerVisible] = useState(false);
   const [timerOn, setTimerOn] = useState(false);
   const actionSheetRef = useRef(null);
   Appearance.getColorScheme();
@@ -45,9 +41,8 @@ export default function Dialogs({
     />
   );
   const fabIcon = <Entypo name="edit" size={26} color="white" />;
-  const timerIcon = <Ionicons name="timer-outline" size={30} color="white" />;
   const notDoneIcon = <Feather name="x" size={30} color="red" />;
-  const doneIcon = <Feather name="check" size={30} color="#78E7C7" />;
+  const doneIcon = <Feather name="check" size={30} color="#2C765B" />;
 
   const handlePresentModalPress = () => {
     actionSheetRef.current.show();
@@ -77,7 +72,7 @@ export default function Dialogs({
     }, 500);
 
     setTimeout(() => {
-      setTimerVisible(true);
+      setTimerOn(true);
     }, 800);
   };
 
@@ -106,15 +101,15 @@ export default function Dialogs({
       <ActionSheet
         ref={actionSheetRef}
         headerAlwaysVisible="true"
+        gestureEnabled="true"
         containerStyle={{
           backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
         }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
-          <Text left vinkkiTitle marginLeft="25px" marginBottom="10px" marginTop="10px">
-            Syötä sarjojen tiedot
+          <Text left medium marginLeft="25px" marginBottom="10px" marginTop="10px">
+            SYÖTÄ SARJAN TIEDOT
           </Text>
-          <Emoji name="collision" style={{ fontSize: 30, marginLeft: 2 }} />
         </View>
         {Array.from(Array(parseInt(sarjatLength))).map((i, idx) => (
           <TouchableOpacity onPress={() => handlePress(i, idx)}>
@@ -126,7 +121,7 @@ export default function Dialogs({
                 style={{
                   flexDirection: 'row',
                   paddingHorizontal: 20,
-                  marginVertical: 20,
+                  marginVertical: 13,
                   alignItems: 'center',
                 }}
               >
@@ -183,10 +178,6 @@ export default function Dialogs({
         ))}
       </ActionSheet>
 
-      <Dialog.Container visible={timerVisible} contentStyle={{ opacity: 0.98 }}>
-        <AloitusTimer />
-        <Dialog.Button label="Sulje" onPress={() => setTimerVisible(false)} />
-      </Dialog.Container>
       <View
         style={{
           flexDirection: 'row',
@@ -195,21 +186,7 @@ export default function Dialogs({
           marginHorizontal: 18,
         }}
       >
-        <FloatingActionButton
-          style={{
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 6,
-            },
-            shadowOpacity: 0.37,
-            shadowRadius: 7.49,
-            elevation: 12,
-          }}
-          onPress={() => setTimerVisible(true)}
-        >
-          <Text>{timerIcon}</Text>
-        </FloatingActionButton>
+        <AloitusTimer timerOn={timerOn} setTimerOn={setTimerOn} />
         <FloatingActionButton
           style={{
             shadowColor: '#000',

@@ -24,7 +24,7 @@ export default function TreeninLopetusCards({ data }) {
         <Text style={{ fontFamily: 'MontserratBold', color: themeColor }} medium>
           TREENIT{' '}
         </Text>
-        <Text style={{ fontFamily: 'MontserratBold', color: '#2301E4' }} title color="#054dd9">
+        <Text style={{ fontFamily: 'MontserratBold', color: '#338467' }} title color="#054dd9">
           {Object.keys(data).length}
         </Text>
       </Card>
@@ -41,7 +41,7 @@ export default function TreeninLopetusCards({ data }) {
         <Text style={{ fontFamily: 'MontserratBold', color: themeColor }} medium>
           SUORITUS %{' '}
         </Text>
-        <Text style={{ fontFamily: 'MontserratBold', color: '#2301E4' }} title color="#054dd9">
+        <Text style={{ fontFamily: 'MontserratBold', color: '#338467' }} title color="#054dd9">
           100
         </Text>
       </Card>

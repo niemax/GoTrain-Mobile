@@ -1,25 +1,22 @@
 import React from 'react';
-import Text from '../components/Text';
+import { BaseToast } from 'react-native-toast-message';
 import { Feather } from '@expo/vector-icons';
-import { Appearance, useColorScheme } from 'react-native-appearance';
-import Toast, { BaseToast } from 'react-native-toast-message';
 
-Appearance.getColorScheme();
-
+const icon = <Feather name="alert-triangle" size={24} color="black" />;
 export const toastConfig = {
   success: ({ text2, ...rest }) => (
     <BaseToast
       {...rest}
-      style={{ borderLeftColor: '#78E7C7', backgroundColor: 'white', width: '100%', height: 65 }}
+      style={{ borderLeftColor: '#338467', backgroundColor: '#141314', width: '100%', height: 80 }}
       contentContainerStyle={{
         paddingHorizontal: 15,
-        backgroundColor: 'black',
+        backgroundColor: '#141314',
         opacity: 0.9,
       }}
       text2Style={{
         color: 'white',
         fontSize: 17,
-        fontFamily: 'MontserratBold',
+        fontFamily: 'MontserratSemiBold',
       }}
       text2={text2}
     />
@@ -27,17 +24,17 @@ export const toastConfig = {
   error: ({ text1, text2, ...rest }) => (
     <BaseToast
       {...rest}
-      style={{ borderLeftColor: 'red', backgroundColor: 'white', width: '100%', height: 65 }}
+      style={{ borderLeftColor: 'red', backgroundColor: '#141314', width: '100%', height: 65 }}
       contentContainerStyle={{
         paddingHorizontal: 15,
         width: '100%',
-        backgroundColor: 'black',
+        backgroundColor: '#141314',
         opacity: 0.9,
       }}
       text2Style={{
         color: 'white',
         fontSize: 17,
-        fontFamily: 'MontserratBold',
+        fontFamily: 'MontserratSemiBold',
       }}
       text2={text2}
     />

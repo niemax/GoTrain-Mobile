@@ -3,14 +3,19 @@ import { View, ActivityIndicator } from 'react-native';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import 'moment/locale/fi';
 import { AntDesign } from '@expo/vector-icons';
-import Text from '../../components/Text';
 import * as firebase from 'firebase';
+import { color } from 'react-native-reanimated';
+import Text from '../Text';
 import { TehdytTreenitBoxContainer } from '../../utils/Styling';
 
 const TehdytTreenitStats = () => {
   const [dataLength, setDataLength] = useState('');
   const [favorite, setFavorite] = useState('');
   const [loading, setLoading] = useState(false);
+
+  Appearance.getColorScheme();
+  const colorScheme = useColorScheme();
+  const themeColor = colorScheme === 'dark' ? 'white' : 'black';
 
   useEffect(() => {
     setLoading(true);
@@ -42,43 +47,51 @@ const TehdytTreenitStats = () => {
 
   return (
     <>
-      <TehdytTreenitBoxContainer
-        style={{
-          backgroundColor: '#2301e4',
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 1,
-          },
-          shadowOpacity: 0.2,
-          shadowRadius: 1.41,
-          elevation: 2,
-          marginTop: 5,
-          marginBottom: 3,
-        }}
-      >
+      <TehdytTreenitBoxContainer>
         <View style={{ flexDirection: 'column' }}>
-          <Text style={{ color: 'white' }} marginBottom="5px" fontFamily="MontserratRegular" medium>
+          <Text
+            style={{ color: themeColor }}
+            marginBottom="5px"
+            fontFamily="MontserratSemiBold"
+            medium
+          >
             TREENIT
           </Text>
-          <Text style={{ color: 'white' }} medium>
-            {loading ? <ActivityIndicator style={{ marginTop: 8 }} size="small" /> : dataLength}
+          <Text style={{ color: '#338467' }} medium>
+            {loading ? (
+              <ActivityIndicator style={{ marginTop: 8 }} color="#338467" size="small" />
+            ) : (
+              dataLength
+            )}
           </Text>
         </View>
         <View style={{ borderLeftWidth: 0.4, borderLeftColor: 'grey', height: 45 }} />
         <View style={{ flexDirection: 'column', alignItems: 'center' }}>
           {loading ? null : <AntDesign name="heart" size={24} color="#F82F6B" />}
-          <Text style={{ color: 'white' }} medium>
-            {loading ? <ActivityIndicator style={{ marginTop: 8 }} size="small" /> : favorite}
+          <Text style={{ color: '#338467' }} medium>
+            {loading ? (
+              <ActivityIndicator style={{ marginTop: 8 }} color="#338467" size="small" />
+            ) : (
+              favorite
+            )}
           </Text>
         </View>
         <View style={{ borderRightWidth: 0.4, borderRightColor: 'grey', height: 45 }} />
         <View style={{ flexDirection: 'column' }}>
-          <Text style={{ color: 'white' }} marginBottom="5px" fontFamily="MontserratRegular" medium>
+          <Text
+            style={{ color: themeColor }}
+            marginBottom="5px"
+            fontFamily="MontserratSemiBold"
+            medium
+          >
             KA / VIIKKO
           </Text>
-          <Text style={{ color: 'white' }} medium>
-            {loading ? <ActivityIndicator style={{ marginTop: 8 }} size="small" /> : dataLength / 4}
+          <Text style={{ color: '#338467' }} medium>
+            {loading ? (
+              <ActivityIndicator style={{ marginTop: 8 }} color="#338467" size="small" />
+            ) : (
+              dataLength / 4
+            )}
           </Text>
         </View>
       </TehdytTreenitBoxContainer>

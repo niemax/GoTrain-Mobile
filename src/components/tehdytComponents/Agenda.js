@@ -1,11 +1,13 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { Touchable, View } from 'react-native';
 import { Agenda, LocaleConfig } from 'react-native-calendars';
 import { Appearance, useColorScheme } from 'react-native-appearance';
+import { useNavigation } from '@react-navigation/native';
 import useAgendaQuery from '../../hooks/useAgendaQuery';
-import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import Text from '../../components/Text';
 import { LottieAgenda } from '../../components/Lottie';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 LocaleConfig.locales.fi = {
   monthNames: [
@@ -54,77 +56,59 @@ export default function AgendaComponent() {
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
   const themeColor = colorScheme === 'dark' ? 'white' : 'black';
+  const randomColor = '#' + (((1 << 24) * Math.random()) | 0).toString(16);
 
-  const { calendarData, error, loading } = useAgendaQuery();
+  const { calendarData } = useAgendaQuery();
+  const navigation = useNavigation();
+
+  const keyExtractor = (index) => index.toString();
 
   const renderItem = (item, index) => (
     <View
       style={{
-        backgroundColor: colorScheme === 'light' ? '#F9F8F5' : 'white',
         padding: 10,
-        margin: 5,
         borderRadius: 20,
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 1,
-        },
-        shadowOpacity: 0.18,
-        shadowRadius: 1.0,
-
-        elevation: 1,
-        marginTop: 30,
+        marginTop: 20,
+        marginRight: 25,
       }}
     >
-      <View style={{ flexDirection: 'row' }}>
-        <Ionicons
-          name="md-barbell-outline"
-          size={24}
-          style={{ marginRight: 10 }}
-          color={themeColor}
-        />
-        <Text
-          fontFamily="MontserratRegular"
-          style={{ color: colorScheme === 'dark' ? 'white' : 'black' }}
-          vinkkiTitle
-          left
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('TehdytTreenitData', {
+            data: item,
+            date: item.pvm,
+          })
+        }
+        style={{
+          backgroundColor: colorScheme === 'dark' ? 'black' : '#F4F4F4',
+          width: '100%',
+          height: 62,
+          borderBottomRightRadius: 20,
+          borderTopRightRadius: 20,
+        }}
+      >
+        <View
+          style={{
+            height: '100%',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
         >
-          {item.treeni}
-        </Text>
-      </View>
-      {Object.values(item.treeniData).map((treeni) => (
-        <View key={treeni.nimi}>
-          <Text left medium marginLeft="25px" marginTop="20px" marginBottom="10px">
-            {treeni.nimi}
-          </Text>
-
-          {Object.values(treeni.suoritusStats).map((itm, i) => (
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                paddingVertical: 4,
-              }}
-            >
-              <View>
-                <Text style={{ color: 'grey' }}>Sarja</Text>
-                <Text vinkit>{i + 1}</Text>
-              </View>
-              <View>
-                <Text style={{ color: 'grey' }}>Toistot</Text>
-                <Text vinkit>{itm.toistot}</Text>
-              </View>
-              <View>
-                <Text style={{ color: 'grey' }}>Painot</Text>
-                <Text vinkit>{itm.painot}</Text>
-              </View>
-            </View>
-          ))}
           <View
-            style={{ height: 1, width: '90%', margin: 25, backgroundColor: 'grey', opacity: 0.2 }}
+            style={{
+              marginRight: 25,
+              height: 60,
+              width: 3,
+              backgroundColor: '#338467',
+            }}
           />
+          <Text left medium marginRight="auto">
+            {item.treeni}
+          </Text>
+          <Feather name="chevron-right" size={30} color="#522802" />
         </View>
-      ))}
+      </TouchableOpacity>
     </View>
   );
 
@@ -132,28 +116,34 @@ export default function AgendaComponent() {
     <Agenda
       renderEmptyData={() => (
         <>
-          <LottieAgenda />
-          <Text marginTop="35px" fontFamily="MontserratSemiBold" vinkkiTitle center>
-            Ei treeniä
+          {/* <LottieAgenda /> */}
+          <Text marginTop="235px" fontFamily="MontserratRegular" vinkkiTitle center>
+            EI TREENIÄ PÄIVÄLLE
           </Text>
         </>
       )}
       theme={{
         calendarBackground: colorScheme === 'dark' ? '#141314' : 'white',
         backgroundColor: colorScheme === 'dark' ? '#141314' : 'white',
-        agendaDayTextColor: '#2301E4',
-        agendaDayNumColor: '#2301E4',
-        agendaTodayColor: '#2301E4',
-        agendaKnobColor: '#2301E4',
+        agendaDayTextColor: '#338467',
+        agendaDayNumColor: '#338467',
+        agendaTodayColor: '#338467',
+        agendaKnobColor: '#522802',
+        todayTextColor: '#338467',
+        selectedDayBackgroundColor: '#338467',
+        dotColor: '#338467',
+        indicatorColor: '#338467',
         textSectionTitleColor: themeColor,
         dayTextColor: themeColor,
         monthTextColor: themeColor,
         textDayFontFamily: 'MontserratRegular',
-        textMonthFontFamily: 'MontserratRegular',
+        textMonthFontFamily: 'MontserratSemiBold',
         textDayHeaderFontFamily: 'MontserratRegular',
         minDate: '2021-05-01',
       }}
       firstDay={1}
+      onDayChange={null}
+      keyExtractor={keyExtractor}
       items={calendarData}
       renderItem={renderItem}
     />

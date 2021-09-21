@@ -21,7 +21,7 @@ export default function EsittelyAloitusTimer({ treeninNimi }) {
   }, [count]);
 
   return (
-    <View style={{ alignItems: 'center', height: 250 }}>
+    <View style={{ alignItems: 'center', height: 260 }}>
       <Text large marginBottom="20px">
         Treenisi alkaa
       </Text>
@@ -31,11 +31,10 @@ export default function EsittelyAloitusTimer({ treeninNimi }) {
         width={6}
         lineCap="square"
         fill={count}
-        tintColor="#2301e4"
-        backgroundColor="black"
+        tintColor="#338467"
       >
         {() => (
-          <Text title fontFamily="MontserratBold" style={{ color: '#054dd9' }}>
+          <Text title fontFamily="MontserratBold" style={{ color: '#338467' }}>
             {count}s
           </Text>
         )}

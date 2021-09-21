@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Feather } from '@expo/vector-icons';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Login from '../screens/Login';
@@ -10,8 +9,8 @@ import TehdytTreenit from '../tabs/TehdytTreenit';
 import TehdytTreenitData from '../screens/TehdytTreenitData';
 import Etusivu from '../tabs/Etusivu';
 import TreeninEsittely from '../screens/TreeniScreens/TreeninEsittely';
-import TreeninEsikatselu from '../screens/TreeniScreens/TreeninEsikatselu';
 import TreeninAloitus from '../screens/TreeniScreens/TreeninAloitus';
+import AloitusHistory from '../screens/AloitusHistory';
 import SplashScreen from '../screens/SplashScreen';
 
 const Stack = createStackNavigator();
@@ -55,25 +54,31 @@ const TreeniScreens = () => {
         options={{ headerShown: false, gestureEnabled: true }}
         component={TreeninEsittely}
       />
-      <Stack.Screen
-        screenOptions={{ mode: 'modal' }}
-        mode="modal"
-        name="TreeninEsikatselu"
-        options={({ route }) => ({
-          title: route.params.nimi,
-          headerStyle: {
-            backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
-            borderBottomWidth: 0,
-          },
-          headerBackTitle: 'Back',
-          headerTintColor: colorScheme === 'dark' ? 'white' : 'black',
-        })}
-        component={TreeninEsikatselu}
-      />
+
       <Stack.Screen
         name="TreeninAloitus"
         options={{ headerShown: false, gestureEnabled: false }}
         component={TreeninAloitus}
+      />
+      <Stack.Screen
+        name="AloitusHistory"
+        options={{ headerShown: false, gestureEnabled: true }}
+        component={AloitusHistory}
+      />
+      <Stack.Screen
+        name="TehdytTreenitData"
+        options={({ route }) => ({
+          gestureEnabled: true,
+          title: route.params.date,
+          headerStyle: {
+            backgroundColor: colorScheme === 'dark' ? '#141314' : 'white',
+            borderBottomWidth: 0,
+          },
+          headerBackTitle: 'Back',
+          headerTitleStyle: { color: colorScheme === 'dark' ? 'white' : 'black' },
+          headerTintColor: '#338467',
+        })}
+        component={TehdytTreenitData}
       />
     </Stack.Navigator>
   );
@@ -101,7 +106,8 @@ const TehdytTreenitStack = () => {
             borderBottomWidth: 0,
           },
           headerBackTitle: 'Back',
-          headerTintColor: colorScheme === 'dark' ? 'white' : 'black',
+          headerTitleStyle: { color: colorScheme === 'dark' ? 'white' : 'black' },
+          headerTintColor: '#338467',
         })}
         component={TehdytTreenitData}
       />
@@ -114,45 +120,33 @@ const KotiMainTab = () => {
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
   const themeColor = colorScheme === 'dark' ? '#141314' : 'white';
-  const activeColor = colorScheme === 'dark' ? 'white' : 'black';
+  const activeColor = '#338467';
 
   return (
     <Tab.Navigator
       initialRouteName="Koti"
       activeColor={activeColor}
-      barStyle={{ backgroundColor: themeColor }}
+      barStyle={{ backgroundColor: themeColor, height: 72 }}
     >
       <Tab.Screen
         name="Kotisivu"
         component={Etusivu}
         options={{
           tabBarLabel: 'Koti',
-          tabBarColor: themeColor,
-          tabBarIcon: ({ color }) => <Feather name="home" size={24} color={activeColor} />,
+          tabBarIcon: () => <Feather name="home" size={24} color={activeColor} />,
         }}
       />
       <Tab.Screen
         name="TehdytTreenit"
         component={TehdytTreenitStack}
         options={{
-          tabBarLabel: 'Minä',
-          tabBarColor: themeColor,
-          tabBarIcon: ({ color }) => <Feather name="check-circle" size={24} color={activeColor} />,
+          tabBarLabel: 'Edistyminen',
+          tabBarIcon: () => <Feather name="check-circle" size={24} color={activeColor} />,
           tabBarStyle: { display: 'none' },
         }}
       />
     </Tab.Navigator>
   );
 };
-
-const Drawer = createDrawerNavigator();
-
-function MyDrawer() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Drawer" component={Drawer} />
-    </Drawer.Navigator>
-  );
-}
 
 export default MainAppStack;

@@ -5,9 +5,7 @@ import {
   FlatList,
   TextInput,
   SafeAreaView,
-  KeyboardAvoidingView,
   TouchableOpacity,
-  Platform,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import * as firebase from 'firebase';
@@ -22,8 +20,8 @@ export default function TehdytHae() {
   const [filteredData, setFilteredData] = useState([]);
   const [input, setInput] = useState('');
 
-  const colorScheme = useColorScheme();
   Appearance.getColorScheme();
+  const colorScheme = useColorScheme();
   const themeColor = colorScheme === 'dark' ? 'white' : 'black';
   const navigation = useNavigation();
 
@@ -84,42 +82,43 @@ export default function TehdytHae() {
   );
 
   return (
-    <FlatList
-      automaticallyAdjustContentInsets={false}
-      data={filteredData}
-      keyExtractor={(item) => item.timestamp.toString()}
-      renderItem={SearchView}
-      ItemSeparatorComponent={ItemSeparatorView}
-      ListEmptyComponent={
-        <View style={{ minHeight: 300, marginTop: 50 }}>
-          <LottieHae />
-        </View>
-      }
-      ListHeaderComponent={
-        <>
-          <TextInput
-            style={{ color: themeColor }}
-            placeholderTextColor="grey"
-            placeholder="Etsi treenin nimellä..."
-            /* autoFocus={true} */
-            input={input}
-            onChangeText={updateInput}
-          />
+    <SafeAreaView>
+      <FlatList
+        automaticallyAdjustContentInsets="true"
+        data={filteredData}
+        keyExtractor={(item) => item.timestamp.toString()}
+        renderItem={SearchView}
+        ItemSeparatorComponent={ItemSeparatorView}
+        ListEmptyComponent={
+          <View style={{ minHeight: 300, marginTop: 50 }}>
+            <LottieHae />
+          </View>
+        }
+        ListHeaderComponent={
+          <>
+            <TextInput
+              style={{ color: themeColor }}
+              placeholderTextColor="grey"
+              placeholder="Etsi treenin nimellä..."
+              input={input}
+              onChangeText={updateInput}
+            />
 
-          <Feather name="search" size={18} style={{ marginRight: 5 }} color="grey" />
-        </>
-      }
-      ListHeaderComponentStyle={{
-        flex: 1,
-        flexDirection: 'row',
-        marginLeft: 22,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        width: '90%',
-        height: '85%',
-        padding: 5,
-      }}
-    />
+            <Feather name="search" size={26} style={{ marginRight: 5 }} color="#338467" />
+          </>
+        }
+        ListHeaderComponentStyle={{
+          flex: 1,
+          flexDirection: 'row',
+          marginLeft: 22,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '90%',
+          height: '85%',
+          padding: 5,
+        }}
+      />
+    </SafeAreaView>
   );
 }
 

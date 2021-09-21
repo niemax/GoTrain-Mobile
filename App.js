@@ -11,6 +11,7 @@ import Toast from 'react-native-toast-message';
 import configKeys from './src/config/Firebase';
 import MainAppStack from './src/navigation/MainAppNav';
 import { toastConfig } from './src/config/toastConfig';
+import BottomSheet from '@gorhom/bottom-sheet';
 
 export default AppContainer = () => (
   <AppearanceProvider>

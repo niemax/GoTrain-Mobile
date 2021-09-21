@@ -1,19 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Dimensions, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons, Feather } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
-import axios from 'axios';
 import { API } from '@env';
 import * as Haptics from 'expo-haptics';
 import Dialogs from '../../components/Dialogs';
 import LopetaTreeni from './TreeninLopetus';
 import Text from '../../components/Text';
-import { toastConfig } from '../../config/toastConfig';
-import LinearGradientButton from '../../components/LinearGradientButton';
+import useAloitusFetch from '../../hooks/useAloitusFetch';
 import {
   IconTouchable2,
   UtilsContainer,
@@ -28,10 +26,8 @@ import {
 const { width: viewportWidth } = Dimensions.get('window');
 
 const AloitaTreeni = ({ route, navigation }) => {
-  const [treeniData, setTreeniData] = useState([]);
   const [tehdytTreenit, setTehdytTreenit] = useState({});
   const [pbProgress, setPbProgress] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
   const [visible, setVisible] = useState(false);
   const [doneCount, setDoneCount] = useState(0);
   const [toisto, setToisto] = useState('');
@@ -39,30 +35,13 @@ const AloitaTreeni = ({ route, navigation }) => {
   const [lisatieto, setLisatieto] = useState('');
   const [toistotPainotData, setToistotPainotData] = useState([]);
   const [open, setOpen] = useState(false);
-
   const carousel = useRef();
   const { treeninNimi } = route.params;
 
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
 
-  useEffect(() => {
-    try {
-      axios
-        .get(`${API}/api/treenit/${treeninNimi}`)
-        .then((response) => setTreeniData(response.data[0].liikkeet))
-        .catch((err) => {
-          console.error(err);
-        })
-        .finally(() => {
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 6000);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  }, [treeninNimi]);
+  const { responseData } = useAloitusFetch(`${API}/api/treenit/${treeninNimi}`);
 
   const setProgress = (item, index) => {
     const treenit = { ...tehdytTreenit };
@@ -82,7 +61,7 @@ const AloitaTreeni = ({ route, navigation }) => {
         type: 'success',
         visibilityTime: 1000,
       });
-      if (index < treeniData.length - 1) {
+      if (index < responseData.length - 1) {
         setTimeout(() => {
           carousel.current.snapToNext();
         }, 1000);
@@ -99,31 +78,45 @@ const AloitaTreeni = ({ route, navigation }) => {
     }
     setTehdytTreenit(treenit);
     setToistotPainotData('');
-    setPbProgress(Object.keys(treenit).length / treeniData.length);
+    setPbProgress(Object.keys(treenit).length / responseData.length);
   };
 
   const renderItem = ({ item, index }) => {
-    const treenitLength = Object.keys(treeniData).length;
+    const treenitLength = Object.keys(responseData).length;
     const colorIcon = colorScheme === 'dark' ? 'white' : 'black';
-    const nextValue = treeniData[(index + 1) % treeniData.length].nimi;
-    const ifDoneBtnColor = !tehdytTreenit.hasOwnProperty(item.nimi)
-      ? ['#2301E4', '#054dd9']
-      : ['#00FFBA', '#78E7C7'];
+    const nextValue = responseData[(index + 1) % responseData.length].nimi;
+    const ifDoneBtnColor = Object.prototype.hasOwnProperty.call(tehdytTreenit, item.nimi)
+      ? '#338467'
+      : 'white';
 
     return (
       <AloitusRenderContainer
         key={index}
         style={{
-          backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+          backgroundColor: colorScheme === 'dark' ? '#141314' : '#FFF',
         }}
       >
         <ScrollView>
           <ExtraContainer>
             <IconTouchable2 onPress={() => navigation.goBack()} left marginLeft="15px">
-              <Ionicons name="return-up-back-outline" size={28} color={colorIcon} />
+              <Feather name="chevron-left" size={28} color={colorIcon} />
             </IconTouchable2>
+            <View>
+              <IconTouchable2
+                onPress={() => navigation.navigate('AloitusHistory')}
+                left
+                marginLeft="15px"
+              >
+                <MaterialIcons
+                  name="history"
+                  size={36}
+                  color="#338467"
+                  style={{ marginBottom: 2 }}
+                />
+              </IconTouchable2>
+            </View>
             <Text medium marginRight="15px">
-              <Text medium>TEHTY</Text> {doneCount} / {treeniData.length}
+              <Text medium>TEHTY</Text> {doneCount} / {responseData.length}
             </Text>
           </ExtraContainer>
           <YoutubePlayer height={230} videoId={item.videoId} />
@@ -133,7 +126,7 @@ const AloitaTreeni = ({ route, navigation }) => {
             width={null}
             height={5}
             borderWidth={null}
-            color="#2301E4"
+            color="#338467"
           />
 
           <UtilsContainer>
@@ -150,12 +143,19 @@ const AloitaTreeni = ({ route, navigation }) => {
                     carousel.current.snapToPrev();
                   }}
                 >
-                  <Ionicons name="ios-chevron-back-outline" size={52} color="#2301E4" />
+                  <Ionicons
+                    name="ios-chevron-back-outline"
+                    size={52}
+                    color={colorScheme === 'dark' ? 'white' : 'black'}
+                  />
                 </PreviousButton>
               )}
 
-              <TouchableOpacity onPress={() => setProgress(item, index)}>
-                <LinearGradientButton colors={ifDoneBtnColor} />
+              <TouchableOpacity
+                onPress={() => setProgress(item, index)}
+                style={{ justifyContent: 'center', alignItems: 'center' }}
+              >
+                <Feather name="check" size={62} color={ifDoneBtnColor} />
               </TouchableOpacity>
               {index < treenitLength - 1 && (
                 <NextButton
@@ -163,7 +163,11 @@ const AloitaTreeni = ({ route, navigation }) => {
                     carousel.current.snapToNext();
                   }}
                 >
-                  <Ionicons name="ios-chevron-forward-outline" size={52} color="#2301E4" />
+                  <Ionicons
+                    name="ios-chevron-forward-outline"
+                    size={52}
+                    color={colorScheme === 'dark' ? 'white' : 'black'}
+                  />
                 </NextButton>
               )}
             </AloitusButtonContainer>
@@ -211,10 +215,11 @@ const AloitaTreeni = ({ route, navigation }) => {
   if (pbProgress >= 1) {
     return <LopetaTreeni treeni={treeninNimi} data={tehdytTreenit} />;
   }
+
   return (
     <Carousel
       ref={carousel}
-      data={treeniData}
+      data={responseData}
       itemWidth={viewportWidth}
       sliderWidth={viewportWidth}
       renderItem={renderItem}

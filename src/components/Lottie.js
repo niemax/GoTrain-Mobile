@@ -12,7 +12,7 @@ export const LottieAnimationCongratulations = () => {
 
   return (
     <LottieContainer>
-      <LottieView ref={animation} source={require('../assets/json/lf30_editor_x9dqgsjq.json')} />
+      <LottieView ref={animation} source={require('../assets/json/congratulations.json')} />
     </LottieContainer>
   );
 };
@@ -70,9 +70,7 @@ export const LottieAgenda = () => {
     animation.current.play();
   }, []);
 
-  return (
-    <LottieView ref={animation} source={require('../assets/json/lf30_editor_53tpjpep.json')} />
-  );
+  return <LottieView ref={animation} source={require('../assets/json/404.json')} />;
 };
 
 export const LottieHae = () => {
@@ -82,7 +80,5 @@ export const LottieHae = () => {
     animation.current.play();
   }, []);
 
-  return (
-    <LottieView ref={animation} source={require('../assets/json/lf30_editor_6qgmlo9x.json')} />
-  );
+  return <LottieView ref={animation} source={require('../assets/json/search.json')} />;
 };

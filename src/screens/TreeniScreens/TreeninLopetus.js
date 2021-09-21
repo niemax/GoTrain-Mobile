@@ -7,10 +7,14 @@ import * as firebase from 'firebase';
 import 'moment/locale/fi';
 import { Appearance, useColorScheme } from 'react-native-appearance';
 import Toast from 'react-native-toast-message';
-import { LopetusCardsContainer } from '../../utils/Styling';
 import Text from '../../components/Text';
 import TreeninLopetusCards from '../../components/TreeninLopetusCards';
-import { ButtonContainer, Container, AloitaButton } from '../../utils/Styling';
+import {
+  ButtonContainer,
+  Container,
+  LopetaButton,
+  LopetusCardsContainer,
+} from '../../utils/Styling';
 import { LottieAnimationCongratulations } from '../../components/Lottie';
 
 const LopetaTreeni = ({ data, treeni }) => {
@@ -80,17 +84,17 @@ const LopetaTreeni = ({ data, treeni }) => {
             count={250}
             origin={{ x: 0, y: -20 }}
             autoStart={false}
-            fallSpeed={7000}
+            fallSpeed={15000}
             fadeOut
           />
         ) : null}
 
         <ButtonContainer>
-          <AloitaButton onPress={saveToDatabase}>
+          <LopetaButton onPress={saveToDatabase}>
             <Text style={{ color: '#fff' }} large>
               Sulje
             </Text>
-          </AloitaButton>
+          </LopetaButton>
         </ButtonContainer>
       </ScrollView>
     </Container>

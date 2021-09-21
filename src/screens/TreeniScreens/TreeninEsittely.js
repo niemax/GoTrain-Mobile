@@ -1,31 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  View,
-  ActivityIndicator,
-} from 'react-native';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { Image, StyleSheet, TouchableOpacity, ScrollView, View, SafeAreaView } from 'react-native';
 import Dialog from 'react-native-dialog';
-import styled from 'styled-components/native';
 import { Ionicons, Feather } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
+import ActionSheet from 'react-native-actions-sheet';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import Toast from 'react-native-toast-message';
 import { API } from '@env';
 import axios from 'axios';
 import TreeninKuvausData from '../../components/TreeninKuvausData';
-import { Container, ButtonContainer, IconTouchable, AloitaButton } from '../../utils/Styling';
+import { Container, IconTouchable, AloitaButton, Loading } from '../../utils/Styling';
 import Text from '../../components/Text';
 import EsittelyAloitusTimer from '../../components/EsittelyAloitusTimer';
-
-const showToast = () => {
-  Toast.show({
-    text2: 'Implemented soon!',
-    type: 'info',
-    visibilityTime: 2500,
-  });
-};
+import TreeninEsikatselu from './TreeninEsikatselu';
 
 export default function TreeninEsittely({ route, navigation }) {
   const [treeniData, setTreeniData] = useState([]);
@@ -35,13 +21,17 @@ export default function TreeninEsittely({ route, navigation }) {
   const [aloitaRoute, setAloitaRoute] = useState('');
   const [timerVisible, setTimerVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [count, setCount] = useState(0);
 
+  const actionSheetRef = useRef(null);
   const colorScheme = useColorScheme();
   Appearance.getColorScheme();
   const themeColor = colorScheme === 'dark' ? 'white' : 'black';
-
   const { treeninNimi, image } = route.params;
+
+  const handleModalPress = () => {
+    Haptics.selectionAsync();
+    actionSheetRef.current.setModalVisible();
+  };
 
   useEffect(() => {
     try {
@@ -83,14 +73,11 @@ export default function TreeninEsittely({ route, navigation }) {
       <Dialog.Container visible={timerVisible} contentStyle={{ opacity: 0.98 }}>
         <EsittelyAloitusTimer treeninNimi={treeninNimi} />
       </Dialog.Container>
-      <Image style={styles.image} source={{ uri: `${API}/api/${image}` }} />
+      <Image style={styles.image} source={{ uri: image }} />
       <View style={{ flexDirection: 'row', position: 'absolute', top: 35 }}>
         <IconTouchable onPress={() => navigation.goBack()}>
           <Feather name="chevron-left" size={32} color="white" />
         </IconTouchable>
-        {/*         <IconTouchable onPress={() => showToast()}>
-          <Feather name="heart" size={32} color="white" style={{ marginLeft: 300 }} />
-        </IconTouchable> */}
       </View>
 
       {!isLoading ? (
@@ -103,17 +90,20 @@ export default function TreeninEsittely({ route, navigation }) {
           />
 
           {treeniData.map(({ nimi, videoId, ohjeet, sarjat }) => (
-            <TouchableOpacity
-              key={nimi}
-              onPress={() =>
-                navigation.navigate('TreeninEsikatselu', {
-                  nimi: nimi,
-                  videoID: videoId,
-                  ohjeet: ohjeet,
-                  title: nimi,
-                })
-              }
-            >
+            <TouchableOpacity key={nimi} onPress={handleModalPress}>
+              <SafeAreaView>
+                <ActionSheet
+                  extraScroll={1}
+                  gestureEnabled="true"
+                  initialOffsetFromBottom={0.5}
+                  ref={actionSheetRef}
+                  containerStyle={{
+                    backgroundColor: colorScheme === 'dark' ? '#141314' : '#F9F8F5',
+                  }}
+                >
+                  <TreeninEsikatselu videoID={videoId} ohjeet={ohjeet} />
+                </ActionSheet>
+              </SafeAreaView>
               <View
                 style={{
                   height: 100,
@@ -150,17 +140,23 @@ export default function TreeninEsittely({ route, navigation }) {
           ))}
         </ScrollView>
       ) : (
-        <ActivityIndicator style={{ marginTop: 200 }} size="large" />
+        <Loading color="#2C1601" size="large" />
       )}
 
       {!isLoading && (
-        <ButtonContainer>
+        <View
+          style={{
+            alignItems: 'flex-end',
+            marginBottom: 9,
+            marginRight: 15,
+          }}
+        >
           <AloitaButton onPress={handleAloitusButton}>
-            <Text style={{ color: '#fff' }} large>
-              Aloita
+            <Text style={{ color: '#522802' }} large>
+              <Feather name="play" size={36} color="white" />
             </Text>
           </AloitaButton>
-        </ButtonContainer>
+        </View>
       )}
     </Container>
   );
@@ -168,7 +164,7 @@ export default function TreeninEsittely({ route, navigation }) {
 
 const styles = StyleSheet.create({
   image: {
-    height: '30%',
+    height: '25%',
     opacity: 0.93,
   },
 });

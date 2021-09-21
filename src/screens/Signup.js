@@ -16,12 +16,6 @@ import {
   AuthField,
 } from '../utils/Styling';
 
-const emptyState = () => {
-  setName('');
-  setEmail('');
-  setPassword('');
-};
-
 const Signup = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -29,6 +23,12 @@ const Signup = ({ navigation }) => {
 
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
+
+  const emptyState = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+  };
 
   const handleSignUp = () => {
     if (!name) {

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, Touchable } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import * as Location from 'expo-location';
 import { Header } from 'react-native-elements';
 import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import { DrawerActions } from '@react-navigation/native';
 import Text from './Text';
-import { TouchableOpacity } from '@gorhom/bottom-sheet';
+
+import { loggingOut } from '../API/FirebaseMethods';
 
 const HeaderComponent = (props) => {
   const [temp, setTemp] = useState(null);
@@ -16,13 +15,8 @@ const HeaderComponent = (props) => {
   const [currentDate, setCurrentDate] = useState('');
   const [weatherIcon, setWeatherIcon] = useState('');
 
-  const navigation = useNavigation();
-
   Appearance.getColorScheme();
   const colorScheme = useColorScheme();
-  const icon = (
-    <Feather name="log-out" size={24} color={colorScheme === 'light' ? 'black' : 'white'} />
-  );
 
   async function getWeatherData(lati, longi) {
     const API = `https://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${longi}&units=metric&appid=909c3e2e0f9c07b670efd67b1b90752f`;
@@ -88,8 +82,12 @@ const HeaderComponent = (props) => {
       }
       rightComponent={
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-            <Feather name="settings" size={24} color={colorScheme === 'dark' ? 'white' : 'black'} />
+          <TouchableOpacity onPress={loggingOut}>
+            <Feather
+              name="log-out"
+              size={24}
+              color={colorScheme === 'dark' ? '#338467' : 'black'}
+            />
           </TouchableOpacity>
         </View>
       }
